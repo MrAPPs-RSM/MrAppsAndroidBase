@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">AndroidBase</string>
+    <string name="Devi_inserire_un_valore_tra__d_e__d" formatted="false">Devi inserire un valore tra %d e %d</string>
+
+    <!--permessi-->
+    <string name="Titolo_permesso_obbligatorio">Richiesta permesso</string>
+
+    <string name="Messaggio_permesso_storage">È necessario consentire il permesso per la gestione dei file nella SD.\n Vuoi impostarlo adesso?</string>
+    <string name="Messaggio_permesso_posizione">È necessario consentire il permesso per accedere alla tua posizione.\n Vuoi impostarlo adesso?</string>
+    <string name="La_mia_posizione">La mia posizione</string>
+    <string name="Credenziali_non_corrette">Credenziali non corrette</string>
+    <string name="Campi_obbligatori_non_inseriti">Campi obbligatori non inseriti</string>
+    <string name="Email_conferma">Ti è stata inviata una email di conferma per completare la registrazione.</string>
+    <string name="Devi_selezionare_una_lingua">Devi selezionare una lingua</string>
+
+    <string name="Nessuna_allergia_impostata">Nessuna allergia impostata</string>
+    <string name="Completa_la_tua_scheda_allergie">Completa la tua scheda allergie</string>
+    <string name="Scegli_lingua">Scegli lingua</string>
+    <string name="Traduzione">Traduzione</string>
+    <string name="Scansiona_il_QR_CODE">Scansiona il QR CODE del ristorante per visualizzarlo</string>
+    <string name="Avviso_gps">Il tuo GPS è disabilitato, vuoi attivarlo?</string>
+    <string name="Si">Si</string>
+    <string name="Annulla">Annulla</string>
+
+
+</resources>
