@@ -1,7 +1,6 @@
 package com.mr_apps.androidbase.preferences;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 
 /**
  * Created by denis on 03/02/16.

@@ -3,7 +3,6 @@ package com.mr_apps.androidbase.webservice;
 import android.content.Context;
 import android.util.Base64;
 
-
 import com.mr_apps.androidbase.preferences.SecurityPreferences;
 
 import java.security.MessageDigest;

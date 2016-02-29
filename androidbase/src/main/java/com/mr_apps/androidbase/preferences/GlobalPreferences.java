@@ -1,24 +1,19 @@
 package com.mr_apps.androidbase.preferences;
 
 import android.content.Context;
-import android.content.SharedPreferences;
-import android.graphics.Color;
-import android.support.v4.content.ContextCompat;
-
-import com.mr_apps.androidbase.utils.Utils;
 
 /**
  * Created by denis on 09/02/16.
  */
 public class GlobalPreferences extends AbstractBasePreferences{
 
-    private static final String namePreferences="GlobalPreferences";
-    private static final String latitude="latitude";
-    private static final String longitude="longitude";
-    private static final String altitude="altitude";
-    private static final String username="username";
-    private static final String password="password";
-    private static final String hashedPassword="hashedPassword";
+    public static final String namePreferences="GlobalPreferences";
+    public static final String latitude="latitude";
+    public static final String longitude="longitude";
+    public static final String altitude="altitude";
+    public static final String username="username";
+    public static final String password="password";
+    public static final String hashedPassword="hashedPassword";
 
     public static void setUsername(Context context, String value)
     {

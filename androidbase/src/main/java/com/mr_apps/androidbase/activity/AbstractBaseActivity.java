@@ -12,7 +12,7 @@ import io.realm.Realm;
 /**
  * Created by denis on 09/02/16
  */
-public abstract class AbstractBaseActivity extends LocationActivity {
+public abstract class AbstractBaseActivity extends PickerActivity {
 
     public Realm realm;
 

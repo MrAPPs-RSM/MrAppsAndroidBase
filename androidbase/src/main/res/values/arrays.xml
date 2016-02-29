@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="pick_array">
+        <item>@string/Scegli_immagine_da_galleria</item>
+        <item>@string/Scatta_foto</item>
+        <item>@string/Scegli_video_da_galleria</item>
+        <item>@string/Gira_video</item>
+    </string-array>
+
+
+</resources>

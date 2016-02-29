@@ -4,7 +4,14 @@ import android.content.Context;
 import android.location.Location;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.text.TextUtils;
 import android.util.DisplayMetrics;
+
+import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+import java.util.UUID;
 
 /**
  * Created by mattia on 27/10/2015.
@@ -73,4 +80,81 @@ public class Utils {
         //Toast.makeText(context.getApplicationContext(), context.getString(R.string.offline), Toast.LENGTH_LONG).show();
         return false;
     }
+
+    /**
+     * Converts number of bytes into proper scale.
+     *
+     * @param bytes number of bytes to be converted.
+     * @return A string that represents the bytes in a proper scale.
+     */
+    public static String getBytesString(long bytes) {
+        String[] quantifiers = new String[] {
+                "KB", "MB", "GB", "TB"
+        };
+        double speedNum = bytes;
+        for (int i = 0;; i++) {
+            if (i >= quantifiers.length) {
+                return "";
+            }
+            speedNum /= 1024;
+            if (speedNum < 512) {
+                return String.format("%.2f", speedNum) + " " + quantifiers[i];
+            }
+        }
+    }
+
+    public final static boolean isValidEmail(CharSequence target) {
+        if (TextUtils.isEmpty(target)) {
+            return false;
+        } else {
+            return android.util.Patterns.EMAIL_ADDRESS.matcher(target).matches();
+        }
+    }
+
+    public enum ElementType {
+        text,
+        img,
+        vid,
+        audio
+    }
+
+    public static File newFileToUpload(Context context, String folder, ElementType type)
+    {
+        SimpleDateFormat sdf = new SimpleDateFormat("HH_mm_ss__dd_MM_yy", Locale.getDefault());
+
+        Date date = new Date();
+        final String data = UUID.randomUUID()+"_"+sdf.format(date);
+
+        String path=getFilePath(context, folder);
+
+        if(type==ElementType.img)
+            return new File(path, data + "_image.jpg");
+        else if(type==ElementType.vid)
+            return new File(path, data + "_video.mp4");
+        else if(type==ElementType.audio)
+            return new File(path, data + "_audio.aac");
+        else
+            return null;
+
+    }
+
+    public static String getFilePath(Context context, String folder) {
+
+        String filePath= context.getFilesDir().getPath()+"/"+folder;//"/mnt/sdcard/qchat/";//Environment.getExternalStorageDirectory() + "/qchat/";
+
+        File directory = new File(filePath);
+
+        if (!directory.isDirectory()) {
+            directory.mkdir();
+        }
+
+        return filePath;
+    }
+
+    public static int dpToPx(Context context, int dp) {
+        DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
+        int px = Math.round(dp * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT));
+        return px;
+    }
+
 }
