@@ -32,7 +32,7 @@ import java.util.Locale;
 import java.util.UUID;
 
 /**
- * Created by denis on 29/02/16.
+ * Created by denis on 29/02/16
  */
 public class LocalUploader {
 
@@ -244,7 +244,7 @@ public class LocalUploader {
         return inSampleSize;
     }
 
-    public static File generateFileFromBitmap(Context context, String folder, Bitmap photo) {
+    public static File generateFileFromBitmap(Context context, String folder, Bitmap photo, boolean internal) {
         if (photo != null) {
             ByteArrayOutputStream bytes = reduceUntilRespectSize(photo, 512000);
 
@@ -255,8 +255,7 @@ public class LocalUploader {
             String datas = simpleDateFormat.format(date);
             String newimagename = UUID.randomUUID().toString() + "_" + datas + "_image.jpg";
 
-            File f = new File(Utils.getFilePath(context, folder)
-                        /*+ File.separator*/ + newimagename);
+            File f = new File(internal ? Utils.getFilePath(context, folder) + newimagename : Utils.getExternalPath(folder) + newimagename);
             try {
                 f.createNewFile();
             } catch (IOException e) {
@@ -298,7 +297,7 @@ public class LocalUploader {
      * @param maxSize
      * @return
      */
-    public static File getResizedImageFile(Context context, String folder, File f, int maxSize) throws FileNotFoundException {
+    public static File getResizedImageFile(Context context, String folder, File f, int maxSize, boolean internal) throws FileNotFoundException {
 
         BitmapFactory.Options thumbOpts = new BitmapFactory.Options();
         thumbOpts.inSampleSize = 4;
@@ -319,7 +318,7 @@ public class LocalUploader {
 
         Bitmap bitmap = Bitmap.createScaledBitmap(image, width, height, true);
 
-        File file = generateFileFromBitmap(context, folder, bitmap);
+        File file = generateFileFromBitmap(context, folder, bitmap, internal);
 
         return file;
     }

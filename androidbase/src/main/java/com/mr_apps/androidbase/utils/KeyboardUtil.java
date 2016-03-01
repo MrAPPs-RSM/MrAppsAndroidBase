@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
 /**
- * Created by bronx on 23/10/14.
+ * Created by bronx on 23/10/14
  */
 public class KeyboardUtil {
 

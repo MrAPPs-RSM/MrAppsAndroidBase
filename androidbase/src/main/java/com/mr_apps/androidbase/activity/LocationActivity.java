@@ -23,7 +23,7 @@ import com.mr_apps.androidbase.utils.Logger;
 
 
 /**
- * Created by denis on 15/01/16.
+ * Created by denis on 15/01/16
  */
 public abstract class LocationActivity extends PermissionManagerActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
 
@@ -31,7 +31,7 @@ public abstract class LocationActivity extends PermissionManagerActivity impleme
     public GoogleApiClient mGoogleApiClient;
     public LatLng latLng;
 
-    private static final String TAG="LocationActivity";
+    private static final String TAG = "LocationActivity";
 
     protected synchronized void createGoogleApiClient() {
         //Toast.makeText(this,"buildGoogleApiClient",Toast.LENGTH_SHORT).show();
@@ -54,13 +54,13 @@ public abstract class LocationActivity extends PermissionManagerActivity impleme
     public void onConnected(Bundle bundle) {
         //Toast.makeText(this,"onConnected",Toast.LENGTH_SHORT).show();
 
-        if(checkOrRequestPermission(Manifest.permission.ACCESS_FINE_LOCATION, R.string.Titolo_permesso_obbligatorio, R.string.Messaggio_permesso_posizione)) {
+        if (checkOrRequestPermission(Manifest.permission.ACCESS_FINE_LOCATION, R.string.Titolo_permesso_obbligatorio, R.string.Messaggio_permesso_posizione)) {
             accessFinePermissionResult(true);
         }
     }
 
     @Override
-    public void accessFinePermissionResult(boolean granted) throws SecurityException{
+    public void accessFinePermissionResult(boolean granted) throws SecurityException {
         super.accessFinePermissionResult(granted);
 
         Location mLastLocation = LocationServices.FusedLocationApi.getLastLocation(
@@ -70,8 +70,7 @@ public abstract class LocationActivity extends PermissionManagerActivity impleme
             //mGoogleMap.clear();
             latLng = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
 
-            if(!isGpsActivated())
-            {
+            if (!isGpsActivated()) {
                 onPositionFound();
                 return;
             }
@@ -101,18 +100,17 @@ public abstract class LocationActivity extends PermissionManagerActivity impleme
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if(!isGpsActivated()) {
+        if (!isGpsActivated()) {
             buildAlertMessageNoGps();
         }
     }
 
-    public boolean isGpsActivated(){
+    public boolean isGpsActivated() {
         LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
     }
 
-    public void refreshPosition()
-    {
+    public void refreshPosition() {
         createGoogleApiClient();
     }
 
@@ -144,19 +142,19 @@ public abstract class LocationActivity extends PermissionManagerActivity impleme
     @Override
     public void onStop() {
         super.onStop();
-        if(mGoogleApiClient!=null && mGoogleApiClient.isConnected())
+        if (mGoogleApiClient != null && mGoogleApiClient.isConnected())
             mGoogleApiClient.disconnect();
     }
 
-    protected void startLocationUpdates() throws SecurityException{
+    protected void startLocationUpdates() throws SecurityException {
 
-        if(mGoogleApiClient==null)
+        if (mGoogleApiClient == null)
             return;
 
-        if(!mGoogleApiClient.isConnected())
+        if (!mGoogleApiClient.isConnected())
             return;
 
-        if(!checkPermission(Manifest.permission.ACCESS_FINE_LOCATION))
+        if (!checkPermission(Manifest.permission.ACCESS_FINE_LOCATION))
             return;
 
         LocationServices.FusedLocationApi.requestLocationUpdates(
@@ -165,10 +163,10 @@ public abstract class LocationActivity extends PermissionManagerActivity impleme
 
     protected void stopLocationUpdates() {
 
-        if(mGoogleApiClient==null)
+        if (mGoogleApiClient == null)
             return;
 
-        if(mGoogleApiClient.isConnected())
+        if (mGoogleApiClient.isConnected())
             LocationServices.FusedLocationApi.removeLocationUpdates(
                     mGoogleApiClient, this);
     }

@@ -28,7 +28,7 @@ public abstract class AbstractBaseActivity extends PickerActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        instance=this;
+        instance = this;
     }
 
     public static AbstractBaseActivity getInstance() {
@@ -69,7 +69,6 @@ public abstract class AbstractBaseActivity extends PickerActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
 
 
     @Override

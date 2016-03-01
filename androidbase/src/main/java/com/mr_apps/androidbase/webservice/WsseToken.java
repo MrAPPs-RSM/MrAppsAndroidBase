@@ -14,7 +14,7 @@ import java.util.Random;
 import java.util.TimeZone;
 
 /**
- * Created by denis on 03/02/16.
+ * Created by denis on 03/02/16
  */
 public class WsseToken {
     public static final String HEADER_AUTHORIZATION = "Authorization";
@@ -31,7 +31,7 @@ public class WsseToken {
     public WsseToken(Context context) {
         //we need the user object because we need his username
         this.user = SecurityPreferences.getUser(context);
-        this.password= SecurityPreferences.getToken(context);
+        this.password = SecurityPreferences.getToken(context);
         this.createdAt = generateTimestamp();
         this.nonce = generateNonce();
         this.digest = generateDigest();
@@ -43,14 +43,13 @@ public class WsseToken {
         return bytesToHex(seed);
     }
 
-    private String myNonce()
-    {
-        long ts=(new Date()).getTime();
+    private String myNonce() {
+        long ts = (new Date()).getTime();
 
-        Random random=new Random();
-        int rand=random.nextInt(999999-1)+1;
+        Random random = new Random();
+        int rand = random.nextInt(999999 - 1) + 1;
 
-        String nonce= WebServiceSecurity.MD5(String.valueOf(rand) + String.valueOf(ts));
+        String nonce = WebServiceSecurity.MD5(String.valueOf(rand) + String.valueOf(ts));
 
         return nonce;
     }

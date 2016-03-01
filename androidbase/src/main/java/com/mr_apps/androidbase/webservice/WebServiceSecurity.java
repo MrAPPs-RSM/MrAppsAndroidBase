@@ -21,90 +21,36 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Created by denis on 03/02/16.
+ * Created by denis on 03/02/16
  */
 public abstract class WebServiceSecurity extends WebServiceUtils {
 
-    private static final String VERSION="v1";
-    private static final String TAG="WebServiceSecurity";
+    private static final String VERSION = "v1";
+    private static final String TAG = "WebServiceSecurity";
 
-    private static final String baseUrl="http://beta.json-generator.com/api/json/get/";
+    private static final String baseUrl = "http://beta.json-generator.com/api/json/get/";
 
-    public static ResponseFuture secureOperationWithPath(final Context context, final String path, final HashMap<String, List<String>> params, final FutureCallback<JsonObject> complete)
-    {
+    public static ResponseFuture secureOperationWithPath(final Context context, final String path, final HashMap<String, List<String>> params, final FutureCallback<JsonObject> complete) {
 
-        if(!Utils.isOnline(context))
-        {
+        if (!Utils.isOnline(context)) {
             complete.onCompleted(null, null);
 
             return null;
         }
 
-        String language= Locale.getDefault().getLanguage();
+        String language = Locale.getDefault().getLanguage();
 
-        Map<String, List<String>> security= getSecurity(context);
+        Map<String, List<String>> security = getSecurity(context);
 
-        String url=composeUrl(path);
-
-        Logger.d(TAG, "chiamata a " + url + "\ncon parametri aggiuntivi " + params.toString() + security.toString());
-
-        ResponseFuture<JsonObject> responseFuture= Ion.with(context)
-                .load(url)
-                //.noCache()
-                //.addHeaders(security)
-                //.setBodyParameters(params)
-                .asJsonObject();
-
-        responseFuture.withResponse().setCallback(new FutureCallback<Response<JsonObject>>() {
-            @Override
-            public void onCompleted(Exception e, Response<JsonObject> jsonResponse) {
-
-                if(jsonResponse==null)
-                {
-                    complete.onCompleted(e, null);
-                    return;
-                }
-
-                Logger.d("esito: "+jsonResponse.getHeaders().message(), "chiamata: "+ jsonResponse.getRequest().getUri().toString());
-
-                JsonObject result=jsonResponse.getResult();
-
-                if (handleErrorCode(context, result)) {
-                    updateSecurity(context);
-                    secureOperationWithPath(context, path, params, complete);
-                } else
-                    complete.onCompleted(e, result);
-
-            }
-        });
-
-        return responseFuture;
-
-    }
-
-    public static ResponseFuture secureOperationWithPathGet(final Context context, final String path, final HashMap<String, List<String>> params, final FutureCallback<JsonObject> complete)
-    {
-
-        if(!Utils.isOnline(context))
-        {
-            complete.onCompleted(null, null);
-
-            return null;
-        }
-
-        String language= Locale.getDefault().getLanguage();
-
-        final Map<String, List<String>> security= getSecurity(context);
-
-        String url=composeUrl(path);
+        String url = composeUrl(path);
 
         Logger.d(TAG, "chiamata a " + url + "\ncon parametri aggiuntivi " + params.toString() + security.toString());
 
-        ResponseFuture<JsonObject> responseFuture=Ion.with(context)
+        ResponseFuture<JsonObject> responseFuture = Ion.with(context)
                 .load(url)
-                //.noCache()
-                //.addHeaders(security)
-                //.addQueries(params)
+                        //.noCache()
+                        //.addHeaders(security)
+                        //.setBodyParameters(params)
                 .asJsonObject();
 
         responseFuture.withResponse().setCallback(new FutureCallback<Response<JsonObject>>() {
@@ -133,8 +79,56 @@ public abstract class WebServiceSecurity extends WebServiceUtils {
 
     }
 
-    private static boolean handleErrorCode(final Context context, JsonObject result)
-    {
+    public static ResponseFuture secureOperationWithPathGet(final Context context, final String path, final HashMap<String, List<String>> params, final FutureCallback<JsonObject> complete) {
+
+        if (!Utils.isOnline(context)) {
+            complete.onCompleted(null, null);
+
+            return null;
+        }
+
+        String language = Locale.getDefault().getLanguage();
+
+        final Map<String, List<String>> security = getSecurity(context);
+
+        String url = composeUrl(path);
+
+        Logger.d(TAG, "chiamata a " + url + "\ncon parametri aggiuntivi " + params.toString() + security.toString());
+
+        ResponseFuture<JsonObject> responseFuture = Ion.with(context)
+                .load(url)
+                        //.noCache()
+                        //.addHeaders(security)
+                        //.addQueries(params)
+                .asJsonObject();
+
+        responseFuture.withResponse().setCallback(new FutureCallback<Response<JsonObject>>() {
+            @Override
+            public void onCompleted(Exception e, Response<JsonObject> jsonResponse) {
+
+                if (jsonResponse == null) {
+                    complete.onCompleted(e, null);
+                    return;
+                }
+
+                Logger.d("esito: " + jsonResponse.getHeaders().message(), "chiamata: " + jsonResponse.getRequest().getUri().toString());
+
+                JsonObject result = jsonResponse.getResult();
+
+                if (handleErrorCode(context, result)) {
+                    updateSecurity(context);
+                    secureOperationWithPath(context, path, params, complete);
+                } else
+                    complete.onCompleted(e, result);
+
+            }
+        });
+
+        return responseFuture;
+
+    }
+
+    private static boolean handleErrorCode(final Context context, JsonObject result) {
 
         boolean error = false;
         int error_code = 0;
@@ -178,16 +172,15 @@ public abstract class WebServiceSecurity extends WebServiceUtils {
     }
 
 
-    public static Map<String, List<String>> getSecurity(Context context)
-    {
+    public static Map<String, List<String>> getSecurity(Context context) {
 
-        long diffInMinutes=diffInMinutes((new Date()).getTime(), SecurityPreferences.getHeader_date(context));
+        long diffInMinutes = diffInMinutes((new Date()).getTime(), SecurityPreferences.getHeader_date(context));
 
-        if(SecurityPreferences.getHeader(context).length()==0 || diffInMinutes>4) {
+        if (SecurityPreferences.getHeader(context).length() == 0 || diffInMinutes > 4) {
             updateSecurity(context);
         }
 
-        Map<String, List<String>> map= new HashMap<>();
+        Map<String, List<String>> map = new HashMap<>();
 
         map.put(WsseToken.HEADER_AUTHORIZATION, Arrays.asList(SecurityPreferences.getAuthorization(context)));
         map.put(WsseToken.HEADER_WSSE, Arrays.asList(SecurityPreferences.getHeader(context)));
@@ -195,27 +188,24 @@ public abstract class WebServiceSecurity extends WebServiceUtils {
         return map;
     }
 
-    private static long diffInMinutes(long date1, long date2)
-    {
-        long diffInMillisec=date1-date2;
+    private static long diffInMinutes(long date1, long date2) {
+        long diffInMillisec = date1 - date2;
 
         return TimeUnit.MILLISECONDS.toMinutes(diffInMillisec);
     }
 
-    private static void updateSecurity(Context context)
-    {
-        WsseToken wsseToken=new WsseToken(context);
-        SharedPreferences preferences=context.getSharedPreferences(SecurityPreferences.namePreferences, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor=preferences.edit();
+    private static void updateSecurity(Context context) {
+        WsseToken wsseToken = new WsseToken(context);
+        SharedPreferences preferences = context.getSharedPreferences(SecurityPreferences.namePreferences, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
         editor.putString(SecurityPreferences.authorization, wsseToken.getAuthorizationHeader());
         editor.putLong(SecurityPreferences.header_date, (new Date()).getTime());
         editor.putString(SecurityPreferences.header, wsseToken.getWsseHeader());
         editor.commit();
     }
 
-    public static String composeUrl(String path)
-    {
-        return baseUrl +path;//String.format("/%s", "api") + String.format("/%s", VERSION)+String.format("/%s", path);
+    public static String composeUrl(String path) {
+        return baseUrl + path;//String.format("/%s", "api") + String.format("/%s", VERSION)+String.format("/%s", path);
     }
 
     public static String MD5(String md5) {
@@ -225,7 +215,7 @@ public abstract class WebServiceSecurity extends WebServiceUtils {
             byte[] array = md.digest(md5.getBytes());
             StringBuffer sb = new StringBuffer();
             for (int i = 0; i < array.length; ++i) {
-                sb.append(Integer.toHexString((array[i] & 0xFF) | 0x100).substring(1,3));
+                sb.append(Integer.toHexString((array[i] & 0xFF) | 0x100).substring(1, 3));
             }
 
             //Log.d("token", sb.toString());
