@@ -165,10 +165,6 @@ public abstract class PickerActivity extends LocationActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(resultCode!= RESULT_OK)
-            return;
-
-        File file;
         String path;
         Utils.ElementType type;
 
