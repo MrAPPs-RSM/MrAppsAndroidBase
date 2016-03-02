@@ -263,7 +263,7 @@ public abstract class PickerActivity extends LocationActivity {
 
                 bitmap = LocalUploader.rotateBitmap(bitmap, orientation);
 
-                file = LocalUploader.generateFileFromBitmap(this, getFolder(), bitmap, false);
+                file = LocalUploader.generateFileFromBitmap(this, getFolder(), bitmap, true);
                 path = file.getPath();
                 type = Utils.ElementType.img;
 

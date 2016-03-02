@@ -256,31 +256,8 @@ public class LocalUploader {
             String newimagename = UUID.randomUUID().toString() + "_" + datas + "_image.jpg";
 
             File f = new File(internal ? Utils.getFilePath(context, folder) + newimagename : Utils.getExternalPath(folder) + newimagename);
-            try {
-                f.createNewFile();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            //write the bytes in file
 
-            FileOutputStream fo = null;
-            try {
-                fo = new FileOutputStream(f);
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
-            try {
-
-                fo.write(bytes.toByteArray());
-                fo.flush();
-                fo.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            long size = f.length();
-            Logger.d(TAG, String.format("size of bitmap: %d", size));
-            //String uri = f.getAbsolutePath();
-            return f;
+            return writeBytes(f, bytes);
 
         } else {
             Toast.makeText(context, "Devi selezionare un file che sia presente in memoria", Toast.LENGTH_SHORT).show();
@@ -288,6 +265,61 @@ public class LocalUploader {
             return null;
         }
 
+    }
+
+    /**
+     * Genera un file da un'immagine bitmap e lo salva nella cartella scelta usando il nome passato come parametro
+     * @param context Context
+     * @param folder La cartella all'interno della quale deve essere salvato file
+     * @param photo Il file bitmap da cui generare il file
+     * @param fileName Il nome del file
+     * @return il file generato, o null se era già presente nella folder un file con lo stesso nome
+     */
+    public static File generateFileFromBitmap(Context context, String folder, Bitmap photo, String fileName) {
+        if (photo != null) {
+
+            ByteArrayOutputStream bytes = reduceUntilRespectSize(photo, 512000);
+            File f = new File(Utils.getExternalPath(folder.endsWith("/") ? folder : folder + "/") + fileName);
+
+            return writeBytes(f, bytes);
+
+        } else {
+            Toast.makeText(context, "Devi selezionare un file che sia presente in memoria", Toast.LENGTH_SHORT).show();
+
+            return null;
+        }
+    }
+
+    private static File writeBytes(File f, ByteArrayOutputStream bytes) {
+
+        try {
+            if (!f.createNewFile())
+                return null;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        FileOutputStream fo = null;
+
+        try {
+            fo = new FileOutputStream(f);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        try {
+
+            fo.write(bytes.toByteArray());
+            fo.flush();
+            fo.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        long size = f.length();
+        Logger.d(TAG, String.format("size of bitmap: %d", size));
+
+        return f;
     }
 
     /**
