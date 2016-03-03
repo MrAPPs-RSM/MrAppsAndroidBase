@@ -74,26 +74,20 @@ public class CustomDialog {
             @Override
             public void afterTextChanged(Editable s) {
 
-                if(lower!=null && upper!=null && s.length()>0)
-                {
-                    double value=Double.parseDouble(s.toString());
+                if (lower != null && upper != null && s.length() > 0) {
+                    double value = Double.parseDouble(s.toString());
 
-                    double lowerValue=Double.parseDouble(lower);
-                    double upperValue=Double.parseDouble(upper);
+                    double lowerValue = Double.parseDouble(lower);
+                    double upperValue = Double.parseDouble(upper);
 
-                    if(value<lowerValue || value>upperValue)
-                    {
+                    if (value < lowerValue || value > upperValue) {
                         til_valore.setError(context.getString(R.string.Devi_inserire_un_valore_tra__d_e__d, (int) lowerValue, (int) upperValue));
                         til_valore.setErrorEnabled(true);
-                    }
-                    else
-                    {
+                    } else {
                         til_valore.setErrorEnabled(false);
                     }
 
-                }
-                else
-                {
+                } else {
                     til_valore.setErrorEnabled(false);
                 }
 

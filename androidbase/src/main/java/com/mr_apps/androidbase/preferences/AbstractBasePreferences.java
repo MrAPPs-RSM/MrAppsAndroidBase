@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 /**
- * Created by denis on 29/02/16.
+ * Created by denis on 29/02/16
  */
 public abstract class AbstractBasePreferences {
 
@@ -22,29 +22,25 @@ public abstract class AbstractBasePreferences {
         return getPreferences(context, namePreferences).edit();
     }
 
-    public static void setPreferences(Context context, String namePreferences, String key, String value)
-    {
+    public static void setPreferences(Context context, String namePreferences, String key, String value) {
         SharedPreferences.Editor editor = getEditor(context, namePreferences);
         editor.putString(key, value);
         editor.commit();
     }
 
-    public static void setPreferences(Context context, String namePreferences, String key, float value)
-    {
+    public static void setPreferences(Context context, String namePreferences, String key, float value) {
         SharedPreferences.Editor editor = getEditor(context, namePreferences);
         editor.putFloat(key, value);
         editor.commit();
     }
 
-    public static void setPreferences(Context context, String namePreferences, String key, long value)
-    {
+    public static void setPreferences(Context context, String namePreferences, String key, long value) {
         SharedPreferences.Editor editor = getEditor(context, namePreferences);
         editor.putLong(key, value);
         editor.commit();
     }
 
-    public static void setPreferences(Context context, String namePreferences, String key, boolean value)
-    {
+    public static void setPreferences(Context context, String namePreferences, String key, boolean value) {
         SharedPreferences.Editor editor = getEditor(context, namePreferences);
         editor.putBoolean(key, value);
         editor.commit();

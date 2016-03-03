@@ -13,7 +13,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 
 /**
- * Created by denis on 15/01/16.
+ * Created by denis on 15/01/16
  */
 public abstract class PermissionManagerActivity extends AppCompatActivity {
 
@@ -23,34 +23,35 @@ public abstract class PermissionManagerActivity extends AppCompatActivity {
     private static final int ACCESS_COARSE_LOCATION_PERMISSION_REQUEST = 3;
     private static final int ACCESS_FINE_LOCATION_PERMISSION_REQUEST = 4;
 
-    public boolean checkOrRequestPermission(String permission, int titleId, int messageId)
-    {
+    public boolean checkOrRequestPermission(String permission, int titleId, int messageId) {
         return checkOrRequestPermission(permission, getString(titleId), getString(messageId));
     }
 
-    public boolean checkOrRequestPermission(String permission, String title, String message)
-    {
+    public boolean checkOrRequestPermission(String permission, String title, String message) {
 
-        if(checkPermission(permission))
+        if (checkPermission(permission))
             return true;
         else {
-            int permissionRequest=getPermissionRequestByPermissionName(permission);
+            int permissionRequest = getPermissionRequestByPermissionName(permission);
             requestPermission(permission, permissionRequest, title, message);
             return false;
         }
     }
 
-    private int getPermissionRequestByPermissionName(String permission)
-    {
+    private int getPermissionRequestByPermissionName(String permission) {
 
-        switch (permission)
-        {
-            case Manifest.permission.WRITE_EXTERNAL_STORAGE: return WRITE_STORAGE_PERMISSION_REQUEST;
-            case Manifest.permission.READ_EXTERNAL_STORAGE: return READ_STORAGE_PERMISSION_REQUEST;
-            case Manifest.permission.ACCESS_COARSE_LOCATION: return ACCESS_COARSE_LOCATION_PERMISSION_REQUEST;
-            case Manifest.permission.ACCESS_FINE_LOCATION: return ACCESS_FINE_LOCATION_PERMISSION_REQUEST;
+        switch (permission) {
+            case Manifest.permission.WRITE_EXTERNAL_STORAGE:
+                return WRITE_STORAGE_PERMISSION_REQUEST;
+            case Manifest.permission.READ_EXTERNAL_STORAGE:
+                return READ_STORAGE_PERMISSION_REQUEST;
+            case Manifest.permission.ACCESS_COARSE_LOCATION:
+                return ACCESS_COARSE_LOCATION_PERMISSION_REQUEST;
+            case Manifest.permission.ACCESS_FINE_LOCATION:
+                return ACCESS_FINE_LOCATION_PERMISSION_REQUEST;
 
-            default: return 0;
+            default:
+                return 0;
         }
 
     }
@@ -111,7 +112,8 @@ public abstract class PermissionManagerActivity extends AppCompatActivity {
         void permissionDenied();
     }*/
 
-    public void permissionDenied(String permission) {}
+    public void permissionDenied(String permission) {
+    }
 
     private void userMustAcceptPermission(String permission, int titleId, int messageId) {
         userMustAcceptPermission(permission, getString(titleId), getString(messageId));
@@ -127,7 +129,7 @@ public abstract class PermissionManagerActivity extends AppCompatActivity {
                         dialog.dismiss();
                         permissionDenied(permission);
                         //if (callback != null)
-                            //callback.permissionDenied();
+                        //callback.permissionDenied();
                     }
                 })
                 .setPositiveButton(getString(android.R.string.yes), new DialogInterface.OnClickListener() {
@@ -142,7 +144,7 @@ public abstract class PermissionManagerActivity extends AppCompatActivity {
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
-        boolean granted=grantResults.length > 0
+        boolean granted = grantResults.length > 0
                 && grantResults[0] == PackageManager.PERMISSION_GRANTED;
 
         switch (requestCode) {
@@ -178,13 +180,17 @@ public abstract class PermissionManagerActivity extends AppCompatActivity {
 
     //metodi granted-denied
 
-    public void writeStoragePermissionResult(boolean granted) {}
+    public void writeStoragePermissionResult(boolean granted) {
+    }
 
-    public void readStoragePermissionResult(boolean granted) {}
+    public void readStoragePermissionResult(boolean granted) {
+    }
 
-    public void accessCoarsePermissionResult(boolean granted){}
+    public void accessCoarsePermissionResult(boolean granted) {
+    }
 
-    public void accessFinePermissionResult(boolean granted){}
+    public void accessFinePermissionResult(boolean granted) {
+    }
 
 
 }

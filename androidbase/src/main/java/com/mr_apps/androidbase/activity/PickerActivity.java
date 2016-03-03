@@ -17,11 +17,11 @@ import com.mr_apps.androidbase.utils.LocalUploader;
 import com.mr_apps.androidbase.utils.Utils;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 
 /**
- * Created by denis on 29/02/16.
+ * Created by denis on 29/02/16
+ * Modified by Mattia Ruggiero on 01/03/16
  */
 public abstract class PickerActivity extends LocationActivity {
 
@@ -30,49 +30,48 @@ public abstract class PickerActivity extends LocationActivity {
 
     private Uri imageUri, videoUri;
 
-    private static final int actionPickImage=100;
-    private static final int actionTakeImage=200;
-    private static final int actionPickVideo=300;
-    private static final int actionRecordVideo=400;
+    private static final int actionPickImage = 100;
+    private static final int actionTakeImage = 200;
+    private static final int actionPickVideo = 300;
+    private static final int actionRecordVideo = 400;
 
-    public void showAlertChoice(String title, boolean pickImageFromGallery, boolean takePhoto, boolean pickVideoFromGallery, boolean recordVideo)
-    {
+    public void showAlertChoice(String title, boolean pickImageFromGallery, boolean takePhoto, boolean pickVideoFromGallery, boolean recordVideo) {
 
-        this.pickImageFromGallery=pickImageFromGallery;
-        this.takePhoto=takePhoto;
-        this.pickVideoFromGallery=pickVideoFromGallery;
-        this.recordVideo=recordVideo;
-        this.title=title;
+        this.pickImageFromGallery = pickImageFromGallery;
+        this.takePhoto = takePhoto;
+        this.pickVideoFromGallery = pickVideoFromGallery;
+        this.recordVideo = recordVideo;
+        this.title = title;
 
-        imageUri=null;
-        videoUri=null;
+        imageUri = null;
+        videoUri = null;
 
-        if(!checkOrRequestPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE, R.string.Titolo_permesso_obbligatorio, R.string.Messaggio_permesso_storage))
+        if (!checkOrRequestPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE, R.string.Titolo_permesso_obbligatorio, R.string.Messaggio_permesso_storage))
             return;
 
-        final String scegli_immagine=getString(R.string.Scegli_immagine_da_galleria);
-        final String scatta_foto=getString(R.string.Scatta_foto);
-        final String scegli_video=getString(R.string.Scegli_video_da_galleria);
-        final String gira_video=getString(R.string.Gira_video);
+        final String scegli_immagine = getString(R.string.Scegli_immagine_da_galleria);
+        final String scatta_foto = getString(R.string.Scatta_foto);
+        final String scegli_video = getString(R.string.Scegli_video_da_galleria);
+        final String gira_video = getString(R.string.Gira_video);
 
-        ArrayList<String> itemsArrayList=new ArrayList<>();
+        ArrayList<String> itemsArrayList = new ArrayList<>();
 
-        if(pickImageFromGallery)
+        if (pickImageFromGallery)
             itemsArrayList.add(scegli_immagine);
 
-        if(takePhoto)
+        if (takePhoto)
             itemsArrayList.add(scatta_foto);
 
-        if(pickVideoFromGallery)
+        if (pickVideoFromGallery)
             itemsArrayList.add(scegli_video);
 
-        if(recordVideo)
+        if (recordVideo)
             itemsArrayList.add(gira_video);
 
-        final String [] items=new String[itemsArrayList.size()];
+        final String[] items = new String[itemsArrayList.size()];
 
-        for(int i=0; i<itemsArrayList.size(); i++)
-            items[i]=itemsArrayList.get(i);
+        for (int i = 0; i < itemsArrayList.size(); i++)
+            items[i] = itemsArrayList.get(i);
 
         new AlertDialog.Builder(this)
                 .setTitle(title)
@@ -81,10 +80,9 @@ public abstract class PickerActivity extends LocationActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
 
-                        String choice=items[which];
+                        String choice = items[which];
 
-                        if(choice.equals(scegli_immagine))
-                        {
+                        if (choice.equals(scegli_immagine)) {
                             Intent intent = new Intent();
                             if (Build.VERSION.SDK_INT >= 19) {
                                 // For Android versions of KitKat or later, we use a
@@ -100,16 +98,16 @@ public abstract class PickerActivity extends LocationActivity {
                             intent.setType("image/*");
                             startActivityForResult(intent, actionPickImage);
 
-                        } else if(choice.equals(scatta_foto)) {
+                        } else if (choice.equals(scatta_foto)) {
 
-                            File file = Utils.newFileToUpload(PickerActivity.this, getFolder(), Utils.ElementType.img);
+                            File file = Utils.newFileToUpload(PickerActivity.this, getFolder(), Utils.ElementType.img, false);
                             Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
                             imageUri = Uri.fromFile(file);
                             intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
 
                             startActivityForResult(intent, actionTakeImage);
 
-                        } else if(choice.equals(scegli_video)) {
+                        } else if (choice.equals(scegli_video)) {
 
                             Intent intent = new Intent();
                             if (Build.VERSION.SDK_INT >= 19) {
@@ -126,10 +124,10 @@ public abstract class PickerActivity extends LocationActivity {
                             intent.setType("video/*");
                             startActivityForResult(intent, actionPickVideo);
 
-                        } else if(choice.equals(gira_video)) {
+                        } else if (choice.equals(gira_video)) {
 
                             Intent intent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
-                            File file = Utils.newFileToUpload(PickerActivity.this, getFolder(), Utils.ElementType.vid);
+                            File file = Utils.newFileToUpload(PickerActivity.this, getFolder(), Utils.ElementType.vid, false);
                             videoUri = Uri.fromFile(file);
                             //Uri outputFileUri = Uri.fromFile(file);
                             intent.putExtra(MediaStore.EXTRA_OUTPUT, videoUri);
@@ -147,8 +145,7 @@ public abstract class PickerActivity extends LocationActivity {
         return 30;
     }
 
-    public String getFolder()
-    {
+    public String getFolder() {
         return "";
     }
 
@@ -156,7 +153,7 @@ public abstract class PickerActivity extends LocationActivity {
     public void writeStoragePermissionResult(boolean granted) {
         super.writeStoragePermissionResult(granted);
 
-        if(granted)
+        if (granted)
             showAlertChoice(title, pickImageFromGallery, takePhoto, pickVideoFromGallery, recordVideo);
 
     }
@@ -179,7 +176,10 @@ public abstract class PickerActivity extends LocationActivity {
 
             case actionPickImage:
 
-                Uri uri=data.getData();
+                if (data == null)
+                    return;
+
+                Uri uri = data.getData();
 
                 try {
 
@@ -192,8 +192,7 @@ public abstract class PickerActivity extends LocationActivity {
                     pickerResult(path, type, bitmap);
 
 
-                } catch (Exception e)
-                {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
 
@@ -201,7 +200,10 @@ public abstract class PickerActivity extends LocationActivity {
 
             case actionPickVideo:
 
-                Uri uriVideo=data.getData();
+                if (data == null)
+                    return;
+
+                Uri uriVideo = data.getData();
 
                 try {
 
@@ -212,8 +214,7 @@ public abstract class PickerActivity extends LocationActivity {
                     pickerResult(path, type, null);
 
 
-                } catch (Exception e)
-                {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
 
@@ -221,7 +222,8 @@ public abstract class PickerActivity extends LocationActivity {
         }
     }
 
-    public void pickerResult(String path, Utils.ElementType elementType, Bitmap bitmap){}
+    public void pickerResult(String path, Utils.ElementType elementType, Bitmap bitmap) {
+    }
 
     private static final String file_uri1 = "image_uri";
     private static final String file_uri2 = "video_uri";
@@ -239,19 +241,18 @@ public abstract class PickerActivity extends LocationActivity {
         handleTempUri();
     }
 
-    private void handleTempUri()
-    {
-        Uri tempUri=imageUri==null?videoUri:imageUri;
+    private void handleTempUri() {
+        Uri tempUri = imageUri == null ? videoUri : imageUri;
 
-        if(tempUri==null)
+        if (tempUri == null)
             return;
 
         File file;
-        String path=null;
-        Utils.ElementType type=null;
+        String path = null;
+        Utils.ElementType type = null;
         Bitmap bitmap = null;
 
-        if(imageUri!=null) {
+        if (imageUri != null) {
             try {
 
                 bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), tempUri);
@@ -262,7 +263,7 @@ public abstract class PickerActivity extends LocationActivity {
 
                 bitmap = LocalUploader.rotateBitmap(bitmap, orientation);
 
-                file = LocalUploader.generateFileFromBitmap(this, getFolder(), bitmap);
+                file = LocalUploader.generateFileFromBitmap(this, getFolder(), bitmap, true);
                 path = file.getPath();
                 type = Utils.ElementType.img;
 
@@ -272,8 +273,8 @@ public abstract class PickerActivity extends LocationActivity {
 
         } else {
 
-            path= LocalUploader.getRealPath(this, tempUri);
-            type= Utils.ElementType.vid;
+            path = LocalUploader.getRealPath(this, tempUri);
+            type = Utils.ElementType.vid;
 
         }
 

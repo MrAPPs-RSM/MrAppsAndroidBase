@@ -4,6 +4,7 @@ import android.content.Context;
 import android.location.Location;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.Environment;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
 
@@ -20,13 +21,12 @@ import java.util.UUID;
  */
 public class Utils {
 
-    public static float distanceInMeters(double latitude1, double longitude1, double latitude2, double longitude2)
-    {
-        Location location1=new Location("");
+    public static float distanceInMeters(double latitude1, double longitude1, double latitude2, double longitude2) {
+        Location location1 = new Location("");
         location1.setLatitude(latitude1);
         location1.setLongitude(longitude1);
 
-        Location location2=new Location("");
+        Location location2 = new Location("");
         location2.setLatitude(latitude2);
         location2.setLongitude(longitude2);
 
@@ -88,11 +88,11 @@ public class Utils {
      * @return A string that represents the bytes in a proper scale.
      */
     public static String getBytesString(long bytes) {
-        String[] quantifiers = new String[] {
+        String[] quantifiers = new String[]{
                 "KB", "MB", "GB", "TB"
         };
         double speedNum = bytes;
-        for (int i = 0;; i++) {
+        for (int i = 0; ; i++) {
             if (i >= quantifiers.length) {
                 return "";
             }
@@ -118,29 +118,48 @@ public class Utils {
         audio
     }
 
-    public static File newFileToUpload(Context context, String folder, ElementType type)
-    {
+    public static File newFileToUpload(Context context, String folder, ElementType type, boolean internal) {
+
         SimpleDateFormat sdf = new SimpleDateFormat("HH_mm_ss__dd_MM_yy", Locale.getDefault());
 
         Date date = new Date();
-        final String data = UUID.randomUUID()+"_"+sdf.format(date);
+        final String data = UUID.randomUUID() + "_" + sdf.format(date);
 
-        String path=getFilePath(context, folder);
+        File dir = getTempImageFolder(context, folder, internal);
 
-        if(type==ElementType.img)
-            return new File(path, data + "_image.jpg");
-        else if(type==ElementType.vid)
-            return new File(path, data + "_video.mp4");
-        else if(type==ElementType.audio)
-            return new File(path, data + "_audio.aac");
+        if (!dir.exists())
+            dir.mkdirs();
+
+        if (type == ElementType.img)
+            return new File(dir.getPath(), data + "_image.jpg");
+        else if (type == ElementType.vid)
+            return new File(dir.getPath(), data + "_video.mp4");
+        else if (type == ElementType.audio)
+            return new File(dir.getPath(), data + "_audio.aac");
         else
             return null;
 
     }
 
-    public static String getFilePath(Context context, String folder) {
+    public static File getTempImageFolder(Context context, String folder, boolean internal) {
+        String path = (internal ? getFilePath(context, folder) : getExternalPath(folder)) + "/temp_images";
 
-        String filePath= context.getFilesDir().getPath()+"/"+folder;//"/mnt/sdcard/qchat/";//Environment.getExternalStorageDirectory() + "/qchat/";
+        return new File(path);
+
+    }
+
+    public static File getFilePath(Context context, String folder) {
+        String filePath = context.getFilesDir().getPath() + "/" + folder;
+        File directory = new File(filePath);
+        if (!directory.isDirectory()) {
+            directory.mkdir();
+        }
+
+        return new File(filePath);
+    }
+
+    public static String getExternalPath(String folder) {
+        String filePath = Environment.getExternalStorageDirectory().getPath() + "/" + folder;
 
         File directory = new File(filePath);
 
