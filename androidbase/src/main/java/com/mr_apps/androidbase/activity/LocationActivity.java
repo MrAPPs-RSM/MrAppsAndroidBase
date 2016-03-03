@@ -30,6 +30,7 @@ public abstract class LocationActivity extends PermissionManagerActivity impleme
     LocationRequest mLocationRequest;
     public GoogleApiClient mGoogleApiClient;
     public LatLng latLng;
+    public double altitude;
 
     private static final String TAG = "LocationActivity";
 
@@ -86,6 +87,7 @@ public abstract class LocationActivity extends PermissionManagerActivity impleme
     public void onPositionFound() {
         GlobalPreferences.setLatitude(this, String.valueOf(latLng.latitude));
         GlobalPreferences.setLongitude(this, String.valueOf(latLng.longitude));
+        GlobalPreferences.setAltitude(this, String.valueOf(altitude));
     }
 
     @Override
@@ -175,8 +177,10 @@ public abstract class LocationActivity extends PermissionManagerActivity impleme
     public void onLocationChanged(Location location) {
 
         latLng = new LatLng(location.getLatitude(), location.getLongitude());
+        altitude=location.getAltitude();
 
         Logger.d(TAG, latLng.toString());
+        Logger.d(TAG, "altitude: "+String.valueOf(altitude));
 
         onPositionFound();
 
