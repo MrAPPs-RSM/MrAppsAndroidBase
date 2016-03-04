@@ -26,6 +26,25 @@ public class CustomDialog {
 
     }
 
+    public static void showOkDialog(Context context, String title, String message, final CustomDialogCallback callback) {
+
+        new AlertDialog.Builder(context)
+                .setTitle(title)
+                .setMessage(message)
+                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        callback.onPositive(null);
+                    }
+                })
+                .show();
+    }
+
+    public static void showOkDialog(Context context, int titleResId, int messageResId, final CustomDialogCallback callback) {
+
+        showOkDialog(context, context.getString(titleResId), context.getString(messageResId), callback);
+    }
+
     public static void showOkDialog(Context context, int titleResId, int messageResId) {
 
         showOkDialog(context, context.getString(titleResId), context.getString(messageResId));
