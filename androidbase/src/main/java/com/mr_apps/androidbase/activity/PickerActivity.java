@@ -25,8 +25,8 @@ import java.util.ArrayList;
  */
 public abstract class PickerActivity extends LocationActivity {
 
-    boolean pickImageFromGallery, takePhoto, pickVideoFromGallery, recordVideo;
-    String title;
+    private boolean pickImageFromGallery, takePhoto, pickVideoFromGallery, recordVideo;
+    private String mTitle;
 
     private Uri imageUri, videoUri;
 
@@ -41,7 +41,7 @@ public abstract class PickerActivity extends LocationActivity {
         this.takePhoto = takePhoto;
         this.pickVideoFromGallery = pickVideoFromGallery;
         this.recordVideo = recordVideo;
-        this.title = title;
+        this.mTitle = title;
 
         imageUri = null;
         videoUri = null;
@@ -149,14 +149,36 @@ public abstract class PickerActivity extends LocationActivity {
         return "";
     }
 
-    @Override
+    public String getmTitle() {
+        return mTitle;
+    }
+
+    public boolean isPickImageFromGallery() {
+        return pickImageFromGallery;
+    }
+
+    public boolean isTakePhoto() {
+        return takePhoto;
+    }
+
+    public boolean isPickVideoFromGallery() {
+        return pickVideoFromGallery;
+    }
+
+    public boolean isRecordVideo() {
+        return recordVideo;
+    }
+
+    /*@Override
     public void writeStoragePermissionResult(boolean granted) {
         super.writeStoragePermissionResult(granted);
 
-        if (granted)
-            showAlertChoice(title, pickImageFromGallery, takePhoto, pickVideoFromGallery, recordVideo);
+        //call:
 
-    }
+        if (granted)
+            showAlertChoice(getmTitle(), isPickImageFromGallery(), isTakePhoto(), isPickVideoFromGallery(), isRecordVideo());
+
+    }*/
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
