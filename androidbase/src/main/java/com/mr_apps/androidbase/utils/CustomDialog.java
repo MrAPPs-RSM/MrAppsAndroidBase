@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.mr_apps.androidbase.R;
 
@@ -64,18 +65,24 @@ public class CustomDialog {
                 .show();
     }
 
-    public static void showEditDialog(Context context, int titleId, int hintId, int inputType, String lower, String upper, final CustomDialogCallback callback) {
-        showEditDialog(context, context.getString(titleId), context.getString(hintId), inputType, lower, upper, callback);
+    public static void showEditDialog(Context context, int titleId, int hintId, Integer messageId, int inputType, String lower, String upper, final CustomDialogCallback callback) {
+        showEditDialog(context, context.getString(titleId), context.getString(hintId), context.getString(messageId), inputType, lower, upper, callback);
     }
 
-    public static void showEditDialog(final Context context, String title, String hint, int inputType, final String lower, final String upper, final CustomDialogCallback callback) {
+    public static void showEditDialog(final Context context, String title, String hint, String message, int inputType, final String lower, final String upper, final CustomDialogCallback callback) {
         View view = LayoutInflater.from(context).inflate(R.layout.custom_dialog, null);
+
+        final TextView textView = (TextView) view.findViewById(R.id.message);
 
         final EditText edit = (EditText) view.findViewById(R.id.edit_dialog);
 
         final TextInputLayout til_valore = (TextInputLayout) view.findViewById(R.id.til_valore);
 
+        textView.setVisibility(message == null ? View.GONE : View.VISIBLE);
+        textView.setText(message == null ? "" : message);
+
         edit.setInputType(inputType);
+        edit.setHint(hint == null ? "" : hint);
 
         til_valore.setErrorEnabled(false);
 

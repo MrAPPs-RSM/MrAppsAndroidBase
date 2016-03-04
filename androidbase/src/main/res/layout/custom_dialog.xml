@@ -4,10 +4,17 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <android.support.design.widget.TextInputLayout
+    <TextView
+        android:id="@+id/message"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="@dimen/default_very_large_margin_or_padding"
+        android:gravity="center" />
+
+    <android.support.design.widget.TextInputLayout
         android:id="@+id/til_valore"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_margin="@dimen/default_very_large_margin_or_padding">
 
         <android.support.v7.widget.AppCompatEditText
