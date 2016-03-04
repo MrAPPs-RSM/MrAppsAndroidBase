@@ -23,7 +23,7 @@ import java.util.ArrayList;
  * Created by denis on 29/02/16
  * Modified by Mattia Ruggiero on 01/03/16
  */
-public abstract class PickerActivity extends LocationActivity {
+public abstract class PickerActivity extends AbstractBaseActivity {
 
     boolean pickImageFromGallery, takePhoto, pickVideoFromGallery, recordVideo;
     String title;
