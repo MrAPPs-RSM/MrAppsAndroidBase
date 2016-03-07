@@ -65,8 +65,8 @@ public class CustomDialog {
                 .show();
     }
 
-    public static void showEditDialog(Context context, int titleId, int hintId, Integer messageId, int inputType, String lower, String upper, final CustomDialogCallback callback) {
-        showEditDialog(context, context.getString(titleId), context.getString(hintId), context.getString(messageId), inputType, lower, upper, callback);
+    public static void showEditDialog(Context context, int titleId, int hintId, int messageId, int inputType, String lower, String upper, final CustomDialogCallback callback) {
+        showEditDialog(context, context.getString(titleId), hintId == 0 ? null : context.getString(hintId), messageId == 0 ? null : context.getString(messageId), inputType, lower, upper, callback);
     }
 
     public static void showEditDialog(final Context context, String title, String hint, String message, int inputType, final String lower, final String upper, final CustomDialogCallback callback) {
