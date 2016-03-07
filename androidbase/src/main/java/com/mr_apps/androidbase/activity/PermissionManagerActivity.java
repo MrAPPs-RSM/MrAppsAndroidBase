@@ -22,6 +22,7 @@ public abstract class PermissionManagerActivity extends AppCompatActivity {
     private static final int READ_STORAGE_PERMISSION_REQUEST = 2;
     private static final int ACCESS_COARSE_LOCATION_PERMISSION_REQUEST = 3;
     private static final int ACCESS_FINE_LOCATION_PERMISSION_REQUEST = 4;
+    private static final int CAMERA = 5;
 
     public boolean checkOrRequestPermission(String permission, int titleId, int messageId) {
         return checkOrRequestPermission(permission, getString(titleId), getString(messageId));
@@ -49,6 +50,8 @@ public abstract class PermissionManagerActivity extends AppCompatActivity {
                 return ACCESS_COARSE_LOCATION_PERMISSION_REQUEST;
             case Manifest.permission.ACCESS_FINE_LOCATION:
                 return ACCESS_FINE_LOCATION_PERMISSION_REQUEST;
+            case Manifest.permission.CAMERA:
+                return CAMERA;
 
             default:
                 return 0;
@@ -167,6 +170,11 @@ public abstract class PermissionManagerActivity extends AppCompatActivity {
                 accessFinePermissionResult(granted);
                 break;
             }
+
+            case CAMERA: {
+                cameraPermissionResult(granted);
+                break;
+            }
         }
     }
 
@@ -180,17 +188,14 @@ public abstract class PermissionManagerActivity extends AppCompatActivity {
 
     //metodi granted-denied
 
-    public void writeStoragePermissionResult(boolean granted) {
-    }
+    public void writeStoragePermissionResult(boolean granted) {}
 
-    public void readStoragePermissionResult(boolean granted) {
-    }
+    public void readStoragePermissionResult(boolean granted) {}
 
-    public void accessCoarsePermissionResult(boolean granted) {
-    }
+    public void accessCoarsePermissionResult(boolean granted) {}
 
-    public void accessFinePermissionResult(boolean granted) {
-    }
+    public void accessFinePermissionResult(boolean granted) {}
 
+    public void cameraPermissionResult(boolean granted){}
 
 }

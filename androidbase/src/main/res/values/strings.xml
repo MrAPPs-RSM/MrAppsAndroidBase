@@ -7,6 +7,8 @@
 
     <string name="Messaggio_permesso_storage">È necessario consentire il permesso per la gestione dei file nella SD.\n Vuoi impostarlo adesso?</string>
     <string name="Messaggio_permesso_posizione">È necessario consentire il permesso per accedere alla tua posizione.\n Vuoi impostarlo adesso?</string>
+    <string name="Messaggio_permesso_camera">È necessario consentire il permesso per accedere alla fotocamera.\n Vuoi impostarlo adesso?</string>
+
     <string name="La_mia_posizione">La mia posizione</string>
     <string name="Credenziali_non_corrette">Credenziali non corrette</string>
     <string name="Campi_obbligatori_non_inseriti">Campi obbligatori non inseriti</string>
