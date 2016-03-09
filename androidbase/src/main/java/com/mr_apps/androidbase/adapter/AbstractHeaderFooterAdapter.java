@@ -1,8 +1,10 @@
 package com.mr_apps.androidbase.adapter;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 
 import com.mr_apps.androidbase.activity.AbstractBaseActivity;
+import com.mr_apps.androidbase.fragments.BaseFragment;
 
 import java.util.ArrayList;
 
@@ -19,12 +21,19 @@ public abstract class AbstractHeaderFooterAdapter extends RecyclerView.Adapter<R
 
     protected final ArrayList<RecyclerItem> items = new ArrayList<>();
 
-    protected final AbstractBaseActivity context;
-    protected final RecyclerViewListener recyclerViewListener;
+    protected AbstractBaseActivity activity;
+    protected BaseFragment fragment;
 
-    public AbstractHeaderFooterAdapter(AbstractBaseActivity context, RecyclerViewListener recyclerViewListener) {
-        this.context = context;
-        this.recyclerViewListener = recyclerViewListener;
+    private final Context context;
+
+    public AbstractHeaderFooterAdapter(AbstractBaseActivity activity) {
+        this.activity = activity;
+        this.context = activity;
+    }
+
+    public AbstractHeaderFooterAdapter(BaseFragment fragment) {
+        this.fragment = fragment;
+        this.context = fragment.getActivity();
     }
 
     public RecyclerItem getItem(int position) {
@@ -32,6 +41,10 @@ public abstract class AbstractHeaderFooterAdapter extends RecyclerView.Adapter<R
             return items.get(position);
         else
             return null;
+    }
+
+    public Context getContext() {
+        return context;
     }
 
     @Override

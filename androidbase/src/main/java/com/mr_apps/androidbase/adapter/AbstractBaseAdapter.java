@@ -3,6 +3,7 @@ package com.mr_apps.androidbase.adapter;
 import android.support.v7.widget.RecyclerView;
 
 import com.mr_apps.androidbase.activity.AbstractBaseActivity;
+import com.mr_apps.androidbase.fragments.BaseFragment;
 
 import java.util.ArrayList;
 
@@ -14,12 +15,15 @@ import java.util.ArrayList;
 public abstract class AbstractBaseAdapter<T> extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     protected final ArrayList<T> items = new ArrayList<>();
 
-    protected final AbstractBaseActivity context;
-    protected final RecyclerViewListener recyclerViewListener;
+    protected AbstractBaseActivity activity;
+    protected BaseFragment fragment;
 
-    public AbstractBaseAdapter(AbstractBaseActivity context, RecyclerViewListener recyclerViewListener) {
-        this.context = context;
-        this.recyclerViewListener = recyclerViewListener;
+    public AbstractBaseAdapter(AbstractBaseActivity activity) {
+        this.activity = activity;
+    }
+
+    public AbstractBaseAdapter(BaseFragment fragment) {
+        this.fragment = fragment;
     }
 
     public T getItem(int position) {
