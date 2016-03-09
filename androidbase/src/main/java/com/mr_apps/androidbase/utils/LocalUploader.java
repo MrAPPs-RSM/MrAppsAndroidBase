@@ -263,22 +263,6 @@ public class LocalUploader {
 
     }
 
-    public static File generateFileFromBitmap(Context context, Uri uri, Bitmap photo, int quality) {
-        if (photo != null) {
-            ByteArrayOutputStream bytes = reduceUntilRespectSize(photo, 512000, quality);
-
-            File f = new File(uri.getPath());
-
-            return writeBytes(f, bytes);
-
-        } else {
-            Toast.makeText(context, "Devi selezionare un file che sia presente in memoria", Toast.LENGTH_SHORT).show();
-
-            return null;
-        }
-
-    }
-
     /**
      * Genera un file da un'immagine bitmap e lo salva nella cartella scelta usando il nome passato come parametro
      * @param context Context
