@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.mr_apps.androidbase.R;
 
@@ -14,14 +15,11 @@ import io.realm.Realm;
  */
 public abstract class AbstractBaseActivity extends PickerActivity {
 
-    public Realm realm;
-
     private static AbstractBaseActivity instance;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        realm = Realm.getDefaultInstance();
         refreshPosition();
     }
 
@@ -74,10 +72,9 @@ public abstract class AbstractBaseActivity extends PickerActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    public void onItemSelected(Object... items){}
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        realm.close();
+    public boolean onItemLongPressed(View view, Object... items){
+        return false;
     }
 }
