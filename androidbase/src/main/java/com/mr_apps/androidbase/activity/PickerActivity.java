@@ -92,7 +92,7 @@ public abstract class PickerActivity extends LocationActivity {
 
         new AlertDialog.Builder(this)
                 .setTitle(title)
-                .setSingleChoiceItems(items, -1, new DialogInterface.OnClickListener() {
+                .setItems(items, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();

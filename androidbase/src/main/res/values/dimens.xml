@@ -11,7 +11,7 @@
     <dimen name="default_large_margin_or_padding">12dp</dimen>
     <dimen name="default_very_large_margin_or_padding">16dp</dimen>
     <dimen name="default_small_margin_or_padding">4dp</dimen>
-    <dimen name="status_cheat">24dp</dimen>
+    <dimen name="status_cheat">0dp</dimen>
     <dimen name="item_asset_height">70dp</dimen>
 
 </resources>
