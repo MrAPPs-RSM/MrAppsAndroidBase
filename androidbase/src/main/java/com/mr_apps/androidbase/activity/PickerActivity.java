@@ -10,6 +10,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 
 import com.mr_apps.androidbase.R;
@@ -25,6 +26,14 @@ import java.util.ArrayList;
  */
 public abstract class PickerActivity extends LocationActivity {
 
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        imageUri=null;
+        videoUri=null;
+    }
+
     private boolean pickImageFromGallery, takePhoto, pickVideoFromGallery, recordVideo;
     private String mTitle;
 
@@ -34,6 +43,14 @@ public abstract class PickerActivity extends LocationActivity {
     private static final int actionTakeImage = 200;
     private static final int actionPickVideo = 300;
     private static final int actionRecordVideo = 400;
+
+    private int qualityImage=80;
+
+    public void setQualityImage(int qualityImage) {
+        this.qualityImage = qualityImage;
+    }
+
+    private boolean saveInInternalStorage=false;
 
     public void showAlertChoice(String title, boolean pickImageFromGallery, boolean takePhoto, boolean pickVideoFromGallery, boolean recordVideo) {
 
@@ -100,7 +117,7 @@ public abstract class PickerActivity extends LocationActivity {
 
                         } else if (choice.equals(scatta_foto)) {
 
-                            File file = Utils.newFileToUpload(PickerActivity.this, getFolder(), Utils.ElementType.img, false);
+                            File file = Utils.newFileToUpload(PickerActivity.this, getFolder(), Utils.ElementType.img, saveInInternalStorage);
                             Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
                             imageUri = Uri.fromFile(file);
                             intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
@@ -169,6 +186,10 @@ public abstract class PickerActivity extends LocationActivity {
         return recordVideo;
     }
 
+    public void setSaveInInternalStorage(boolean saveInInternalStorage) {
+        this.saveInInternalStorage = saveInInternalStorage;
+    }
+
     /*@Override
     public void writeStoragePermissionResult(boolean granted) {
         super.writeStoragePermissionResult(granted);
@@ -190,10 +211,10 @@ public abstract class PickerActivity extends LocationActivity {
         switch (requestCode) {
 
             case actionTakeImage:
-                handleTempUri();
+                handleTempUri(imageUri, true);
                 break;
             case actionRecordVideo:
-                handleTempUri();
+                handleTempUri(videoUri, false);
                 break;
 
             case actionPickImage:
@@ -253,6 +274,17 @@ public abstract class PickerActivity extends LocationActivity {
     private static final String date_uri2 = "date_uri2";
 
     @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        // save file url in bundle as it will be null on scren orientation
+        // changes
+        outState.putParcelable(file_uri1, imageUri);
+        outState.putParcelable(file_uri2, videoUri);
+
+    }
+
+    @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
 
@@ -260,11 +292,15 @@ public abstract class PickerActivity extends LocationActivity {
         imageUri = savedInstanceState.getParcelable(file_uri1);
         videoUri = savedInstanceState.getParcelable(file_uri2);
 
-        handleTempUri();
+        if(imageUri!=null)
+            handleTempUri(imageUri, true);
+
+        if(videoUri!=null)
+            handleTempUri(videoUri, false);
+
     }
 
-    private void handleTempUri() {
-        Uri tempUri = imageUri == null ? videoUri : imageUri;
+    private void handleTempUri(Uri tempUri, boolean isImage) {
 
         if (tempUri == null)
             return;
@@ -274,18 +310,17 @@ public abstract class PickerActivity extends LocationActivity {
         Utils.ElementType type = null;
         Bitmap bitmap = null;
 
-        if (imageUri != null) {
+        if (isImage) {
             try {
 
                 bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), tempUri);
-
 
                 ExifInterface exif = new ExifInterface(tempUri.getPath());
                 int orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_UNDEFINED);
 
                 bitmap = LocalUploader.rotateBitmap(bitmap, orientation);
 
-                file = LocalUploader.generateFileFromBitmap(this, getFolder(), bitmap, true);
+                file = LocalUploader.generateFileFromBitmap(this, tempUri, bitmap, qualityImage);//LocalUploader.generateFileFromBitmap(this, getFolder(), bitmap, saveInInternalStorage, qualityImage);
                 path = file.getPath();
                 type = Utils.ElementType.img;
 

@@ -142,7 +142,7 @@ public class Utils {
     }
 
     public static File getTempImageFolder(Context context, String folder, boolean internal) {
-        String path = (internal ? getFilePath(context, folder) : getExternalPath(folder)) + "/temp_images";
+        String path = (internal ? getFilePath(context, folder).getPath() : getExternalPath(folder));
 
         return new File(path);
 

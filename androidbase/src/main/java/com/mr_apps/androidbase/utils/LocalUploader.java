@@ -41,7 +41,7 @@ public class LocalUploader {
     private static int durationAudio = 120000;
     private static int durationVideo = 30000;
 
-    public static ByteArrayOutputStream reduceUntilRespectSize(Bitmap bitmap, int size) {
+    public static ByteArrayOutputStream reduceUntilRespectSize(Bitmap bitmap, int size, int quality) {
         ByteArrayOutputStream o = new ByteArrayOutputStream();
 
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, o);
@@ -49,14 +49,10 @@ public class LocalUploader {
         int byteCount = o.toByteArray().length;//BitmapCompat.getAllocationByteCount(bitmap);
 
         if (byteCount > size) {
-            int quality = (size * 100) / byteCount;
 
             o = new ByteArrayOutputStream();
 
-            if (quality < 50)
-                quality += 50;
-
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 80, o);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, quality, o);
 
             Logger.d(TAG, "compresso a " + String.valueOf(o.toByteArray().length));
 
@@ -244,9 +240,9 @@ public class LocalUploader {
         return inSampleSize;
     }
 
-    public static File generateFileFromBitmap(Context context, String folder, Bitmap photo, boolean internal) {
+    public static File generateFileFromBitmap(Context context, String folder, Bitmap photo, boolean internal, int quality) {
         if (photo != null) {
-            ByteArrayOutputStream bytes = reduceUntilRespectSize(photo, 512000);
+            ByteArrayOutputStream bytes = reduceUntilRespectSize(photo, 512000, quality);
 
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH_mm_ss__dd_MM_yyyy", Locale.getDefault());
 
@@ -255,7 +251,23 @@ public class LocalUploader {
             String datas = simpleDateFormat.format(date);
             String newimagename = UUID.randomUUID().toString() + "_" + datas + "_image.jpg";
 
-            File f = new File(internal ? Utils.getFilePath(context, folder) + newimagename : Utils.getExternalPath(folder) + newimagename);
+            File f = new File(internal ? Utils.getFilePath(context, folder).getPath(): Utils.getExternalPath(folder),  newimagename);
+
+            return writeBytes(f, bytes);
+
+        } else {
+            Toast.makeText(context, "Devi selezionare un file che sia presente in memoria", Toast.LENGTH_SHORT).show();
+
+            return null;
+        }
+
+    }
+
+    public static File generateFileFromBitmap(Context context, Uri uri, Bitmap photo, int quality) {
+        if (photo != null) {
+            ByteArrayOutputStream bytes = reduceUntilRespectSize(photo, 512000, quality);
+
+            File f = new File(uri.getPath());
 
             return writeBytes(f, bytes);
 
@@ -275,10 +287,10 @@ public class LocalUploader {
      * @param fileName Il nome del file
      * @return il file generato, o null se era già presente nella folder un file con lo stesso nome
      */
-    public static File generateFileFromBitmap(Context context, String folder, Bitmap photo, String fileName) {
+    public static File generateFileFromBitmap(Context context, String folder, Bitmap photo, String fileName, int quality) {
         if (photo != null) {
 
-            ByteArrayOutputStream bytes = reduceUntilRespectSize(photo, 512000);
+            ByteArrayOutputStream bytes = reduceUntilRespectSize(photo, 512000, quality);
             File f = new File(Utils.getExternalPath(folder.endsWith("/") ? folder : folder + "/") + fileName);
 
             return writeBytes(f, bytes);
@@ -329,7 +341,7 @@ public class LocalUploader {
      * @param maxSize
      * @return
      */
-    public static File getResizedImageFile(Context context, String folder, File f, int maxSize, boolean internal) throws FileNotFoundException {
+    public static File getResizedImageFile(Context context, String folder, File f, int maxSize, boolean internal, int quality) throws FileNotFoundException {
 
         BitmapFactory.Options thumbOpts = new BitmapFactory.Options();
         thumbOpts.inSampleSize = 4;
@@ -350,7 +362,7 @@ public class LocalUploader {
 
         Bitmap bitmap = Bitmap.createScaledBitmap(image, width, height, true);
 
-        File file = generateFileFromBitmap(context, folder, bitmap, internal);
+        File file = generateFileFromBitmap(context, folder, bitmap, internal, quality);
 
         return file;
     }
