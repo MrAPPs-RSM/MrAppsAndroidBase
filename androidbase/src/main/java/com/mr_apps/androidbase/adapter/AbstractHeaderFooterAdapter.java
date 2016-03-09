@@ -11,18 +11,23 @@ import java.util.ArrayList;
  *
  * @author Mattia Ruggiero
  */
-public abstract class AbstractBaseAdapter<T> extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    protected final ArrayList<T> items = new ArrayList<>();
+public abstract class AbstractHeaderFooterAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+
+    protected static final int TYPE_HEADER = 1;
+    protected static final int TYPE_ITEM = 2;
+    protected static final int TYPE_FOOTER = 3;
+
+    protected final ArrayList<RecyclerItem> items = new ArrayList<>();
 
     protected final AbstractBaseActivity context;
     protected final RecyclerViewListener recyclerViewListener;
 
-    public AbstractBaseAdapter(AbstractBaseActivity context, RecyclerViewListener recyclerViewListener) {
+    public AbstractHeaderFooterAdapter(AbstractBaseActivity context, RecyclerViewListener recyclerViewListener) {
         this.context = context;
         this.recyclerViewListener = recyclerViewListener;
     }
 
-    public T getItem(int position) {
+    public RecyclerItem getItem(int position) {
         if (items != null && items.size() > position)
             return items.get(position);
         else
@@ -30,11 +35,16 @@ public abstract class AbstractBaseAdapter<T> extends RecyclerView.Adapter<Recycl
     }
 
     @Override
+    public int getItemViewType(int position) {
+        return items.get(position).isHeader() ? TYPE_HEADER : items.get(position).isFooter() ? TYPE_FOOTER : TYPE_ITEM;
+    }
+
+    @Override
     public int getItemCount() {
         return items.size();
     }
 
-    public ArrayList<T> getItems() {
+    public ArrayList<RecyclerItem> getItems() {
         return items;
     }
 
@@ -43,7 +53,7 @@ public abstract class AbstractBaseAdapter<T> extends RecyclerView.Adapter<Recycl
         notifyItemRemoved(position);
     }
 
-    public void modifyItem(T item, int i) {
+    public void modifyItem(RecyclerItem item, int i) {
         items.set(i, item);
         notifyItemChanged(i);
     }
@@ -53,17 +63,17 @@ public abstract class AbstractBaseAdapter<T> extends RecyclerView.Adapter<Recycl
         notifyDataSetChanged();
     }
 
-    public void addItemInPosition(T item, int i) {
+    public void addItemInPosition(RecyclerItem item, int i) {
         items.add(i, item);
         notifyItemInserted(i);
     }
 
-    public void addItem(T item) {
+    public void addItem(RecyclerItem item) {
         items.add(item);
         notifyItemInserted(items.size() - 1);
     }
 
-    public void addItems(ArrayList<T> itemsToAdd, int positionToAdd) {
+    public void addItems(ArrayList<RecyclerItem> itemsToAdd, int positionToAdd) {
         items.addAll(positionToAdd, itemsToAdd);
         notifyDataSetChanged();
     }
