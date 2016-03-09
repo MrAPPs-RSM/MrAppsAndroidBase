@@ -24,6 +24,7 @@ public class GalleryActivity extends AbstractBaseActivity {
     public static final String Field_ImagesPath="Field_ImagesPath";
     public static final String Field_Position="Field_Position";
     public static final String Field_PlaceholderId="Field_PlaceholderId";
+    public static final String Field_CanShare="Field_CanShare";
 
     ArrayList<String> images;
 
@@ -61,7 +62,8 @@ public class GalleryActivity extends AbstractBaseActivity {
 
         MenuInflater menuInflater= getMenuInflater();
 
-        menuInflater.inflate(R.menu.gallery_menu, menu);
+        if(getIntent().getBooleanExtra(Field_CanShare, false))
+            menuInflater.inflate(R.menu.gallery_menu, menu);
 
         return super.onCreateOptionsMenu(menu);
     }

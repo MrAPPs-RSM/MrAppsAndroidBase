@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:background="@android:color/black">
 
-    <com.mr_apps.gourmet_risto.gallery.HackyProblematicViewGroup
+    <com.mr_apps.androidbase.gallery.HackyProblematicViewGroup
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/pager"/>
