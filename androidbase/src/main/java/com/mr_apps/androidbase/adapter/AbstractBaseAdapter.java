@@ -10,13 +10,13 @@ import java.util.ArrayList;
  *
  * @author Mattia Ruggiero
  */
-public abstract class BaseAdapter<T> extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public abstract class AbstractBaseAdapter<T> extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     protected final ArrayList<T> items = new ArrayList<>();
 
     protected final Context context;
     protected final RecyclerViewListener recyclerViewListener;
 
-    public BaseAdapter(Context context, RecyclerViewListener recyclerViewListener) {
+    public AbstractBaseAdapter(Context context, RecyclerViewListener recyclerViewListener) {
         this.context = context;
         this.recyclerViewListener = recyclerViewListener;
     }
