@@ -11,6 +11,10 @@
         android:label="@string/app_name"
         android:supportsRtl="true">
 
+        <activity android:name=".gallery.GalleryActivity"
+            android:launchMode="singleTop"
+            android:theme="@style/GalleryTheme"/>
+
     </application>
 
 </manifest>

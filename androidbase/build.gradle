@@ -24,8 +24,12 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:23.1.1'
     compile 'com.android.support:design:23.1.1'
-    compile 'com.koushikdutta.ion:ion:+'
-    compile 'com.google.code.gson:gson:+'
-    compile 'io.realm:realm-android:+'
-    compile 'com.google.android.gms:play-services-location:+'
+    compile 'com.koushikdutta.ion:ion:2.1.7'
+    compile 'com.google.code.gson:gson:2.6.2'
+    compile 'io.realm:realm-android:0.87.5'
+    compile 'com.google.android.gms:play-services-location:8.4.0'
+    compile 'com.github.bumptech.glide:glide:3.7.0'
+    compile 'com.commit451:PhotoView:1.2.4'
+
+
 }

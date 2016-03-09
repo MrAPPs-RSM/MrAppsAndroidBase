@@ -45,6 +45,10 @@ public abstract class AbstractBaseActivity extends PickerActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
+    public void setEmptyTitle() {
+        getSupportActionBar().setTitle("");
+    }
+
     public void setCloseButton() {
         setBackButton();
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close_24dp);
