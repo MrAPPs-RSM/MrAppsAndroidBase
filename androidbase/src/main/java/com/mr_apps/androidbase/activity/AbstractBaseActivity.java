@@ -14,7 +14,7 @@ public abstract class AbstractBaseActivity extends PickerActivity {
     private static AbstractBaseActivity instance;
 
     @Override
-    protected void onResume() {
+    public void onResume() {
         super.onResume();
         instance = this;
     }
