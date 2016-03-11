@@ -77,16 +77,35 @@ public abstract class AbstractHeaderFooterAdapter extends RecyclerView.Adapter<R
     }
 
     public void addItemInPosition(RecyclerItem item, int i) {
+
+        if(items.size()>0 && items.get(items.size()-1).isFooter())
+        {
+            items.remove(items.size()-1);
+            i--;
+        }
+
         items.add(i, item);
         notifyItemInserted(i);
     }
 
     public void addItem(RecyclerItem item) {
+        if(items.size()>0 && items.get(items.size()-1).isFooter())
+        {
+            items.remove(items.size()-1);
+        }
+
         items.add(item);
-        notifyItemInserted(items.size() - 1);
+        notifyDataSetChanged();
     }
 
     public void addItems(ArrayList<RecyclerItem> itemsToAdd, int positionToAdd) {
+
+        if(items.size()>0 && items.get(items.size()-1).isFooter())
+        {
+            items.remove(items.size()-1);
+            positionToAdd--;
+        }
+
         items.addAll(positionToAdd, itemsToAdd);
         notifyDataSetChanged();
     }
