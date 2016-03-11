@@ -30,24 +30,29 @@ public abstract class AbstractBaseActivity extends PickerActivity {
 
     public void setBackButton() {
         setToolbar();
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        if(getSupportActionBar()!=null)
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     public void setEmptyTitle() {
-        getSupportActionBar().setTitle("");
+        if(getSupportActionBar()!=null)
+            getSupportActionBar().setTitle("");
     }
 
     public void setCloseButton() {
         setBackButton();
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close_24dp);
+        if(getSupportActionBar()!=null)
+            getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close_24dp);
     }
 
     public void setTitle(String title) {
-        getSupportActionBar().setTitle(title);
+        if(getSupportActionBar()!=null)
+            getSupportActionBar().setTitle(title);
     }
 
     public void setSubTitle(String subtitle) {
-        getSupportActionBar().setSubtitle(subtitle);
+        if(getSupportActionBar()!=null)
+            getSupportActionBar().setSubtitle(subtitle);
     }
 
     @Override
@@ -61,6 +66,8 @@ public abstract class AbstractBaseActivity extends PickerActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+
 
     public void onItemSelected(Object... items) {
     }

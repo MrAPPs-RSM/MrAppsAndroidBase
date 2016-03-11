@@ -14,15 +14,15 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 
 import com.mr_apps.androidbase.R;
-import com.mr_apps.androidbase.utils.LocalUploader;
-import com.mr_apps.androidbase.utils.Utils;
+import com.mr_apps.androidbase.utils.FileUtils;
+import com.mr_apps.androidbase.utils.FileUtils.ElementType;
+
 
 import java.io.File;
 import java.util.ArrayList;
 
 /**
  * Created by denis on 29/02/16
- * Modified by Mattia Ruggiero on 01/03/16
  */
 public abstract class PickerActivity extends LocationActivity {
 
@@ -117,7 +117,7 @@ public abstract class PickerActivity extends LocationActivity {
 
                         } else if (choice.equals(scatta_foto)) {
 
-                            File file = Utils.newFileToUpload(PickerActivity.this, getFolder(), Utils.ElementType.img, saveInInternalStorage);
+                            File file = FileUtils.newFileToUpload(PickerActivity.this, getFolder(), ElementType.img, saveInInternalStorage);
                             Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
                             imageUri = Uri.fromFile(file);
                             intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
@@ -144,7 +144,7 @@ public abstract class PickerActivity extends LocationActivity {
                         } else if (choice.equals(gira_video)) {
 
                             Intent intent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
-                            File file = Utils.newFileToUpload(PickerActivity.this, getFolder(), Utils.ElementType.vid, false);
+                            File file = FileUtils.newFileToUpload(PickerActivity.this, getFolder(), ElementType.vid, false);
                             videoUri = Uri.fromFile(file);
                             //Uri outputFileUri = Uri.fromFile(file);
                             intent.putExtra(MediaStore.EXTRA_OUTPUT, videoUri);
@@ -190,23 +190,12 @@ public abstract class PickerActivity extends LocationActivity {
         this.saveInInternalStorage = saveInInternalStorage;
     }
 
-    /*@Override
-    public void writeStoragePermissionResult(boolean granted) {
-        super.writeStoragePermissionResult(granted);
-
-        //call:
-
-        if (granted)
-            showAlertChoice(getmTitle(), isPickImageFromGallery(), isTakePhoto(), isPickVideoFromGallery(), isRecordVideo());
-
-    }*/
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
         String path;
-        Utils.ElementType type;
+        ElementType type;
 
         switch (requestCode) {
 
@@ -226,9 +215,9 @@ public abstract class PickerActivity extends LocationActivity {
 
                 try {
 
-                    LocalUploader.MediaSelected mediaSelected = LocalUploader.getPath(this, uri);
+                    FileUtils.MediaSelected mediaSelected = FileUtils.getPath(this, uri);
                     path = mediaSelected.path;
-                    type = Utils.ElementType.img;
+                    type = ElementType.img;
 
                     Bitmap bitmap = BitmapFactory.decodeFile(path);
 
@@ -250,9 +239,9 @@ public abstract class PickerActivity extends LocationActivity {
 
                 try {
 
-                    LocalUploader.MediaSelected mediaSelected = LocalUploader.getPath(this, uriVideo);
+                    FileUtils.MediaSelected mediaSelected = FileUtils.getPath(this, uriVideo);
                     path = mediaSelected.path;
-                    type = Utils.ElementType.img;
+                    type = ElementType.img;
 
                     pickerResult(path, type, null);
 
@@ -265,7 +254,7 @@ public abstract class PickerActivity extends LocationActivity {
         }
     }
 
-    public void pickerResult(String path, Utils.ElementType elementType, Bitmap bitmap) {
+    public void pickerResult(String path, ElementType elementType, Bitmap bitmap) {
     }
 
     private static final String file_uri1 = "image_uri";
@@ -307,7 +296,7 @@ public abstract class PickerActivity extends LocationActivity {
 
         File file;
         String path = null;
-        Utils.ElementType type = null;
+        ElementType type = null;
         Bitmap bitmap = null;
 
         if (isImage) {
@@ -318,9 +307,9 @@ public abstract class PickerActivity extends LocationActivity {
                 ExifInterface exif = new ExifInterface(tempUri.getPath());
                 int orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_UNDEFINED);
 
-                bitmap = LocalUploader.rotateBitmap(bitmap, orientation);
+                bitmap = FileUtils.rotateBitmap(bitmap, orientation);
 
-                file = LocalUploader.generateFileFromBitmap(this, getFolder(), bitmap, saveInInternalStorage, qualityImage);
+                file = FileUtils.generateFileFromBitmap(this, getFolder(), bitmap, saveInInternalStorage, qualityImage);
 
                 File file1=new File(tempUri.getPath());
 
@@ -328,7 +317,7 @@ public abstract class PickerActivity extends LocationActivity {
                     file1.delete();
 
                 path = file.getPath();
-                type = Utils.ElementType.img;
+                type = ElementType.img;
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -336,8 +325,8 @@ public abstract class PickerActivity extends LocationActivity {
 
         } else {
 
-            path = LocalUploader.getRealPath(this, tempUri);
-            type = Utils.ElementType.vid;
+            path = FileUtils.getRealPath(this, tempUri);
+            type = ElementType.vid;
 
         }
 

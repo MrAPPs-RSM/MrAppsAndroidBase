@@ -27,7 +27,7 @@ public abstract class AbstractBaseAdapter<T> extends RecyclerView.Adapter<Recycl
     }
 
     public T getItem(int position) {
-        if (items != null && items.size() > position)
+        if (items.size() > position)
             return items.get(position);
         else
             return null;

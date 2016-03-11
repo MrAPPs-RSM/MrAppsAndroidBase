@@ -34,12 +34,71 @@ import java.util.UUID;
 /**
  * Created by denis on 29/02/16
  */
-public class LocalUploader {
+public class FileUtils {
 
-    private static final String TAG = "LocalUploader";
+    private static final String TAG = "FileUtils";
 
     private static int durationAudio = 120000;
     private static int durationVideo = 30000;
+
+    public enum ElementType {
+        text,
+        img,
+        vid,
+        audio
+    }
+
+    public static File newFileToUpload(Context context, String folder, ElementType type, boolean internal) {
+
+        SimpleDateFormat sdf = new SimpleDateFormat("HH_mm_ss__dd_MM_yy", Locale.getDefault());
+
+        Date date = new Date();
+        final String data = UUID.randomUUID() + "_" + sdf.format(date);
+
+        File dir = getTempImageFolder(context, folder, internal);
+
+        if (!dir.exists())
+            dir.mkdirs();
+
+        if (type == ElementType.img)
+            return new File(dir.getPath(), data + "_image.jpg");
+        else if (type == ElementType.vid)
+            return new File(dir.getPath(), data + "_video.mp4");
+        else if (type == ElementType.audio)
+            return new File(dir.getPath(), data + "_audio.aac");
+        else
+            return null;
+
+    }
+
+    public static File getTempImageFolder(Context context, String folder, boolean internal) {
+        String path = (internal ? getFilePath(context, folder).getPath() : getExternalPath(folder));
+
+        return new File(path);
+
+    }
+
+    public static File getFilePath(Context context, String folder) {
+        String filePath = context.getFilesDir().getPath() + "/" + folder;
+        File directory = new File(filePath);
+        if (!directory.isDirectory()) {
+            directory.mkdir();
+        }
+
+        return new File(filePath);
+    }
+
+    public static String getExternalPath(String folder) {
+        String filePath = Environment.getExternalStorageDirectory().getPath() + "/" + folder;
+
+        File directory = new File(filePath);
+
+        if (!directory.isDirectory()) {
+            directory.mkdir();
+        }
+
+        return filePath;
+    }
 
     public static ByteArrayOutputStream reduceUntilRespectSize(Bitmap bitmap, int size, int quality) {
         ByteArrayOutputStream o = new ByteArrayOutputStream();
@@ -251,7 +310,7 @@ public class LocalUploader {
             String datas = simpleDateFormat.format(date);
             String newimagename = UUID.randomUUID().toString() + "_" + datas + "_image.jpg";
 
-            File f = new File(internal ? Utils.getFilePath(context, folder).getPath(): Utils.getExternalPath(folder),  newimagename);
+            File f = new File(internal ? getFilePath(context, folder).getPath(): getExternalPath(folder),  newimagename);
 
             return writeBytes(f, bytes);
 
@@ -275,7 +334,7 @@ public class LocalUploader {
         if (photo != null) {
 
             ByteArrayOutputStream bytes = reduceUntilRespectSize(photo, 512000, quality);
-            File f = new File(Utils.getExternalPath(folder.endsWith("/") ? folder : folder + "/") + fileName);
+            File f = new File(getExternalPath(folder.endsWith("/") ? folder : folder + "/") + fileName);
 
             return writeBytes(f, bytes);
 

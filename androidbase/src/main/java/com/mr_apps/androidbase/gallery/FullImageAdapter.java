@@ -25,7 +25,12 @@ public class FullImageAdapter extends PagerAdapter{
     Context context;
     final List<String> imagesPath;
 
-    private int placeholderResId;
+    private int placeholderResId=-1;
+
+    public FullImageAdapter(Context context, List<String> images) {
+        this.context = context;
+        this.imagesPath = images;
+    }
 
     public FullImageAdapter(Context context, int placeholderResId, List<String> images) {
         this.context = context;
@@ -61,7 +66,7 @@ public class FullImageAdapter extends PagerAdapter{
 
         BitmapTypeRequest<String> request=Glide.with(context).load(imagesPath.get(position)).asBitmap();
 
-        if(placeholderResId!=0)
+        if(placeholderResId!=-1)
             request.error(placeholderResId).placeholder(placeholderResId);
 
         request.into(new BitmapImageViewTarget(imageView) {

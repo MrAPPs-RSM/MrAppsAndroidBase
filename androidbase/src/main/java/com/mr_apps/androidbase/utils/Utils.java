@@ -111,65 +111,6 @@ public class Utils {
         }
     }
 
-    public enum ElementType {
-        text,
-        img,
-        vid,
-        audio
-    }
-
-    public static File newFileToUpload(Context context, String folder, ElementType type, boolean internal) {
-
-        SimpleDateFormat sdf = new SimpleDateFormat("HH_mm_ss__dd_MM_yy", Locale.getDefault());
-
-        Date date = new Date();
-        final String data = UUID.randomUUID() + "_" + sdf.format(date);
-
-        File dir = getTempImageFolder(context, folder, internal);
-
-        if (!dir.exists())
-            dir.mkdirs();
-
-        if (type == ElementType.img)
-            return new File(dir.getPath(), data + "_image.jpg");
-        else if (type == ElementType.vid)
-            return new File(dir.getPath(), data + "_video.mp4");
-        else if (type == ElementType.audio)
-            return new File(dir.getPath(), data + "_audio.aac");
-        else
-            return null;
-
-    }
-
-    public static File getTempImageFolder(Context context, String folder, boolean internal) {
-        String path = (internal ? getFilePath(context, folder).getPath() : getExternalPath(folder));
-
-        return new File(path);
-
-    }
-
-    public static File getFilePath(Context context, String folder) {
-        String filePath = context.getFilesDir().getPath() + "/" + folder;
-        File directory = new File(filePath);
-        if (!directory.isDirectory()) {
-            directory.mkdir();
-        }
-
-        return new File(filePath);
-    }
-
-    public static String getExternalPath(String folder) {
-        String filePath = Environment.getExternalStorageDirectory().getPath() + "/" + folder;
-
-        File directory = new File(filePath);
-
-        if (!directory.isDirectory()) {
-            directory.mkdir();
-        }
-
-        return filePath;
-    }
-
     public static int dpToPx(Context context, int dp) {
         DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
         int px = Math.round(dp * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT));

@@ -20,7 +20,12 @@ public class ImageAdapter extends PagerAdapter {
 
     Context context;
     final ArrayList<String> imagesPath;
-    private int placeholderResId;
+    private int placeholderResId=-1;
+
+    public ImageAdapter(Context context, ArrayList<String> images) {
+        this.context = context;
+        this.imagesPath = images;
+    }
 
     public ImageAdapter(Context context, int placeholderResId, ArrayList<String> images) {
         this.context = context;
@@ -49,7 +54,7 @@ public class ImageAdapter extends PagerAdapter {
 
         DrawableTypeRequest<String> request=Glide.with(context).load(imagesPath.get(position));
 
-        if(placeholderResId!=0)
+        if(placeholderResId!=-1)
             request.error(placeholderResId).placeholder(placeholderResId);
 
         request.into(imageView);
