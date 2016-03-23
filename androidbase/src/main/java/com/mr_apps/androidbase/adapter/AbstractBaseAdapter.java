@@ -1,5 +1,6 @@
 package com.mr_apps.androidbase.adapter;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 
 import com.mr_apps.androidbase.activity.AbstractBaseActivity;
@@ -19,12 +20,20 @@ public abstract class AbstractBaseAdapter<T> extends RecyclerView.Adapter<Recycl
     protected AbstractBaseActivity activity;
     protected BaseFragment fragment;
 
+    private final Context context;
+
     public AbstractBaseAdapter(AbstractBaseActivity activity) {
         this.activity = activity;
+        this.context = activity;
     }
 
     public AbstractBaseAdapter(BaseFragment fragment) {
         this.fragment = fragment;
+        this.context = fragment.getActivity();
+    }
+
+    public Context getContext() {
+        return context;
     }
 
     public T getItem(int position) {
