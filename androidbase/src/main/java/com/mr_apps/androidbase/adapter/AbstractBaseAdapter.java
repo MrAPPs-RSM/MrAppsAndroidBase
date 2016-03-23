@@ -6,6 +6,7 @@ import com.mr_apps.androidbase.activity.AbstractBaseActivity;
 import com.mr_apps.androidbase.fragments.BaseFragment;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by mattia on 09/03/2016.
@@ -67,7 +68,7 @@ public abstract class AbstractBaseAdapter<T> extends RecyclerView.Adapter<Recycl
         notifyItemInserted(items.size() - 1);
     }
 
-    public void addItems(ArrayList<T> itemsToAdd, int positionToAdd) {
+    public void addItems(List<T> itemsToAdd, int positionToAdd) {
         items.addAll(positionToAdd, itemsToAdd);
         notifyDataSetChanged();
     }

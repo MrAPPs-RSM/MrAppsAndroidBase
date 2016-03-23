@@ -20,17 +20,20 @@ public class ImageAdapter extends PagerAdapter {
 
     Context context;
     final ArrayList<String> imagesPath;
+    boolean canShare;
     private int placeholderResId=-1;
 
-    public ImageAdapter(Context context, ArrayList<String> images) {
+    public ImageAdapter(Context context, ArrayList<String> images, boolean canShare) {
         this.context = context;
         this.imagesPath = images;
+        this.canShare = canShare;
     }
 
-    public ImageAdapter(Context context, int placeholderResId, ArrayList<String> images) {
+    public ImageAdapter(Context context, int placeholderResId, ArrayList<String> images, boolean canShare) {
         this.context = context;
         this.imagesPath = images;
         this.placeholderResId=placeholderResId;
+        this.canShare = canShare;
     }
 
     @Override
@@ -66,6 +69,7 @@ public class ImageAdapter extends PagerAdapter {
 
                 intent.putStringArrayListExtra(GalleryActivity.Field_ImagesPath, imagesPath);
                 intent.putExtra(GalleryActivity.Field_Position, position);
+                intent.putExtra(GalleryActivity.Field_CanShare, canShare);
 
                 context.startActivity(intent);
             }

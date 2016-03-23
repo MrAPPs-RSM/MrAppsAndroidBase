@@ -25,10 +25,16 @@ import java.util.concurrent.TimeUnit;
  */
 public abstract class WebServiceSecurity extends WebServiceUtils {
 
-    private static final String VERSION = "v1";
     private static final String TAG = "WebServiceSecurity";
 
-    private static final String baseUrl = "http://beta.json-generator.com/api/json/get/";
+    private static String baseUrl = "http://beta.json-generator.com/api/json/get/";
+
+    /*
+    * da settare all'oncreate dell applicazione
+    */
+    public static void setBaseUrl(String baseUrl) {
+        WebServiceSecurity.baseUrl = baseUrl;
+    }
 
     public static ResponseFuture secureOperationWithPath(final Context context, final String path, final HashMap<String, List<String>> params, final FutureCallback<JsonObject> complete) {
 

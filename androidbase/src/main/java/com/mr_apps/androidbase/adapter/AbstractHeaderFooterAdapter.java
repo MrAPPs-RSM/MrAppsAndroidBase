@@ -7,6 +7,7 @@ import com.mr_apps.androidbase.activity.AbstractBaseActivity;
 import com.mr_apps.androidbase.fragments.BaseFragment;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by mattia on 09/03/2016.
@@ -98,7 +99,7 @@ public abstract class AbstractHeaderFooterAdapter extends RecyclerView.Adapter<R
         notifyDataSetChanged();
     }
 
-    public void addItems(ArrayList<RecyclerItem> itemsToAdd, int positionToAdd) {
+    public void addItems(List<RecyclerItem> itemsToAdd, int positionToAdd) {
 
         if(items.size()>0 && items.get(items.size()-1).isFooter())
         {
