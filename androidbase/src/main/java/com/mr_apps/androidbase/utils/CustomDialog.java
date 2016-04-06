@@ -65,7 +65,7 @@ public class CustomDialog {
                 .show();
     }
 
-    protected void showYesNoDialog(Context context, String title, String message, final CustomDialogCallback callback) {
+    public void showYesNoDialog(Context context, String title, String message, final CustomDialogCallback callback) {
         new AlertDialog.Builder(context)
                 .setTitle(title)
                 .setMessage(message)
@@ -84,7 +84,7 @@ public class CustomDialog {
                 .show();
     }
 
-    protected void showYesNoDialog(Context context, int titleResId, int messageResId, final CustomDialogCallback callback) {
+    public void showYesNoDialog(Context context, int titleResId, int messageResId, final CustomDialogCallback callback) {
         showYesNoDialog(context, context.getString(titleResId), context.getString(messageResId), callback);
     }
 
