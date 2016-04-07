@@ -50,7 +50,7 @@ public class FileUtils {
         audio
     }
 
-    public void copy(File src, File dst) throws IOException {
+    public static void copy(File src, File dst) throws IOException {
         InputStream in = new FileInputStream(src);
         OutputStream out = new FileOutputStream(dst);
 
