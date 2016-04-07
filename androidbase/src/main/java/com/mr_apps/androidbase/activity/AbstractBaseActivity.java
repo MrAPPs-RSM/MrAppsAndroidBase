@@ -13,6 +13,8 @@ public abstract class AbstractBaseActivity extends PickerActivity {
 
     private static AbstractBaseActivity instance;
 
+    public Toolbar toolbar;
+
     @Override
     public void onResume() {
         super.onResume();
@@ -24,7 +26,7 @@ public abstract class AbstractBaseActivity extends PickerActivity {
     }
 
     public void setToolbar() {
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
     }
 
