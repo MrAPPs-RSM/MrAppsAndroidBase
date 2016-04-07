@@ -30,6 +30,8 @@
     <string name="Scegli_video_da_galleria">Scegli video da galleria</string>
     <string name="Gira_video">Gira video</string>
     <string name="Condividi">Condividi</string>
+    <string name="termini_condizioni">Iscrivendoti al servizio accetti <b>Termini e condizioni</b> e informativa sulla <b>Privacy Policy</b></string>
+    <string name="Iscriviti">Iscriviti</string>
 
 
 </resources>
