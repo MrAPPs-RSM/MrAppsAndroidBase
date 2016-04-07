@@ -10,9 +10,6 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.mr_apps.androidbase.account.BaseRegistrazioneActivity;
-import com.mr_apps.androidbase.account.FuffaActivity;
-
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -57,9 +54,5 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    public void login(View v) {
-        startActivity(new Intent(this, FuffaActivity.class));
     }
 }

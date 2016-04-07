@@ -1,78 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <include layout="@layout/account_toolbar"/>
+    <include layout="@layout/account_toolbar" />
 
-    <android.support.v7.widget.AppCompatTextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/Esegui_il_login" />
-
-    <com.facebook.login.widget.LoginButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/fb_login"/>
-
-    <android.support.v7.widget.AppCompatTextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/oppure"/>
-
-    <android.support.design.widget.TextInputLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/til_email">
+        android:layout_margin="@dimen/default_very_large_margin_or_padding"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
 
-        <android.support.v7.widget.AppCompatEditText
+        <android.support.v7.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Esegui_il_login" />
+
+        <com.facebook.login.widget.LoginButton
+            android:id="@+id/fb_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/oppure" />
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/til_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <android.support.v7.widget.AppCompatEditText
+                android:id="@+id/email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/Email" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/til_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <android.support.v7.widget.AppCompatEditText
+                android:id="@+id/password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/Password" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/Email"
-            android:id="@+id/email"/>
+            android:text="@string/Entra" />
 
-    </android.support.design.widget.TextInputLayout>
-
-    <android.support.design.widget.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/til_password">
-
-        <android.support.v7.widget.AppCompatEditText
-            android:layout_width="match_parent"
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/forget_pwd"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="@string/Password"
-            android:id="@+id/password"/>
+            android:text="@string/Password_dimenticata" />
 
-    </android.support.design.widget.TextInputLayout>
+        <android.support.v7.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Nessun_account" />
 
-    <android.support.v7.widget.AppCompatButton
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/login"
-        android:text="@string/Entra"/>
+        <android.support.v7.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Nessun_account" />
 
-    <android.support.v7.widget.AppCompatTextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/forget_pwd"
-        android:text="@string/Password_dimenticata"/>
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/iscriviti"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Iscriviti_ora" />
 
-    <android.support.v7.widget.AppCompatTextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/Nessun_account"/>
-
-    <android.support.v7.widget.AppCompatTextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/Nessun_account"/>
-
-    <android.support.v7.widget.AppCompatTextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/Iscriviti_ora"
-        android:id="@+id/iscriviti"/>
-
+    </LinearLayout>
 
 </LinearLayout>

@@ -1,7 +1,5 @@
 package com.mr_apps.androidbaseproject;
 
-import android.graphics.Color;
-
 import com.facebook.login.LoginResult;
 import com.mr_apps.androidbase.account.BaseLoginActivity;
 import com.mr_apps.androidbase.utils.Logger;
@@ -13,7 +11,7 @@ import org.json.JSONObject;
  */
 public class LoginActivity extends BaseLoginActivity {
 
-    private static final String TAG="LoginActivity";
+    private static final String TAG = "LoginActivity";
 
     @Override
     public String[] getFbPermissions() {
@@ -39,6 +37,6 @@ public class LoginActivity extends BaseLoginActivity {
 
     @Override
     public boolean passwordTilRule(String s) {
-        return s.length()>=4;
+        return s.length() >= 4;
     }
 }
