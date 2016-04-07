@@ -32,6 +32,7 @@ public class CustomDialog {
         new AlertDialog.Builder(context)
                 .setTitle(title)
                 .setMessage(message)
+                .setCancelable(false)
                 .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -56,6 +57,7 @@ public class CustomDialog {
         new AlertDialog.Builder(context)
                 .setTitle(title)
                 .setMessage(message)
+                .setCancelable(false)
                 .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -63,6 +65,30 @@ public class CustomDialog {
                     }
                 })
                 .show();
+    }
+
+    public static void showYesNoDialog(Context context, String title, String message, final CustomDialogCallback callback) {
+        new AlertDialog.Builder(context)
+                .setTitle(title)
+                .setMessage(message)
+                .setCancelable(false)
+                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        callback.onPositive(null);
+                    }
+                })
+                .show();
+    }
+
+    public static void showYesNoDialog(Context context, int titleResId, int messageResId, final CustomDialogCallback callback) {
+        showYesNoDialog(context, context.getString(titleResId), context.getString(messageResId), callback);
     }
 
     public static void showEditDialog(Context context, int titleId, int hintId, int messageId, int inputType, String lower, String upper, final CustomDialogCallback callback) {
