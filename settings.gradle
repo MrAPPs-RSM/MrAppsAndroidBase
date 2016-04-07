@@ -1,1 +1,1 @@
-include ':androidbase'
+include ':androidbase', ':app'
