@@ -163,21 +163,24 @@ public abstract class LocationActivity extends PermissionManagerActivity impleme
     @Override
     public void onStart() {
         super.onStart();
-        if (mGoogleApiClient != null && !mGoogleApiClient.isConnected() && !mGoogleApiClient.isConnecting())
-            mGoogleApiClient.connect();
+        if(isLocationEnabled())
+            if (mGoogleApiClient != null && !mGoogleApiClient.isConnected() && !mGoogleApiClient.isConnecting())
+                mGoogleApiClient.connect();
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        stopLocationUpdates();
+        if(isLocationEnabled())
+            stopLocationUpdates();
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        if (mGoogleApiClient != null && mGoogleApiClient.isConnected())
-            mGoogleApiClient.disconnect();
+        if(isLocationEnabled())
+            if (mGoogleApiClient != null && mGoogleApiClient.isConnected())
+                mGoogleApiClient.disconnect();
     }
 
     protected void startLocationUpdates() throws SecurityException {
@@ -234,6 +237,10 @@ public abstract class LocationActivity extends PermissionManagerActivity impleme
             }
         });
 
+    }
+
+    public boolean isLocationEnabled(){
+        return false;
     }
 
     public void getStringFromLocation(double lat, double lng, final FutureCallback<List<Address>> complete) {

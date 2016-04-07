@@ -33,5 +33,18 @@
     <string name="termini_condizioni">Iscrivendoti al servizio accetti <b>Termini e condizioni</b> e informativa sulla <b>Privacy Policy</b></string>
     <string name="Iscriviti">Iscriviti</string>
 
+    <string name="Esegui_il_login">Esegui il login</string>
+    <string name="oppure">oppure</string>
+    <string name="Email">Email</string>
+    <string name="Password">Password</string>
+    <string name="Nome">Nome</string>
+    <string name="Cognome">Cognome</string>
+    <string name="Password_dimenticata">Hai dimenticato la password?</string>
+    <string name="Nessun_account">Non hai un account?</string>
+    <string name="Iscriviti_ora">Iscriviti ora</string>
+    <string name="Login">Login</string>
+    <string name="Signin">Signin</string>
+    <string name="Entra">Entra</string>
+
 
 </resources>
