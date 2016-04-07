@@ -1,5 +1,6 @@
 package com.mr_apps.androidbaseproject;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -26,6 +27,11 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+    }
+
+    public void login(View v)
+    {
+        startActivity(new Intent(this, LoginActivity.class));
     }
 
     @Override
