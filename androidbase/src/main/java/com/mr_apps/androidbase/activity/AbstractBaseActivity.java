@@ -47,6 +47,7 @@ public abstract class AbstractBaseActivity extends PickerActivity {
             getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close_24dp);
     }
 
+    @Override
     public void setTitle(String title) {
         if(getSupportActionBar()!=null)
             getSupportActionBar().setTitle(title);

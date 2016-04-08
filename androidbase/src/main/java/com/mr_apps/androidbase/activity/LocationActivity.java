@@ -239,6 +239,8 @@ public abstract class LocationActivity extends PermissionManagerActivity impleme
 
     }
 
+    public void setTitle(String title){}
+
     public boolean isLocationEnabled(){
         return false;
     }
