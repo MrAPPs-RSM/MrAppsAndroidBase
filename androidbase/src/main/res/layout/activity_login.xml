@@ -9,23 +9,20 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/default_very_large_margin_or_padding"
+        android:layout_margin="@dimen/default_extra_large_margin_or_padding"
         android:gravity="center_horizontal"
         android:orientation="vertical">
 
         <android.support.v7.widget.AppCompatTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/LoginPrimaryTextStyle"
             android:text="@string/Esegui_il_login" />
 
         <com.facebook.login.widget.LoginButton
             android:id="@+id/fb_login"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            style="@style/FacebookButtonStyle" />
 
         <android.support.v7.widget.AppCompatTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/LoginSecondaryTextStyle"
             android:text="@string/oppure" />
 
         <android.support.design.widget.TextInputLayout

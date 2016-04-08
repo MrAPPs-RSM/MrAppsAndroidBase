@@ -147,7 +147,7 @@ public abstract class BaseLoginActivity extends AbstractBaseActivity {
                 }
                 else {
                     til_email.setErrorEnabled(true);
-                    til_email.setError(null);
+                    til_email.setError("BOIADE");
                 }
             }
         });
