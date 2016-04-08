@@ -25,18 +25,18 @@
             style="@style/LoginSecondaryTextStyle"
             android:text="@string/oppure" />
 
-        <android.support.design.widget.TextInputLayout
+        <com.mr_apps.androidbase.account.Prova
             android:id="@+id/til_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <android.support.v7.widget.AppCompatEditText
+            <android.support.design.widget.TextInputEditText
                 android:id="@+id/email"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                style="@style/EditTextStyle"
+                android:layout_marginBottom="@dimen/default_margin_or_padding"
                 android:hint="@string/Email" />
 
-        </android.support.design.widget.TextInputLayout>
+        </com.mr_apps.androidbase.account.Prova>
 
         <android.support.design.widget.TextInputLayout
             android:id="@+id/til_password"
@@ -45,8 +45,7 @@
 
             <android.support.v7.widget.AppCompatEditText
                 android:id="@+id/password"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                style="@style/EditTextStyle"
                 android:hint="@string/Password" />
 
         </android.support.design.widget.TextInputLayout>

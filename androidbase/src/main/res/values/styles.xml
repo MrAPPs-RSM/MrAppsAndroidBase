@@ -46,4 +46,22 @@
         <item name="android:paddingRight">@dimen/default_very_large_margin_or_padding</item>
     </style>
 
+    <style name="EditTextStyle" parent="Widget.AppCompat.EditText">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:inputType">textEmailAddress</item>
+        <item name="android:theme">@style/ColorControlTheme</item>
+        <item name="android:singleLine">true</item>
+    </style>
+
+    <style name="ColorControlTheme">
+        <item name="colorControlNormal">@color/lightGrey</item>
+    </style>
+
+    <style name="HintStyle" parent="TextAppearance.Design.Hint" />
+
+    <style name="HintErrorStyle" parent="HintStyle">
+        <item name="android:textColor">@color/errorRed</item>
+    </style>
+
 </resources>

@@ -55,8 +55,8 @@ public abstract class WebServiceSecurity extends WebServiceUtils {
         ResponseFuture<JsonObject> responseFuture = Ion.with(context)
                 .load(url)
                         //.noCache()
-                        //.addHeaders(security)
-                        //.setBodyParameters(params)
+                        .addHeaders(security)
+                        .setBodyParameters(params)
                 .asJsonObject();
 
         responseFuture.withResponse().setCallback(new FutureCallback<Response<JsonObject>>() {
@@ -104,8 +104,8 @@ public abstract class WebServiceSecurity extends WebServiceUtils {
         ResponseFuture<JsonObject> responseFuture = Ion.with(context)
                 .load(url)
                         //.noCache()
-                        //.addHeaders(security)
-                        //.addQueries(params)
+                        .addHeaders(security)
+                        .addQueries(params)
                 .asJsonObject();
 
         responseFuture.withResponse().setCallback(new FutureCallback<Response<JsonObject>>() {

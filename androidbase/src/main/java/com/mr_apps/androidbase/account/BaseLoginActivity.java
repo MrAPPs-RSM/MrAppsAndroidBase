@@ -38,7 +38,8 @@ public abstract class BaseLoginActivity extends AbstractBaseActivity {
     AppCompatButton login;
     LoginButton loginButton;
     AppCompatTextView forgetPwd, subscribe;
-    TextInputLayout til_email, til_password;
+    Prova til_email;
+    TextInputLayout til_password;
 
 
     @Override
@@ -48,11 +49,11 @@ public abstract class BaseLoginActivity extends AbstractBaseActivity {
         setContentView(R.layout.activity_login);
         setToolbar();
 
-        loginButton=(LoginButton) findViewById(R.id.fb_login);
+        loginButton = (LoginButton) findViewById(R.id.fb_login);
 
         loginButton.setReadPermissions(getFbPermissions());
 
-        callbackManager=CallbackManager.Factory.create();
+        callbackManager = CallbackManager.Factory.create();
 
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
@@ -97,15 +98,15 @@ public abstract class BaseLoginActivity extends AbstractBaseActivity {
         LoginManager.getInstance().logOut();
 
 
-        email= (AppCompatEditText) findViewById(R.id.email);
-        password= (AppCompatEditText) findViewById(R.id.password);
-        til_email= (TextInputLayout) findViewById(R.id.til_email);
-        til_password= (TextInputLayout) findViewById(R.id.til_password);
+        email = (AppCompatEditText) findViewById(R.id.email);
+        password = (AppCompatEditText) findViewById(R.id.password);
+        til_email = (Prova) findViewById(R.id.til_email);
+        til_password = (TextInputLayout) findViewById(R.id.til_password);
 
-        login=(AppCompatButton) findViewById(R.id.login);
+        login = (AppCompatButton) findViewById(R.id.login);
 
-        forgetPwd= (AppCompatTextView) findViewById(R.id.forget_pwd);
-        subscribe= (AppCompatTextView) findViewById(R.id.iscriviti);
+        forgetPwd = (AppCompatTextView) findViewById(R.id.forget_pwd);
+        subscribe = (AppCompatTextView) findViewById(R.id.iscriviti);
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -141,13 +142,8 @@ public abstract class BaseLoginActivity extends AbstractBaseActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if(Utils.isValidEmail(s)) {
-                    til_email.setErrorEnabled(false);
-                    til_email.setError(null);
-                }
-                else {
-                    til_email.setErrorEnabled(true);
-                    til_email.setError("BOIADE");
+                if (s.length() != 0) {
+                    til_email.setErrorEnabled(!Utils.isValidEmail(s));
                 }
             }
         });
@@ -165,10 +161,10 @@ public abstract class BaseLoginActivity extends AbstractBaseActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if(passwordTilRule(s.toString())) {
+                if (passwordTilRule(s.toString())) {
                     til_password.setErrorEnabled(false);
                 } else {
-                    til_password.setError(null);
+                    til_password.setError("Email");
                     til_password.setErrorEnabled(true);
                 }
             }
@@ -183,9 +179,13 @@ public abstract class BaseLoginActivity extends AbstractBaseActivity {
     }
 
     public abstract String[] getFbPermissions();
+
     public abstract String getFbParameters();
+
     public abstract void onFbSuccess(JSONObject jsonObject, LoginResult loginResult);
+
     public abstract void onFbError();
+
     public abstract boolean passwordTilRule(String s);
 
 }
