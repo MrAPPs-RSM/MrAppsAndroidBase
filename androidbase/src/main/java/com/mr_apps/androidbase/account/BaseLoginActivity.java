@@ -3,7 +3,6 @@ package com.mr_apps.androidbase.account;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.TextInputLayout;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.AppCompatTextView;
@@ -22,6 +21,8 @@ import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.mr_apps.androidbase.R;
 import com.mr_apps.androidbase.activity.AbstractBaseActivity;
+import com.mr_apps.androidbase.custom_views.PasswordView;
+import com.mr_apps.androidbase.custom_views.WarningTextInputLayout;
 import com.mr_apps.androidbase.utils.Utils;
 
 import org.json.JSONObject;
@@ -34,12 +35,12 @@ public abstract class BaseLoginActivity extends AbstractBaseActivity {
 
     CallbackManager callbackManager;
 
-    AppCompatEditText email, password;
+    AppCompatEditText email;
+    PasswordView password;
     AppCompatButton login;
     LoginButton loginButton;
     AppCompatTextView forgetPwd, subscribe;
-    Prova til_email;
-    TextInputLayout til_password;
+    WarningTextInputLayout til_email, til_password;
 
 
     @Override
@@ -99,9 +100,9 @@ public abstract class BaseLoginActivity extends AbstractBaseActivity {
 
 
         email = (AppCompatEditText) findViewById(R.id.email);
-        password = (AppCompatEditText) findViewById(R.id.password);
-        til_email = (Prova) findViewById(R.id.til_email);
-        til_password = (TextInputLayout) findViewById(R.id.til_password);
+        password = (PasswordView) findViewById(R.id.password);
+        til_email = (WarningTextInputLayout) findViewById(R.id.til_email);
+        til_password = (WarningTextInputLayout) findViewById(R.id.til_password);
 
         login = (AppCompatButton) findViewById(R.id.login);
 
@@ -142,9 +143,7 @@ public abstract class BaseLoginActivity extends AbstractBaseActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (s.length() != 0) {
-                    til_email.setErrorEnabled(!Utils.isValidEmail(s));
-                }
+                til_email.setErrorEnabled(!Utils.isValidEmail(s) && s.length() > 0);
             }
         });
 
@@ -161,12 +160,7 @@ public abstract class BaseLoginActivity extends AbstractBaseActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (passwordTilRule(s.toString())) {
-                    til_password.setErrorEnabled(false);
-                } else {
-                    til_password.setError("Email");
-                    til_password.setErrorEnabled(true);
-                }
+                til_password.setErrorEnabled(!passwordTilRule(s.toString()) && s.length() > 0);
             }
         });
 
