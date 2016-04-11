@@ -3,6 +3,7 @@ package com.mr_apps.androidbase.custom_views;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.PorterDuff;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
@@ -24,9 +25,10 @@ public class PasswordView extends EditText {
     private Drawable eye;
     private Drawable eyeWithStrike;
     private final static int VISIBILITY_ENABLED = (int) (255 * .54f); // 54%
-    private final static int VISIBLITY_DISABLED = (int) (255 * .38f); // 38%
+    private final static int VISIBILITY_DISABLED = (int) (255 * .38f); // 38%
     private boolean visible = false;
     private boolean useStrikeThrough = false;
+    private boolean error = false;
     private Typeface typeface;
 
     public PasswordView(Context context) {
@@ -44,7 +46,8 @@ public class PasswordView extends EditText {
         init(attrs);
     }
 
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP) public PasswordView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    public PasswordView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         init(attrs);
     }
@@ -75,10 +78,18 @@ public class PasswordView extends EditText {
         Drawable drawable = useStrikeThrough && !visible ? eyeWithStrike : eye;
         Drawable[] drawables = getCompoundDrawables();
         setCompoundDrawablesWithIntrinsicBounds(drawables[0], drawables[1], drawable, drawables[3]);
-        eye.setAlpha(visible && !useStrikeThrough ? VISIBILITY_ENABLED : VISIBLITY_DISABLED);
+        eye.setAlpha(visible && !useStrikeThrough ? VISIBILITY_ENABLED : VISIBILITY_DISABLED);
+        if (error) {
+            eye.setColorFilter(ContextCompat.getColor(getContext(), R.color.errorRed), PorterDuff.Mode.SRC_ATOP);
+            eyeWithStrike.setColorFilter(ContextCompat.getColor(getContext(), R.color.errorRed), PorterDuff.Mode.SRC_ATOP);
+        } else {
+            eye.clearColorFilter();
+            eyeWithStrike.clearColorFilter();
+        }
     }
 
-    @Override public boolean onTouchEvent(MotionEvent event) {
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
         if (event.getAction() == MotionEvent.ACTION_UP
                 && event.getX() >= (getRight() - getCompoundDrawables()[2].getBounds().width())) {
             visible = !visible;
@@ -91,7 +102,8 @@ public class PasswordView extends EditText {
         return super.onTouchEvent(event);
     }
 
-    @Override public void setInputType(int type) {
+    @Override
+    public void setInputType(int type) {
         this.typeface = getTypeface();
         super.setInputType(type);
         setTypeface(typeface);
@@ -99,5 +111,9 @@ public class PasswordView extends EditText {
 
     public void setUseStrikeThrough(boolean useStrikeThrough) {
         this.useStrikeThrough = useStrikeThrough;
+    }
+
+    public void setError(boolean error) {
+        this.error = error;
     }
 }

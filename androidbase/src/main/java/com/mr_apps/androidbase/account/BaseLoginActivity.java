@@ -32,7 +32,6 @@ import org.json.JSONObject;
  */
 public abstract class BaseLoginActivity extends AbstractBaseActivity {
 
-
     CallbackManager callbackManager;
 
     AppCompatEditText email;
@@ -41,7 +40,6 @@ public abstract class BaseLoginActivity extends AbstractBaseActivity {
     LoginButton loginButton;
     AppCompatTextView forgetPwd, subscribe;
     WarningTextInputLayout til_email, til_password;
-
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -163,7 +161,6 @@ public abstract class BaseLoginActivity extends AbstractBaseActivity {
                 til_password.setErrorEnabled(!passwordTilRule(s.toString()) && s.length() > 0);
             }
         });
-
     }
 
     @Override
@@ -181,5 +178,4 @@ public abstract class BaseLoginActivity extends AbstractBaseActivity {
     public abstract void onFbError();
 
     public abstract boolean passwordTilRule(String s);
-
 }

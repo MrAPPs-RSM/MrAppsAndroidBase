@@ -33,9 +33,7 @@ public class WarningTextInputLayout extends TextInputLayout {
                 edit.getBackground().setColorFilter(ContextCompat.getColor(getContext(), R.color.errorRed), PorterDuff.Mode.SRC_ATOP);
                 setHintTextAppearance(R.style.HintErrorStyle);
                 if (edit instanceof PasswordView) {
-                    Drawable eye = edit.getCompoundDrawables()[2];
-                    if (eye != null)
-                        eye.setColorFilter(ContextCompat.getColor(getContext(), R.color.errorRed), PorterDuff.Mode.SRC_ATOP);
+                    passwordViewManagement(edit, true);
                 } else {
                     Drawable warning = ContextCompat.getDrawable(getContext(), R.drawable.ic_warning_24dp);
                     warning.setColorFilter(ContextCompat.getColor(getContext(), R.color.errorRed), PorterDuff.Mode.SRC_ATOP);
@@ -45,13 +43,23 @@ public class WarningTextInputLayout extends TextInputLayout {
                 edit.getBackground().clearColorFilter();
                 setHintTextAppearance(R.style.HintStyle);
                 if (edit instanceof PasswordView) {
-                    Drawable eye = edit.getCompoundDrawables()[2];
-                    if (eye != null)
-                        eye.clearColorFilter();
+                    passwordViewManagement(edit, false);
                 } else {
                     edit.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null);
                 }
             }
         }
+    }
+
+    private void passwordViewManagement(EditText edit, boolean error) {
+        ((PasswordView) edit).setError(error);
+        Drawable eye = edit.getCompoundDrawables()[2];
+
+        if (eye != null)
+            if (error) {
+                eye.setColorFilter(ContextCompat.getColor(getContext(), R.color.errorRed), PorterDuff.Mode.SRC_ATOP);
+            } else {
+                eye.clearColorFilter();
+            }
     }
 }
