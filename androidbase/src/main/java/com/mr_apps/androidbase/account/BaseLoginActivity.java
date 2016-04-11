@@ -1,8 +1,12 @@
 package com.mr_apps.androidbase.account;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.AppCompatTextView;
@@ -36,9 +40,8 @@ public abstract class BaseLoginActivity extends AbstractBaseActivity {
 
     AppCompatEditText email;
     PasswordView password;
-    AppCompatButton login;
     LoginButton loginButton;
-    AppCompatTextView forgetPwd, subscribe;
+    AppCompatTextView forgetPwd, subscribe, login;
     WarningTextInputLayout til_email, til_password;
 
     @Override
@@ -102,10 +105,12 @@ public abstract class BaseLoginActivity extends AbstractBaseActivity {
         til_email = (WarningTextInputLayout) findViewById(R.id.til_email);
         til_password = (WarningTextInputLayout) findViewById(R.id.til_password);
 
-        login = (AppCompatButton) findViewById(R.id.login);
+        login = (AppCompatTextView) findViewById(R.id.login);
 
         forgetPwd = (AppCompatTextView) findViewById(R.id.forget_pwd);
         subscribe = (AppCompatTextView) findViewById(R.id.iscriviti);
+
+        login.setBackgroundDrawable(Utils.getButtonSelector(ContextCompat.getColor(this, R.color.colorAccent), this));
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override

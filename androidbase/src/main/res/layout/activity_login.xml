@@ -7,73 +7,81 @@
 
     <include layout="@layout/account_toolbar" />
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/default_extra_large_margin_or_padding"
-        android:gravity="center_horizontal"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <android.support.v7.widget.AppCompatTextView
-            style="@style/LoginPrimaryTextStyle"
-            android:text="@string/Esegui_il_login" />
-
-        <com.facebook.login.widget.LoginButton
-            android:id="@+id/fb_login"
-            style="@style/FacebookButtonStyle" />
-
-        <android.support.v7.widget.AppCompatTextView
-            style="@style/LoginSecondaryTextStyle"
-            android:text="@string/oppure" />
-
-        <com.mr_apps.androidbase.custom_views.WarningTextInputLayout
-            android:id="@+id/til_email"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <android.support.design.widget.TextInputEditText
-                android:id="@+id/email"
-                style="@style/EditTextStyle"
-                android:hint="@string/Email" />
-
-        </com.mr_apps.androidbase.custom_views.WarningTextInputLayout>
-
-        <com.mr_apps.androidbase.custom_views.WarningTextInputLayout
-            android:id="@+id/til_password"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <com.mr_apps.androidbase.custom_views.PasswordView
-                android:id="@+id/password"
-                style="@style/EditTextStyle"
-                android:hint="@string/Password"
-                app:useStrikeThrough="true" />
-
-        </com.mr_apps.androidbase.custom_views.WarningTextInputLayout>
-
-        <android.support.v7.widget.AppCompatButton
-            android:id="@+id/login"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/Entra" />
+            android:layout_marginLeft="@dimen/default_extra_large_margin_or_padding"
+            android:layout_marginRight="@dimen/default_extra_large_margin_or_padding"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
 
-        <android.support.v7.widget.AppCompatTextView
-            android:id="@+id/forget_pwd"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/Password_dimenticata" />
+            <android.support.v7.widget.AppCompatTextView
+                android:layout_marginTop="@dimen/default_extra_large_margin_or_padding"
+                style="@style/LoginPrimaryTextStyle"
+                android:text="@string/Esegui_il_login" />
 
-        <android.support.v7.widget.AppCompatTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/Nessun_account" />
+            <com.facebook.login.widget.LoginButton
+                android:id="@+id/fb_login"
+                style="@style/FacebookButtonStyle" />
 
-        <android.support.v7.widget.AppCompatTextView
-            android:id="@+id/iscriviti"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/Iscriviti_ora" />
+            <android.support.v7.widget.AppCompatTextView
+                style="@style/LoginSecondaryTextStyle"
+                android:text="@string/oppure" />
 
-    </LinearLayout>
+            <com.mr_apps.androidbase.custom_views.WarningTextInputLayout
+                android:id="@+id/til_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/email"
+                    style="@style/EditTextStyle"
+                    android:hint="@string/Email" />
+
+            </com.mr_apps.androidbase.custom_views.WarningTextInputLayout>
+
+            <com.mr_apps.androidbase.custom_views.WarningTextInputLayout
+                android:id="@+id/til_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.mr_apps.androidbase.custom_views.PasswordView
+                    android:id="@+id/password"
+                    style="@style/EditTextStyle"
+                    android:hint="@string/Password"
+                    app:useStrikeThrough="true" />
+
+            </com.mr_apps.androidbase.custom_views.WarningTextInputLayout>
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/login"
+                style="@style/ButtonStyle"
+                android:text="@string/Entra" />
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/forget_pwd"
+                style="@style/LoginSecondaryTextStyle"
+                android:text="@string/Password_dimenticata"
+                android:textSize="13sp" />
+
+            <android.support.v7.widget.AppCompatTextView
+                style="@style/LoginSecondaryTextStyle"
+                android:layout_marginBottom="0dp"
+                android:text="@string/Nessun_account"
+                android:textColor="@android:color/black" />
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/iscriviti"
+                style="@style/LoginPrimaryTextStyle"
+                android:text="@string/Iscriviti_ora"
+                android:textColor="@color/colorAccent" />
+
+        </LinearLayout>
+
+    </ScrollView>
 
 </LinearLayout>

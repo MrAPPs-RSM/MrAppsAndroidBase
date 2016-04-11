@@ -1,12 +1,18 @@
 package com.mr_apps.androidbase.utils;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
+import android.graphics.drawable.StateListDrawable;
 import android.location.Location;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Environment;
+import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
+
+import com.mr_apps.androidbase.R;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -117,4 +123,31 @@ public class Utils {
         return px;
     }
 
+    public static StateListDrawable getButtonSelector(int color, Context context) {
+
+        GradientDrawable standardDrawable = new GradientDrawable();
+        standardDrawable.setCornerRadius(Utils.dpToPx(3, context));
+        standardDrawable.setColor(color);
+
+        GradientDrawable pressedDrawable = new GradientDrawable();
+        pressedDrawable.setCornerRadius(Utils.dpToPx(3, context));
+        pressedDrawable.setColor(getDarker(ContextCompat.getColor(context, R.color.colorAccent)));
+
+        StateListDrawable states = new StateListDrawable();
+        int statePressed = android.R.attr.state_pressed;
+        states.addState(new int[]{-statePressed}, standardDrawable);
+        states.addState(new int[]{statePressed}, pressedDrawable);
+
+        return states;
+    }
+
+    public static int getDarker(int col) {
+        float[] hsv = new float[3];
+
+        Color.colorToHSV(col, hsv);
+
+        hsv[2] = (float) (0.5);
+
+        return Color.HSVToColor(hsv);
+    }
 }

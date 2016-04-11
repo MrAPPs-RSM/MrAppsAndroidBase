@@ -10,14 +10,15 @@
         <item name="colorAccent">@android:color/white</item>
     </style>
 
-    <style name="ButtonStyle" parent="Base.Widget.AppCompat.Button.Borderless">
+    <style name="ButtonStyle" parent="android:TextAppearance">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_gravity">center_vertical</item>
-        <item name="android:background">@drawable/default_button</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_marginTop">@dimen/default_very_large_margin_or_padding</item>
         <item name="android:textColor">@android:color/white</item>
         <item name="android:textSize">16sp</item>
         <item name="android:textAllCaps">true</item>
+        <item name="android:padding">@dimen/default_large_margin_or_padding</item>
     </style>
 
     <style name="LoginPrimaryTextStyle" parent="android:TextAppearance">
@@ -44,6 +45,8 @@
         <item name="android:paddingBottom">@dimen/default_large_margin_or_padding</item>
         <item name="android:paddingLeft">@dimen/default_very_large_margin_or_padding</item>
         <item name="android:paddingRight">@dimen/default_very_large_margin_or_padding</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">normal</item>
     </style>
 
     <style name="EditTextStyle" parent="Widget.AppCompat.EditText">
