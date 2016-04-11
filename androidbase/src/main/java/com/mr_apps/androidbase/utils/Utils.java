@@ -123,6 +123,12 @@ public class Utils {
         return px;
     }
 
+    /**
+     * Metodo di utility per creare drawable con effetto pressed e colori parametrizzati
+     * @param color il colore "standard" del bottone
+     * @param context il context
+     * @return un drawable del colore passato come parametro con bordi arrotondati (3dp) e effetto press
+     */
     public static StateListDrawable getButtonSelector(int color, Context context) {
 
         GradientDrawable standardDrawable = new GradientDrawable();
@@ -141,6 +147,11 @@ public class Utils {
         return states;
     }
 
+    /**
+     * Metodo che "scurisce" il colore passato come parametro. Utile per creare effetto "press"
+     * @param col il colore che si vuole scurire
+     * @return il colore passato come parametro con una tonalità più scura
+     */
     public static int getDarker(int col) {
         float[] hsv = new float[3];
 
