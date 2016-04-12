@@ -17,7 +17,6 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
@@ -45,19 +44,25 @@ public abstract class WebServiceSecurity extends WebServiceUtils {
             return null;
         }
 
-        String language = Locale.getDefault().getLanguage();
-
-        Map<String, List<String>> security = getSecurity(context);
+        //String language = Locale.getDefault().getLanguage();
 
         String url = composeUrl(path);
-
-        Logger.d(TAG, "chiamata a " + url + "\ncon parametri aggiuntivi " + params.toString() + security.toString());
 
         Builders.Any.B builder=Ion.with(context)
                 .load(url);
 
-        if(isSecurityEnabled)
+        if(isSecurityEnabled) {
+            Map<String, List<String>> security = getSecurity(context);
+
+            Logger.d(TAG, "chiamata a " + url + "\ncon parametri aggiuntivi " + params.toString() + security.toString());
+
             builder.addHeaders(security);
+        } else {
+            SecurityPreferences.setHeader(context, "");
+
+            Logger.d(TAG, "chiamata a " + url + "\ncon parametri aggiuntivi " + params.toString());
+
+        }
 
         ResponseFuture<JsonObject> responseFuture = builder
                         .setBodyParameters(params)
@@ -97,19 +102,24 @@ public abstract class WebServiceSecurity extends WebServiceUtils {
             return null;
         }
 
-        String language = Locale.getDefault().getLanguage();
-
-        final Map<String, List<String>> security = getSecurity(context);
 
         String url = composeUrl(path);
-
-        Logger.d(TAG, "chiamata a " + url + "\ncon parametri aggiuntivi " + params.toString() + security.toString());
 
         Builders.Any.B builder=Ion.with(context)
                 .load(url);
 
-        if(isSecurityEnabled)
+        if(isSecurityEnabled) {
+            Map<String, List<String>> security = getSecurity(context);
+
+            Logger.d(TAG, "chiamata a " + url + "\ncon parametri aggiuntivi " + params.toString() + security.toString());
+
             builder.addHeaders(security);
+        } else {
+            SecurityPreferences.setHeader(context, "");
+
+            Logger.d(TAG, "chiamata a " + url + "\ncon parametri aggiuntivi " + params.toString());
+
+        }
 
         ResponseFuture<JsonObject> responseFuture = builder
                         .addQueries(params)
@@ -189,7 +199,9 @@ public abstract class WebServiceSecurity extends WebServiceUtils {
 
         long diffInMinutes = diffInMinutes((new Date()).getTime(), SecurityPreferences.getHeader_date(context));
 
-        if (SecurityPreferences.getHeader(context).length() == 0 || diffInMinutes > 4) {
+        String header=SecurityPreferences.getHeader(context);
+
+        if (Utils.isNullOrEmpty(header) || diffInMinutes > 4) {
             updateSecurity(context);
         }
 
