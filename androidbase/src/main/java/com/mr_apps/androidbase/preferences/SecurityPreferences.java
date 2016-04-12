@@ -28,12 +28,24 @@ public class SecurityPreferences extends AbstractBasePreferences {
         return getPreferences(context, namePreferences).getLong(header_date, 0);
     }
 
+    public static void setHeader_date(Context context, long value) {
+        setPreferences(context, namePreferences, header_date, value);
+    }
+
     public static String getToken(Context context) {
         return getPreferences(context, namePreferences).getString(token, "");
     }
 
+    public static void setToken(Context context, String value) {
+        setPreferences(context, namePreferences, token, value);
+    }
+
     public static String getSecret(Context context) {
         return getPreferences(context, namePreferences).getString(secret, "");
+    }
+
+    public static void setSecret(Context context, String value) {
+        setPreferences(context, namePreferences, secret, value);
     }
 
     public static String getHeader(Context context) {
@@ -41,8 +53,16 @@ public class SecurityPreferences extends AbstractBasePreferences {
         return getPreferences(context, namePreferences).getString(header, "");
     }
 
+    public static void setHeader(Context context, String value) {
+        setPreferences(context, namePreferences, header, value);
+    }
+
     public static String getAuthorization(Context context) {
         return getPreferences(context, namePreferences).getString(authorization, "");
+    }
+
+    public static void setAuthorization(Context context, String value) {
+        setPreferences(context, namePreferences, authorization, value);
     }
 
 }
