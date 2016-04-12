@@ -10,8 +10,7 @@ public abstract class RecyclerViewFooterScrollView<T> extends RecyclerView.OnScr
 
     private int previousTotal = 0;
     private boolean loading = true;
-    int firstVisibleItem, visibleItemCount, totalItemCount;
-    boolean limit_reached=false;
+    private boolean limit_reached=false;
 
     LinearLayoutManager layoutManager;
     AbstractHeaderFooterAdapter adapter;
@@ -29,9 +28,9 @@ public abstract class RecyclerViewFooterScrollView<T> extends RecyclerView.OnScr
         if (limit_reached || adapter==null || layoutManager==null)
             return;
 
-        visibleItemCount = recyclerView.getChildCount();
-        totalItemCount = layoutManager.getItemCount();
-        firstVisibleItem = layoutManager.findFirstVisibleItemPosition();
+        int visibleItemCount = recyclerView.getChildCount();
+        int totalItemCount = layoutManager.getItemCount();
+        int firstVisibleItem = layoutManager.findFirstVisibleItemPosition();
 
         //swipeContainer.setEnabled(mLayoutManager.findFirstCompletelyVisibleItemPosition() == 0 || adapterProdotti.getItemCount() == 0);
 
@@ -54,6 +53,18 @@ public abstract class RecyclerViewFooterScrollView<T> extends RecyclerView.OnScr
 
             loading = true;
         }
+    }
+
+    public void setLoading(boolean loading) {
+        this.loading = loading;
+    }
+
+    public void setLimit_reached(boolean limit_reached) {
+        this.limit_reached = limit_reached;
+    }
+
+    public void setPreviousTotal(int previousTotal) {
+        this.previousTotal = previousTotal;
     }
 
     public abstract void load();
