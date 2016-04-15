@@ -9,7 +9,8 @@
 
 
     <!-- Custom dialog colors -->
-    <color name="editTextDialogColor">#999999</color>
+    <color name="editTextDialogColorNormal">#999999</color>
+    <color name="editTextDialogColorHighlight">@color/colorAccent</color>
     <color name="editTextDialogTextColor">#000000</color>
     <color name="titleDialogColor">#000000</color>
 </resources>
