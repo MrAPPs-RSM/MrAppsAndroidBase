@@ -107,4 +107,11 @@ public abstract class AbstractHeaderFooterAdapter extends RecyclerView.Adapter<R
         items.addAll(positionToAdd, itemsToAdd);
         notifyDataSetChanged();
     }
+
+    public void removeFooterProgress() {
+        if(items.size()>0 && items.get(items.size() - 1).isFooter())
+            items.remove(items.size() - 1);
+
+        notifyDataSetChanged();
+    }
 }

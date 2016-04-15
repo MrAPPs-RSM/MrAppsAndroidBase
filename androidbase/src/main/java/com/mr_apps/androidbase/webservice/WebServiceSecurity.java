@@ -7,6 +7,7 @@ import com.google.gson.JsonObject;
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
 import com.koushikdutta.ion.Response;
+import com.koushikdutta.ion.builder.Builders;
 import com.koushikdutta.ion.future.ResponseFuture;
 import com.mr_apps.androidbase.preferences.SecurityPreferences;
 import com.mr_apps.androidbase.utils.Logger;
@@ -16,7 +17,6 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
@@ -36,7 +36,7 @@ public abstract class WebServiceSecurity extends WebServiceUtils {
         WebServiceSecurity.baseUrl = baseUrl;
     }
 
-    public static ResponseFuture secureOperationWithPath(final Context context, final String path, final HashMap<String, List<String>> params, final FutureCallback<JsonObject> complete) {
+    public static ResponseFuture secureOperationWithPath(final Context context, final String path, final HashMap<String, List<String>> params, final FutureCallback<JsonObject> complete, final boolean isSecurityEnabled) {
 
         if (!Utils.isOnline(context)) {
             complete.onCompleted(null, null);
@@ -44,18 +44,27 @@ public abstract class WebServiceSecurity extends WebServiceUtils {
             return null;
         }
 
-        String language = Locale.getDefault().getLanguage();
-
-        Map<String, List<String>> security = getSecurity(context);
+        //String language = Locale.getDefault().getLanguage();
 
         String url = composeUrl(path);
 
-        Logger.d(TAG, "chiamata a " + url + "\ncon parametri aggiuntivi " + params.toString() + security.toString());
+        Builders.Any.B builder=Ion.with(context)
+                .load(url);
 
-        ResponseFuture<JsonObject> responseFuture = Ion.with(context)
-                .load(url)
-                        //.noCache()
-                        .addHeaders(security)
+        if(isSecurityEnabled) {
+            Map<String, List<String>> security = getSecurity(context);
+
+            Logger.d(TAG, "chiamata a " + url + "\ncon parametri aggiuntivi " + params.toString() + security.toString());
+
+            builder.addHeaders(security);
+        } else {
+            SecurityPreferences.setHeader(context, "");
+
+            Logger.d(TAG, "chiamata a " + url + "\ncon parametri aggiuntivi " + params.toString());
+
+        }
+
+        ResponseFuture<JsonObject> responseFuture = builder
                         .setBodyParameters(params)
                 .asJsonObject();
 
@@ -74,7 +83,7 @@ public abstract class WebServiceSecurity extends WebServiceUtils {
 
                 if (handleErrorCode(context, result)) {
                     updateSecurity(context);
-                    secureOperationWithPath(context, path, params, complete);
+                    secureOperationWithPath(context, path, params, complete, isSecurityEnabled);
                 } else
                     complete.onCompleted(e, result);
 
@@ -85,7 +94,7 @@ public abstract class WebServiceSecurity extends WebServiceUtils {
 
     }
 
-    public static ResponseFuture secureOperationWithPathGet(final Context context, final String path, final HashMap<String, List<String>> params, final FutureCallback<JsonObject> complete) {
+    public static ResponseFuture secureOperationWithPathGet(final Context context, final String path, final HashMap<String, List<String>> params, final FutureCallback<JsonObject> complete, final boolean isSecurityEnabled) {
 
         if (!Utils.isOnline(context)) {
             complete.onCompleted(null, null);
@@ -93,18 +102,26 @@ public abstract class WebServiceSecurity extends WebServiceUtils {
             return null;
         }
 
-        String language = Locale.getDefault().getLanguage();
-
-        final Map<String, List<String>> security = getSecurity(context);
 
         String url = composeUrl(path);
 
-        Logger.d(TAG, "chiamata a " + url + "\ncon parametri aggiuntivi " + params.toString() + security.toString());
+        Builders.Any.B builder=Ion.with(context)
+                .load(url);
 
-        ResponseFuture<JsonObject> responseFuture = Ion.with(context)
-                .load(url)
-                        //.noCache()
-                        .addHeaders(security)
+        if(isSecurityEnabled) {
+            Map<String, List<String>> security = getSecurity(context);
+
+            Logger.d(TAG, "chiamata a " + url + "\ncon parametri aggiuntivi " + params.toString() + security.toString());
+
+            builder.addHeaders(security);
+        } else {
+            SecurityPreferences.setHeader(context, "");
+
+            Logger.d(TAG, "chiamata a " + url + "\ncon parametri aggiuntivi " + params.toString());
+
+        }
+
+        ResponseFuture<JsonObject> responseFuture = builder
                         .addQueries(params)
                 .asJsonObject();
 
@@ -123,7 +140,7 @@ public abstract class WebServiceSecurity extends WebServiceUtils {
 
                 if (handleErrorCode(context, result)) {
                     updateSecurity(context);
-                    secureOperationWithPath(context, path, params, complete);
+                    secureOperationWithPath(context, path, params, complete, isSecurityEnabled);
                 } else
                     complete.onCompleted(e, result);
 
@@ -182,7 +199,9 @@ public abstract class WebServiceSecurity extends WebServiceUtils {
 
         long diffInMinutes = diffInMinutes((new Date()).getTime(), SecurityPreferences.getHeader_date(context));
 
-        if (SecurityPreferences.getHeader(context).length() == 0 || diffInMinutes > 4) {
+        String header=SecurityPreferences.getHeader(context);
+
+        if (Utils.isNullOrEmpty(header) || diffInMinutes > 4) {
             updateSecurity(context);
         }
 
