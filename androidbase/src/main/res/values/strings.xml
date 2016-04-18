@@ -30,7 +30,10 @@
     <string name="Scegli_video_da_galleria">Scegli video da galleria</string>
     <string name="Gira_video">Gira video</string>
     <string name="Condividi">Condividi</string>
-    <string name="termini_condizioni">Iscrivendoti al servizio accetti <b>Termini e condizioni</b> e informativa sulla <b>Privacy Policy</b></string>
+    <string name="termini_condizioni_1">Iscrivendoti al servizio accetti</string>
+    <string name="termini_condizioni_2">Termini e condizioni</string>
+    <string name="termini_condizioni_3">e informativa sulla</string>
+    <string name="termini_condizioni_4">Privacy Policy</string>
     <string name="Iscriviti">Iscriviti</string>
 
     <string name="Esegui_il_login">Esegui il login</string>
@@ -46,6 +49,7 @@
     <string name="Signin">Signin</string>
     <string name="Entra">Entra</string>
     <string name="Controllare_dati_inseriti">Controllare i dati inseriti</string>
+    <string name="Placeholder">Prova</string>
 
 
 </resources>
