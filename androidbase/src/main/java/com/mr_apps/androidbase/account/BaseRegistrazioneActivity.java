@@ -62,7 +62,7 @@ public abstract class BaseRegistrazioneActivity extends AbstractBaseActivity {
     }
 
     private SpannableStringBuilder getTermsConditionSpannableString() {
-        int start = 0;
+        int start;
         SpannableStringBuilder builder = new SpannableStringBuilder();
 
         builder.append(getString(R.string.termini_condizioni_1));
@@ -70,20 +70,7 @@ public abstract class BaseRegistrazioneActivity extends AbstractBaseActivity {
 
         start = builder.length();
         builder.append(getString(R.string.termini_condizioni_2));
-        builder.setSpan(new ForegroundColorSpan(Color.BLACK), start, builder.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        ClickableSpan clickableSpan1 = new ClickableSpan() {
-            @Override
-            public void onClick(View textView) {
-                Toast.makeText(getApplicationContext(), "Cliccato: Termini e condizioni", Toast.LENGTH_SHORT).show();
-            }
-            @Override
-            public void updateDrawState(TextPaint ds) {
-                super.updateDrawState(ds);
-                ds.setUnderlineText(false);
-                ds.setColor(Color.BLACK);
-            }
-        };
-        builder.setSpan(clickableSpan1, start, builder.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        builder.setSpan(getClickableSpan(true), start, builder.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         builder.append(" ");
 
         builder.append(getString(R.string.termini_condizioni_3));
@@ -91,11 +78,17 @@ public abstract class BaseRegistrazioneActivity extends AbstractBaseActivity {
 
         start = builder.length();
         builder.append(getString(R.string.termini_condizioni_4));
-        builder.setSpan(new ForegroundColorSpan(Color.BLACK), start, builder.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        ClickableSpan clickableSpan2 = new ClickableSpan() {
+        builder.setSpan(getClickableSpan(false), start, builder.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        builder.append(" ");
+
+        return builder;
+    }
+
+    private ClickableSpan getClickableSpan(final boolean termsCondition) {
+        return new ClickableSpan() {
             @Override
             public void onClick(View textView) {
-                Toast.makeText(getApplicationContext(), "Cliccato: Privacy Policy", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), termsCondition ? "Cliccato: Termini e condizioni" : "Cliccato: Privacy Policy", Toast.LENGTH_SHORT).show();
             }
             @Override
             public void updateDrawState(TextPaint ds) {
@@ -104,10 +97,6 @@ public abstract class BaseRegistrazioneActivity extends AbstractBaseActivity {
                 ds.setColor(Color.BLACK);
             }
         };
-        builder.setSpan(clickableSpan2, start, builder.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        builder.append(" ");
-
-        return builder;
     }
 
     protected abstract List<SignUpElement> getSignUpElements();
