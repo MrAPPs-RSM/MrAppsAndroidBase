@@ -1,9 +1,6 @@
 package com.mr_apps.androidbaseproject;
 
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.text.InputType;
-import android.widget.EditText;
+import android.content.Intent;
 
 import com.facebook.login.LoginResult;
 import com.mr_apps.androidbase.account.BaseLoginActivity;
@@ -18,17 +15,6 @@ import org.json.JSONObject;
 public class LoginActivity extends BaseLoginActivity {
 
     private static final String TAG = "LoginActivity";
-
-    @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        CustomDialog.showEditDialog(this, "boia", "qualcosa", "messaggio di merda", InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS, null, null, new CustomDialog.CustomDialogCallback() {
-            @Override
-            public void onPositive(EditText editText) {
-
-            }
-        });
-    }
 
     @Override
     public String[] getFbPermissions() {
@@ -55,5 +41,20 @@ public class LoginActivity extends BaseLoginActivity {
     @Override
     public boolean passwordTilRule(String s) {
         return s.length() >= 4;
+    }
+
+    @Override
+    protected void onLoginSuccess() {
+        CustomDialog.showOkDialog(this, "Bravo stronzo!", "Ti sei loggato!");
+    }
+
+    @Override
+    protected void passwordForgotten() {
+        CustomDialog.showOkDialog(this, "Ti sei dimenticato la password?", "Allora sei proprio un coglione");
+    }
+
+    @Override
+    protected void subscribe() {
+        startActivity(new Intent(this, RegistrazioneActivity.class));
     }
 }

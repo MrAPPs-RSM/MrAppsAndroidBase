@@ -45,6 +45,7 @@
     <string name="Login">Login</string>
     <string name="Signin">Signin</string>
     <string name="Entra">Entra</string>
+    <string name="Controllare_dati_inseriti">Controllare i dati inseriti</string>
 
 
 </resources>

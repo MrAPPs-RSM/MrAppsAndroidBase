@@ -17,6 +17,8 @@ import com.mr_apps.androidbase.R;
  */
 public class WarningTextInputLayout extends TextInputLayout {
 
+    boolean isErrorEnabled = false;
+
     public WarningTextInputLayout(Context context) {
         super(context);
     }
@@ -48,7 +50,13 @@ public class WarningTextInputLayout extends TextInputLayout {
                     edit.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null);
                 }
             }
+            isErrorEnabled = enabled;
         }
+    }
+
+    @Override
+    public boolean isErrorEnabled() {
+        return isErrorEnabled;
     }
 
     private void passwordViewManagement(EditText edit, boolean error) {

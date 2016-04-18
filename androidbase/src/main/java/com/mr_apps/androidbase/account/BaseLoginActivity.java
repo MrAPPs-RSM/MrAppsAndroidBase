@@ -6,6 +6,7 @@ import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatEditText;
@@ -115,21 +116,25 @@ public abstract class BaseLoginActivity extends AbstractBaseActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                if (checkForm()) {
+                    showErrorMessage();
+                } else {
+                    onLoginSuccess();
+                }
             }
         });
 
         forgetPwd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                passwordForgotten();
             }
         });
 
         subscribe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                subscribe();
             }
         });
 
@@ -168,6 +173,15 @@ public abstract class BaseLoginActivity extends AbstractBaseActivity {
         });
     }
 
+    private boolean checkForm() {
+        return til_email.isErrorEnabled() || til_password.isErrorEnabled()
+                || email.getText().toString().length() == 0 || password.getText().toString().length() == 0;
+    }
+
+    private void showErrorMessage() {
+        Snackbar.make(email, R.string.Controllare_dati_inseriti, Snackbar.LENGTH_LONG).show();
+    }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -183,4 +197,10 @@ public abstract class BaseLoginActivity extends AbstractBaseActivity {
     public abstract void onFbError();
 
     public abstract boolean passwordTilRule(String s);
+
+    protected abstract void onLoginSuccess();
+
+    protected abstract void passwordForgotten();
+
+    protected abstract void subscribe();
 }

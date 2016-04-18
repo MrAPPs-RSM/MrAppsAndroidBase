@@ -20,8 +20,8 @@
             android:orientation="vertical">
 
             <android.support.v7.widget.AppCompatTextView
-                android:layout_marginTop="@dimen/default_extra_large_margin_or_padding"
                 style="@style/LoginPrimaryTextStyle"
+                android:layout_marginTop="@dimen/default_extra_large_margin_or_padding"
                 android:text="@string/Esegui_il_login" />
 
             <com.facebook.login.widget.LoginButton
@@ -65,6 +65,13 @@
             <android.support.v7.widget.AppCompatTextView
                 android:id="@+id/forget_pwd"
                 style="@style/LoginSecondaryTextStyle"
+                android:layout_marginBottom="@dimen/default_margin_or_padding"
+                android:layout_marginTop="@dimen/default_margin_or_padding"
+                android:background="?attr/selectableItemBackground"
+                android:paddingBottom="@dimen/default_margin_or_padding"
+                android:paddingLeft="@dimen/default_margin_or_padding"
+                android:paddingRight="@dimen/default_margin_or_padding"
+                android:paddingTop="@dimen/default_margin_or_padding"
                 android:text="@string/Password_dimenticata"
                 android:textSize="13sp" />
 
@@ -77,6 +84,9 @@
             <android.support.v7.widget.AppCompatTextView
                 android:id="@+id/iscriviti"
                 style="@style/LoginPrimaryTextStyle"
+                android:background="?attr/selectableItemBackground"
+                android:paddingLeft="@dimen/default_margin_or_padding"
+                android:paddingRight="@dimen/default_margin_or_padding"
                 android:text="@string/Iscriviti_ora"
                 android:textColor="@color/colorAccent" />
 

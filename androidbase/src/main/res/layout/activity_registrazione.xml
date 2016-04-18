@@ -24,13 +24,14 @@
             android:layout_marginTop="@dimen/default_very_large_margin_or_padding"
             android:orientation="vertical">
 
-            <TextView
+            <android.support.v7.widget.AppCompatTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="@string/termini_condizioni" />
 
-            <Button
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/signup"
                 style="@style/LoginButtonStyle"
                 android:layout_marginTop="@dimen/default_very_large_margin_or_padding"
                 android:text="@string/Iscriviti" />
