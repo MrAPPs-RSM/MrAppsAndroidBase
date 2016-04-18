@@ -44,12 +44,12 @@ public class CustomDialog {
 
     public static void showOkDialog(Context context, int titleResId, int messageResId, final CustomDialogCallback callback) {
 
-        showOkDialog(context, context.getString(titleResId), context.getString(messageResId), callback);
+        showOkDialog(context, titleResId==0?null:context.getString(titleResId), messageResId==0?null:context.getString(messageResId), callback);
     }
 
     public static void showOkDialog(Context context, int titleResId, int messageResId) {
 
-        showOkDialog(context, context.getString(titleResId), context.getString(messageResId));
+        showOkDialog(context, titleResId==0?null:context.getString(titleResId), messageResId==0?null:context.getString(messageResId));
     }
 
     public static void showOkDialog(Context context, String title, String message) {
@@ -88,11 +88,11 @@ public class CustomDialog {
     }
 
     public static void showYesNoDialog(Context context, int titleResId, int messageResId, final CustomDialogCallback callback) {
-        showYesNoDialog(context, context.getString(titleResId), context.getString(messageResId), callback);
+        showYesNoDialog(context, titleResId==0?null:context.getString(titleResId), titleResId==0?null:context.getString(messageResId), callback);
     }
 
     public static void showEditDialog(Context context, int titleId, int hintId, int messageId, int inputType, String lower, String upper, final CustomDialogCallback callback) {
-        showEditDialog(context, context.getString(titleId), hintId == 0 ? null : context.getString(hintId), messageId == 0 ? null : context.getString(messageId), inputType, lower, upper, callback);
+        showEditDialog(context, titleId==0?null:context.getString(titleId), hintId == 0 ? null : context.getString(hintId), messageId == 0 ? null : context.getString(messageId), inputType, lower, upper, callback);
     }
 
     public static void showEditDialog(final Context context, String title, String hint, String message, int inputType, final String lower, final String upper, final CustomDialogCallback callback) {

@@ -80,6 +80,7 @@
 
     <style name="DialogColorControlTheme">
         <item name="colorControlNormal">@color/editTextDialogColor</item>
+        <item name="colorControlHighlight">@color/editTextDialogColor</item>
     </style>
 
     <style name="TitleDialogStyle" parent="android:TextAppearance">
