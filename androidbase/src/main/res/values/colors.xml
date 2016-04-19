@@ -13,4 +13,10 @@
     <color name="editTextDialogColorHighlight">@color/colorAccent</color>
     <color name="editTextDialogTextColor">#000000</color>
     <color name="titleDialogColor">#000000</color>
+
+    <!-- Custom tutorial colors -->
+    <color name="tutorial_title_color">@android:color/white</color>
+    <color name="tutorial_subtitle_color">@android:color/white</color>
+    <color name="tutorial_background_color">#3e79c9</color>
+
 </resources>

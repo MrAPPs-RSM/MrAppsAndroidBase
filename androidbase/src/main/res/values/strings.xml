@@ -50,6 +50,6 @@
     <string name="Entra">Entra</string>
     <string name="Controllare_dati_inseriti">Controllare i dati inseriti</string>
     <string name="Placeholder">Prova</string>
-
+    <string name="skip_login">Vai alla login</string>
 
 </resources>

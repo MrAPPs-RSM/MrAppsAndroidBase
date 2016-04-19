@@ -6,9 +6,12 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+
+import com.mr_apps.androidbase.tutorial.ItemTutorial;
+import com.mr_apps.androidbase.tutorial.TutorialActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -32,6 +35,12 @@ public class MainActivity extends AppCompatActivity {
     public void login(View v)
     {
         startActivity(new Intent(this, LoginActivity.class));
+    }
+
+    public void tutorial(View v) {
+        Intent intent=new Intent(this, TutorialActivity.class);
+        intent.putExtra(TutorialActivity.Field_Tutorials, new ItemTutorial [] {new ItemTutorial(R.drawable.tutorial_01_android, "titolo 1", "sottotitolo 1"), new ItemTutorial(0, "titolo 2", "sottotitolo 2"), new ItemTutorial(0, "titolo 3", "sottotitolo 3")});
+        startActivity(intent);
     }
 
     @Override
