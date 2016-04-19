@@ -1,0 +1,52 @@
+package com.mr_apps.androidbase.tutorial;
+
+import android.content.Context;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentStatePagerAdapter;
+
+import java.util.List;
+
+/**
+ * Created by denis on 19/04/16.
+ */
+public class TutorialAdapter extends FragmentStatePagerAdapter {
+
+    Context context;
+    final ItemTutorial [] tutorials;
+
+    public TutorialAdapter(FragmentManager fm, Context context, ItemTutorial... tutorials) {
+        super(fm);
+        this.context = context;
+        this.tutorials = tutorials;
+    }
+
+    public TutorialAdapter(FragmentManager fm, Context context, List<ItemTutorial> tutorials) {
+        super(fm);
+        this.context = context;
+
+        this.tutorials=new ItemTutorial[tutorials.size()];
+
+        for(int i=0; i<tutorials.size(); i++) {
+            this.tutorials[i]=tutorials.get(i);
+        }
+    }
+
+
+    @Override
+    public Fragment getItem(int position) {
+
+        TutorialFragment tutorialFragment=new TutorialFragment();
+        Bundle bundle=new Bundle(1);
+        bundle.putSerializable(TutorialFragment.Field_Tutorial, tutorials[position]);
+        tutorialFragment.setArguments(bundle);
+
+        return tutorialFragment;
+    }
+
+    @Override
+    public int getCount() {
+        return tutorials==null?0:tutorials.length;
+    }
+}

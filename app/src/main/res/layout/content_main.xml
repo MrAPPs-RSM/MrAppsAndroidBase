@@ -15,4 +15,10 @@
         android:text="Login/Registrazione"
         android:onClick="login"/>
 
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Tutorial"
+        android:onClick="tutorial"/>
+
 </LinearLayout>
