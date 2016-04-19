@@ -1,15 +1,12 @@
 package com.mr_apps.androidbase.account;
 
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.GradientDrawable;
-import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
+import android.support.design.widget.TextInputEditText;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.AppCompatButton;
-import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.AppCompatTextView;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -39,7 +36,7 @@ public abstract class BaseLoginActivity extends AbstractBaseActivity {
 
     CallbackManager callbackManager;
 
-    AppCompatEditText email;
+    TextInputEditText email;
     PasswordView password;
     LoginButton loginButton;
     AppCompatTextView forgetPwd, subscribe, login;
@@ -101,7 +98,7 @@ public abstract class BaseLoginActivity extends AbstractBaseActivity {
         LoginManager.getInstance().logOut();
 
 
-        email = (AppCompatEditText) findViewById(R.id.email);
+        email = (TextInputEditText) findViewById(R.id.email);
         password = (PasswordView) findViewById(R.id.password);
         til_email = (WarningTextInputLayout) findViewById(R.id.til_email);
         til_password = (WarningTextInputLayout) findViewById(R.id.til_password);
@@ -155,6 +152,21 @@ public abstract class BaseLoginActivity extends AbstractBaseActivity {
             }
         });
 
+        email.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                correctColor(true);
+            }
+        });
+
+        email.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus)
+                    correctColor(true);
+            }
+        });
+
         password.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -171,6 +183,35 @@ public abstract class BaseLoginActivity extends AbstractBaseActivity {
                 til_password.setErrorEnabled(!passwordTilRule(s.toString()) && s.length() > 0);
             }
         });
+
+        password.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                correctColor(false);
+            }
+        });
+
+        password.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus)
+                    correctColor(false);
+            }
+        });
+    }
+
+    private void correctColor(final boolean email) {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (email) {
+                    til_email.setErrorEnabled(til_email.isErrorEnabled());
+                } else {
+                    til_password.setErrorEnabled(til_password.isErrorEnabled());
+                }
+
+            }
+        }, 100);
     }
 
     private boolean checkForm() {

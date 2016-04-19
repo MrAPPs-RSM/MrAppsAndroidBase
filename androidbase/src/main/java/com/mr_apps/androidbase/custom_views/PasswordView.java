@@ -8,6 +8,7 @@ import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.VectorDrawable;
 import android.os.Build;
+import android.support.design.widget.TextInputEditText;
 import android.support.graphics.drawable.VectorDrawableCompat;
 import android.support.v4.content.ContextCompat;
 import android.text.InputType;
@@ -22,7 +23,7 @@ import com.mr_apps.androidbase.R;
  *
  * @author Mattia Ruggiero
  */
-public class PasswordView extends EditText {
+public class PasswordView extends TextInputEditText {
 
     private Drawable eye;
     private Drawable eyeWithStrike;
@@ -48,12 +49,6 @@ public class PasswordView extends EditText {
         init(attrs);
     }
 
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    public PasswordView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-        super(context, attrs, defStyleAttr, defStyleRes);
-        init(attrs);
-    }
-
     private void init(AttributeSet attrs) {
         if (attrs != null) {
             TypedArray a = getContext().getTheme().obtainStyledAttributes(
@@ -69,8 +64,14 @@ public class PasswordView extends EditText {
 
         // Make sure to mutate so that if there are multiple password fields, they can have
         // different visibilities.
-        eye = VectorDrawableCompat.create(getContext().getResources(), R.drawable.ic_eye, null).mutate();
-        eyeWithStrike = VectorDrawableCompat.create(getContext().getResources(), R.drawable.ic_eye_strike, null).mutate();
+        if(Build.VERSION.SDK_INT >= 21 ){
+            eye = ContextCompat.getDrawable(getContext(), R.drawable.ic_eye).mutate();
+            eyeWithStrike = ContextCompat.getDrawable(getContext(), R.drawable.ic_eye_strike).mutate();
+        } else {
+            eye = VectorDrawableCompat.create(getContext().getResources(), R.drawable.ic_eye, null).mutate();
+            eyeWithStrike = VectorDrawableCompat.create(getContext().getResources(), R.drawable.ic_eye_strike, null).mutate();
+        }
+
         eyeWithStrike.setAlpha(VISIBILITY_ENABLED);
         setup();
     }
