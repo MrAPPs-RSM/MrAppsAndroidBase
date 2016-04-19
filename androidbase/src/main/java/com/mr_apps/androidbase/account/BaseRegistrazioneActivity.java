@@ -88,7 +88,10 @@ public abstract class BaseRegistrazioneActivity extends AbstractBaseActivity {
         return new ClickableSpan() {
             @Override
             public void onClick(View textView) {
-                Toast.makeText(getApplicationContext(), termsCondition ? "Cliccato: Termini e condizioni" : "Cliccato: Privacy Policy", Toast.LENGTH_SHORT).show();
+                if (termsCondition)
+                    termsConditions();
+                else
+                    privacyPolicy();
             }
             @Override
             public void updateDrawState(TextPaint ds) {
@@ -100,4 +103,8 @@ public abstract class BaseRegistrazioneActivity extends AbstractBaseActivity {
     }
 
     protected abstract List<SignUpElement> getSignUpElements();
+
+    protected abstract void termsConditions();
+
+    protected abstract void privacyPolicy();
 }
