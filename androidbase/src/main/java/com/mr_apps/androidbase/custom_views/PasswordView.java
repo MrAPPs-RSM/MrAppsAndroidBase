@@ -6,7 +6,9 @@ import android.content.res.TypedArray;
 import android.graphics.PorterDuff;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.VectorDrawable;
 import android.os.Build;
+import android.support.graphics.drawable.VectorDrawableCompat;
 import android.support.v4.content.ContextCompat;
 import android.text.InputType;
 import android.util.AttributeSet;
@@ -67,8 +69,8 @@ public class PasswordView extends EditText {
 
         // Make sure to mutate so that if there are multiple password fields, they can have
         // different visibilities.
-        eye = ContextCompat.getDrawable(getContext(), R.drawable.ic_eye).mutate();
-        eyeWithStrike = ContextCompat.getDrawable(getContext(), R.drawable.ic_eye_strike).mutate();
+        eye = VectorDrawableCompat.create(getContext().getResources(), R.drawable.ic_eye, null).mutate();
+        eyeWithStrike = VectorDrawableCompat.create(getContext().getResources(), R.drawable.ic_eye_strike, null).mutate();
         eyeWithStrike.setAlpha(VISIBILITY_ENABLED);
         setup();
     }
