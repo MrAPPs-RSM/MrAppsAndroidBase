@@ -6,6 +6,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.AppCompatButton;
 import android.view.View;
+import android.widget.RelativeLayout;
 
 import com.mr_apps.androidbase.R;
 import com.mr_apps.androidbase.activity.AbstractBaseActivity;
@@ -20,24 +21,27 @@ public abstract class BaseTutorialActivity extends AbstractBaseActivity {
     ViewPager pagerTutorial;
     CirclePageIndicator pageIndicator;
 
-    public static final String Field_Tutorials="Field_Tutorials";
     public static final String Field_SkipLogin="Field_SkipLogin";
 
     AppCompatButton login, skip;
 
     ItemTutorial [] tutorials;
 
+    boolean skipLogin=true;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tutorial);
+
+        RelativeLayout background=(RelativeLayout) findViewById(R.id.background);
 
         pagerTutorial= (ViewPager) findViewById(R.id.tutorial_pager);
         pageIndicator= (CirclePageIndicator) findViewById(R.id.indicator);
 
         pageIndicator.setRadius(getResources().getDimension(R.dimen.default_small_margin_or_padding));
 
-        tutorials= (ItemTutorial[]) getIntent().getSerializableExtra(Field_Tutorials);
+        tutorials= getTutorials();
 
         TutorialAdapter adapter=new TutorialAdapter(getSupportFragmentManager(), this, tutorials);
 
@@ -67,6 +71,8 @@ public abstract class BaseTutorialActivity extends AbstractBaseActivity {
             }
         });
 
+        skipLogin=getIntent().getBooleanExtra(Field_SkipLogin, true);
+
         showHideButtons(0);
 
         login.setBackgroundDrawable(ThemeUtils.getButtonSelector(ContextCompat.getColor(this, R.color.tutorial_button_color), this));
@@ -85,9 +91,15 @@ public abstract class BaseTutorialActivity extends AbstractBaseActivity {
             }
         });
 
+        styleViews(background, pagerTutorial, pageIndicator, skip, login);
+
     }
 
+    public abstract void styleViews(View background, View pager, View indicator, View skip, View login);
+
     public abstract void login();
+
+    public abstract ItemTutorial [] getTutorials();
 
     private void showHideButtons(int position) {
         if(position==tutorials.length-1) {
@@ -97,6 +109,9 @@ public abstract class BaseTutorialActivity extends AbstractBaseActivity {
             login.setVisibility(View.GONE);
             skip.setVisibility(View.VISIBLE);
         }
+
+        if(!skipLogin)
+            skip.setVisibility(View.GONE);
     }
 
 
