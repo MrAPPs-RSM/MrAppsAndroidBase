@@ -4,6 +4,7 @@ import com.mr_apps.androidbase.account.BaseRegistrazioneActivity;
 import com.mr_apps.androidbase.account.ElementInputType;
 import com.mr_apps.androidbase.account.ElementName;
 import com.mr_apps.androidbase.account.SignUpElement;
+import com.mr_apps.androidbase.utils.CustomDialog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,5 +35,15 @@ public class RegistrazioneActivity extends BaseRegistrazioneActivity {
         list.add(nation);
 
         return list;
+    }
+
+    @Override
+    protected void termsConditions() {
+        CustomDialog.showOkDialog(this, "Termini e condizioni", "Termini: quindi finisci\n Condizioni: quindi sei freddo");
+    }
+
+    @Override
+    protected void privacyPolicy() {
+        CustomDialog.showOkDialog(this, "Privacy policy", "cosa fai mi spii? Occhio alla mia privacy");
     }
 }

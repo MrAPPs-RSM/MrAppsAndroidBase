@@ -3,9 +3,12 @@ package com.mr_apps.androidbase.custom_views;
 import android.content.Context;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.support.design.widget.TextInputLayout;
+import android.support.graphics.drawable.VectorDrawableCompat;
 import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
+import android.view.View;
 import android.widget.EditText;
 
 import com.mr_apps.androidbase.R;
@@ -37,12 +40,17 @@ public class WarningTextInputLayout extends TextInputLayout {
                 if (edit instanceof PasswordView) {
                     passwordViewManagement(edit, true);
                 } else {
-                    Drawable warning = ContextCompat.getDrawable(getContext(), R.drawable.ic_warning_24dp);
-                    warning.setColorFilter(ContextCompat.getColor(getContext(), R.color.errorRed), PorterDuff.Mode.SRC_ATOP);
+                    Drawable warning = Build.VERSION.SDK_INT >= 21 ? ContextCompat.getDrawable(getContext(), R.drawable.ic_warning_24dp) : VectorDrawableCompat.create(getContext().getResources(), R.drawable.ic_warning_24dp, null);
+                    if (warning != null)
+                        warning.setColorFilter(ContextCompat.getColor(getContext(), R.color.errorRed), PorterDuff.Mode.SRC_ATOP);
                     edit.setCompoundDrawablesWithIntrinsicBounds(null, null, warning, null);
                 }
             } else {
-                edit.getBackground().clearColorFilter();
+                if (Build.VERSION.SDK_INT >= 21) {
+                    edit.getBackground().clearColorFilter();
+                } else {
+                    edit.getBackground().setColorFilter(ContextCompat.getColor(getContext(), R.color.colorAccent), PorterDuff.Mode.SRC_ATOP);
+                }
                 setHintTextAppearance(R.style.HintStyle);
                 if (edit instanceof PasswordView) {
                     passwordViewManagement(edit, false);
@@ -69,5 +77,10 @@ public class WarningTextInputLayout extends TextInputLayout {
             } else {
                 eye.clearColorFilter();
             }
+    }
+
+    @Override
+    public void setOnClickListener(OnClickListener l) {
+        //super.setOnClickListener(l);
     }
 }
