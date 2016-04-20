@@ -10,8 +10,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.mr_apps.androidbase.tutorial.BaseTutorialActivity;
 import com.mr_apps.androidbase.tutorial.ItemTutorial;
-import com.mr_apps.androidbase.tutorial.TutorialActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void tutorial(View v) {
         Intent intent=new Intent(this, TutorialActivity.class);
-        intent.putExtra(TutorialActivity.Field_Tutorials, new ItemTutorial [] {new ItemTutorial(R.drawable.tutorial_01_android, "titolo 1", "sottotitolo 1"), new ItemTutorial(0, "titolo 2", "sottotitolo 2"), new ItemTutorial(0, "titolo 3", "sottotitolo 3")});
+        intent.putExtra(BaseTutorialActivity.Field_Tutorials, new ItemTutorial [] {new ItemTutorial(R.drawable.tutorial_01_android, "titolo 1", "sottotitolo 1"), new ItemTutorial(0, "titolo 2", "sottotitolo 2"), new ItemTutorial(0, "titolo 3", "sottotitolo 3")});
         startActivity(intent);
     }
 

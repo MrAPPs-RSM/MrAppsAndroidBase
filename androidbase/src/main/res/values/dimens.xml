@@ -14,5 +14,6 @@
     <dimen name="default_small_margin_or_padding">4dp</dimen>
     <dimen name="status_cheat">0dp</dimen>
     <dimen name="item_asset_height">70dp</dimen>
+    <dimen name="min_button_width">160dp</dimen>
 
 </resources>

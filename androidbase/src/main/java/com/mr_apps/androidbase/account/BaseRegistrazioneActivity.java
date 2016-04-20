@@ -10,14 +10,12 @@ import android.text.SpannableStringBuilder;
 import android.text.TextPaint;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
-import android.text.style.ForegroundColorSpan;
 import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import com.mr_apps.androidbase.R;
 import com.mr_apps.androidbase.activity.AbstractBaseActivity;
-import com.mr_apps.androidbase.utils.Utils;
+import com.mr_apps.androidbase.utils.ThemeUtils;
 
 import java.util.List;
 
@@ -46,7 +44,7 @@ public abstract class BaseRegistrazioneActivity extends AbstractBaseActivity {
         termsConditions.setText(getTermsConditionSpannableString());
         termsConditions.setMovementMethod(LinkMovementMethod.getInstance());
 
-        signUp.setBackgroundDrawable(Utils.getButtonSelector(ContextCompat.getColor(this, R.color.colorAccent), this));
+        signUp.setBackgroundDrawable(ThemeUtils.getButtonSelector(ContextCompat.getColor(this, R.color.colorAccent), this));
 
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override

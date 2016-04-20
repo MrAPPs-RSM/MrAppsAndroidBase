@@ -16,10 +16,6 @@
             android:launchMode="singleTop"
             android:theme="@style/GalleryTheme" />
 
-        <activity android:name=".tutorial.TutorialActivity"
-            android:launchMode="singleTop"
-            android:theme="@style/TutorialTheme"/>
-
     </application>
 
 </manifest>
