@@ -25,6 +25,7 @@ import com.mr_apps.androidbase.R;
 import com.mr_apps.androidbase.activity.AbstractBaseActivity;
 import com.mr_apps.androidbase.custom_views.PasswordView;
 import com.mr_apps.androidbase.custom_views.WarningTextInputLayout;
+import com.mr_apps.androidbase.utils.ThemeUtils;
 import com.mr_apps.androidbase.utils.Utils;
 
 import org.json.JSONObject;
@@ -108,7 +109,7 @@ public abstract class BaseLoginActivity extends AbstractBaseActivity {
         forgetPwd = (AppCompatTextView) findViewById(R.id.forget_pwd);
         subscribe = (AppCompatTextView) findViewById(R.id.iscriviti);
 
-        login.setBackgroundDrawable(Utils.getButtonSelector(ContextCompat.getColor(this, R.color.colorAccent), this));
+        login.setBackgroundDrawable(ThemeUtils.getButtonSelector(ContextCompat.getColor(this, R.color.colorAccent), this));
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override

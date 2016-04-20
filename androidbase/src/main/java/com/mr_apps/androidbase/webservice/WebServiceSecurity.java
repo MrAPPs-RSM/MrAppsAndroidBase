@@ -29,6 +29,13 @@ public abstract class WebServiceSecurity extends WebServiceUtils {
 
     private static String baseUrl = "http://beta.json-generator.com/api/json/get/";
 
+    public static final int GENERIC_ERROR=1001;
+    public static final int CREATEDAT_TOO_NEXT=1002;
+    public static final int CREATEDAT_TOO_PREVIOUS=1003;
+    public static final int DIGEST_ALREADY_IN_USE=1004;
+    public static final int WRONG_DIGEST=1005;
+    public static final int USER_DOES_NOT_EXIST=1006;
+
     /*
     * da settare all'oncreate dell applicazione
     */
@@ -36,7 +43,7 @@ public abstract class WebServiceSecurity extends WebServiceUtils {
         WebServiceSecurity.baseUrl = baseUrl;
     }
 
-    public static ResponseFuture secureOperationWithPath(final Context context, final String path, final HashMap<String, List<String>> params, final FutureCallback<JsonObject> complete, final boolean isSecurityEnabled) {
+    public static ResponseFuture secureOperationWithPath(final Context context, final String path, final HashMap<String, List<String>> params, final FutureCallback<JsonObject> complete, final boolean isSecurityEnabled, final boolean handleErrorCode) {
 
         if (!Utils.isOnline(context)) {
             complete.onCompleted(null, null);
@@ -81,9 +88,17 @@ public abstract class WebServiceSecurity extends WebServiceUtils {
 
                 JsonObject result = jsonResponse.getResult();
 
+                if(result!=null)
+                    Logger.d(TAG, "risposta " + result.toString());
+
+                if(!handleErrorCode) {
+                    complete.onCompleted(e, result);
+                    return;
+                }
+
                 if (handleErrorCode(context, result)) {
                     updateSecurity(context);
-                    secureOperationWithPath(context, path, params, complete, isSecurityEnabled);
+                    secureOperationWithPath(context, path, params, complete, isSecurityEnabled, true);
                 } else
                     complete.onCompleted(e, result);
 
@@ -94,7 +109,7 @@ public abstract class WebServiceSecurity extends WebServiceUtils {
 
     }
 
-    public static ResponseFuture secureOperationWithPathGet(final Context context, final String path, final HashMap<String, List<String>> params, final FutureCallback<JsonObject> complete, final boolean isSecurityEnabled) {
+    public static ResponseFuture secureOperationWithPathGet(final Context context, final String path, final HashMap<String, List<String>> params, final FutureCallback<JsonObject> complete, final boolean isSecurityEnabled, final boolean handleErrorCode) {
 
         if (!Utils.isOnline(context)) {
             complete.onCompleted(null, null);
@@ -138,9 +153,17 @@ public abstract class WebServiceSecurity extends WebServiceUtils {
 
                 JsonObject result = jsonResponse.getResult();
 
+                if(result!=null)
+                    Logger.d(TAG, "risposta " + result.toString());
+
+                if(!handleErrorCode) {
+                    complete.onCompleted(e, result);
+                    return;
+                }
+
                 if (handleErrorCode(context, result)) {
                     updateSecurity(context);
-                    secureOperationWithPath(context, path, params, complete, isSecurityEnabled);
+                    secureOperationWithPathGet(context, path, params, complete, isSecurityEnabled, true);
                 } else
                     complete.onCompleted(e, result);
 
@@ -151,27 +174,26 @@ public abstract class WebServiceSecurity extends WebServiceUtils {
 
     }
 
+
     private static boolean handleErrorCode(final Context context, JsonObject result) {
 
         boolean error = false;
         int error_code = 0;
 
         if (result != null) {
-            Logger.d(TAG, "risposta " + result.toString());
 
             error_code = putJsonInt(result.get("error_code"));
 
             error = error_code == 403;
         }
 
-        if (error_code == 1006)//utente inesistente
-        {
-            SecurityPreferences.removeAll(context, SecurityPreferences.namePreferences);
+        switch (error_code) {
+            case GENERIC_ERROR:
+                error=true;
+                break;
+            case CREATEDAT_TOO_NEXT:
 
-            //context.startActivity(new Intent(context, SplashScreen.class));
-            //((Activity) context).finish();
-        } else if (error_code == 1002) {
-            /*new AlertDialog.Builder(context)
+                /*new AlertDialog.Builder(context)
                     .setTitle(context.getString(R.string.ERRORE_ORARIO))
                     .setMessage(context.getString(R.string.ERRORE_ORARIO_MESSAGE))
                     .setNegativeButton(context.getString(R.string.ANNULLA), new DialogInterface.OnClickListener() {
@@ -188,6 +210,25 @@ public abstract class WebServiceSecurity extends WebServiceUtils {
 
                         }
                     }).show();*/
+                error=true;
+
+                break;
+
+            case CREATEDAT_TOO_PREVIOUS:
+                error=true;
+                break;
+
+            case DIGEST_ALREADY_IN_USE:
+                error=true;
+                break;
+
+            case WRONG_DIGEST:
+                error=true;
+                break;
+            case USER_DOES_NOT_EXIST:
+                error=true;
+                SecurityPreferences.removeAll(context, SecurityPreferences.namePreferences);
+                break;
         }
 
         return error;

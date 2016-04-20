@@ -32,6 +32,10 @@
             android:name=".RegistrazioneActivity"
             android:theme="@style/AppTheme.NoActionBar" />
 
+        <activity android:name=".TutorialActivity"
+            android:launchMode="singleTop"
+            android:theme="@style/TutorialTheme"/>
+
         <activity
             android:name="com.facebook.FacebookActivity"
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"

@@ -1,41 +1,47 @@
 package com.mr_apps.androidbase.tutorial;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.AppCompatButton;
 import android.view.View;
-import android.widget.Button;
+import android.widget.RelativeLayout;
 
 import com.mr_apps.androidbase.R;
-import com.mr_apps.androidbase.account.BaseLoginActivity;
-import com.mr_apps.androidbase.activity.AbstractBaseActivity;
+import com.mr_apps.androidbase.utils.ThemeUtils;
 import com.viewpagerindicator.CirclePageIndicator;
 
 /**
  * Created by denis on 19/04/16.
  */
-public class TutorialActivity extends AbstractBaseActivity {
+public abstract class BaseTutorialActivity extends AppCompatActivity {
 
     ViewPager pagerTutorial;
     CirclePageIndicator pageIndicator;
 
-    public static final String Field_Tutorials="Field_Tutorials";
     public static final String Field_SkipLogin="Field_SkipLogin";
 
-    Button login, skip;
+    AppCompatButton login, skip;
 
     ItemTutorial [] tutorials;
+
+    boolean skipLogin=true;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tutorial);
 
+        RelativeLayout background=(RelativeLayout) findViewById(R.id.background);
+
         pagerTutorial= (ViewPager) findViewById(R.id.tutorial_pager);
         pageIndicator= (CirclePageIndicator) findViewById(R.id.indicator);
 
-        tutorials= (ItemTutorial[]) getIntent().getSerializableExtra(Field_Tutorials);
+        pageIndicator.setRadius(getResources().getDimension(R.dimen.default_small_margin_or_padding));
+
+        tutorials= getTutorials();
 
         TutorialAdapter adapter=new TutorialAdapter(getSupportFragmentManager(), this, tutorials);
 
@@ -43,8 +49,8 @@ public class TutorialActivity extends AbstractBaseActivity {
 
         pageIndicator.setViewPager(pagerTutorial);
 
-        login= (Button) findViewById(R.id.login);
-        skip= (Button) findViewById(R.id.skip);
+        login= (AppCompatButton) findViewById(R.id.login);
+        skip= (AppCompatButton) findViewById(R.id.skip);
 
         pagerTutorial.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -65,8 +71,12 @@ public class TutorialActivity extends AbstractBaseActivity {
             }
         });
 
+        skipLogin=getIntent().getBooleanExtra(Field_SkipLogin, true);
+
         showHideButtons(0);
 
+        login.setBackgroundDrawable(ThemeUtils.getButtonSelector(ContextCompat.getColor(this, R.color.tutorial_button_color), this));
+        login.setTextColor(ContextCompat.getColor(this, R.color.tutorial_button_textcolor));
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -81,11 +91,15 @@ public class TutorialActivity extends AbstractBaseActivity {
             }
         });
 
+        styleViews(background, pagerTutorial, pageIndicator, skip, login);
+
     }
 
-    public void login() {
-        startActivity(new Intent(this, BaseLoginActivity.class));
-    }
+    public abstract void styleViews(View background, View pager, View indicator, View skip, View login);
+
+    public abstract void login();
+
+    public abstract ItemTutorial [] getTutorials();
 
     private void showHideButtons(int position) {
         if(position==tutorials.length-1) {
@@ -95,6 +109,9 @@ public class TutorialActivity extends AbstractBaseActivity {
             login.setVisibility(View.GONE);
             skip.setVisibility(View.VISIBLE);
         }
+
+        if(!skipLogin)
+            skip.setVisibility(View.GONE);
     }
 
 
