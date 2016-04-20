@@ -88,6 +88,9 @@ public abstract class WebServiceSecurity extends WebServiceUtils {
 
                 JsonObject result = jsonResponse.getResult();
 
+                if(result!=null)
+                    Logger.d(TAG, "risposta " + result.toString());
+
                 if(!handleErrorCode) {
                     complete.onCompleted(e, result);
                     return;
@@ -150,6 +153,9 @@ public abstract class WebServiceSecurity extends WebServiceUtils {
 
                 JsonObject result = jsonResponse.getResult();
 
+                if(result!=null)
+                    Logger.d(TAG, "risposta " + result.toString());
+
                 if(!handleErrorCode) {
                     complete.onCompleted(e, result);
                     return;
@@ -175,7 +181,6 @@ public abstract class WebServiceSecurity extends WebServiceUtils {
         int error_code = 0;
 
         if (result != null) {
-            Logger.d(TAG, "risposta " + result.toString());
 
             error_code = putJsonInt(result.get("error_code"));
 
