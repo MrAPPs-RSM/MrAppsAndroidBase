@@ -1,7 +1,5 @@
 package com.mr_apps.androidbaseproject;
 
-import android.view.View;
-
 import com.mr_apps.androidbase.account.BaseRegistrazioneActivity;
 import com.mr_apps.androidbase.account.ElementInputType;
 import com.mr_apps.androidbase.account.ElementName;

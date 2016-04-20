@@ -18,8 +18,6 @@ import android.widget.LinearLayout;
 import com.mr_apps.androidbase.R;
 import com.mr_apps.androidbase.activity.AbstractBaseActivity;
 import com.mr_apps.androidbase.custom_views.WarningTextInputLayout;
-import com.mr_apps.androidbase.utils.CustomDialog;
-import com.mr_apps.androidbase.utils.Utils;
 import com.mr_apps.androidbase.utils.ThemeUtils;
 
 import java.util.List;
