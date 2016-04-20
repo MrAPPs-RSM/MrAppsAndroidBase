@@ -4,19 +4,19 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatButton;
 import android.view.View;
 import android.widget.RelativeLayout;
 
 import com.mr_apps.androidbase.R;
-import com.mr_apps.androidbase.activity.AbstractBaseActivity;
 import com.mr_apps.androidbase.utils.ThemeUtils;
 import com.viewpagerindicator.CirclePageIndicator;
 
 /**
  * Created by denis on 19/04/16.
  */
-public abstract class BaseTutorialActivity extends AbstractBaseActivity {
+public abstract class BaseTutorialActivity extends AppCompatActivity {
 
     ViewPager pagerTutorial;
     CirclePageIndicator pageIndicator;
