@@ -1,6 +1,7 @@
 package com.mr_apps.androidbase.account;
 
 import android.content.Context;
+import android.os.Handler;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.widget.AppCompatTextView;
@@ -85,6 +86,31 @@ public class SignUpElement {
                             @Override
                             public void afterTextChanged(Editable s) {
                                 tilElement.setErrorEnabled(name.equals(ElementName.EMAIL) ? !Utils.isValidEmail(s) && s.length() > 0 : s.length() < 6 && s.length() > 0);
+                            }
+                        });
+
+                        element.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                new Handler().postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        tilElement.setErrorEnabled(tilElement.isErrorEnabled());
+                                    }
+                                }, 100);
+                            }
+                        });
+
+                        element.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+                            @Override
+                            public void onFocusChange(View v, boolean hasFocus) {
+                                if (hasFocus)
+                                    new Handler().postDelayed(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            tilElement.setErrorEnabled(tilElement.isErrorEnabled());
+                                        }
+                                    }, 100);
                             }
                         });
                     }

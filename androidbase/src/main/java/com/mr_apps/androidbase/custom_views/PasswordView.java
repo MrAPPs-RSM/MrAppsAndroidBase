@@ -18,6 +18,8 @@ import android.widget.EditText;
 
 import com.mr_apps.androidbase.R;
 
+import java.util.Vector;
+
 /**
  * Created by mattia on 08/04/2016.
  *
@@ -61,6 +63,7 @@ public class PasswordView extends TextInputEditText {
                 a.recycle();
             }
         }
+
 
         // Make sure to mutate so that if there are multiple password fields, they can have
         // different visibilities.

@@ -184,18 +184,19 @@ public abstract class LocationActivity extends PermissionManagerActivity impleme
     }
 
     protected void startLocationUpdates() throws SecurityException {
+        if (isLocationEnabled()) {
+            if (mGoogleApiClient == null)
+                return;
 
-        if (mGoogleApiClient == null)
-            return;
+            if (!mGoogleApiClient.isConnected())
+                return;
 
-        if (!mGoogleApiClient.isConnected())
-            return;
+            if (!checkPermission(Manifest.permission.ACCESS_FINE_LOCATION))
+                return;
 
-        if (!checkPermission(Manifest.permission.ACCESS_FINE_LOCATION))
-            return;
-
-        LocationServices.FusedLocationApi.requestLocationUpdates(
-                mGoogleApiClient, mLocationRequest, this);
+            LocationServices.FusedLocationApi.requestLocationUpdates(
+                    mGoogleApiClient, mLocationRequest, this);
+        }
     }
 
     protected void stopLocationUpdates() {
