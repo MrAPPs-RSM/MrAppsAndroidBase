@@ -46,4 +46,12 @@ public class RegistrazioneActivity extends BaseRegistrazioneActivity {
     protected void privacyPolicy() {
         CustomDialog.showOkDialog(this, "Privacy policy", "cosa fai mi spii? Occhio alla mia privacy");
     }
+
+    @Override
+    public void onSpanClicked(int index) {
+        if (index==0)
+            termsConditions();
+        else
+            privacyPolicy();
+    }
 }

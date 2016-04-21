@@ -95,7 +95,7 @@ public abstract class BaseTutorialActivity extends AppCompatActivity {
 
     }
 
-    public abstract void styleViews(View background, View pager, View indicator, View skip, View login);
+    public abstract void styleViews(RelativeLayout background, ViewPager pager, CirclePageIndicator indicator, AppCompatButton skip, AppCompatButton login);
 
     public abstract void login();
 
