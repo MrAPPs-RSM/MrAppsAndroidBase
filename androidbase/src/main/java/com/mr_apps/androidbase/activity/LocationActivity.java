@@ -115,7 +115,7 @@ public abstract class LocationActivity extends PermissionManagerActivity impleme
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (!isGpsActivated()) {
+        if (!isGpsActivated() && isLocationEnabled()) {
             buildAlertMessageNoGps();
         }
     }

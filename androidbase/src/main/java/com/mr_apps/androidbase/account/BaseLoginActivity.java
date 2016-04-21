@@ -1,6 +1,7 @@
 package com.mr_apps.androidbase.account;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
@@ -29,7 +30,6 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.Scopes;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.mr_apps.androidbase.R;
 import com.mr_apps.androidbase.activity.AbstractBaseActivity;
@@ -37,13 +37,12 @@ import com.mr_apps.androidbase.custom_views.PasswordView;
 import com.mr_apps.androidbase.custom_views.WarningTextInputLayout;
 import com.mr_apps.androidbase.utils.DrawableUtils;
 import com.mr_apps.androidbase.utils.Logger;
-import com.mr_apps.androidbase.utils.ThemeUtils;
 import com.mr_apps.androidbase.utils.Utils;
 
 import org.json.JSONObject;
 
 /**
- * Created by denis on 07/04/16.
+ * Created by Mattia Ruggiero on 07/04/16.
  */
 public abstract class BaseLoginActivity extends AbstractBaseActivity implements
         GoogleApiClient.OnConnectionFailedListener, View.OnClickListener {
@@ -239,8 +238,7 @@ public abstract class BaseLoginActivity extends AbstractBaseActivity implements
             googleSignIn.post(new Runnable() //Serve purtroppo per rendere effettive le modifiche ai compound drawable nei device con API < 21
             {
                 @Override
-                public void run()
-                {
+                public void run() {
                     googleSignIn.setCompoundDrawablesWithIntrinsicBounds(drawables[0], null, drawables[2], null);
                 }
             });
