@@ -13,9 +13,9 @@ import android.widget.LinearLayout;
 
 import com.mr_apps.androidbase.R;
 import com.mr_apps.androidbase.activity.AbstractBaseActivity;
-import com.mr_apps.androidbase.utils.TextViewUtils;
 import com.mr_apps.androidbase.custom_views.WarningTextInputLayout;
-import com.mr_apps.androidbase.utils.ThemeUtils;
+import com.mr_apps.androidbase.utils.DrawableUtils;
+import com.mr_apps.androidbase.utils.TextViewUtils;
 
 import java.util.List;
 
@@ -46,7 +46,7 @@ public abstract class BaseRegistrazioneActivity extends AbstractBaseActivity imp
         termsConditions.setText(TextViewUtils.getSpannableString(this, Color.BLACK, getString(R.string.termini_condizioni), getString(R.string.termini_condizioni_2), getString(R.string.termini_condizioni_4)));//getTermsConditionSpannableString());
         termsConditions.setMovementMethod(LinkMovementMethod.getInstance());
 
-        signUp.setBackgroundDrawable(ThemeUtils.getButtonSelector(ContextCompat.getColor(this, R.color.colorAccent), this));
+        signUp.setBackgroundDrawable(DrawableUtils.getButtonSelector(ContextCompat.getColor(this, R.color.colorAccent), this));
 
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override

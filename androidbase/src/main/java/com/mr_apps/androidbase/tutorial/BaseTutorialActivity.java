@@ -1,5 +1,6 @@
 package com.mr_apps.androidbase.tutorial;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
@@ -10,7 +11,7 @@ import android.view.View;
 import android.widget.RelativeLayout;
 
 import com.mr_apps.androidbase.R;
-import com.mr_apps.androidbase.utils.ThemeUtils;
+import com.mr_apps.androidbase.utils.DrawableUtils;
 import com.viewpagerindicator.CirclePageIndicator;
 
 /**
@@ -52,6 +53,10 @@ public abstract class BaseTutorialActivity extends AppCompatActivity {
         login= (AppCompatButton) findViewById(R.id.login);
         skip= (AppCompatButton) findViewById(R.id.skip);
 
+        Drawable d = DrawableUtils.getVectorDrawable(this, R.drawable.ic_chevron_right_white_18dp);
+
+        skip.setCompoundDrawablesWithIntrinsicBounds(null, null, d, null);
+
         pagerTutorial.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -75,7 +80,7 @@ public abstract class BaseTutorialActivity extends AppCompatActivity {
 
         showHideButtons(0);
 
-        login.setBackgroundDrawable(ThemeUtils.getButtonSelector(ContextCompat.getColor(this, R.color.tutorial_button_color), this));
+        login.setBackgroundDrawable(DrawableUtils.getButtonSelector(ContextCompat.getColor(this, R.color.tutorial_button_color), this));
         login.setTextColor(ContextCompat.getColor(this, R.color.tutorial_button_textcolor));
         login.setOnClickListener(new View.OnClickListener() {
             @Override
