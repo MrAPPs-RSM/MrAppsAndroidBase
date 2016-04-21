@@ -3,13 +3,21 @@ package com.mr_apps.androidbase.utils;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.StateListDrawable;
+import android.os.Build;
+import android.support.graphics.drawable.VectorDrawableCompat;
+import android.support.v4.content.ContextCompat;
 
 /**
  * Created by denis on 20/04/16.
  */
-public class ThemeUtils {
+public class DrawableUtils {
+
+    public static Drawable getVectorDrawable(Context context, int resId) {
+        return Build.VERSION.SDK_INT >= 21 ? ContextCompat.getDrawable(context, resId) : VectorDrawableCompat.create(context.getResources(), resId, null);
+    }
 
     public static StateListDrawable getSelector(String color)
     {

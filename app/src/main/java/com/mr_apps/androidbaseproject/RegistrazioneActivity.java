@@ -48,6 +48,14 @@ public class RegistrazioneActivity extends BaseRegistrazioneActivity {
     }
 
     @Override
+    public void onSpanClicked(int index) {
+        if (index==0)
+            termsConditions();
+        else
+            privacyPolicy();
+    }
+
+    @Override
     protected void onSignupSuccess() {
         CustomDialog.showOkDialog(this, "Dunque ti sei registrato", "Complimenti. Vuoi un biscottino?");
     }

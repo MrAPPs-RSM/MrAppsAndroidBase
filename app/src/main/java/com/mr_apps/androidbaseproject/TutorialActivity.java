@@ -1,18 +1,22 @@
 package com.mr_apps.androidbaseproject;
 
 import android.content.Intent;
-import android.view.View;
+import android.support.v4.view.ViewPager;
+import android.support.v7.widget.AppCompatButton;
+import android.widget.RelativeLayout;
 
 import com.mr_apps.androidbase.tutorial.BaseTutorialActivity;
 import com.mr_apps.androidbase.tutorial.ItemTutorial;
+import com.viewpagerindicator.CirclePageIndicator;
 
 /**
  * Created by denis on 20/04/16.
  */
 public class TutorialActivity extends BaseTutorialActivity {
 
+
     @Override
-    public void styleViews(View background, View pager, View indicator, View skip, View login) {
+    public void styleViews(RelativeLayout background, ViewPager pager, CirclePageIndicator indicator, AppCompatButton skip, AppCompatButton login) {
 
     }
 
