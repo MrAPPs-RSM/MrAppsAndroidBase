@@ -1,29 +1,4 @@
 apply plugin: 'com.android.library'
-
-ext {
-    bintrayRepo = 'maven'
-    bintrayName = 'android-base-sdk'
-
-    publishedGroupId = 'com.mr_apps.androidbase'
-    libraryName = 'AndroidBaseSdk'
-    artifact = 'android-base-sdk'
-
-    libraryDescription = 'Android Base SDK of Mr APPs'
-
-    siteUrl = 'https://github.com/MrAPPs-RSM/MrAppsAndroidBase'
-    gitUrl = 'https://github.com/MrAPPs-RSM/MrAppsAndroidBase.git'
-
-    libraryVersion = '1.0'
-
-    developerId = 'denisbronx'
-    developerName = 'Denis Brandi'
-    developerEmail = 'dnsbrnd@gmail.com'
-
-    licenseName = 'The Apache Software License, Version 2.0'
-    licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-    allLicenses = ["Apache-2.0"]
-}
-
 apply plugin: 'realm-android'
 
 android {
@@ -43,6 +18,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+}
+
+repositories {
+    jcenter()
 }
 
 dependencies {
