@@ -19,4 +19,29 @@ public class Logger {
             Log.d(Tag, msg);
     }
 
+    public static void i(String Tag, String msg) {
+        if (!hideLog)
+            Log.i(Tag, msg);
+    }
+
+    public static void e(String Tag, String msg) {
+        if (!hideLog)
+            Log.e(Tag, msg);
+    }
+
+    public static void v(String Tag, String msg) {
+        if (!hideLog)
+            Log.v(Tag, msg);
+    }
+
+    public static void w(String Tag, String msg) {
+        if (!hideLog)
+            Log.w(Tag, msg);
+    }
+
+    public static void wtf(String Tag, String msg) {
+        if (!hideLog)
+            Log.wtf(Tag, msg);
+    }
+
 }

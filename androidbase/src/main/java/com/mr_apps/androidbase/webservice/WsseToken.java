@@ -49,7 +49,7 @@ public class WsseToken {
         Random random = new Random();
         int rand = random.nextInt(999999 - 1) + 1;
 
-        String nonce = WebServiceSecurity.MD5(String.valueOf(rand) + String.valueOf(ts));
+        String nonce = BaseWebServiceSecurity.MD5(String.valueOf(rand) + String.valueOf(ts));
 
         return nonce;
     }
