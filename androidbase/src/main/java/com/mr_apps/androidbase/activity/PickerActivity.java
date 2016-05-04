@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.ExifInterface;
+import android.media.ThumbnailUtils;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -16,7 +17,6 @@ import android.support.v7.app.AlertDialog;
 import com.mr_apps.androidbase.R;
 import com.mr_apps.androidbase.utils.FileUtils;
 import com.mr_apps.androidbase.utils.FileUtils.ElementType;
-
 
 import java.io.File;
 import java.util.ArrayList;
@@ -200,10 +200,10 @@ public abstract class PickerActivity extends LocationActivity {
         switch (requestCode) {
 
             case actionTakeImage:
-                handleTempUri(imageUri, true);
+                handleTempUri(imageUri);
                 break;
             case actionRecordVideo:
-                handleTempUri(videoUri, false);
+                handleVideoTempUri(videoUri);
                 break;
 
             case actionPickImage:
@@ -259,8 +259,6 @@ public abstract class PickerActivity extends LocationActivity {
 
     private static final String file_uri1 = "image_uri";
     private static final String file_uri2 = "video_uri";
-    private static final String date_uri1 = "date_uri1";
-    private static final String date_uri2 = "date_uri2";
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
@@ -282,14 +280,14 @@ public abstract class PickerActivity extends LocationActivity {
         videoUri = savedInstanceState.getParcelable(file_uri2);
 
         if(imageUri!=null)
-            handleTempUri(imageUri, true);
+            handleTempUri(imageUri);
 
         if(videoUri!=null)
-            handleTempUri(videoUri, false);
+            handleVideoTempUri(videoUri);
 
     }
 
-    private void handleTempUri(Uri tempUri, boolean isImage) {
+    /*private void handleTempUri(Uri tempUri, boolean isImage) {
 
         if (tempUri == null)
             return;
@@ -332,6 +330,49 @@ public abstract class PickerActivity extends LocationActivity {
 
         pickerResult(path, type, bitmap);
 
+    }*/
+
+    private void handleTempUri(Uri tempUri)
+    {
+        //photo = null;//(Bitmap) data.getExtras().get("data");
+        try {
+            Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), tempUri);
+
+            ExifInterface exif = new ExifInterface(tempUri.getPath());
+            int orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_UNDEFINED);
+
+            Bitmap bitmap1=FileUtils.rotateBitmap(bitmap, orientation);
+
+            if(bitmap1!=null)
+                bitmap = bitmap1;
+
+            String path=FileUtils.getRealPath(this, tempUri);
+            ElementType type=ElementType.img;
+
+            pickerResult(path, type, bitmap);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void handleVideoTempUri(Uri videoTempUri) {
+        try {
+            Uri filmedVideo = videoTempUri;
+
+            final String path = FileUtils.getRealPath(this, filmedVideo);
+
+            final ElementType type = ElementType.vid;
+
+            Bitmap thumb = ThumbnailUtils.createVideoThumbnail(path,
+                    MediaStore.Images.Thumbnails.MINI_KIND);
+
+            pickerResult(path, type, thumb);
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }

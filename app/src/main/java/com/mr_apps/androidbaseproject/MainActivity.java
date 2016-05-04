@@ -12,15 +12,40 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.mr_apps.androidbase.activity.AbstractBaseActivity;
+import com.mr_apps.androidbase.gallery.GalleryActivity;
 import com.mr_apps.androidbase.utils.FileUtils;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AbstractBaseActivity {
+
+    ImageView preview;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setToolbar();
+
+        preview=((ImageView) findViewById(R.id.image));
+
+        preview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if(preview.getDrawable()!=null)
+                {
+                    ArrayList<String> paths=new ArrayList<>();
+
+                    paths.add(path);
+
+                    Intent intent=new Intent(MainActivity.this, GalleryActivity.class);
+                    intent.putStringArrayListExtra(GalleryActivity.Field_ImagesPath, paths);
+                    startActivity(intent);
+                }
+
+            }
+        });
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -68,15 +93,19 @@ public class MainActivity extends AbstractBaseActivity {
 
     }
 
+    String path;
+
     @Override
     public void pickerResult(final String path, FileUtils.ElementType elementType, Bitmap bitmap) {
         super.pickerResult(path, elementType, bitmap);
+
+        this.path=path;
 
         if (path == null || elementType == null)
             return;
 
         if (bitmap != null)
-            ((ImageView) findViewById(R.id.image)).setImageBitmap(FileUtils.scaleBitmap(bitmap));
+            preview.setImageBitmap(FileUtils.scaleBitmap(bitmap));
     }
 
     @Override
