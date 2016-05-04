@@ -23,9 +23,9 @@ import java.util.concurrent.TimeUnit;
 /**
  * Created by denis on 03/02/16
  */
-public abstract class WebServiceSecurity extends WebServiceUtils {
+public abstract class BaseWebServiceSecurity extends WebServiceUtils {
 
-    private static final String TAG = "WebServiceSecurity";
+    private static final String TAG = "BaseWebServiceSecurity";
 
     private static String baseUrl = "http://beta.json-generator.com/api/json/get/";
 
@@ -36,14 +36,24 @@ public abstract class WebServiceSecurity extends WebServiceUtils {
     public static final int WRONG_DIGEST=1005;
     public static final int USER_DOES_NOT_EXIST=1006;
 
-    /*
-    * da settare all'oncreate dell applicazione
-    */
-    public static void setBaseUrl(String baseUrl) {
-        WebServiceSecurity.baseUrl = baseUrl;
+    private static BaseWebServiceSecurity instance;
+
+    public static BaseWebServiceSecurity getInstance(BaseWebServiceSecurity implementation) {
+
+        if(instance==null)
+            instance=implementation;
+
+        return instance;
     }
 
-    public static ResponseFuture secureOperationWithPath(final Context context, final String path, final HashMap<String, List<String>> params, final FutureCallback<JsonObject> complete, final boolean isSecurityEnabled, final boolean handleErrorCode) {
+    /*
+        * da settare all'oncreate dell applicazione
+        */
+    public static void setBaseUrl(String baseUrl) {
+        BaseWebServiceSecurity.baseUrl = baseUrl;
+    }
+
+    public ResponseFuture baseOperationWithPath(final Context context, final String path, final HashMap<String, List<String>> params, final FutureCallback<JsonObject> complete, final boolean isSecurityEnabled, final boolean handleErrorCode) {
 
         if (!Utils.isOnline(context)) {
             complete.onCompleted(null, null);
@@ -98,7 +108,7 @@ public abstract class WebServiceSecurity extends WebServiceUtils {
 
                 if (handleErrorCode(context, result)) {
                     updateSecurity(context);
-                    secureOperationWithPath(context, path, params, complete, isSecurityEnabled, true);
+                    baseOperationWithPath(context, path, params, complete, isSecurityEnabled, true);
                 } else
                     complete.onCompleted(e, result);
 
@@ -109,7 +119,7 @@ public abstract class WebServiceSecurity extends WebServiceUtils {
 
     }
 
-    public static ResponseFuture secureOperationWithPathGet(final Context context, final String path, final HashMap<String, List<String>> params, final FutureCallback<JsonObject> complete, final boolean isSecurityEnabled, final boolean handleErrorCode) {
+    public ResponseFuture baseOperationWithPathGet(final Context context, final String path, final HashMap<String, List<String>> params, final FutureCallback<JsonObject> complete, final boolean isSecurityEnabled, final boolean handleErrorCode) {
 
         if (!Utils.isOnline(context)) {
             complete.onCompleted(null, null);
@@ -163,7 +173,7 @@ public abstract class WebServiceSecurity extends WebServiceUtils {
 
                 if (handleErrorCode(context, result)) {
                     updateSecurity(context);
-                    secureOperationWithPathGet(context, path, params, complete, isSecurityEnabled, true);
+                    baseOperationWithPathGet(context, path, params, complete, isSecurityEnabled, true);
                 } else
                     complete.onCompleted(e, result);
 
@@ -174,69 +184,22 @@ public abstract class WebServiceSecurity extends WebServiceUtils {
 
     }
 
+    public boolean handleErrorCode(final Context context, JsonObject result) {
+        return false;
+    }
 
-    private static boolean handleErrorCode(final Context context, JsonObject result) {
-
-        boolean error = false;
-        int error_code = 0;
-
-        if (result != null) {
-
-            error_code = putJsonInt(result.get("error_code"));
-
-            error = error_code == 403;
-        }
-
-        switch (error_code) {
-            case GENERIC_ERROR:
-                error=true;
-                break;
-            case CREATEDAT_TOO_NEXT:
-
-                /*new AlertDialog.Builder(context)
-                    .setTitle(context.getString(R.string.ERRORE_ORARIO))
-                    .setMessage(context.getString(R.string.ERRORE_ORARIO_MESSAGE))
-                    .setNegativeButton(context.getString(R.string.ANNULLA), new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-
-                        }
-                    })
-                    .setPositiveButton(context.getString(R.string.IMPOSTAZIONI), new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-
-                            context.startActivity(new Intent(android.provider.Settings.ACTION_SETTINGS));
-
-                        }
-                    }).show();*/
-                error=true;
-
-                break;
-
-            case CREATEDAT_TOO_PREVIOUS:
-                error=true;
-                break;
-
-            case DIGEST_ALREADY_IN_USE:
-                error=true;
-                break;
-
-            case WRONG_DIGEST:
-                error=true;
-                break;
-            case USER_DOES_NOT_EXIST:
-                error=true;
-                SecurityPreferences.removeAll(context, SecurityPreferences.namePreferences);
-                break;
-        }
-
-        return error;
-
+    public void updateSecurity(Context context) {
+        WsseToken wsseToken = new WsseToken(context);
+        SharedPreferences preferences = context.getSharedPreferences(SecurityPreferences.namePreferences, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString(SecurityPreferences.authorization, wsseToken.getAuthorizationHeader());
+        editor.putLong(SecurityPreferences.header_date, (new Date()).getTime());
+        editor.putString(SecurityPreferences.header, wsseToken.getWsseHeader());
+        editor.commit();
     }
 
 
-    public static Map<String, List<String>> getSecurity(Context context) {
+    public Map<String, List<String>> getSecurity(Context context) {
 
         long diffInMinutes = diffInMinutes((new Date()).getTime(), SecurityPreferences.getHeader_date(context));
 
@@ -254,20 +217,10 @@ public abstract class WebServiceSecurity extends WebServiceUtils {
         return map;
     }
 
-    private static long diffInMinutes(long date1, long date2) {
+    public static long diffInMinutes(long date1, long date2) {
         long diffInMillisec = date1 - date2;
 
         return TimeUnit.MILLISECONDS.toMinutes(diffInMillisec);
-    }
-
-    private static void updateSecurity(Context context) {
-        WsseToken wsseToken = new WsseToken(context);
-        SharedPreferences preferences = context.getSharedPreferences(SecurityPreferences.namePreferences, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putString(SecurityPreferences.authorization, wsseToken.getAuthorizationHeader());
-        editor.putLong(SecurityPreferences.header_date, (new Date()).getTime());
-        editor.putString(SecurityPreferences.header, wsseToken.getWsseHeader());
-        editor.commit();
     }
 
     public static String composeUrl(String path) {

@@ -129,7 +129,7 @@ public abstract class LocationActivity extends PermissionManagerActivity impleme
         createGoogleApiClient();
     }
 
-    private void buildAlertMessageNoGps() {
+    public void buildAlertMessageNoGps() {
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(getString(R.string.Avviso_gps))
                 .setCancelable(false)

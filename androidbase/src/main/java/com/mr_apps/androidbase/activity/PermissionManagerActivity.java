@@ -111,13 +111,6 @@ public abstract class PermissionManagerActivity extends AppCompatActivity {
                 MY_PERMISSIONS_REQUEST_CODE);
     }
 
-    /*public interface PermissionCallback {
-        void permissionDenied();
-    }*/
-
-    public void permissionDenied(String permission) {
-    }
-
     private void userMustAcceptPermission(String permission, int titleId, int messageId) {
         userMustAcceptPermission(permission, getString(titleId), getString(messageId));
     }
@@ -130,7 +123,7 @@ public abstract class PermissionManagerActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
-                        permissionDenied(permission);
+                        goToPermissionCallback(getPermissionRequestByPermissionName(permission), false);
                         //if (callback != null)
                         //callback.permissionDenied();
                     }
@@ -150,6 +143,11 @@ public abstract class PermissionManagerActivity extends AppCompatActivity {
         boolean granted = grantResults.length > 0
                 && grantResults[0] == PackageManager.PERMISSION_GRANTED;
 
+        goToPermissionCallback(requestCode, granted);
+
+    }
+
+    private void goToPermissionCallback(int requestCode, boolean granted) {
         switch (requestCode) {
             case WRITE_STORAGE_PERMISSION_REQUEST: {
                 writeStoragePermissionResult(granted);

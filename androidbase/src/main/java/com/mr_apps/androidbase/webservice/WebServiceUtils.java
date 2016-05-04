@@ -1,18 +1,7 @@
 package com.mr_apps.androidbase.webservice;
 
-import android.content.Context;
-import android.content.SharedPreferences;
-
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import com.mr_apps.androidbase.preferences.SecurityPreferences;
-
-import java.util.Arrays;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.concurrent.TimeUnit;
 
 /**
  * Created by denis on 02/02/16
@@ -20,38 +9,6 @@ import java.util.concurrent.TimeUnit;
 public abstract class WebServiceUtils {
 
     private static final String TAG = "WebServiceUtils";
-
-    public static Map<String, List<String>> getSecurity(Context context) {
-
-        long diffInMinutes = diffInMinutes((new Date()).getTime(), SecurityPreferences.getHeader_date(context));
-
-        if (SecurityPreferences.getHeader(context).length() == 0 || diffInMinutes > 4) {
-            updateSecurity(context);
-        }
-
-        Map<String, List<String>> map = new HashMap<>();
-
-        map.put(WsseToken.HEADER_AUTHORIZATION, Arrays.asList(SecurityPreferences.getAuthorization(context)));
-        map.put(WsseToken.HEADER_WSSE, Arrays.asList(SecurityPreferences.getHeader(context)));
-
-        return map;
-    }
-
-    private static void updateSecurity(Context context) {
-        WsseToken wsseToken = new WsseToken(context);
-        SharedPreferences preferences = context.getSharedPreferences(SecurityPreferences.namePreferences, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putString(SecurityPreferences.authorization, wsseToken.getAuthorizationHeader());
-        editor.putLong(SecurityPreferences.header_date, (new Date()).getTime());
-        editor.putString(SecurityPreferences.header, wsseToken.getWsseHeader());
-        editor.commit();
-    }
-
-    private static long diffInMinutes(long date1, long date2) {
-        long diffInMillisec = date1 - date2;
-
-        return TimeUnit.MILLISECONDS.toMinutes(diffInMillisec);
-    }
 
     public static JsonObject putJsonObject(JsonElement object) {
         if (object == null || object.isJsonNull() || !object.isJsonObject())
