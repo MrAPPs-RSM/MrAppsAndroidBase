@@ -17,6 +17,7 @@ import android.os.Environment;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.support.design.widget.Snackbar;
+import android.util.Log;
 import android.widget.Toast;
 
 import java.io.ByteArrayOutputStream;
@@ -134,6 +135,38 @@ public class FileUtils {
         }
 
         return o;
+    }
+
+    public static Bitmap scaleBitmap(Bitmap bm) {
+        return scaleBitmap(bm, 1280, 720);
+    }
+
+    public static Bitmap scaleBitmap(Bitmap bm, float maxWidth, float maxHeight) {
+        float width = bm.getWidth();
+        float height = bm.getHeight();
+
+        Log.v("Pictures", "Width and height are " + width + "--" + height);
+
+        if (width > height) {
+            // landscape
+            float ratio = (float) width / maxWidth;
+            width = maxWidth;
+            height = (int)(height / ratio);
+        } else if (height > width) {
+            // portrait
+            float ratio = (float) height / maxHeight;
+            height = maxHeight;
+            width = (int)(width / ratio);
+        } else {
+            // square
+            height = maxWidth;
+            width = maxWidth;
+        }
+
+        Log.v("Pictures", "after scaling Width and height are " + width + "--" + height);
+
+        bm = Bitmap.createScaledBitmap(bm, (int) width, (int) height, true);
+        return bm;
     }
 
     public static Bitmap rotateBitmap(Bitmap bitmap, int orientation) {
