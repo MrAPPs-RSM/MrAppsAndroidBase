@@ -68,13 +68,15 @@ public class FullImageAdapter extends PagerAdapter{
 
         if(placeholderResId!=-1)
             request.error(placeholderResId).placeholder(placeholderResId);
+        
 
         request.into(new BitmapImageViewTarget(imageView) {
             @Override
             protected void setResource(Bitmap resource) {
-                imageView.setImageBitmap(FileUtils.scaleBitmap(resource));
-                mAttacher.update();
-                super.setResource(resource);
+                if(resource!=null) {
+                    imageView.setImageBitmap(FileUtils.scaleBitmap(resource));
+                    mAttacher.update();
+                }
             }
         });
 

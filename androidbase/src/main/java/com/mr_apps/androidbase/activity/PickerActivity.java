@@ -341,7 +341,9 @@ public abstract class PickerActivity extends LocationActivity {
             ExifInterface exif = new ExifInterface(tempUri.getPath());
             int orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_UNDEFINED);
 
-            Bitmap bitmap1=FileUtils.rotateBitmap(bitmap, orientation);
+            Bitmap resizedBitmap=FileUtils.scaleBitmap(bitmap);
+
+            Bitmap bitmap1=FileUtils.rotateBitmap(resizedBitmap, orientation);
 
             if(bitmap1!=null)
                 bitmap = bitmap1;
