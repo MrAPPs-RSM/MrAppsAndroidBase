@@ -6,19 +6,13 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.mr_apps.androidbase.activity.AbstractBaseActivity;
 import com.mr_apps.androidbase.utils.FileUtils;
-
-import java.io.File;
-import java.io.IOException;
 
 public class MainActivity extends AbstractBaseActivity {
 
@@ -82,7 +76,7 @@ public class MainActivity extends AbstractBaseActivity {
             return;
 
         if (bitmap != null)
-            ((ImageView) findViewById(R.id.image)).setImageBitmap(bitmap);
+            ((ImageView) findViewById(R.id.image)).setImageBitmap(FileUtils.scaleBitmap(bitmap));
     }
 
     @Override
