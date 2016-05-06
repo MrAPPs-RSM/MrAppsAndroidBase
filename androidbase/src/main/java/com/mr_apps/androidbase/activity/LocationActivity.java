@@ -17,7 +17,6 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -41,7 +40,6 @@ public abstract class LocationActivity extends PermissionManagerActivity impleme
     public LocationRequest mLocationRequest;
     public GoogleApiClient mGoogleApiClient;
     public String location;
-    public GoogleMap googleMap;
     public LatLng latLng;
     public double altitude;
 
@@ -56,12 +54,28 @@ public abstract class LocationActivity extends PermissionManagerActivity impleme
                 .build();
 
         mLocationRequest = new LocationRequest();
-        mLocationRequest.setInterval(60000);
-        mLocationRequest.setFastestInterval(30000);
-        mLocationRequest.setSmallestDisplacement(100);
-        mLocationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
+        mLocationRequest.setInterval(getInterval());
+        mLocationRequest.setFastestInterval(getFastestInterval());
+        mLocationRequest.setSmallestDisplacement(getSmallestDisplacement());
+        mLocationRequest.setPriority(getPriority());
 
         mGoogleApiClient.connect();
+    }
+
+    public long getInterval() {
+        return 60000;
+    }
+
+    public long getFastestInterval() {
+        return 30000;
+    }
+
+    public float getSmallestDisplacement() {
+        return 100;
+    }
+
+    public int getPriority() {
+        return LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY;
     }
 
     @Override
@@ -304,41 +318,6 @@ public abstract class LocationActivity extends PermissionManagerActivity impleme
 
                     }
                 });
-
-        /*String address = String
-                .format(Locale.ENGLISH, "http://maps.googleapis.com/maps/api/geocode/json?latlng=%1$f,%2$f&sensor=true&language="
-                        + Locale.getDefault().getCountry(), lat, lng);
-        HttpGet httpGet = new HttpGet(address);
-        HttpClient client = new DefaultHttpClient();
-        HttpResponse response;
-        StringBuilder stringBuilder = new StringBuilder();
-
-        List<Address> retList = null;
-
-        response = client.execute(httpGet);
-        HttpEntity entity = response.getEntity();
-        InputStream stream = entity.getContent();
-        int b;
-        while ((b = stream.read()) != -1) {
-            stringBuilder.append((char) b);
-        }
-
-        JSONObject jsonObject = new JSONObject(stringBuilder.toString());
-
-        retList = new ArrayList<Address>();
-
-        if ("OK".equalsIgnoreCase(jsonObject.getString("status"))) {
-            JSONArray results = jsonObject.getJSONArray("results");
-            for (int i = 0; i < results.length(); i++) {
-                JSONObject result = results.getJSONObject(i);
-                String indiStr = result.getString("formatted_address");
-                Address addr = new Address(Locale.getDefault());
-                addr.setAddressLine(0, indiStr);
-                retList.add(addr);
-            }
-        }
-
-        return retList;*/
     }
 
 }
