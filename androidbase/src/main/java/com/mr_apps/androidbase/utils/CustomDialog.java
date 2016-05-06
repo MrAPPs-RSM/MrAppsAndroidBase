@@ -17,7 +17,10 @@ import com.mr_apps.androidbase.R;
 
 
 /**
- * Created by denis on 04/02/16
+ * Class that contains a lot of useful methods to create standard dialogs
+ *
+ * @author Mattia Ruggiero
+ * @author Denis Brandi
  */
 public class CustomDialog {
 
@@ -29,6 +32,14 @@ public class CustomDialog {
         void onPositive();
     }
 
+    /**
+     * Shows a standard dialog with only a ok button
+     *
+     * @param context  the context
+     * @param title    the title that should be displayed at the top of the dialog
+     * @param message  the message of the dialog
+     * @param callback the callback to determine the actions that should be done on "Ok" tap
+     */
     public static void showOkDialog(Context context, String title, String message, final StandardDialogCallback callback) {
 
         new AlertDialog.Builder(context)
@@ -44,16 +55,38 @@ public class CustomDialog {
                 .show();
     }
 
+    /**
+     * Shows a standard dialog with only a ok button
+     *
+     * @param context      the context
+     * @param titleResId   the string's resource id of the title that should be displayed at the top of the dialog
+     * @param messageResId the string's resource id of the message of the dialog
+     * @param callback     the callback to determine the actions that should be done on "Ok" tap
+     */
     public static void showOkDialog(Context context, int titleResId, int messageResId, final StandardDialogCallback callback) {
 
-        showOkDialog(context, titleResId==0?null:context.getString(titleResId), messageResId==0?null:context.getString(messageResId), callback);
+        showOkDialog(context, titleResId == 0 ? null : context.getString(titleResId), messageResId == 0 ? null : context.getString(messageResId), callback);
     }
 
+    /**
+     * Shows a standard dialog with only a ok button with the default "Ok" tap's action
+     *
+     * @param context      the context
+     * @param titleResId   the string's resource id of the title that should be displayed at the top of the dialog
+     * @param messageResId the string's resource id of the message of the dialog
+     */
     public static void showOkDialog(Context context, int titleResId, int messageResId) {
 
-        showOkDialog(context, titleResId==0?null:context.getString(titleResId), messageResId==0?null:context.getString(messageResId));
+        showOkDialog(context, titleResId == 0 ? null : context.getString(titleResId), messageResId == 0 ? null : context.getString(messageResId));
     }
 
+    /**
+     * Shows a standard dialog with only a ok button with the default "Ok" tap's action
+     *
+     * @param context the context
+     * @param title   the title that should be displayed at the top of the dialog
+     * @param message the message of the dialog
+     */
     public static void showOkDialog(Context context, String title, String message) {
 
         new AlertDialog.Builder(context)
@@ -69,6 +102,14 @@ public class CustomDialog {
                 .show();
     }
 
+    /**
+     * Shows a dialog with two possible actions, "yes" or "no"
+     *
+     * @param context  the context
+     * @param title    the title that should be displayed at the top of the dialog
+     * @param message  the message of the dialog
+     * @param callback the callback to determine the actions that should be done on "yes" tap (on "no" tap there's a simple dialog dismiss)
+     */
     public static void showYesNoDialog(Context context, String title, String message, final StandardDialogCallback callback) {
         new AlertDialog.Builder(context)
                 .setTitle(title)
@@ -89,14 +130,46 @@ public class CustomDialog {
                 .show();
     }
 
+    /**
+     * Shows a dialog with two possible actions, "yes" or "no"
+     *
+     * @param context      the context
+     * @param titleResId   the string's resource id of the title that should be displayed at the top of the dialog
+     * @param messageResId the string's resource id of the message of the dialog
+     * @param callback     the callback to determine the actions that should be done on "yes" tap
+     */
     public static void showYesNoDialog(Context context, int titleResId, int messageResId, final StandardDialogCallback callback) {
-        showYesNoDialog(context, titleResId==0?null:context.getString(titleResId), titleResId==0?null:context.getString(messageResId), callback);
+        showYesNoDialog(context, titleResId == 0 ? null : context.getString(titleResId), titleResId == 0 ? null : context.getString(messageResId), callback);
     }
 
+    /**
+     * Shows a dialog with an edit text, with all the given parameters to configure it
+     *
+     * @param context   the context
+     * @param titleId   the string's resource id of the title that should be displayed at the top of the dialog
+     * @param hintId    the string's resource id of the hint that should be displayed in the edit text. A null value removes the hint from the edit text
+     * @param messageId the string's resource id of the message of the dialog, placed above the edit text. A null value removes the message from the dialog
+     * @param inputType the input type of the edit text
+     * @param lower     lower bound of the edit text, to show an error message if the value of the edit text is lower. A null value removes the controls
+     * @param upper     upper bound of the edit text, to show an error message if the value of the edit text is higher. A null value removes the controls
+     * @param callback  the callback to determine the actions that should be done on "ok" tap
+     */
     public static void showEditDialog(Context context, int titleId, int hintId, int messageId, int inputType, String lower, String upper, final EditTextDialogCallback callback) {
-        showEditDialog(context, titleId==0?null:context.getString(titleId), hintId == 0 ? null : context.getString(hintId), messageId == 0 ? null : context.getString(messageId), inputType, lower, upper, callback);
+        showEditDialog(context, titleId == 0 ? null : context.getString(titleId), hintId == 0 ? null : context.getString(hintId), messageId == 0 ? null : context.getString(messageId), inputType, lower, upper, callback);
     }
 
+    /**
+     * Shows a dialog with an edit text, with all the given parameters to configure it
+     *
+     * @param context   the context
+     * @param title     the title that should be displayed at the top of the dialog
+     * @param hint      the hint that should be displayed in the edit text. A null value removes the hint from the edit text
+     * @param message   the message of the dialog, placed above the edit text. A null value removes the message from the dialog
+     * @param inputType the input type of the edit text
+     * @param lower     lower bound of the edit text, to show an error message if the value of the edit text is lower. A null value removes the controls
+     * @param upper     upper bound of the edit text, to show an error message if the value of the edit text is higher. A null value removes the controls
+     * @param callback  the callback to determine the actions that should be done on "ok" tap
+     */
     public static void showEditDialog(final Context context, String title, String hint, String message, int inputType, final String lower, final String upper, final EditTextDialogCallback callback) {
         View view = LayoutInflater.from(context).inflate(R.layout.custom_dialog, null);
 
@@ -168,10 +241,26 @@ public class CustomDialog {
         dialog.show();
     }
 
+    /**
+     * Shows a progress dialog
+     *
+     * @param context   the context
+     * @param titleId   the string's resource id of the title of the progress dialog
+     * @param messageId the string's resource id of the loading message of the dialog
+     * @return the progressDialog displayed
+     */
     public static ProgressDialog show(Context context, int titleId, int messageId) {
         return show(context, titleId != 0 ? context.getString(titleId) : null, messageId != 0 ? context.getString(messageId) : null);
     }
 
+    /**
+     * Shows a progress dialog
+     *
+     * @param context the context
+     * @param title   the title of the progress dialog
+     * @param message the loading message of the dialog
+     * @return the progressDialog displayed
+     */
     public static ProgressDialog show(Context context, String title, String message) {
         ProgressDialog dialog = new ProgressDialog(context);
 
@@ -194,6 +283,11 @@ public class CustomDialog {
 
     }
 
+    /**
+     * Dismisses the given progress dialog
+     *
+     * @param dialog the progress dialog that has to be dismissed
+     */
     public static void dismiss(ProgressDialog dialog) {
         try {
 

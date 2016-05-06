@@ -8,10 +8,16 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
 /**
- * Created by bronx on 23/10/14
+ * Class that contains basic File Utils
+ *
+ * @author Denis Brandi
  */
 public class KeyboardUtil {
 
+    /**
+     * Hides the Android keyboard
+     * @param activity the current activity
+     */
     public static void hideKeyboard(Activity activity) {
         try {
             InputMethodManager inputManager = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -22,6 +28,11 @@ public class KeyboardUtil {
         }
     }
 
+    /**
+     * Hides the Android keyboard
+     * @param activity the current activity
+     * @param view the view on which the keyboard is open
+     */
     public static void hideKeyboard(Activity activity, View view) {
         try {
             InputMethodManager inputManager = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);

@@ -14,18 +14,33 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 
 /**
- * Created by mattia on 06/05/2016.
+ * Class that contains basic Bitmap Utils
  *
+ * @author Denis Brandi
  * @author Mattia Ruggiero
  */
 public class BitmapUtils {
 
     private static final String TAG = "BitmapUtils";
 
+    /**
+     * Scales the given bitmap to a max dimension of 1280x720
+     *
+     * @param bm the bitmap to be scaled
+     * @return the scaled bitmap
+     */
     public static Bitmap scaleBitmap(Bitmap bm) {
         return scaleBitmap(bm, 1280, 720);
     }
 
+    /**
+     * Scales the given bitmap at the given max width and max height, mainteining the aspect ratio
+     *
+     * @param bm        the bitmap to be scaled
+     * @param maxWidth  the max width of the final bitmap
+     * @param maxHeight the max height of the final bitmap
+     * @return the scaled bitmap
+     */
     public static Bitmap scaleBitmap(Bitmap bm, float maxWidth, float maxHeight) {
         float width = bm.getWidth();
         float height = bm.getHeight();
@@ -36,12 +51,12 @@ public class BitmapUtils {
             // landscape
             float ratio = width / maxWidth;
             width = maxWidth;
-            height = (int)(height / ratio);
+            height = (int) (height / ratio);
         } else if (height > width) {
             // portrait
             float ratio = height / maxHeight;
             height = maxHeight;
-            width = (int)(width / ratio);
+            width = (int) (width / ratio);
         } else {
             // square
             height = maxWidth;
@@ -54,6 +69,13 @@ public class BitmapUtils {
         return bm;
     }
 
+    /**
+     * Rotates the given bitmap to the correct rotation, using the given orientation
+     *
+     * @param bitmap      the bitmap to be rotated
+     * @param orientation the orientation
+     * @return the rotated bitmap
+     */
     public static Bitmap rotateBitmap(Bitmap bitmap, int orientation) {
 
         try {
@@ -104,6 +126,14 @@ public class BitmapUtils {
         //return bitmap;
     }
 
+    /**
+     * Reduces the size of the given bitmap
+     *
+     * @param bitmap  the bitmap to be reduced
+     * @param size    the size of the new bitmap
+     * @param quality the quality of the compression of the bitmap, from 1 (low quality) to 100 (high quality)
+     * @return the byte stream of the reduced bitmap
+     */
     public static ByteArrayOutputStream reduceUntilRespectSize(Bitmap bitmap, int size, int quality) {
         ByteArrayOutputStream o = new ByteArrayOutputStream();
 
@@ -124,9 +154,15 @@ public class BitmapUtils {
         return o;
     }
 
+    /**
+     * Method that contains a procedure to be used for big images
+     *
+     * @param context       the context
+     * @param selectedImage the Uri of the big image
+     * @return a bitmap from the given Uri
+     */
     public static Bitmap procedureBigImage(Context context, Uri selectedImage) {
         if (selectedImage != null) {
-
 
             try {
 
@@ -149,6 +185,12 @@ public class BitmapUtils {
 
     }
 
+    /**
+     * Gets a bitmap from the given file, if possible
+     *
+     * @param image the file that has to be converted to a bitmap
+     * @return the bitmap generated from the file, or null if the file is not convertible to a bitmap
+     */
     public static Bitmap getBitmapFromFile(File image) {
 
         try {
@@ -164,9 +206,15 @@ public class BitmapUtils {
 
     }
 
+    /**
+     * Method that contains a procedure to be used for standard images
+     *
+     * @param context       the context
+     * @param selectedImage the Uri of the image
+     * @return a bitmap from the given Uri
+     */
     public static Bitmap procedureImage(Context context, Uri selectedImage) {
         if (selectedImage != null) {
-
 
             try {
 
@@ -193,19 +241,24 @@ public class BitmapUtils {
 
                 return BitmapFactory.decodeFile(picturePath, options);//yourSelectedImage;
 
-
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
         }
 
         return null;
 
     }
 
-    public static int calculateInSampleSize(
-            BitmapFactory.Options options, int reqWidth, int reqHeight) {
+    /**
+     * Calculate the "inSampleSize" value of a bitmap, using the given width and height
+     *
+     * @param options   the options of the bitmap
+     * @param reqWidth  pixels required for the width of image
+     * @param reqHeight pixels required for the height of image
+     * @return the "inSampleSize" value of the bitmap
+     */
+    public static int calculateInSampleSize(BitmapFactory.Options options, int reqWidth, int reqHeight) {
         // Raw height and width of image
         final int height = options.outHeight;
         final int width = options.outWidth;

@@ -35,7 +35,10 @@ import java.util.Locale;
 import java.util.UUID;
 
 /**
- * Created by denis on 29/02/16
+ * Class that contains basic File Utils
+ *
+ * @author Denis Brandi
+ * @author Mattia Ruggiero
  */
 public class FileUtils {
 
@@ -51,6 +54,13 @@ public class FileUtils {
         audio
     }
 
+    /**
+     * Copies a file to another destination
+     *
+     * @param src the file to be copied
+     * @param dst the file in which the "src" has to be copied
+     * @throws IOException if some errors occur during the copy
+     */
     public static void copy(File src, File dst) throws IOException {
         InputStream in = new FileInputStream(src);
         OutputStream out = new FileOutputStream(dst);
@@ -65,6 +75,15 @@ public class FileUtils {
         out.close();
     }
 
+    /**
+     * Generates a new file using the "type" parameter
+     *
+     * @param context  the context
+     * @param folder   the folder in which the file has to be created
+     * @param type     the type of the new file. Possible values are "text, img, vid, audio" (see the ElementType enum)
+     * @param internal true if the file has to be created in an internal folder of the app, false if the folder is in the root
+     * @return the new file created
+     */
     public static File newFileToUpload(Context context, String folder, ElementType type, boolean internal) {
 
         SimpleDateFormat sdf = new SimpleDateFormat("HH_mm_ss__dd_MM_yy", Locale.getDefault());
@@ -88,6 +107,14 @@ public class FileUtils {
 
     }
 
+    /**
+     * Gets the folder passed by parameter, or creates a new one if it doesn't exist
+     *
+     * @param context  the context
+     * @param folder   the name of the folder that has to be returned/created
+     * @param internal true if the folder has to be finded/created in the app folder, false if the folder has to be finded/created in the root
+     * @return the folder passed by parameter, or a new one if it doesn't exist
+     */
     public static File getTempImageFolder(Context context, String folder, boolean internal) {
         String path = (internal ? getFilePath(context, folder).getPath() : getExternalPath(folder));
 
@@ -95,6 +122,13 @@ public class FileUtils {
 
     }
 
+    /**
+     * Gets the path of the given file/folder
+     *
+     * @param context the context
+     * @param folder  the name of the file/folder
+     * @return the path of the existing file/folder, or the path of a new file/folder if it doesn't exist
+     */
     public static File getFilePath(Context context, String folder) {
         String filePath = context.getFilesDir().getPath() + "/" + folder;
         File directory = new File(filePath);
@@ -105,6 +139,12 @@ public class FileUtils {
         return new File(filePath);
     }
 
+    /**
+     * Gets the path of the given file/folder, searching or creating it from the root folder
+     *
+     * @param folder the name of the file/folder
+     * @return the path of the existing file/folder, or the path of a new file/folder if it doesn't exist
+     */
     public static String getExternalPath(String folder) {
         String filePath = Environment.getExternalStorageDirectory().getPath() + "/" + folder;
 
@@ -117,6 +157,13 @@ public class FileUtils {
         return filePath;
     }
 
+    /**
+     * Useful method to gets the orientation of a photo
+     *
+     * @param context  the context
+     * @param photoUri the Uri of the photo
+     * @return the orientation of the photo, using the ExifInterface integers
+     */
     public static int getOrientation(Context context, Uri photoUri) {
         Cursor cursor = context.getContentResolver().query(photoUri,
                 new String[]{MediaStore.Images.ImageColumns.ORIENTATION},
@@ -143,6 +190,17 @@ public class FileUtils {
         return filePath;
     }*/
 
+
+    /**
+     * Generates a new file from the given bitmap, saving it in the specified folder
+     *
+     * @param context  the context
+     * @param folder   the name of the folder in which the file has to be saved
+     * @param photo    the bitmap to be converted to a file
+     * @param internal true if the file has to be saved in an internal folder of the app, false if the folder is in the root
+     * @param quality  the quality of the compression of the bitmap: the range of values goes from 1 (min quality) to 100 (max quality)
+     * @return the file generated from the bitmap
+     */
     public static File generateFileFromBitmap(Context context, String folder, Bitmap photo, boolean internal, int quality) {
         if (photo != null) {
             ByteArrayOutputStream bytes = BitmapUtils.reduceUntilRespectSize(photo, 512000, quality);
@@ -154,7 +212,7 @@ public class FileUtils {
             String datas = simpleDateFormat.format(date);
             String newimagename = UUID.randomUUID().toString() + "_" + datas + "_image.jpg";
 
-            File f = new File(internal ? getFilePath(context, folder).getPath(): getExternalPath(folder),  newimagename);
+            File f = new File(internal ? getFilePath(context, folder).getPath() : getExternalPath(folder), newimagename);
 
             return writeBytes(f, bytes);
 
@@ -167,12 +225,13 @@ public class FileUtils {
     }
 
     /**
-     * Genera un file da un'immagine bitmap e lo salva nella cartella scelta usando il nome passato come parametro
-     * @param context Context
-     * @param folder La cartella all'interno della quale deve essere salvato file
-     * @param photo Il file bitmap da cui generare il file
-     * @param fileName Il nome del file
-     * @return il file generato, o null se era già presente nella folder un file con lo stesso nome
+     * Generates a file from the given bitmap and saves it in the given folder
+     *
+     * @param context  the context
+     * @param folder   the folder in which the file has to be saved
+     * @param photo    the bitmap photo
+     * @param fileName the name of the new file
+     * @return the generated file, or null if a file with the same name already exists in the folder
      */
     public static File generateFileFromBitmap(Context context, String folder, Bitmap photo, String fileName, int quality) {
         if (photo != null) {
@@ -189,6 +248,13 @@ public class FileUtils {
         }
     }
 
+    /**
+     * Writes a stream of bytes in a file
+     *
+     * @param f     the file in which the bytes have to be written
+     * @param bytes the stream of bytes to be write in the file
+     * @return the file passed by parameter, after writing the stream of bytes
+     */
     private static File writeBytes(File f, ByteArrayOutputStream bytes) {
 
         try {
@@ -222,11 +288,11 @@ public class FileUtils {
     }
 
     /**
-     * reduces the size of the image
+     * Reduces the size of the image
      *
-     * @param f
-     * @param maxSize
-     * @return
+     * @param f       the file containing the image to reduce
+     * @param maxSize max size of the image (width or height)
+     * @return the file with the image resized
      */
     public static File getResizedImageFile(Context context, String folder, File f, int maxSize, boolean internal, int quality) throws FileNotFoundException {
 
@@ -334,9 +400,16 @@ public class FileUtils {
         }
     }
 
-    public static boolean checkAudioDuration(Context context, Uri filmedVideo) {
+    /**
+     * Method that uses a constant parameter to determine if a audio file is too long or not
+     *
+     * @param context the context
+     * @param audio   the Uri of the audio file
+     * @return true if the file is less than 2 minutes long, false otherwise
+     */
+    public static boolean checkAudioDuration(Context context, Uri audio) {
 
-        MediaPlayer mediaPlayer = MediaPlayer.create(context, filmedVideo);
+        MediaPlayer mediaPlayer = MediaPlayer.create(context, audio);
 
         int duration = mediaPlayer.getDuration();
 
@@ -350,6 +423,13 @@ public class FileUtils {
         return true;
     }
 
+    /**
+     * Method that uses a constant parameter to determine if a video file is too long or not
+     *
+     * @param context     the context
+     * @param filmedVideo the Uri of the video file
+     * @return true if the file is less than 30 seconds long, false otherwise
+     */
     public static boolean checkVideoDuration(Context context, Uri filmedVideo) {
         MediaPlayer mediaPlayer = MediaPlayer.create(context, filmedVideo);
 
@@ -365,8 +445,13 @@ public class FileUtils {
         return true;
     }
 
-    /*
+    /**
      * Gets the file path of the given Uri.
+     *
+     * @param context the context
+     * @param uri     the Uri of the file that has to be retrieved
+     * @return a MediaSelected object containing the type and the path of the file
+     * @throws URISyntaxException if the given Uri isn't valid
      */
     @SuppressLint("NewApi")
     public static MediaSelected getPath(Context context, Uri uri) throws URISyntaxException {
