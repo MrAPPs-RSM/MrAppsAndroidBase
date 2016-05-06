@@ -1,12 +1,10 @@
 package com.mr_apps.androidbase.custom_views;
 
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.PorterDuff;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
-import android.graphics.drawable.VectorDrawable;
 import android.os.Build;
 import android.support.design.widget.TextInputEditText;
 import android.support.graphics.drawable.VectorDrawableCompat;
@@ -14,15 +12,14 @@ import android.support.v4.content.ContextCompat;
 import android.text.InputType;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
-import android.widget.EditText;
 
 import com.mr_apps.androidbase.R;
 
-import java.util.Vector;
-
 /**
- * Created by mattia on 08/04/2016.
+ * Class that manages the Password View, a custom view based on the implementation of Lisa Wray
+ * This class manage a special edit text with a button that can switch between "visible password" and "hidden password"
  *
+ * @author Lisa Wray
  * @author Mattia Ruggiero
  */
 public class PasswordView extends TextInputEditText {
@@ -51,6 +48,11 @@ public class PasswordView extends TextInputEditText {
         init(attrs);
     }
 
+    /**
+     * Initializator of the custom view, setting the button and the attributes
+     *
+     * @param attrs the attributes of the view
+     */
     private void init(AttributeSet attrs) {
         if (attrs != null) {
             TypedArray a = getContext().getTheme().obtainStyledAttributes(
@@ -67,7 +69,7 @@ public class PasswordView extends TextInputEditText {
 
         // Make sure to mutate so that if there are multiple password fields, they can have
         // different visibilities.
-        if(Build.VERSION.SDK_INT >= 21 ){
+        if (Build.VERSION.SDK_INT >= 21) {
             eye = ContextCompat.getDrawable(getContext(), R.drawable.ic_eye).mutate();
             eyeWithStrike = ContextCompat.getDrawable(getContext(), R.drawable.ic_eye_strike).mutate();
         } else {
@@ -79,6 +81,9 @@ public class PasswordView extends TextInputEditText {
         setup();
     }
 
+    /**
+     * Setup of the custom view, setting the input type, the drawable and the error
+     */
     protected void setup() {
         setInputType(InputType.TYPE_CLASS_TEXT | (visible ? InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD : InputType.TYPE_TEXT_VARIATION_PASSWORD));
         Drawable drawable = useStrikeThrough && !visible ? eyeWithStrike : eye;
@@ -115,10 +120,20 @@ public class PasswordView extends TextInputEditText {
         setTypeface(typeface);
     }
 
+    /**
+     * Sets if the button should turn in the "strikethrough" version or not
+     *
+     * @param useStrikeThrough true if the button's icon should turns in the "strikethrough", false otherwise
+     */
     public void setUseStrikeThrough(boolean useStrikeThrough) {
         this.useStrikeThrough = useStrikeThrough;
     }
 
+    /**
+     * Sets if the error is activated or not. When activeted, the button turns red
+     *
+     * @param error true if the error is active, false otherwise
+     */
     public void setError(boolean error) {
         this.error = error;
     }
