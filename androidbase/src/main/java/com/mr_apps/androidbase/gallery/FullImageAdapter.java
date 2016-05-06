@@ -11,7 +11,7 @@ import android.widget.ImageView;
 import com.bumptech.glide.BitmapTypeRequest;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.BitmapImageViewTarget;
-import com.mr_apps.androidbase.utils.FileUtils;
+import com.mr_apps.androidbase.utils.BitmapUtils;
 
 import java.util.List;
 
@@ -74,7 +74,7 @@ public class FullImageAdapter extends PagerAdapter{
             @Override
             protected void setResource(Bitmap resource) {
                 if(resource!=null) {
-                    imageView.setImageBitmap(FileUtils.scaleBitmap(resource));
+                    imageView.setImageBitmap(BitmapUtils.scaleBitmap(resource));
                     mAttacher.update();
                 }
             }

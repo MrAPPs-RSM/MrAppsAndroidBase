@@ -15,6 +15,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 
 import com.mr_apps.androidbase.R;
+import com.mr_apps.androidbase.utils.BitmapUtils;
 import com.mr_apps.androidbase.utils.FileUtils;
 import com.mr_apps.androidbase.utils.FileUtils.ElementType;
 
@@ -341,9 +342,9 @@ public abstract class PickerActivity extends LocationActivity {
             ExifInterface exif = new ExifInterface(tempUri.getPath());
             int orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_UNDEFINED);
 
-            Bitmap resizedBitmap=FileUtils.scaleBitmap(bitmap);
+            Bitmap resizedBitmap= BitmapUtils.scaleBitmap(bitmap);
 
-            Bitmap bitmap1=FileUtils.rotateBitmap(resizedBitmap, orientation);
+            Bitmap bitmap1= BitmapUtils.rotateBitmap(resizedBitmap, orientation);
 
             if(bitmap1!=null)
                 bitmap = bitmap1;
