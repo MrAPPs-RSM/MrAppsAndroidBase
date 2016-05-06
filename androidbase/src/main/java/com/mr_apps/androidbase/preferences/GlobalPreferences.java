@@ -11,9 +11,18 @@ public class GlobalPreferences extends AbstractBasePreferences {
     public static final String latitude = "latitude";
     public static final String longitude = "longitude";
     public static final String altitude = "altitude";
+    public static final String id = "id";
     public static final String username = "username";
     public static final String password = "password";
     public static final String hashedPassword = "hashedPassword";
+
+    public static void setId(Context context, int value) {
+        setPreferences(context, namePreferences, id, value);
+    }
+
+    public static int getId(Context context) {
+        return getPreferences(context, namePreferences).getInt(id, 0);
+    }
 
     public static void setUsername(Context context, String value) {
         setPreferences(context, namePreferences, username, value);
