@@ -13,6 +13,7 @@ import android.widget.ImageView;
 
 import com.mr_apps.androidbase.activity.AbstractBaseActivity;
 import com.mr_apps.androidbase.gallery.GalleryActivity;
+import com.mr_apps.androidbase.utils.BitmapUtils;
 import com.mr_apps.androidbase.utils.FileUtils;
 
 import java.util.ArrayList;
@@ -105,7 +106,7 @@ public class MainActivity extends AbstractBaseActivity {
             return;
 
         if (bitmap != null)
-            preview.setImageBitmap(FileUtils.scaleBitmap(bitmap));
+            preview.setImageBitmap(BitmapUtils.scaleBitmap(bitmap));
     }
 
     @Override

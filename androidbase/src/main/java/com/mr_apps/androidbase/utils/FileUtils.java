@@ -117,108 +117,6 @@ public class FileUtils {
         return filePath;
     }
 
-    public static ByteArrayOutputStream reduceUntilRespectSize(Bitmap bitmap, int size, int quality) {
-        ByteArrayOutputStream o = new ByteArrayOutputStream();
-
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, o);
-
-        int byteCount = o.toByteArray().length;//BitmapCompat.getAllocationByteCount(bitmap);
-
-        if (byteCount > size) {
-
-            o = new ByteArrayOutputStream();
-
-            bitmap.compress(Bitmap.CompressFormat.JPEG, quality, o);
-
-            Logger.d(TAG, "compresso a " + String.valueOf(o.toByteArray().length));
-
-        }
-
-        return o;
-    }
-
-    public static Bitmap scaleBitmap(Bitmap bm) {
-        return scaleBitmap(bm, 1280, 720);
-    }
-
-    public static Bitmap scaleBitmap(Bitmap bm, float maxWidth, float maxHeight) {
-        float width = bm.getWidth();
-        float height = bm.getHeight();
-
-        Log.v("Pictures", "Width and height are " + width + "--" + height);
-
-        if (width > height) {
-            // landscape
-            float ratio = (float) width / maxWidth;
-            width = maxWidth;
-            height = (int)(height / ratio);
-        } else if (height > width) {
-            // portrait
-            float ratio = (float) height / maxHeight;
-            height = maxHeight;
-            width = (int)(width / ratio);
-        } else {
-            // square
-            height = maxWidth;
-            width = maxWidth;
-        }
-
-        Log.v("Pictures", "after scaling Width and height are " + width + "--" + height);
-
-        bm = Bitmap.createScaledBitmap(bm, (int) width, (int) height, true);
-        return bm;
-    }
-
-    public static Bitmap rotateBitmap(Bitmap bitmap, int orientation) {
-
-        try {
-            Matrix matrix = new Matrix();
-            switch (orientation) {
-                case ExifInterface.ORIENTATION_NORMAL:
-                    return bitmap;
-                case ExifInterface.ORIENTATION_FLIP_HORIZONTAL:
-                    matrix.setScale(-1, 1);
-                    break;
-                case ExifInterface.ORIENTATION_ROTATE_180:
-                    matrix.setRotate(180);
-                    break;
-                case ExifInterface.ORIENTATION_FLIP_VERTICAL:
-                    matrix.setRotate(180);
-                    matrix.postScale(-1, 1);
-                    break;
-                case ExifInterface.ORIENTATION_TRANSPOSE:
-                    matrix.setRotate(90);
-                    matrix.postScale(-1, 1);
-                    break;
-                case ExifInterface.ORIENTATION_ROTATE_90:
-                    matrix.setRotate(90);
-                    break;
-                case ExifInterface.ORIENTATION_TRANSVERSE:
-                    matrix.setRotate(-90);
-                    matrix.postScale(-1, 1);
-                    break;
-                case ExifInterface.ORIENTATION_ROTATE_270:
-                    matrix.setRotate(-90);
-                    break;
-                default:
-                    return bitmap;
-            }
-            try {
-                Bitmap bmRotated = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
-                bitmap.recycle();
-                return bmRotated;
-            } catch (OutOfMemoryError e) {
-                e.printStackTrace();
-                return null;
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-
-        //return bitmap;
-    }
-
     public static int getOrientation(Context context, Uri photoUri) {
         Cursor cursor = context.getContentResolver().query(photoUri,
                 new String[]{MediaStore.Images.ImageColumns.ORIENTATION},
@@ -245,112 +143,9 @@ public class FileUtils {
         return filePath;
     }*/
 
-    public static Bitmap procedureBigImage(Context context, Uri selectedImage) {
-        if (selectedImage != null) {
-
-
-            try {
-
-                String[] filePathColumn = {MediaStore.Images.Media.DATA};
-                Cursor cursor = context.getContentResolver().query(selectedImage,
-                        filePathColumn, null, null, null);
-                cursor.moveToFirst();
-
-                int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-                String picturePath = cursor.getString(columnIndex);
-                cursor.close();
-
-                return BitmapFactory.decodeFile(picturePath);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-
-        return null;
-
-    }
-
-    public static Bitmap getBitmapFromFile(File image) {
-
-        try {
-            BitmapFactory.Options bmOptions = new BitmapFactory.Options();
-
-            Bitmap bitmap = BitmapFactory.decodeFile(image.getAbsolutePath(), bmOptions);
-
-            return bitmap;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-
-    }
-
-    public static Bitmap procedureImage(Context context, Uri selectedImage) {
-        if (selectedImage != null) {
-
-
-            try {
-
-                String[] filePathColumn = {MediaStore.Images.Media.DATA};
-                Cursor cursor = context.getContentResolver().query(selectedImage,
-                        filePathColumn, null, null, null);
-                cursor.moveToFirst();
-
-                int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-                String picturePath = cursor.getString(columnIndex);
-                cursor.close();
-
-                final BitmapFactory.Options options = new BitmapFactory.Options();
-                options.inJustDecodeBounds = true;
-
-                //Bitmap yourSelectedImage =
-                BitmapFactory.decodeFile(picturePath, options);
-
-                // Calculate inSampleSize
-                options.inSampleSize = calculateInSampleSize(options, 720, 1280);
-
-                // Decode bitmap with inSampleSize set
-                options.inJustDecodeBounds = false;
-
-                return BitmapFactory.decodeFile(picturePath, options);//yourSelectedImage;
-
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-        }
-
-        return null;
-
-    }
-
-    public static int calculateInSampleSize(
-            BitmapFactory.Options options, int reqWidth, int reqHeight) {
-        // Raw height and width of image
-        final int height = options.outHeight;
-        final int width = options.outWidth;
-        int inSampleSize = 1;
-
-        if (height > reqHeight || width > reqWidth) {
-
-            final int halfHeight = height / 2;
-            final int halfWidth = width / 2;
-
-            // Calculate the largest inSampleSize value that is a power of 2 and keeps both
-            // height and width larger than the requested height and width.
-            while ((halfHeight / inSampleSize) > reqHeight
-                    && (halfWidth / inSampleSize) > reqWidth) {
-                inSampleSize *= 2;
-            }
-        }
-
-        return inSampleSize;
-    }
-
     public static File generateFileFromBitmap(Context context, String folder, Bitmap photo, boolean internal, int quality) {
         if (photo != null) {
-            ByteArrayOutputStream bytes = reduceUntilRespectSize(photo, 512000, quality);
+            ByteArrayOutputStream bytes = BitmapUtils.reduceUntilRespectSize(photo, 512000, quality);
 
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH_mm_ss__dd_MM_yyyy", Locale.getDefault());
 
@@ -382,7 +177,7 @@ public class FileUtils {
     public static File generateFileFromBitmap(Context context, String folder, Bitmap photo, String fileName, int quality) {
         if (photo != null) {
 
-            ByteArrayOutputStream bytes = reduceUntilRespectSize(photo, 512000, quality);
+            ByteArrayOutputStream bytes = BitmapUtils.reduceUntilRespectSize(photo, 512000, quality);
             File f = new File(getExternalPath(folder.endsWith("/") ? folder : folder + "/") + fileName);
 
             return writeBytes(f, bytes);
