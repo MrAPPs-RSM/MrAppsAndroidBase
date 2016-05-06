@@ -2,16 +2,22 @@
 
 to include :
 
+```gradle
+
 allprojects {
-repositories {
-...
-maven { url "http://dl.bintray.com/populov/maven" }
-maven { url "https://jitpack.io" }
+  repositories {
+    ...
+    maven { url "http://dl.bintray.com/populov/maven" }
+    maven { url "https://jitpack.io" }
+  }
 }
-}
+```
 
 and
 
+``` gradle
+
 dependencies {
-compile 'com.github.MrAPPs-RSM:MrAppsAndroidBase:1.0.1'
+  compile 'com.github.MrAPPs-RSM:MrAppsAndroidBase:1.0.3'
 }
+```
