@@ -14,7 +14,7 @@ import android.widget.EditText;
 import com.mr_apps.androidbase.R;
 
 /**
- * Created by mattia on 08/04/2016.
+ * Custom view used to create a TextInputLayout that displays a red warning drawable instead of the red text below the edit text
  *
  * @author Mattia Ruggiero
  */
@@ -67,6 +67,12 @@ public class WarningTextInputLayout extends TextInputLayout {
         return isErrorEnabled;
     }
 
+    /**
+     * Special management if the EditText contained by the TextInputLayout is instance of the Password View
+     *
+     * @param edit the edit text (should be a Password View)
+     * @param error sets whether the error si activated or not
+     */
     private void passwordViewManagement(EditText edit, boolean error) {
         ((PasswordView) edit).setError(error);
         Drawable eye = edit.getCompoundDrawables()[2];
@@ -77,10 +83,5 @@ public class WarningTextInputLayout extends TextInputLayout {
             } else {
                 eye.clearColorFilter();
             }
-    }
-
-    @Override
-    public void setOnClickListener(OnClickListener l) {
-        //super.setOnClickListener(l);
     }
 }
