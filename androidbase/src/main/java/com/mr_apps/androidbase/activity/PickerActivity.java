@@ -25,40 +25,52 @@ import java.util.ArrayList;
 /**
  * Created by denis on 29/02/16
  */
+
+/**
+ * To avoid activity recreation remember to add "android:configChanges="orientation|keyboardHidden|screenSize"
+ * in your manifest.
+ */
+
 public abstract class PickerActivity extends LocationActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        imageUri=null;
-        videoUri=null;
+        imageUri = null;
+        audioUri = null;
+        videoUri = null;
     }
 
-    private boolean pickImageFromGallery, takePhoto, pickVideoFromGallery, recordVideo;
     private String mTitle;
 
-    private Uri imageUri, videoUri;
+    private Uri imageUri, audioUri, videoUri;
 
-    private static final int actionPickImage = 100;
-    private static final int actionTakeImage = 200;
-    private static final int actionPickVideo = 300;
-    private static final int actionRecordVideo = 400;
+    private static final int actionPickImage = 1000;
+    private static final int actionTakeImage = 2000;
+    private static final int actionPickVideo = 3000;
+    private static final int actionRecordVideo = 4000;
+    private static final int actionPickAudio = 5000;
+    private static final int actionRecordAudio = 6000;
 
-    private int qualityImage=80;
+    private int qualityImage = 80;
 
     public void setQualityImage(int qualityImage) {
         this.qualityImage = qualityImage;
     }
 
-    private boolean saveInInternalStorage=false;
+    private boolean saveInInternalStorage = false;
+
+    public void showAlertChoice(String title, boolean pickImageFromGallery, boolean takePhoto) {
+        showAlertChoice(title, pickImageFromGallery, takePhoto, false, false);
+    }
 
     public void showAlertChoice(String title, boolean pickImageFromGallery, boolean takePhoto, boolean pickVideoFromGallery, boolean recordVideo) {
+        showAlertChoice(title, pickImageFromGallery, takePhoto, pickVideoFromGallery, recordVideo, false, false);
+    }
 
-        this.pickImageFromGallery = pickImageFromGallery;
-        this.takePhoto = takePhoto;
-        this.pickVideoFromGallery = pickVideoFromGallery;
-        this.recordVideo = recordVideo;
+    public void showAlertChoice(String title, boolean pickImageFromGallery, final boolean takePhoto, boolean pickVideoFromGallery, boolean recordVideo, boolean pickAudioFromGallery, boolean recordAudio) {
+
         this.mTitle = title;
 
         imageUri = null;
@@ -69,6 +81,8 @@ public abstract class PickerActivity extends LocationActivity {
 
         final String scegli_immagine = getString(R.string.Scegli_immagine_da_galleria);
         final String scatta_foto = getString(R.string.Scatta_foto);
+        final String scegli_audio = getString(R.string.Scegli_audio_da_galleria);
+        final String registra_audio = getString(R.string.Registra_audio);
         final String scegli_video = getString(R.string.Scegli_video_da_galleria);
         final String gira_video = getString(R.string.Gira_video);
 
@@ -86,6 +100,12 @@ public abstract class PickerActivity extends LocationActivity {
         if (recordVideo)
             itemsArrayList.add(gira_video);
 
+        if (pickAudioFromGallery)
+            itemsArrayList.add(scegli_audio);
+
+        if (recordAudio)
+            itemsArrayList.add(registra_audio);
+
         final String[] items = new String[itemsArrayList.size()];
 
         for (int i = 0; i < itemsArrayList.size(); i++)
@@ -101,56 +121,28 @@ public abstract class PickerActivity extends LocationActivity {
                         String choice = items[which];
 
                         if (choice.equals(scegli_immagine)) {
-                            Intent intent = new Intent();
-                            if (Build.VERSION.SDK_INT >= 19) {
-                                // For Android versions of KitKat or later, we use a
-                                // different intent to ensure
-                                // we can get the file path from the returned intent URI
-                                intent.setAction(Intent.ACTION_OPEN_DOCUMENT);
-                                intent.addCategory(Intent.CATEGORY_OPENABLE);
-                                intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true);
-                            } else {
-                                intent.setAction(Intent.ACTION_GET_CONTENT);
-                            }
 
-                            intent.setType("image/*");
-                            startActivityForResult(intent, actionPickImage);
+                            pickImage();
 
                         } else if (choice.equals(scatta_foto)) {
 
-                            File file = FileUtils.newFileToUpload(PickerActivity.this, getFolder(), ElementType.img, saveInInternalStorage);
-                            Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-                            imageUri = Uri.fromFile(file);
-                            intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
-
-                            startActivityForResult(intent, actionTakeImage);
+                            takePhoto();
 
                         } else if (choice.equals(scegli_video)) {
 
-                            Intent intent = new Intent();
-                            if (Build.VERSION.SDK_INT >= 19) {
-                                // For Android versions of KitKat or later, we use a
-                                // different intent to ensure
-                                // we can get the file path from the returned intent URI
-                                intent.setAction(Intent.ACTION_OPEN_DOCUMENT);
-                                intent.addCategory(Intent.CATEGORY_OPENABLE);
-                                intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true);
-                            } else {
-                                intent.setAction(Intent.ACTION_GET_CONTENT);
-                            }
-
-                            intent.setType("video/*");
-                            startActivityForResult(intent, actionPickVideo);
+                            pickVideo();
 
                         } else if (choice.equals(gira_video)) {
 
-                            Intent intent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
-                            File file = FileUtils.newFileToUpload(PickerActivity.this, getFolder(), ElementType.vid, false);
-                            videoUri = Uri.fromFile(file);
-                            //Uri outputFileUri = Uri.fromFile(file);
-                            intent.putExtra(MediaStore.EXTRA_OUTPUT, videoUri);
-                            intent.putExtra(MediaStore.EXTRA_DURATION_LIMIT, getDurationVideo());
-                            startActivityForResult(intent, actionRecordVideo);
+                            recordVideo();
+
+                        } else if (choice.equals(scegli_audio)) {
+
+                            pickAudio();
+
+                        } else if (choice.equals(registra_audio)) {
+
+                            recordAudio();
 
                         }
 
@@ -159,8 +151,89 @@ public abstract class PickerActivity extends LocationActivity {
 
     }
 
+    public void pickImage() {
+        Intent intent = new Intent();
+        if (Build.VERSION.SDK_INT >= 19) {
+            // For Android versions of KitKat or later, we use a
+            // different intent to ensure
+            // we can get the file path from the returned intent URI
+            intent.setAction(Intent.ACTION_OPEN_DOCUMENT);
+            intent.addCategory(Intent.CATEGORY_OPENABLE);
+            intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true);
+        } else {
+            intent.setAction(Intent.ACTION_GET_CONTENT);
+        }
+
+        intent.setType("image/*");
+        startActivityForResult(intent, actionPickImage);
+    }
+
+    public void takePhoto() {
+        Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+        File file = FileUtils.newFileToUpload(PickerActivity.this, getFolder(), ElementType.img, saveInInternalStorage);
+        imageUri = Uri.fromFile(file);
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
+        startActivityForResult(intent, actionTakeImage);
+    }
+
+    public void pickVideo() {
+        Intent intent = new Intent();
+        if (Build.VERSION.SDK_INT >= 19) {
+            // For Android versions of KitKat or later, we use a
+            // different intent to ensure
+            // we can get the file path from the returned intent URI
+            intent.setAction(Intent.ACTION_OPEN_DOCUMENT);
+            intent.addCategory(Intent.CATEGORY_OPENABLE);
+            intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true);
+        } else {
+            intent.setAction(Intent.ACTION_GET_CONTENT);
+        }
+
+        intent.setType("video/*");
+        startActivityForResult(intent, actionPickVideo);
+    }
+
+    public void recordVideo() {
+        Intent intent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
+        File file = FileUtils.newFileToUpload(PickerActivity.this, getFolder(), ElementType.vid, false);
+        videoUri = Uri.fromFile(file);
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, videoUri);
+        intent.putExtra(MediaStore.EXTRA_DURATION_LIMIT, getDurationVideo());
+        startActivityForResult(intent, actionRecordVideo);
+    }
+
+    public void pickAudio() {
+        Intent intent = new Intent();
+        if (Build.VERSION.SDK_INT >= 19) {
+            // For Android versions of KitKat or later, we use a
+            // different intent to ensure
+            // we can get the file path from the returned intent URI
+            intent.setAction(Intent.ACTION_OPEN_DOCUMENT);
+            intent.addCategory(Intent.CATEGORY_OPENABLE);
+            intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true);
+        } else {
+            intent.setAction(Intent.ACTION_GET_CONTENT);
+        }
+
+        intent.setType("audio/*");
+        startActivityForResult(intent, actionPickAudio);
+    }
+
+    public void recordAudio() {
+        Intent intent = new Intent(MediaStore.Audio.Media.RECORD_SOUND_ACTION);
+        File file = FileUtils.newFileToUpload(PickerActivity.this, getFolder(), ElementType.audio, false);
+        audioUri = Uri.fromFile(file);
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, audioUri);
+        intent.putExtra(MediaStore.EXTRA_DURATION_LIMIT, getDurationAudio());
+        startActivityForResult(intent, actionRecordAudio);
+    }
+
     public int getDurationVideo() {
         return 30;
+    }
+
+    public int getDurationAudio() {
+        return 120;
     }
 
     public String getFolder() {
@@ -169,22 +242,6 @@ public abstract class PickerActivity extends LocationActivity {
 
     public String getmTitle() {
         return mTitle;
-    }
-
-    public boolean isPickImageFromGallery() {
-        return pickImageFromGallery;
-    }
-
-    public boolean isTakePhoto() {
-        return takePhoto;
-    }
-
-    public boolean isPickVideoFromGallery() {
-        return pickVideoFromGallery;
-    }
-
-    public boolean isRecordVideo() {
-        return recordVideo;
     }
 
     public void setSaveInInternalStorage(boolean saveInInternalStorage) {
@@ -205,6 +262,10 @@ public abstract class PickerActivity extends LocationActivity {
                 break;
             case actionRecordVideo:
                 handleVideoTempUri(videoUri);
+                break;
+
+            case actionRecordAudio:
+                handleAudioTempUri(audioUri);
                 break;
 
             case actionPickImage:
@@ -242,7 +303,7 @@ public abstract class PickerActivity extends LocationActivity {
 
                     FileUtils.MediaSelected mediaSelected = FileUtils.getPath(this, uriVideo);
                     path = mediaSelected.path;
-                    type = ElementType.img;
+                    type = ElementType.vid;
 
                     pickerResult(path, type, null);
 
@@ -252,14 +313,38 @@ public abstract class PickerActivity extends LocationActivity {
                 }
 
                 break;
+
+            case actionPickAudio:
+
+                if (data == null)
+                    return;
+
+                Uri uriAudio = data.getData();
+
+                try {
+
+                    FileUtils.MediaSelected mediaSelected = FileUtils.getPath(this, uriAudio);
+                    path = mediaSelected.path;
+                    type = ElementType.audio;
+
+                    pickerResult(path, type, null);
+
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                break;
+
         }
     }
 
     public void pickerResult(String path, ElementType elementType, Bitmap bitmap) {
     }
 
-    private static final String file_uri1 = "image_uri";
-    private static final String file_uri2 = "video_uri";
+    private static final String image_uri = "image_uri";
+    private static final String audio_uri = "audio_uri";
+    private static final String video_uri = "video_uri";
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
@@ -267,8 +352,9 @@ public abstract class PickerActivity extends LocationActivity {
 
         // save file url in bundle as it will be null on scren orientation
         // changes
-        outState.putParcelable(file_uri1, imageUri);
-        outState.putParcelable(file_uri2, videoUri);
+        outState.putParcelable(image_uri, imageUri);
+        outState.putParcelable(audio_uri, audioUri);
+        outState.putParcelable(video_uri, videoUri);
 
     }
 
@@ -277,80 +363,38 @@ public abstract class PickerActivity extends LocationActivity {
         super.onRestoreInstanceState(savedInstanceState);
 
         // get the file url
-        imageUri = savedInstanceState.getParcelable(file_uri1);
-        videoUri = savedInstanceState.getParcelable(file_uri2);
+        imageUri = savedInstanceState.getParcelable(image_uri);
+        audioUri = savedInstanceState.getParcelable(audio_uri);
+        videoUri = savedInstanceState.getParcelable(video_uri);
 
-        if(imageUri!=null)
+        if (imageUri != null)
             handleTempUri(imageUri);
 
-        if(videoUri!=null)
+        if (audioUri != null)
+            handleAudioTempUri(audioUri);
+
+        if (videoUri != null)
             handleVideoTempUri(videoUri);
 
     }
 
-    /*private void handleTempUri(Uri tempUri, boolean isImage) {
+    private void handleTempUri(Uri tempUri) {
 
-        if (tempUri == null)
-            return;
-
-        File file;
-        String path = null;
-        ElementType type = null;
-        Bitmap bitmap = null;
-
-        if (isImage) {
-            try {
-
-                bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), tempUri);
-
-                ExifInterface exif = new ExifInterface(tempUri.getPath());
-                int orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_UNDEFINED);
-
-                bitmap = FileUtils.rotateBitmap(bitmap, orientation);
-
-                file = FileUtils.generateFileFromBitmap(this, getFolder(), bitmap, saveInInternalStorage, qualityImage);
-
-                File file1=new File(tempUri.getPath());
-
-                if(file.getParent().equals(file1.getParent()))
-                    file1.delete();
-
-                path = file.getPath();
-                type = ElementType.img;
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-        } else {
-
-            path = FileUtils.getRealPath(this, tempUri);
-            type = ElementType.vid;
-
-        }
-
-        pickerResult(path, type, bitmap);
-
-    }*/
-
-    private void handleTempUri(Uri tempUri)
-    {
-        //photo = null;//(Bitmap) data.getExtras().get("data");
         try {
             Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), tempUri);
 
             ExifInterface exif = new ExifInterface(tempUri.getPath());
             int orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_UNDEFINED);
 
-            Bitmap resizedBitmap= BitmapUtils.scaleBitmap(bitmap);
+            Bitmap resizedBitmap = BitmapUtils.scaleBitmap(bitmap);
 
-            Bitmap bitmap1= BitmapUtils.rotateBitmap(resizedBitmap, orientation);
+            Bitmap bitmap1 = BitmapUtils.rotateBitmap(resizedBitmap, orientation);
 
-            if(bitmap1!=null)
+            if (bitmap1 != null)
                 bitmap = bitmap1;
 
-            String path=FileUtils.getRealPath(this, tempUri);
-            ElementType type=ElementType.img;
+            String path = FileUtils.getRealPath(this, tempUri);
+            ElementType type = ElementType.img;
 
             pickerResult(path, type, bitmap);
 
@@ -359,11 +403,27 @@ public abstract class PickerActivity extends LocationActivity {
         }
     }
 
+    private void handleAudioTempUri(Uri audioTempUri) {
+
+        try {
+
+            final String path = FileUtils.getRealPath(this, audioTempUri);
+
+            final ElementType type = ElementType.audio;
+
+            pickerResult(path, type, null);
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
     private void handleVideoTempUri(Uri videoTempUri) {
         try {
-            Uri filmedVideo = videoTempUri;
 
-            final String path = FileUtils.getRealPath(this, filmedVideo);
+            final String path = FileUtils.getRealPath(this, videoTempUri);
 
             final ElementType type = ElementType.vid;
 
