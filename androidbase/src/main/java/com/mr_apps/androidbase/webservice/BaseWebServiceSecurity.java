@@ -1,7 +1,6 @@
 package com.mr_apps.androidbase.webservice;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 
 import com.google.gson.JsonObject;
 import com.koushikdutta.async.future.FutureCallback;
@@ -13,7 +12,7 @@ import com.mr_apps.androidbase.preferences.SecurityPreferences;
 import com.mr_apps.androidbase.utils.Logger;
 import com.mr_apps.androidbase.utils.Utils;
 
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -190,12 +189,15 @@ public abstract class BaseWebServiceSecurity extends WebServiceUtils {
 
     public void updateSecurity(Context context) {
         WsseToken wsseToken = new WsseToken(context);
-        SharedPreferences preferences = context.getSharedPreferences(SecurityPreferences.namePreferences, Context.MODE_PRIVATE);
+        SecurityPreferences.setAuthorization(context, wsseToken.getAuthorizationHeader());
+        SecurityPreferences.setHeader_date(context, (new Date()).getTime());
+        SecurityPreferences.setHeader(context, wsseToken.getWsseHeader());
+        /*SharedPreferences preferences = context.getSharedPreferences(SecurityPreferences.namePreferences, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString(SecurityPreferences.authorization, wsseToken.getAuthorizationHeader());
         editor.putLong(SecurityPreferences.header_date, (new Date()).getTime());
         editor.putString(SecurityPreferences.header, wsseToken.getWsseHeader());
-        editor.commit();
+        editor.commit();*/
     }
 
 
@@ -211,8 +213,8 @@ public abstract class BaseWebServiceSecurity extends WebServiceUtils {
 
         Map<String, List<String>> map = new HashMap<>();
 
-        map.put(WsseToken.HEADER_AUTHORIZATION, Arrays.asList(SecurityPreferences.getAuthorization(context)));
-        map.put(WsseToken.HEADER_WSSE, Arrays.asList(SecurityPreferences.getHeader(context)));
+        map.put(WsseToken.HEADER_AUTHORIZATION, Collections.singletonList(SecurityPreferences.getAuthorization(context)));
+        map.put(WsseToken.HEADER_WSSE, Collections.singletonList(SecurityPreferences.getHeader(context)));
 
         return map;
     }

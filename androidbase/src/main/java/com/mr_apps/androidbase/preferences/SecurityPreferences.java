@@ -3,7 +3,9 @@ package com.mr_apps.androidbase.preferences;
 import android.content.Context;
 
 /**
- * Created by denis on 03/02/16
+ * Class that handle the SharedPreferences for the WSSE Security
+ *
+ * @author Denis Brandi
  */
 public class SecurityPreferences extends AbstractBasePreferences {
 
@@ -16,26 +18,68 @@ public class SecurityPreferences extends AbstractBasePreferences {
     public static final String header_date = "header_date";
     public static final String authorization = "authorization";
 
+    /**
+     *
+     * Get the user for the WSSE Security.
+     *
+     * @param context
+     * @return
+     */
     public static String getUser(Context context) {
         return getPreferences(context, namePreferences).getString(user, "");
     }
 
+    /**
+     *
+     * Set the user for the WSSE Security.
+     *
+     * @param context
+     * @param value
+     */
     public static void setUser(Context context, String value) {
         setPreferences(context, namePreferences, user, value);
     }
 
+    /**
+     *
+     * Get the timestamp of the last update of the Header for the WSSE Security.
+     *
+     * @param context
+     * @return
+     */
     public static long getHeader_date(Context context) {
         return getPreferences(context, namePreferences).getLong(header_date, 0);
     }
 
+    /**
+     *
+     * Set the timestamp of the last update of the Header for the WSSE Security.
+     *
+     * @param context
+     * @param value
+     */
     public static void setHeader_date(Context context, long value) {
         setPreferences(context, namePreferences, header_date, value);
     }
 
+    /**
+     *
+     * Get the password for the WSSE Security.
+     *
+     * @param context
+     * @return
+     */
     public static String getToken(Context context) {
         return getPreferences(context, namePreferences).getString(token, "");
     }
 
+    /**
+     *
+     * Set the password for the WSSE Security.
+     *
+     * @param context
+     * @param value
+     */
     public static void setToken(Context context, String value) {
         setPreferences(context, namePreferences, token, value);
     }
