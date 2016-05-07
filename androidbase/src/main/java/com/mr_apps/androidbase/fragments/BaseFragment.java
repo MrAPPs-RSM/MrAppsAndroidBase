@@ -20,7 +20,7 @@ public class BaseFragment extends Fragment {
     }
 
     /**
-     * Method that should be called by the recycler view's adapter on item tap
+     * Method that should be called by the recycler view's adapter on item long tap
      *
      * @param view  the view tapped
      * @param items customizable params

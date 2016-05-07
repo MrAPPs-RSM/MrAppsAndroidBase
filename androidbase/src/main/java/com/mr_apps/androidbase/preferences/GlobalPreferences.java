@@ -22,7 +22,7 @@ public class GlobalPreferences extends AbstractBasePreferences {
      * Sets the value for the id key
      *
      * @param context the context
-     * @param value the value for the id key
+     * @param value   the value for the id key
      */
     public static void setId(Context context, int value) {
         setPreferences(context, namePreferences, id, value);
@@ -42,7 +42,7 @@ public class GlobalPreferences extends AbstractBasePreferences {
      * Sets the value for the username key
      *
      * @param context the context
-     * @param value the value for the username key
+     * @param value   the value for the username key
      */
     public static void setUsername(Context context, String value) {
         setPreferences(context, namePreferences, username, value);
@@ -62,7 +62,7 @@ public class GlobalPreferences extends AbstractBasePreferences {
      * Sets the value for the password key
      *
      * @param context the context
-     * @param value the value for the password key
+     * @param value   the value for the password key
      */
     public static void setPassword(Context context, String value) {
         setPreferences(context, namePreferences, password, value);
@@ -82,7 +82,7 @@ public class GlobalPreferences extends AbstractBasePreferences {
      * Sets the value for the hashed password key
      *
      * @param context the context
-     * @param value the value for the hashed password key
+     * @param value   the value for the hashed password key
      */
     public static void setHashedPassword(Context context, String value) {
         setPreferences(context, namePreferences, hashedPassword, value);
@@ -102,7 +102,7 @@ public class GlobalPreferences extends AbstractBasePreferences {
      * Sets the value for the latitude key
      *
      * @param context the context
-     * @param value the value for the latitude key
+     * @param value   the value for the latitude key
      */
     public static void setLatitude(Context context, String value) {
         setPreferences(context, namePreferences, latitude, value);
@@ -122,7 +122,7 @@ public class GlobalPreferences extends AbstractBasePreferences {
      * Sets the value for the longitude key
      *
      * @param context the context
-     * @param value the value for the longitude key
+     * @param value   the value for the longitude key
      */
     public static void setLongitude(Context context, String value) {
         setPreferences(context, namePreferences, longitude, value);
@@ -142,7 +142,7 @@ public class GlobalPreferences extends AbstractBasePreferences {
      * Sets the value for the altitude key
      *
      * @param context the context
-     * @param value the value for the altitude key
+     * @param value   the value for the altitude key
      */
     public static void setAltitude(Context context, String value) {
         setPreferences(context, namePreferences, altitude, value);

@@ -33,7 +33,9 @@ import java.util.Locale;
 
 
 /**
- * Created by denis on 15/01/16
+ * Base Activity that manage all the location's stuff
+ *
+ * @author Denis Brandi
  */
 public abstract class LocationActivity extends PermissionManagerActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
 
@@ -45,6 +47,9 @@ public abstract class LocationActivity extends PermissionManagerActivity impleme
 
     private static final String TAG = "LocationActivity";
 
+    /**
+     * Creates google API client with customizable params
+     */
     protected synchronized void createGoogleApiClient() {
         //Toast.makeText(this,"buildGoogleApiClient",Toast.LENGTH_SHORT).show();
         mGoogleApiClient = new GoogleApiClient.Builder(this)
@@ -62,18 +67,38 @@ public abstract class LocationActivity extends PermissionManagerActivity impleme
         mGoogleApiClient.connect();
     }
 
+    /**
+     * Method that should be overrided by the subclasses to customize the interval of the Google Api Client
+     *
+     * @return the interval of the Google Api Client
+     */
     public long getInterval() {
         return 60000;
     }
 
+    /**
+     * Method that should be overrided by the subclasses to customize the fastest interval of the Google Api Client
+     *
+     * @return the fastest interval of the Google Api Client
+     */
     public long getFastestInterval() {
         return 30000;
     }
 
+    /**
+     * Method that should be overrided by the subclasses to customize the smallest displacement of the Google Api Client
+     *
+     * @return the smallest displacement of the Google Api Client
+     */
     public float getSmallestDisplacement() {
         return 100;
     }
 
+    /**
+     * Gets the priority of the location request
+     *
+     * @return the priority of the location request
+     */
     public int getPriority() {
         return LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY;
     }
@@ -111,6 +136,9 @@ public abstract class LocationActivity extends PermissionManagerActivity impleme
 
     }
 
+    /**
+     * Sets the global preferences connected to the location stuff
+     */
     public void onPositionFound() {
         GlobalPreferences.setLatitude(this, String.valueOf(latLng.latitude));
         GlobalPreferences.setLongitude(this, String.valueOf(latLng.longitude));
@@ -134,15 +162,26 @@ public abstract class LocationActivity extends PermissionManagerActivity impleme
         }
     }
 
+    /**
+     * Method that control if the GPS is activated or not
+     *
+     * @return true if the GPS is active, false otherwise
+     */
     public boolean isGpsActivated() {
         LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
     }
 
+    /**
+     * Creates a Google Api Client
+     */
     public void refreshPosition() {
         createGoogleApiClient();
     }
 
+    /**
+     * Shows an alert message is the GPS is not activated, that asks the user if he wants to activate the GPS
+     */
     public void buildAlertMessageNoGps() {
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(getString(R.string.Avviso_gps))
@@ -177,7 +216,7 @@ public abstract class LocationActivity extends PermissionManagerActivity impleme
     @Override
     public void onStart() {
         super.onStart();
-        if(isLocationEnabled())
+        if (isLocationEnabled())
             if (mGoogleApiClient != null && !mGoogleApiClient.isConnected() && !mGoogleApiClient.isConnecting())
                 mGoogleApiClient.connect();
     }
@@ -185,18 +224,23 @@ public abstract class LocationActivity extends PermissionManagerActivity impleme
     @Override
     public void onPause() {
         super.onPause();
-        if(isLocationEnabled())
+        if (isLocationEnabled())
             stopLocationUpdates();
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        if(isLocationEnabled())
+        if (isLocationEnabled())
             if (mGoogleApiClient != null && mGoogleApiClient.isConnected())
                 mGoogleApiClient.disconnect();
     }
 
+    /**
+     * Starts the location updates for this activity
+     *
+     * @throws SecurityException if some security error occur
+     */
     protected void startLocationUpdates() throws SecurityException {
         if (isLocationEnabled()) {
             if (mGoogleApiClient == null)
@@ -213,6 +257,9 @@ public abstract class LocationActivity extends PermissionManagerActivity impleme
         }
     }
 
+    /**
+     * Stops the location updates for this activity
+     */
     protected void stopLocationUpdates() {
 
         if (mGoogleApiClient == null)
@@ -236,6 +283,9 @@ public abstract class LocationActivity extends PermissionManagerActivity impleme
 
     }
 
+    /**
+     * Sets the title of the toolbar to the location name
+     */
     public void setLocationNameToTitle() {
 
         getStringFromLocation(latLng.latitude, latLng.longitude, new FutureCallback<List<Address>>() {
@@ -254,12 +304,30 @@ public abstract class LocationActivity extends PermissionManagerActivity impleme
 
     }
 
-    public void setTitle(String title){}
+    /**
+     * Method that should be override to set the title of the toolbar
+     *
+     * @param title the title of the toolbar
+     */
+    public void setTitle(String title) {
+    }
 
-    public boolean isLocationEnabled(){
+    /**
+     * Method that should be override by the subclasses to sets if the location is enabled or not for this activity
+     *
+     * @return false
+     */
+    public boolean isLocationEnabled() {
         return false;
     }
 
+    /**
+     * Takes some coordinates and create a string containing the full name of the location
+     *
+     * @param lat      the latitude
+     * @param lng      the longitude
+     * @param complete the callback for the caller of the method
+     */
     public void getStringFromLocation(double lat, double lng, final FutureCallback<List<Address>> complete) {
 
         Ion.with(this)

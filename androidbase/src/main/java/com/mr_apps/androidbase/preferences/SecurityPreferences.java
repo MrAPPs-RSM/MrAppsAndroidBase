@@ -19,7 +19,6 @@ public class SecurityPreferences extends AbstractBasePreferences {
     public static final String authorization = "authorization";
 
     /**
-     *
      * Get the user for the WSSE Security.
      *
      * @param context the context
@@ -30,18 +29,16 @@ public class SecurityPreferences extends AbstractBasePreferences {
     }
 
     /**
-     *
      * Set the user for the WSSE Security.
      *
      * @param context the context
-     * @param value the value to set in the preferences
+     * @param value   the value to set in the preferences
      */
     public static void setUser(Context context, String value) {
         setPreferences(context, namePreferences, user, value);
     }
 
     /**
-     *
      * Get the timestamp of the last update of the Header for the WSSE Security.
      *
      * @param context the context
@@ -52,18 +49,16 @@ public class SecurityPreferences extends AbstractBasePreferences {
     }
 
     /**
-     *
      * Set the timestamp of the last update of the Header for the WSSE Security.
      *
      * @param context the context
-     * @param value the value to set in the preferences
+     * @param value   the value to set in the preferences
      */
     public static void setHeader_date(Context context, long value) {
         setPreferences(context, namePreferences, header_date, value);
     }
 
     /**
-     *
      * Get the password for the WSSE Security.
      *
      * @param context the context
@@ -74,11 +69,10 @@ public class SecurityPreferences extends AbstractBasePreferences {
     }
 
     /**
-     *
      * Set the password for the WSSE Security.
      *
      * @param context the context
-     * @param value the value to set in the preferences
+     * @param value   the value to set in the preferences
      */
     public static void setToken(Context context, String value) {
         setPreferences(context, namePreferences, token, value);
@@ -86,7 +80,6 @@ public class SecurityPreferences extends AbstractBasePreferences {
 
 
     /**
-     *
      * Get the additional parameter for the WSSE Security.
      *
      * @param context the context
@@ -97,18 +90,16 @@ public class SecurityPreferences extends AbstractBasePreferences {
     }
 
     /**
-     *
      * Set the additional parameter for the WSSE Security.
      *
      * @param context the context
-     * @param value the value to set in the preferences
+     * @param value   the value to set in the preferences
      */
     public static void setSecret(Context context, String value) {
         setPreferences(context, namePreferences, secret, value);
     }
 
     /**
-     *
      * Get the Header for the WSSE Security.
      *
      * @param context the context
@@ -120,18 +111,16 @@ public class SecurityPreferences extends AbstractBasePreferences {
     }
 
     /**
-     *
      * Set the Header for the WSSE Security.
      *
      * @param context the context
-     * @param value the value to set in the preferences
+     * @param value   the value to set in the preferences
      */
     public static void setHeader(Context context, String value) {
         setPreferences(context, namePreferences, header, value);
     }
 
     /**
-     *
      * Get the Authorization for the WSSE Security.
      *
      * @param context the context
@@ -142,11 +131,10 @@ public class SecurityPreferences extends AbstractBasePreferences {
     }
 
     /**
-     *
      * Set the Authorization for the WSSE Security.
      *
      * @param context the context
-     * @param value the value to set in the preferences
+     * @param value   the value to set in the preferences
      */
     public static void setAuthorization(Context context, String value) {
         setPreferences(context, namePreferences, authorization, value);

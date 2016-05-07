@@ -6,9 +6,9 @@ import android.support.annotation.Nullable;
 import io.realm.Realm;
 
 /**
- * Created by mattia on 09/03/2016.
+ * Class that manages the Base Activity that every activity that uses Realm database should extends
  *
- * @author Mattia Ruggiero
+ * @author Denis Brandi
  */
 public class AbstractRealmActivity extends AbstractBaseActivity {
 

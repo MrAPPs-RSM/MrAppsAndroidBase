@@ -13,7 +13,9 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 
 /**
- * Created by denis on 15/01/16
+ * Class that manages all the base runtime permissions for API > 23 devices
+ *
+ * @author Mattia Ruggiero
  */
 public abstract class PermissionManagerActivity extends AppCompatActivity {
 
@@ -24,10 +26,26 @@ public abstract class PermissionManagerActivity extends AppCompatActivity {
     private static final int ACCESS_FINE_LOCATION_PERMISSION_REQUEST = 4;
     private static final int CAMERA = 5;
 
+    /**
+     * Checks if a permission has already been accepted by the user, and request it if not
+     *
+     * @param permission the permission that the user must accept
+     * @param titleId the string's resource id of the title of the dialog to show, if the permission was denied in the past
+     * @param messageId the string's resource id of the message of the dialog to show, if the permission was denied in the past
+     * @return true if the permission was already accepted, false otherwise
+     */
     public boolean checkOrRequestPermission(String permission, int titleId, int messageId) {
         return checkOrRequestPermission(permission, getString(titleId), getString(messageId));
     }
 
+    /**
+     * Checks if a permission has already been accepted by the user, and request it if not
+     *
+     * @param permission the permission that the user must accept
+     * @param title the title of the dialog to show, if the permission was denied in the past
+     * @param message the message of the dialog to show, if the permission was denied in the past
+     * @return true if the permission was already accepted, false otherwise
+     */
     public boolean checkOrRequestPermission(String permission, String title, String message) {
 
         if (checkPermission(permission))
@@ -39,6 +57,12 @@ public abstract class PermissionManagerActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Gets the permission request's id from the permission's string
+     *
+     * @param permission the string of the permission
+     * @return the id of the permission's request
+     */
     private int getPermissionRequestByPermissionName(String permission) {
 
         switch (permission) {
@@ -61,6 +85,12 @@ public abstract class PermissionManagerActivity extends AppCompatActivity {
 
     //controllo se ho già il permesso
 
+    /**
+     * Checks if the system already has the permission
+     *
+     * @param permission the permission yo check
+     * @return true if the permission already has been accepted, false otherwise
+     */
     public boolean checkPermission(String permission) {
         return ContextCompat.checkSelfPermission(this, permission) == PackageManager.PERMISSION_GRANTED;
     }
@@ -72,10 +102,26 @@ public abstract class PermissionManagerActivity extends AppCompatActivity {
     -forceAlert=false: se non ho il permesso e l'utente precedentemente me lo ha rifiutato non glielo richiedo
      */
 
+    /**
+     * Requests the given permission to the user
+     *
+     * @param permission the permission to request
+     * @param MY_PERMISSIONS_REQUEST_CODE the code of the permission
+     * @param titleId the string's resource id of the title of the dialog to show, if the permission was denied in the past
+     * @param messageId the string's resource id of the message of the dialog to show, if the permission was denied in the past
+     */
     private void requestPermission(String permission, int MY_PERMISSIONS_REQUEST_CODE, int titleId, int messageId) {
         requestPermission(permission, MY_PERMISSIONS_REQUEST_CODE, getString(titleId), getString(messageId));
     }
 
+    /**
+     * Requests the given permission to the user
+     *
+     * @param permission the permission to request
+     * @param MY_PERMISSIONS_REQUEST_CODE the code of the permission
+     * @param title the title of the dialog to show, if the permission was denied in the past
+     * @param message the message of the dialog to show, if the permission was denied in the past
+     */
     private void requestPermission(String permission, int MY_PERMISSIONS_REQUEST_CODE, String title, String message) {
         // Here, thisActivity is the current activity
         if (!checkPermission(permission)) {
@@ -105,16 +151,36 @@ public abstract class PermissionManagerActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Requests the given permission to the user using the standard dialog
+     *
+     * @param permission the permission to request
+     * @param MY_PERMISSIONS_REQUEST_CODE the code of the permission
+     */
     private void requestPermissionWithAlert(String permission, int MY_PERMISSIONS_REQUEST_CODE) {
         ActivityCompat.requestPermissions(this,
                 new String[]{permission},
                 MY_PERMISSIONS_REQUEST_CODE);
     }
 
+    /**
+     * Shows a dialog to tell the user that he MUST accept permission in order to use the application
+     *
+     * @param permission the permission to accept
+     * @param titleId the string's resource id of the title of the dialog
+     * @param messageId the string's resource id of the message of the dialog
+     */
     private void userMustAcceptPermission(String permission, int titleId, int messageId) {
         userMustAcceptPermission(permission, getString(titleId), getString(messageId));
     }
 
+    /**
+     * Shows a dialog to tell the user that he MUST accept permission in order to use the application
+     *
+     * @param permission the permission to accept
+     * @param title the title of the dialog
+     * @param message the message of the dialog
+     */
     private void userMustAcceptPermission(final String permission, String title, String message) {
         new AlertDialog.Builder(this)
                 .setTitle(title)
@@ -147,6 +213,12 @@ public abstract class PermissionManagerActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Calls the right methods that has to be overriden by the subclasses
+     *
+     * @param requestCode the permission id
+     * @param granted true if the permission was granted, false otherwise
+     */
     private void goToPermissionCallback(int requestCode, boolean granted) {
         switch (requestCode) {
             case WRITE_STORAGE_PERMISSION_REQUEST: {
@@ -176,6 +248,9 @@ public abstract class PermissionManagerActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Go to the settings activity of the phone, to help the user accept the permission
+     */
     private void goToSettings() {
 
         Intent myAppSettings = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:" + getPackageName()));
@@ -184,16 +259,39 @@ public abstract class PermissionManagerActivity extends AppCompatActivity {
         startActivityForResult(myAppSettings, REQUEST_APP_SETTINGS);
     }
 
-    //metodi granted-denied
-
+    /**
+     * Method that should be overriden by the subclasses to manage the acceptance of the write storage permission
+     *
+     * @param granted true if the permission was granted, false otherwise
+     */
     public void writeStoragePermissionResult(boolean granted) {}
 
+    /**
+     * Method that should be overriden by the subclasses to manage the acceptance of the read storage permission
+     *
+     * @param granted true if the permission was granted, false otherwise
+     */
     public void readStoragePermissionResult(boolean granted) {}
 
+    /**
+     * Method that should be overriden by the subclasses to manage the acceptance of the access coarse permission
+     *
+     * @param granted true if the permission was granted, false otherwise
+     */
     public void accessCoarsePermissionResult(boolean granted) {}
 
+    /**
+     * Method that should be overriden by the subclasses to manage the acceptance of the access fine permission
+     *
+     * @param granted true if the permission was granted, false otherwise
+     */
     public void accessFinePermissionResult(boolean granted) {}
 
+    /**
+     * Method that should be overriden by the subclasses to manage the acceptance of the camera permission
+     *
+     * @param granted true if the permission was granted, false otherwise
+     */
     public void cameraPermissionResult(boolean granted){}
 
 }
