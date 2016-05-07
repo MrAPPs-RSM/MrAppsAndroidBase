@@ -1,15 +1,40 @@
 package com.mr_apps.androidbase.webservice;
 
+import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
 /**
- * Created by denis on 02/02/16
+ *
+ * Class to handle JsonElements to avoid crashes and additional code
+ *
+ * @author Denis Brandi
  */
 public abstract class WebServiceUtils {
 
     private static final String TAG = "WebServiceUtils";
 
+    /**
+     *
+     * Get the JsonArray for the given JsonElement
+     *
+     * @param object
+     * @return null if the JsonElement is not a JsonArray or is null
+     */
+    public static JsonArray putJsonArray(JsonElement object) {
+        if(object==null || object.isJsonNull() || !object.isJsonArray())
+            return null;
+        else
+            return object.getAsJsonArray();
+    }
+
+    /**
+     *
+     * Get the JsonObject for the given JsonElement
+     *
+     * @param object
+     * @return null if the JsonElement is not a JsonObject or is null
+     */
     public static JsonObject putJsonObject(JsonElement object) {
         if (object == null || object.isJsonNull() || !object.isJsonObject())
             return null;
@@ -17,6 +42,13 @@ public abstract class WebServiceUtils {
             return object.getAsJsonObject();
     }
 
+    /**
+     *
+     * Get the String for the given JsonElement
+     *
+     * @param object
+     * @return null if the JsonElement is not a String or is null
+     */
     public static String putJsonString(JsonElement object) {
         try {
 
@@ -31,6 +63,13 @@ public abstract class WebServiceUtils {
 
     }
 
+    /**
+     *
+     * Get the int for the given JsonElement
+     *
+     * @param object
+     * @return 0 if the JsonElement is not a int or is null
+     */
     public static int putJsonInt(JsonElement object) {
         if (object != null && !object.isJsonNull() && !object.getAsString().equals(""))
             return object.getAsInt();
@@ -39,6 +78,13 @@ public abstract class WebServiceUtils {
 
     }
 
+    /**
+     *
+     * Get the rounded int for the given JsonElement
+     *
+     * @param object
+     * @return 0 if the JsonElement is not a int or is null
+     */
     public static int putJsonIntRounded(JsonElement object) {
         if (object != null && !object.isJsonNull() && !object.getAsString().equals(""))
             return (int) Math.round(object.getAsDouble());
@@ -47,6 +93,13 @@ public abstract class WebServiceUtils {
 
     }
 
+    /**
+     *
+     * Get the int for the given JsonElement that may contain an int or a String
+     *
+     * @param object
+     * @return null if the JsonElement is not a String or is null
+     */
     public static int putJsonIntFromString(JsonElement object) {
         if (object != null && !object.isJsonNull())
             return Integer.parseInt(object.getAsString());
@@ -55,6 +108,13 @@ public abstract class WebServiceUtils {
 
     }
 
+    /**
+     *
+     * Get the int for the given JsonElement that contains a boolean value
+     *
+     * @param object
+     * @return null if the JsonElement is not a boolean or is null
+     */
     public static int putJsonIntFromBoolean(JsonElement object) {
         if (object != null && !object.isJsonNull() && !object.getAsString().equals(""))
             if (object.getAsBoolean())
@@ -66,6 +126,13 @@ public abstract class WebServiceUtils {
 
     }
 
+    /**
+     *
+     * Get the boolean for the given JsonElement
+     *
+     * @param object
+     * @return null if the JsonElement is not a boolean or is null
+     */
     public static boolean putJsonBoolean(JsonElement object) {
         if (object != null && !object.isJsonNull() && !object.getAsString().equals(""))
             if (object.getAsBoolean())
@@ -77,6 +144,13 @@ public abstract class WebServiceUtils {
 
     }
 
+    /**
+     *
+     * Get the timestamp in millis (long) for the given JsonElement
+     *
+     * @param object
+     * @return null if the JsonElement is not a long or is null
+     */
     public static long putJsonLong(JsonElement object) {
         if (object != null && !object.isJsonNull() && !object.getAsString().equals(""))
             return object.getAsLong() * 1000L;
@@ -85,6 +159,13 @@ public abstract class WebServiceUtils {
 
     }
 
+    /**
+     *
+     * Get the timestamp in millis (long) for the given JsonElement that may contain an long or a String
+     *
+     * @param object
+     * @return null if the JsonElement is not a String or is null
+     */
     public static long putJsonLongFromString(JsonElement object) {
         if (object != null && !object.isJsonNull() && !object.getAsString().equals(""))
             if (object.getAsString().equals(""))
@@ -96,6 +177,13 @@ public abstract class WebServiceUtils {
 
     }
 
+    /**
+     *
+     * Get the float for the given JsonElement
+     *
+     * @param object
+     * @return null if the JsonElement is not a float or is null
+     */
     public static float putJsonFloat(JsonElement object) {
         if (object != null && !object.isJsonNull() && !object.getAsString().equals(""))
             return object.getAsFloat();
@@ -104,6 +192,13 @@ public abstract class WebServiceUtils {
 
     }
 
+    /**
+     *
+     * Get the double for the given JsonElement
+     *
+     * @param object
+     * @return null if the JsonElement is not a double or is null
+     */
     public static double putJsonDouble(JsonElement object) {
         if (object != null && !object.isJsonNull() && !object.getAsString().equals(""))
             return object.getAsDouble();

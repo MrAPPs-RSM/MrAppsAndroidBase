@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
 /**
- * Class that contains basic File Utils
+ * Class that contains basic Keyboard Utils
  *
  * @author Denis Brandi
  */

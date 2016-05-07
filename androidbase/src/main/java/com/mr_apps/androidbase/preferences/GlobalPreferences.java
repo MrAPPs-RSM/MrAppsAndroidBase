@@ -3,7 +3,9 @@ package com.mr_apps.androidbase.preferences;
 import android.content.Context;
 
 /**
- * Created by denis on 09/02/16
+ *
+ *
+ * @author Denis Brandi
  */
 public class GlobalPreferences extends AbstractBasePreferences {
 
