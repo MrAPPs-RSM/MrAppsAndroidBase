@@ -8,7 +8,6 @@ import android.support.design.widget.TextInputLayout;
 import android.support.graphics.drawable.VectorDrawableCompat;
 import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
-import android.view.View;
 import android.widget.EditText;
 
 import com.mr_apps.androidbase.R;
@@ -70,7 +69,7 @@ public class WarningTextInputLayout extends TextInputLayout {
     /**
      * Special management if the EditText contained by the TextInputLayout is instance of the Password View
      *
-     * @param edit the edit text (should be a Password View)
+     * @param edit  the edit text (should be a Password View)
      * @param error sets whether the error si activated or not
      */
     private void passwordViewManagement(EditText edit, boolean error) {
