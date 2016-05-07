@@ -84,27 +84,70 @@ public class SecurityPreferences extends AbstractBasePreferences {
         setPreferences(context, namePreferences, token, value);
     }
 
+
+    /**
+     *
+     * Get the additional parameter for the WSSE Security.
+     *
+     * @param context
+     * @return
+     */
     public static String getSecret(Context context) {
         return getPreferences(context, namePreferences).getString(secret, "");
     }
 
+    /**
+     *
+     * Set the additional parameter for the WSSE Security.
+     *
+     * @param context
+     * @param value
+     */
     public static void setSecret(Context context, String value) {
         setPreferences(context, namePreferences, secret, value);
     }
 
+    /**
+     *
+     * Get the Header for the WSSE Security.
+     *
+     * @param context
+     * @return
+     */
     public static String getHeader(Context context) {
 
         return getPreferences(context, namePreferences).getString(header, "");
     }
 
+    /**
+     *
+     * Set the Header for the WSSE Security.
+     *
+     * @param context
+     * @param value
+     */
     public static void setHeader(Context context, String value) {
         setPreferences(context, namePreferences, header, value);
     }
 
+    /**
+     *
+     * Get the Authorization for the WSSE Security.
+     *
+     * @param context
+     * @return
+     */
     public static String getAuthorization(Context context) {
         return getPreferences(context, namePreferences).getString(authorization, "");
     }
 
+    /**
+     *
+     * Set the Authorization for the WSSE Security.
+     *
+     * @param context
+     * @param value
+     */
     public static void setAuthorization(Context context, String value) {
         setPreferences(context, namePreferences, authorization, value);
     }
