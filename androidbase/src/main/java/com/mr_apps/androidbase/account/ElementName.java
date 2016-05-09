@@ -1,7 +1,7 @@
 package com.mr_apps.androidbase.account;
 
 /**
- * Created by mattia on 18/04/2016.
+ * Enum that manages the name of the possible elements of the sign up form
  *
  * @author Mattia Ruggiero
  */
@@ -16,6 +16,11 @@ public enum ElementName {
 
     private final String name;
 
+    /**
+     * Constructor that takes the name of the enum
+     *
+     * @param s the name of the enum
+     */
     ElementName(String s) {
         name = s;
     }

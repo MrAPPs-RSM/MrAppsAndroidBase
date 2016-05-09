@@ -42,7 +42,10 @@ import com.mr_apps.androidbase.utils.Utils;
 import org.json.JSONObject;
 
 /**
- * Created by Mattia Ruggiero on 07/04/16.
+ * Abstract Base class that manages a login activity, that should be extended by a real Login Activity
+ *
+ * @author Mattia Ruggiero
+ * @author Denis Brandi
  */
 public abstract class BaseLoginActivity extends AbstractBaseActivity implements
         GoogleApiClient.OnConnectionFailedListener, View.OnClickListener {
@@ -172,6 +175,9 @@ public abstract class BaseLoginActivity extends AbstractBaseActivity implements
         setupGoogleSignInButton();
     }
 
+    /**
+     * Sets up the facebook login/register button
+     */
     private void setupFbSignInButton() {
 
         loginButton = (LoginButton) findViewById(R.id.fb_login);
@@ -221,6 +227,9 @@ public abstract class BaseLoginActivity extends AbstractBaseActivity implements
         LoginManager.getInstance().logOut();
     }
 
+    /**
+     * Sets up the google login/register button
+     */
     private void setupGoogleSignInButton() {
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
@@ -252,6 +261,11 @@ public abstract class BaseLoginActivity extends AbstractBaseActivity implements
         Logger.d(TAG, "FAILED: " + connectionResult.toString());
     }
 
+    /**
+     * Corrects the color of the WarningTextInputLayout for some Samsung devices
+     *
+     * @param email true if the edit text to correct is the "email" one, false is it's the password one
+     */
     private void correctColor(final boolean email) {
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -266,31 +280,76 @@ public abstract class BaseLoginActivity extends AbstractBaseActivity implements
         }, 100);
     }
 
+    /**
+     * Checks the form to verify if every field is correctly compiled
+     *
+     * @return true if the form is correctly compiled, false otherwise
+     */
     private boolean checkForm() {
         return til_email.isErrorEnabled() || til_password.isErrorEnabled()
                 || email.getText().toString().length() == 0 || password.getText().toString().length() == 0;
     }
 
+    /**
+     * Shows a snackbar that displays an error message
+     */
     private void showErrorMessage() {
         Snackbar.make(email, R.string.Controllare_dati_inseriti, Snackbar.LENGTH_LONG).show();
     }
 
+    /**
+     * Abstract method that should be override by the subclasses to set the correct facebook login permissions
+     *
+     * @return the facebook login permissions
+     */
     public abstract String[] getFbPermissions();
 
+    /**
+     * Abstract method that should be override by the subclasses to set the correct facebook login parameters
+     *
+     * @return the facebook login parameters
+     */
     public abstract String getFbParameters();
 
+    /**
+     * Abstract method that should be override by the subclasses to manage the actions to do when the fb login is successful
+     */
     public abstract void onFbSuccess(JSONObject jsonObject, LoginResult loginResult);
 
+    /**
+     * Abstract method that should be override by the subclasses to manage the actions to do when the fb login return errors
+     */
     public abstract void onFbError();
 
+    /**
+     * Abstract method that should be override by the subclasses to sets the rules that defines when the password should be considered correct or not
+     *
+     * @param s the current password contained in the password edit text
+     * @return true if the password is currently valid, false otherwise
+     */
     public abstract boolean passwordTilRule(String s);
 
+
+    /**
+     * Abstract method that should be override by the subclasses to sets the action to do when the "login" button is tapped and login is successful
+     */
     protected abstract void onLoginSuccess();
 
+    /**
+     * Abstract method that should be override by the subclasses to sets the action to do when the "password forgotten" button is tapped
+     */
     protected abstract void passwordForgotten();
 
+    /**
+     * Abstract method that should be override by the subclasses to sets the action to do when the "subscribe" button is tapped
+     */
     protected abstract void subscribe();
 
+    /**
+     * Abstract method that should be override by the subclasses to manage the actions to do when the google login is completed
+     *
+     * @param account the Google Account
+     */
     protected abstract void onGoogleSignInCompleted(GoogleSignInAccount account);
 
     @Override
@@ -300,6 +359,9 @@ public abstract class BaseLoginActivity extends AbstractBaseActivity implements
         }
     }
 
+    /**
+     * Sign in with google account
+     */
     private void signIn() {
         Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
         startActivityForResult(signInIntent, RC_SIGN_IN);
@@ -318,6 +380,11 @@ public abstract class BaseLoginActivity extends AbstractBaseActivity implements
         }
     }
 
+    /**
+     * Handles the result of the google sign in
+     *
+     * @param result the result of the google sign in
+     */
     private void handleSignInResult(GoogleSignInResult result) {
         Log.d(TAG, "handleSignInResult:" + result.isSuccess());
         if (result.isSuccess()) {

@@ -20,7 +20,9 @@ import com.mr_apps.androidbase.utils.TextViewUtils;
 import java.util.List;
 
 /**
- * Created by denis on 07/04/16.
+ * Abstract Base class that manages a sign up activity, that should be extended by a real Sign Up Activity
+ *
+ * @author Mattia Ruggiero
  */
 public abstract class BaseRegistrazioneActivity extends AbstractBaseActivity implements TextViewUtils.ClickableSpannableCallback {
 
@@ -74,10 +76,19 @@ public abstract class BaseRegistrazioneActivity extends AbstractBaseActivity imp
         }
     }
 
+    /**
+     * Manages the actions to do when a part of the form is tapped by the user. Should be override by the subclasses to customize the behaviour
+     *
+     * @param name the ElementName of the section tapped
+     */
     protected void onSubsectionClick(ElementName name) {
-
     }
 
+    /**
+     * Checks all the dynamic elements of the form and decides if the form is valid or not
+     *
+     * @return true if the form is valid, false otherwise
+     */
     private boolean checkForm() {
         for (int i = 0; i < elements.size(); i++) {
             if (elements.get(i).isRequired()) {
@@ -92,15 +103,32 @@ public abstract class BaseRegistrazioneActivity extends AbstractBaseActivity imp
         return false;
     }
 
+    /**
+     * Shows a snackbar that displays an error message
+     */
     private void showErrorMessage() {
         Snackbar.make(container, R.string.Campi_obbligatori_non_inseriti, Snackbar.LENGTH_LONG).show();
     }
 
+    /**
+     * Abstract method that should be override by the subclasses to set all the elements (edit text, switch, subsections) of the sign up form
+     *
+     * @return a list containing all the sign up form elements
+     */
     protected abstract List<SignUpElement> getSignUpElements();
 
+    /**
+     * Abstract method that should be override by the subclasses to set the actions to do when the "terms & conditions" button is tapped
+     */
     protected abstract void termsConditions();
 
+    /**
+     * Abstract method that should be override by the subclasses to set the actions to do when the "privacy policy" button is tapped
+     */
     protected abstract void privacyPolicy();
 
+    /**
+     * Abstract method that should be override by the subclasses to set the actions to do when the "sign up" button is tapped and the sign up is successful
+     */
     protected abstract void onSignupSuccess();
 }

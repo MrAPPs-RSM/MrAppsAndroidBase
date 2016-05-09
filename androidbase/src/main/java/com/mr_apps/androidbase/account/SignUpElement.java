@@ -17,7 +17,7 @@ import com.mr_apps.androidbase.utils.CustomDialog;
 import com.mr_apps.androidbase.utils.Utils;
 
 /**
- * Created by mattia on 18/04/2016.
+ * Class that manages a standard sign up element of the registration form
  *
  * @author Mattia Ruggiero
  */
@@ -31,6 +31,14 @@ public class SignUpElement {
 
     private boolean required;
 
+    /**
+     * Constructor that takes all the fields of the class
+     *
+     * @param context   the context
+     * @param name      the name of the element, chosen by the names of the "ElementName" enum
+     * @param inputType the input type of the element, chosen by the "ElementInputType" enum
+     * @param required  true if this element is required to complete the sign up process, false otherwise
+     */
     public SignUpElement(Context context, ElementName name, ElementInputType inputType, boolean required) {
         this.context = context;
         this.name = name;
@@ -38,14 +46,29 @@ public class SignUpElement {
         this.required = required;
     }
 
+    /**
+     * Gets the name of this element
+     *
+     * @return the name of the element
+     */
     public ElementName getName() {
         return name;
     }
 
+    /**
+     * Gets the input type of this element
+     *
+     * @return the input type of the element
+     */
     public ElementInputType getInputType() {
         return inputType;
     }
 
+    /**
+     * Gets the view of the element
+     *
+     * @return the view of the element
+     */
     public View getView() {
         if (view != null) {
             return view;
@@ -54,6 +77,11 @@ public class SignUpElement {
         }
     }
 
+    /**
+     * Creates the view for this element, with all the actions associated
+     *
+     * @return the view for this element
+     */
     private View createView() {
         LayoutInflater inflater = LayoutInflater.from(context);
 
@@ -137,9 +165,9 @@ public class SignUpElement {
     }
 
     /**
-     * Consente di aggiungere un listener all'elemento SOLO se è di tipo SUBSECTION
+     * Allows to add a listener to the element only if its type is "SUBSECTION"
      *
-     * @param listener il listener da aggiungere alla view
+     * @param listener the listaner to add to the view
      */
     public void addOnClickListener(View.OnClickListener listener) {
         if (inputType.equals(ElementInputType.SUBSECTION)) {
@@ -155,6 +183,11 @@ public class SignUpElement {
         }
     }
 
+    /**
+     * Gets the "required" field of this class
+     *
+     * @return true if this element is required, false otherwise
+     */
     public boolean isRequired() {
         return required;
     }

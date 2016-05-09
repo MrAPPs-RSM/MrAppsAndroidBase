@@ -1,7 +1,7 @@
 package com.mr_apps.androidbase.account;
 
 /**
- * Created by mattia on 18/04/2016.
+ * Enum that manages all the types of element of the sign up activity
  *
  * @author Mattia Ruggiero
  */
