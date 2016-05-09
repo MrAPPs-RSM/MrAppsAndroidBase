@@ -23,14 +23,12 @@ import java.io.File;
 import java.util.ArrayList;
 
 /**
- * Created by denis on 29/02/16
+ * Base activity that offers method to manage taking pictures and choosing images from gallery
+ * Warning: To avoid activity recreation remember to add "android:configChanges="orientation|keyboardHidden|screenSize" in your manifest.
+ *
+ * @author Denis Brandi
+ * @author Mattia Ruggiero
  */
-
-/**
- * To avoid activity recreation remember to add "android:configChanges="orientation|keyboardHidden|screenSize"
- * in your manifest.
- */
-
 public abstract class PickerActivity extends LocationActivity {
 
     @Override
@@ -55,20 +53,52 @@ public abstract class PickerActivity extends LocationActivity {
 
     private int qualityImage = 80;
 
+    /**
+     * Sets the quality of the image taken or chosen from gallery
+     *
+     * @param qualityImage the quality of the image
+     */
     public void setQualityImage(int qualityImage) {
         this.qualityImage = qualityImage;
     }
 
     private boolean saveInInternalStorage = false;
 
+    /**
+     * Shows an alert dialog that allows the user to choose an action. The possible actions are determined by the parameters of the method
+     *
+     * @param title                the title of the dialog
+     * @param pickImageFromGallery true if the dialog should contain the option for picking an image from gallery, false otherwise
+     * @param takePhoto            true if the dialog should contain the option for taking a photo using camera, false otherwise
+     */
     public void showAlertChoice(String title, boolean pickImageFromGallery, boolean takePhoto) {
         showAlertChoice(title, pickImageFromGallery, takePhoto, false, false);
     }
 
+    /**
+     * Shows an alert dialog that allows the user to choose an action. The possible actions are determined by the parameters of the method
+     *
+     * @param title                the title of the dialog
+     * @param pickImageFromGallery true if the dialog should contain the option for picking an image from gallery, false otherwise
+     * @param takePhoto            true if the dialog should contain the option for taking a photo using camera, false otherwise
+     * @param pickVideoFromGallery true if the dialog should contain the option for picking a video from gallery, false otherwise
+     * @param recordVideo          true if the dialog should contain the option for record a video, false otherwise
+     */
     public void showAlertChoice(String title, boolean pickImageFromGallery, boolean takePhoto, boolean pickVideoFromGallery, boolean recordVideo) {
         showAlertChoice(title, pickImageFromGallery, takePhoto, pickVideoFromGallery, recordVideo, false, false);
     }
 
+    /**
+     * Shows an alert dialog that allows the user to choose an action. The possible actions are determined by the parameters of the method
+     *
+     * @param title                the title of the dialog
+     * @param pickImageFromGallery true if the dialog should contain the option for picking an image from gallery, false otherwise
+     * @param takePhoto            true if the dialog should contain the option for taking a photo using camera, false otherwise
+     * @param pickVideoFromGallery true if the dialog should contain the option for picking a video from gallery, false otherwise
+     * @param recordVideo          true if the dialog should contain the option for record a video, false otherwise
+     * @param pickAudioFromGallery true if the dialog should contain the option for picking an audio from gallery, false otherwise
+     * @param recordAudio          true if the dialog should contain the option for record an audio file, false otherwise
+     */
     public void showAlertChoice(String title, boolean pickImageFromGallery, final boolean takePhoto, boolean pickVideoFromGallery, boolean recordVideo, boolean pickAudioFromGallery, boolean recordAudio) {
 
         this.mTitle = title;
@@ -151,6 +181,9 @@ public abstract class PickerActivity extends LocationActivity {
 
     }
 
+    /**
+     * Opens the screen where the user can choose a photo from his gallery
+     */
     public void pickImage() {
         Intent intent = new Intent();
         if (Build.VERSION.SDK_INT >= 19) {
@@ -168,6 +201,9 @@ public abstract class PickerActivity extends LocationActivity {
         startActivityForResult(intent, actionPickImage);
     }
 
+    /**
+     * Opens the camera activity where the user can take a photo to return to this activity
+     */
     public void takePhoto() {
         Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
         File file = FileUtils.newFileToUpload(PickerActivity.this, getFolder(), ElementType.img, saveInInternalStorage);
@@ -176,6 +212,9 @@ public abstract class PickerActivity extends LocationActivity {
         startActivityForResult(intent, actionTakeImage);
     }
 
+    /**
+     * Opens the screen where the user can choose a video from his gallery
+     */
     public void pickVideo() {
         Intent intent = new Intent();
         if (Build.VERSION.SDK_INT >= 19) {
@@ -193,6 +232,9 @@ public abstract class PickerActivity extends LocationActivity {
         startActivityForResult(intent, actionPickVideo);
     }
 
+    /**
+     * Opens the camera activity where the user can record a video to return to this activity
+     */
     public void recordVideo() {
         Intent intent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
         File file = FileUtils.newFileToUpload(PickerActivity.this, getFolder(), ElementType.vid, false);
@@ -202,6 +244,9 @@ public abstract class PickerActivity extends LocationActivity {
         startActivityForResult(intent, actionRecordVideo);
     }
 
+    /**
+     * Opens the screen where the user can choose an audio file from his gallery
+     */
     public void pickAudio() {
         Intent intent = new Intent();
         if (Build.VERSION.SDK_INT >= 19) {
@@ -219,6 +264,9 @@ public abstract class PickerActivity extends LocationActivity {
         startActivityForResult(intent, actionPickAudio);
     }
 
+    /**
+     * Opens the camera activity where the user can record an audio file to return to this activity
+     */
     public void recordAudio() {
         Intent intent = new Intent(MediaStore.Audio.Media.RECORD_SOUND_ACTION);
         File file = FileUtils.newFileToUpload(PickerActivity.this, getFolder(), ElementType.audio, false);
@@ -228,22 +276,48 @@ public abstract class PickerActivity extends LocationActivity {
         startActivityForResult(intent, actionRecordAudio);
     }
 
+    /**
+     * Gets the duration of the video. The default value is 30, but is strongly recommended to override this method in the subclass to customize the value
+     *
+     * @return the default video duration, 30
+     */
     public int getDurationVideo() {
         return 30;
     }
 
+    /**
+     * Gets the duration of the audio file. The default value is 120, but is strongly recommended to override this method in the subclass to customize the value
+     *
+     * @return the default audio file duration, 120
+     */
     public int getDurationAudio() {
         return 120;
     }
 
+    /**
+     * Gets the folder where the images or the video have to be saved.
+     * The default folder is the root folder, so is recommended to override this method in the subclass to customize the default folder
+     *
+     * @return an empty string, so the default folder is the root folder
+     */
     public String getFolder() {
         return "";
     }
 
+    /**
+     * Gets the title of the chooser dialog
+     *
+     * @return the title of the chooser dialog
+     */
     public String getmTitle() {
         return mTitle;
     }
 
+    /**
+     * Setter method for the "saveInInternalStorage" flag
+     *
+     * @param saveInInternalStorage true if the file should be saved in the internal storage, false otherwise
+     */
     public void setSaveInInternalStorage(boolean saveInInternalStorage) {
         this.saveInInternalStorage = saveInInternalStorage;
     }
@@ -339,6 +413,13 @@ public abstract class PickerActivity extends LocationActivity {
         }
     }
 
+    /**
+     * Method that should be override by the subclasses to manage the image taken from camera or picked from gallery
+     *
+     * @param path the path where the image is saved
+     * @param elementType the type of the bitmap file
+     * @param bitmap the bitmap image
+     */
     public void pickerResult(String path, ElementType elementType, Bitmap bitmap) {
     }
 
@@ -378,6 +459,11 @@ public abstract class PickerActivity extends LocationActivity {
 
     }
 
+    /**
+     * Manages the temporary Uri of the bitmap image, setting it in the correct orientation and resizing it before calling the "pickerResult" method
+     *
+     * @param tempUri the temporary Uri of the image
+     */
     private void handleTempUri(Uri tempUri) {
 
         try {
@@ -403,6 +489,11 @@ public abstract class PickerActivity extends LocationActivity {
         }
     }
 
+    /**
+     * Manages the temporary Uri of the audio file, before calling the "pickerResult" method
+     *
+     * @param audioTempUri the temporary Uri of the audio file
+     */
     private void handleAudioTempUri(Uri audioTempUri) {
 
         try {
@@ -420,6 +511,11 @@ public abstract class PickerActivity extends LocationActivity {
 
     }
 
+    /**
+     * Manages the temporary Uri of the video, before calling the "pickerResult" method
+     *
+     * @param videoTempUri the temporary Uri of the video
+     */
     private void handleVideoTempUri(Uri videoTempUri) {
         try {
 
