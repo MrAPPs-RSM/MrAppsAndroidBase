@@ -9,27 +9,43 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import java.util.List;
 
 /**
- * Created by denis on 19/04/16.
+ * Class that manages the adapter for the BaseTutorialActivity
+ *
+ * @author Denis Brandi
  */
 public class TutorialAdapter extends FragmentStatePagerAdapter {
 
     Context context;
-    final ItemTutorial [] tutorials;
+    final ItemTutorial[] tutorials;
 
+    /**
+     * Constructor that takes the fragment manager, the context and an optional parameter for the tutorial items
+     *
+     * @param fm        the fragment manager
+     * @param context   the context
+     * @param tutorials an optional parameter contains a variable number of tutorial items
+     */
     public TutorialAdapter(FragmentManager fm, Context context, ItemTutorial... tutorials) {
         super(fm);
         this.context = context;
         this.tutorials = tutorials;
     }
 
+    /**
+     * Constructor that takes the fragment manager, the context and an optional parameter for the tutorial items
+     *
+     * @param fm        the fragment manager
+     * @param context   the context
+     * @param tutorials a list containing the tutorial items
+     */
     public TutorialAdapter(FragmentManager fm, Context context, List<ItemTutorial> tutorials) {
         super(fm);
         this.context = context;
 
-        this.tutorials=new ItemTutorial[tutorials.size()];
+        this.tutorials = new ItemTutorial[tutorials.size()];
 
-        for(int i=0; i<tutorials.size(); i++) {
-            this.tutorials[i]=tutorials.get(i);
+        for (int i = 0; i < tutorials.size(); i++) {
+            this.tutorials[i] = tutorials.get(i);
         }
     }
 
@@ -37,8 +53,8 @@ public class TutorialAdapter extends FragmentStatePagerAdapter {
     @Override
     public Fragment getItem(int position) {
 
-        TutorialFragment tutorialFragment=new TutorialFragment();
-        Bundle bundle=new Bundle(1);
+        TutorialFragment tutorialFragment = new TutorialFragment();
+        Bundle bundle = new Bundle(1);
         bundle.putSerializable(TutorialFragment.Field_Tutorial, tutorials[position]);
         tutorialFragment.setArguments(bundle);
 
@@ -47,6 +63,6 @@ public class TutorialAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public int getCount() {
-        return tutorials==null?0:tutorials.length;
+        return tutorials == null ? 0 : tutorials.length;
     }
 }

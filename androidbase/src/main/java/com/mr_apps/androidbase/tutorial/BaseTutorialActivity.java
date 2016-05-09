@@ -15,7 +15,9 @@ import com.mr_apps.androidbase.utils.DrawableUtils;
 import com.viewpagerindicator.CirclePageIndicator;
 
 /**
- * Created by denis on 19/04/16.
+ * Base abstract activity that should be extended to create a tutorial for an application
+ *
+ * @author Denis Brandi
  */
 public abstract class BaseTutorialActivity extends AppCompatActivity {
 
@@ -100,12 +102,34 @@ public abstract class BaseTutorialActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Abstract method that should be override by the subclasses to style all the views of the tutorial
+     *
+     * @param background the layout of the background
+     * @param pager the view pager
+     * @param indicator the view pager indicator
+     * @param skip the button "skip" to skip the turorial
+     * @param login the "login" button to show at the end of the tutorial
+     */
     public abstract void styleViews(RelativeLayout background, ViewPager pager, CirclePageIndicator indicator, AppCompatButton skip, AppCompatButton login);
 
+    /**
+     * Abstract method that should be override by the subclasses to manage the actions to do on "login" button tapped
+     */
     public abstract void login();
 
+    /**
+     * Abstract method that should be override by the subclasses to gets all the items of this tutorial
+     *
+     * @return an array containing all the items of the tutorial
+     */
     public abstract ItemTutorial [] getTutorials();
 
+    /**
+     * Shows or hides the buttons base on the given position
+     *
+     * @param position the position of the current "slide" of the tutorial
+     */
     private void showHideButtons(int position) {
         if(position==tutorials.length-1) {
             login.setVisibility(View.VISIBLE);

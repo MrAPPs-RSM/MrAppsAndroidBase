@@ -13,7 +13,9 @@ import com.mr_apps.androidbase.R;
 import com.mr_apps.androidbase.utils.Utils;
 
 /**
- * Created by denis on 19/04/16.
+ * CLass that manages a fragment of the tutorial
+ *
+ * @author Denis Brandi
  */
 public class TutorialFragment extends Fragment {
 
