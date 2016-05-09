@@ -17,14 +17,16 @@ import com.mr_apps.androidbase.share.GlobalShare;
 import java.util.ArrayList;
 
 /**
- * Created by denis on 11/02/16.
+ * Class that manages the gallery activity, namely an activity that shows a gallery of images full screen
+ *
+ * @author Mattia Ruggiero
  */
 public class GalleryActivity extends AbstractBaseActivity {
 
-    public static final String Field_ImagesPath="Field_ImagesPath";
-    public static final String Field_Position="Field_Position";
-    public static final String Field_PlaceholderId="Field_PlaceholderId";
-    public static final String Field_CanShare="Field_CanShare";
+    public static final String Field_ImagesPath = "Field_ImagesPath";
+    public static final String Field_Position = "Field_Position";
+    public static final String Field_PlaceholderId = "Field_PlaceholderId";
+    public static final String Field_CanShare = "Field_CanShare";
 
     ArrayList<String> images;
 
@@ -37,19 +39,19 @@ public class GalleryActivity extends AbstractBaseActivity {
         setBackButton();
         setEmptyTitle();
 
-        images=getIntent().getStringArrayListExtra(Field_ImagesPath);
+        images = getIntent().getStringArrayListExtra(Field_ImagesPath);
 
-        int position=getIntent().getIntExtra(Field_Position, 0);
+        int position = getIntent().getIntExtra(Field_Position, 0);
 
         setBackButton();
 
-        viewPager=(ViewPager)findViewById(R.id.pager);
+        viewPager = (ViewPager) findViewById(R.id.pager);
 
         FullImageAdapter adapter;
 
-        int placeholderId=getIntent().getIntExtra(Field_PlaceholderId, 0);
+        int placeholderId = getIntent().getIntExtra(Field_PlaceholderId, 0);
 
-        adapter=new FullImageAdapter(this, placeholderId, images);
+        adapter = new FullImageAdapter(this, placeholderId, images);
 
         viewPager.setAdapter(adapter);
 
@@ -60,9 +62,9 @@ public class GalleryActivity extends AbstractBaseActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
-        MenuInflater menuInflater= getMenuInflater();
+        MenuInflater menuInflater = getMenuInflater();
 
-        if(getIntent().getBooleanExtra(Field_CanShare, false))
+        if (getIntent().getBooleanExtra(Field_CanShare, false))
             menuInflater.inflate(R.menu.gallery_menu, menu);
 
         return super.onCreateOptionsMenu(menu);
@@ -82,8 +84,10 @@ public class GalleryActivity extends AbstractBaseActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void shareImage()
-    {
+    /**
+     * Opens the chooser dialog where the user can select the method he likes to share the image
+     */
+    private void shareImage() {
         Ion.with(this).load(images.get(viewPager.getCurrentItem())).asBitmap().setCallback(new FutureCallback<Bitmap>() {
             @Override
             public void onCompleted(Exception e, Bitmap result) {
@@ -98,7 +102,7 @@ public class GalleryActivity extends AbstractBaseActivity {
     public void readStoragePermissionResult(boolean granted) {
         super.readStoragePermissionResult(granted);
 
-        if(granted)
+        if (granted)
             shareImage();
 
     }

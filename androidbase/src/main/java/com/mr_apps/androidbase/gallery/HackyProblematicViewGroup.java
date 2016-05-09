@@ -6,15 +6,27 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 
 /**
- * Created by denis on 11/02/16.
+ * Workaround class that resolves an issue of the ViewPager with the FullImageAdapter
+ *
+ * @author Denis Brandi
  */
 public class HackyProblematicViewGroup extends ViewPager {
 
-
+    /**
+     * Constructor that takes the context
+     *
+     * @param context the context
+     */
     public HackyProblematicViewGroup(Context context) {
         super(context);
     }
 
+    /**
+     * Constructor that takes the context and the attribute sets of the object
+     *
+     * @param context the context
+     * @param attrs the attribute set
+     */
     public HackyProblematicViewGroup(Context context, AttributeSet attrs) {
         super(context, attrs);
     }

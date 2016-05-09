@@ -18,7 +18,9 @@ import java.util.List;
 import uk.co.senab.photoview.PhotoViewAttacher;
 
 /**
- * Created by denis on 11/02/16.
+ * Class that manages an adapter to see an image full screen
+ *
+ * @author Denis Brandi
  */
 public class FullImageAdapter extends PagerAdapter{
 
@@ -27,11 +29,24 @@ public class FullImageAdapter extends PagerAdapter{
 
     private int placeholderResId=-1;
 
+    /**
+     * Constructor that takes the context and the list of images to show in the adapter
+     *
+     * @param context the context
+     * @param images the list of images to show
+     */
     public FullImageAdapter(Context context, List<String> images) {
         this.context = context;
         this.imagesPath = images;
     }
 
+    /**
+     * Constructor that takes the context, the placeholder image to show when an image is not still loaded and the list of images to show in the adapter
+     *
+     * @param context the context
+     * @param placeholderResId the placeholder image to show until the real image is not loaded
+     * @param images the list of images to show
+     */
     public FullImageAdapter(Context context, int placeholderResId, List<String> images) {
         this.context = context;
         this.imagesPath = images;
