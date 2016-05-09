@@ -41,18 +41,42 @@ public class CustomDialog {
      * @param callback the callback to determine the actions that should be done on "Ok" tap
      */
     public static void showOkDialog(Context context, String title, String message, final StandardDialogCallback callback) {
+        showOkDialog(context, title, message, null, callback);
+    }
 
-        new AlertDialog.Builder(context)
+    /**
+     * Shows a standard dialog with only a ok button
+     *
+     * @param context    the context
+     * @param title      the title that should be displayed at the top of the dialog
+     * @param message    the message of the dialog
+     * @param buttonText the text of the positive button of the dialog
+     * @param callback   the callback to determine the actions that should be done on "Ok" tap
+     */
+    public static void showOkDialog(Context context, String title, String message, String buttonText, final StandardDialogCallback callback) {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(context)
                 .setTitle(title)
                 .setMessage(message)
-                .setCancelable(false)
-                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        callback.onPositive();
-                    }
-                })
-                .show();
+                .setCancelable(false);
+
+        String myButtonText = context.getString(android.R.string.ok);
+
+        if (buttonText != null)
+            myButtonText = buttonText;
+
+        builder.setPositiveButton(myButtonText, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+
+                if (callback != null)
+                    callback.onPositive();
+            }
+        });
+
+        builder.show();
+
     }
 
     /**
@@ -64,8 +88,7 @@ public class CustomDialog {
      * @param callback     the callback to determine the actions that should be done on "Ok" tap
      */
     public static void showOkDialog(Context context, int titleResId, int messageResId, final StandardDialogCallback callback) {
-
-        showOkDialog(context, titleResId == 0 ? null : context.getString(titleResId), messageResId == 0 ? null : context.getString(messageResId), callback);
+        showOkDialog(context, titleResId == 0 ? null : context.getString(titleResId), messageResId == 0 ? null : context.getString(messageResId), null, callback);
     }
 
     /**
@@ -76,8 +99,7 @@ public class CustomDialog {
      * @param messageResId the string's resource id of the message of the dialog
      */
     public static void showOkDialog(Context context, int titleResId, int messageResId) {
-
-        showOkDialog(context, titleResId == 0 ? null : context.getString(titleResId), messageResId == 0 ? null : context.getString(messageResId));
+        showOkDialog(context, titleResId == 0 ? null : context.getString(titleResId), messageResId == 0 ? null : context.getString(messageResId), null, null);
     }
 
     /**
@@ -88,18 +110,31 @@ public class CustomDialog {
      * @param message the message of the dialog
      */
     public static void showOkDialog(Context context, String title, String message) {
+        showOkDialog(context, title, message, null, null);
+    }
 
-        new AlertDialog.Builder(context)
-                .setTitle(title)
-                .setMessage(message)
-                .setCancelable(false)
-                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                })
-                .show();
+    /**
+     * Shows a standard dialog with only a positive button with a customizable tap's action
+     *
+     * @param context    the context
+     * @param title      the title that should be displayed at the top of the dialog
+     * @param message    the message of the dialog
+     * @param buttonText the text of the positive button of the dialog
+     */
+    public static void showOkDialog(Context context, String title, String message, String buttonText) {
+        showOkDialog(context, title, message, buttonText, null);
+    }
+
+    /**
+     * Shows a standard dialog with only a positive button with a customizable tap's action
+     *
+     * @param context         the context
+     * @param titleResId      the string's resource id of the title that should be displayed at the top of the dialog
+     * @param messageResId    the string's resource id of the message of the dialog
+     * @param buttonTextResId the string's resource id  of the text of the positive button of the dialog
+     */
+    public static void showOkDialog(Context context, int titleResId, int messageResId, int buttonTextResId) {
+        showOkDialog(context, titleResId == 0 ? null : context.getString(titleResId), messageResId == 0 ? null : context.getString(messageResId), context.getString(buttonTextResId), null);
     }
 
     /**
