@@ -13,7 +13,7 @@ import android.graphics.PorterDuffXfermode;
 import java.io.FileOutputStream;
 
 /**
- * Created by denis on 19/01/2016.
+ * Class that manages a masked bitmap
  *
  * @author Denis Brandi
  */
@@ -36,15 +36,33 @@ public class MaskedBitmap {
      * declare-an-alpha-mask-directly-within-layer-list-xml
      *
      */
+
+    /**
+     * Constructor that takes a bitmap and another bitmap: the mask
+     *
+     * @param source the bitmap
+     * @param mask   the mask bitmap
+     */
     public MaskedBitmap(final Bitmap source, final Bitmap mask) {
         super();
         draw(source, mask);
     }
 
+    /**
+     * Enum that contains the square modes of the bitmap
+     */
     public enum SquareMode {
-        CROP, LETTERBOX;
+        CROP, LETTERBOX
     }
 
+    /**
+     * Takes a bitmap and make it a square bitmap
+     *
+     * @param size   the size of the final bitmap
+     * @param source the bitmap to transform
+     * @param mode   the type of square of the final bitmap, chosen between CROP and LETTERBOX
+     * @return the squared bitmap
+     */
     public static Bitmap makeItSquare(final int size, final Bitmap source,
                                       final SquareMode mode) {
 
@@ -82,6 +100,13 @@ public class MaskedBitmap {
         return background;
     }
 
+    /**
+     * Draws the new bitmap with the mask
+     *
+     * @param source the source bitmap
+     * @param mask   the bitmap that should be used as mask
+     * @return the masked bitmap
+     */
     public static Bitmap draw(final Bitmap source, final Bitmap mask) {
         // final Bitmap scaledMask = makeItSquare(MAXIMUM_IMAGE_SIZE, mask,
         // SquareMode.LETTERBOX);
@@ -93,6 +118,12 @@ public class MaskedBitmap {
                 applyMaskToBitmap(source, mask));
     }
 
+    /**
+     * Creates the masked bitmap merging all the created components
+     *
+     * @param bitmaps the bitmaps to merge
+     * @return the bitmaps merged
+     */
     private static Bitmap mergeAndDestroy(final Bitmap... bitmaps) {
         final Bitmap merged = Bitmap.createBitmap(bitmaps[0].getWidth(),
                 bitmaps[0].getHeight(), bitmaps[0].getConfig());
@@ -105,6 +136,12 @@ public class MaskedBitmap {
         return merged;
     }
 
+    /**
+     * Creates a background layer to add the mask
+     *
+     * @param source the bitmap
+     * @return the bitmap with the background layer
+     */
     private static Bitmap createBackgroundLayer(final Bitmap source) {
         final Bitmap temp = Bitmap.createBitmap(source.getWidth(),
                 source.getHeight(), source.getConfig());
@@ -122,6 +159,13 @@ public class MaskedBitmap {
         return temp;
     }
 
+    /**
+     * Applies the mask to te bitmap
+     *
+     * @param source the bitmap
+     * @param mask   the mask to apply to the bitmap
+     * @return the masked bitmap
+     */
     private static Bitmap applyMaskToBitmap(final Bitmap source,
                                             final Bitmap mask) {
 
@@ -137,6 +181,12 @@ public class MaskedBitmap {
         return source;
     }
 
+    /**
+     * Saves the bitmap with the given filename
+     *
+     * @param filename the name of the bitmap to save
+     * @param image    the bitmap to save
+     */
     public static void save(final String filename, final Bitmap image) {
         try {
             final FileOutputStream out = new FileOutputStream(filename);

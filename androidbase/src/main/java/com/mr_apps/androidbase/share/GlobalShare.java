@@ -7,7 +7,7 @@ import android.net.Uri;
 import android.provider.MediaStore;
 
 /**
- * Created by denis on 19/01/2016.
+ * Class that manages sharing images
  *
  * @author Denis Brandi
  */
@@ -15,6 +15,13 @@ public class GlobalShare {
 
     //public static final String fb_id="420026631431043";
 
+    /**
+     * Manages sharing an image or a text
+     *
+     * @param context the context
+     * @param text the text to share
+     * @param bitmap the bitmap image to share
+     */
     public static void share(Context context, String text, Bitmap bitmap) {
         Intent shareIntent = new Intent();
         shareIntent.setAction(Intent.ACTION_SEND);
