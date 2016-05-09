@@ -20,7 +20,9 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Created by denis on 03/02/16
+ * Class that manages the base Web Service Security
+ *
+ * @author Denis Brandi
  */
 public abstract class BaseWebServiceSecurity extends WebServiceUtils {
 
@@ -28,30 +30,49 @@ public abstract class BaseWebServiceSecurity extends WebServiceUtils {
 
     private static String baseUrl = "http://beta.json-generator.com/api/json/get/";
 
-    public static final int GENERIC_ERROR=1001;
-    public static final int CREATEDAT_TOO_NEXT=1002;
-    public static final int CREATEDAT_TOO_PREVIOUS=1003;
-    public static final int DIGEST_ALREADY_IN_USE=1004;
-    public static final int WRONG_DIGEST=1005;
-    public static final int USER_DOES_NOT_EXIST=1006;
+    public static final int GENERIC_ERROR = 1001;
+    public static final int CREATEDAT_TOO_NEXT = 1002;
+    public static final int CREATEDAT_TOO_PREVIOUS = 1003;
+    public static final int DIGEST_ALREADY_IN_USE = 1004;
+    public static final int WRONG_DIGEST = 1005;
+    public static final int USER_DOES_NOT_EXIST = 1006;
 
     private static BaseWebServiceSecurity instance;
 
+    /**
+     * Gets the instance of this class
+     *
+     * @param implementation the implementation of the BaseWebServiceSecurity
+     * @return the instance
+     */
     public static BaseWebServiceSecurity getInstance(BaseWebServiceSecurity implementation) {
 
-        if(instance==null)
-            instance=implementation;
+        if (instance == null)
+            instance = implementation;
 
         return instance;
     }
 
-    /*
-        * da settare all'oncreate dell applicazione
-        */
+    /**
+     * Sets the base Url of the app, that is used for every web service call
+     *
+     * @param baseUrl the base url of the app
+     */
     public static void setBaseUrl(String baseUrl) {
         BaseWebServiceSecurity.baseUrl = baseUrl;
     }
 
+    /**
+     * Calls the given URL with all the additional strings passed as parameters
+     *
+     * @param context           the context
+     * @param path              the path of the url to call
+     * @param params            a map containing all the additional parameters of the call
+     * @param complete          callback for the completion of the call
+     * @param isSecurityEnabled true if the WSSE security is enabled for this call, false otherwise
+     * @param handleErrorCode   parameter for the error's code management
+     * @return the response of the web service
+     */
     public ResponseFuture baseOperationWithPath(final Context context, final String path, final HashMap<String, List<String>> params, final FutureCallback<JsonObject> complete, final boolean isSecurityEnabled, final boolean handleErrorCode) {
 
         if (!Utils.isOnline(context)) {
@@ -64,10 +85,10 @@ public abstract class BaseWebServiceSecurity extends WebServiceUtils {
 
         String url = composeUrl(path);
 
-        Builders.Any.B builder=Ion.with(context)
+        Builders.Any.B builder = Ion.with(context)
                 .load(url);
 
-        if(isSecurityEnabled) {
+        if (isSecurityEnabled) {
             Map<String, List<String>> security = getSecurity(context);
 
             Logger.d(TAG, "chiamata a " + url + "\ncon parametri aggiuntivi " + params.toString() + security.toString());
@@ -81,7 +102,7 @@ public abstract class BaseWebServiceSecurity extends WebServiceUtils {
         }
 
         ResponseFuture<JsonObject> responseFuture = builder
-                        .setBodyParameters(params)
+                .setBodyParameters(params)
                 .asJsonObject();
 
         responseFuture.withResponse().setCallback(new FutureCallback<Response<JsonObject>>() {
@@ -97,10 +118,10 @@ public abstract class BaseWebServiceSecurity extends WebServiceUtils {
 
                 JsonObject result = jsonResponse.getResult();
 
-                if(result!=null)
+                if (result != null)
                     Logger.d(TAG, "risposta " + result.toString());
 
-                if(!handleErrorCode) {
+                if (!handleErrorCode) {
                     complete.onCompleted(e, result);
                     return;
                 }
@@ -118,6 +139,17 @@ public abstract class BaseWebServiceSecurity extends WebServiceUtils {
 
     }
 
+    /**
+     * Calls the given URL with all the additional strings passed as parameters, using the GET method
+     *
+     * @param context           the context
+     * @param path              the path of the url to call
+     * @param params            a map containing all the additional parameters of the call
+     * @param complete          callback for the completion of the call
+     * @param isSecurityEnabled true if the WSSE security is enabled for this call, false otherwise
+     * @param handleErrorCode   parameter for the error's code management
+     * @return the response of the web service
+     */
     public ResponseFuture baseOperationWithPathGet(final Context context, final String path, final HashMap<String, List<String>> params, final FutureCallback<JsonObject> complete, final boolean isSecurityEnabled, final boolean handleErrorCode) {
 
         if (!Utils.isOnline(context)) {
@@ -129,10 +161,10 @@ public abstract class BaseWebServiceSecurity extends WebServiceUtils {
 
         String url = composeUrl(path);
 
-        Builders.Any.B builder=Ion.with(context)
+        Builders.Any.B builder = Ion.with(context)
                 .load(url);
 
-        if(isSecurityEnabled) {
+        if (isSecurityEnabled) {
             Map<String, List<String>> security = getSecurity(context);
 
             Logger.d(TAG, "chiamata a " + url + "\ncon parametri aggiuntivi " + params.toString() + security.toString());
@@ -146,7 +178,7 @@ public abstract class BaseWebServiceSecurity extends WebServiceUtils {
         }
 
         ResponseFuture<JsonObject> responseFuture = builder
-                        .addQueries(params)
+                .addQueries(params)
                 .asJsonObject();
 
         responseFuture.withResponse().setCallback(new FutureCallback<Response<JsonObject>>() {
@@ -162,10 +194,10 @@ public abstract class BaseWebServiceSecurity extends WebServiceUtils {
 
                 JsonObject result = jsonResponse.getResult();
 
-                if(result!=null)
+                if (result != null)
                     Logger.d(TAG, "risposta " + result.toString());
 
-                if(!handleErrorCode) {
+                if (!handleErrorCode) {
                     complete.onCompleted(e, result);
                     return;
                 }
@@ -183,10 +215,22 @@ public abstract class BaseWebServiceSecurity extends WebServiceUtils {
 
     }
 
+    /**
+     * Method to override to implement the security handler for the error code
+     *
+     * @param context the context
+     * @param result  the result of the call
+     * @return false by default
+     */
     public boolean handleErrorCode(final Context context, JsonObject result) {
         return false;
     }
 
+    /**
+     * Update the Security Preferences
+     *
+     * @param context the context
+     */
     public void updateSecurity(Context context) {
         WsseToken wsseToken = new WsseToken(context);
         SecurityPreferences.setAuthorization(context, wsseToken.getAuthorizationHeader());
@@ -200,12 +244,17 @@ public abstract class BaseWebServiceSecurity extends WebServiceUtils {
         editor.commit();*/
     }
 
-
+    /**
+     * Gets the security map
+     *
+     * @param context the context
+     * @return the security map for this class
+     */
     public Map<String, List<String>> getSecurity(Context context) {
 
         long diffInMinutes = diffInMinutes((new Date()).getTime(), SecurityPreferences.getHeader_date(context));
 
-        String header=SecurityPreferences.getHeader(context);
+        String header = SecurityPreferences.getHeader(context);
 
         if (Utils.isNullOrEmpty(header) || diffInMinutes > 4) {
             updateSecurity(context);
@@ -219,16 +268,35 @@ public abstract class BaseWebServiceSecurity extends WebServiceUtils {
         return map;
     }
 
+    /**
+     * Calculates the difference in minutes between two dates
+     *
+     * @param date1 first date
+     * @param date2 second date
+     * @return the difference in minutes between the two dates
+     */
     public static long diffInMinutes(long date1, long date2) {
         long diffInMillisec = date1 - date2;
 
         return TimeUnit.MILLISECONDS.toMinutes(diffInMillisec);
     }
 
+    /**
+     * Composes an URL using the base Url
+     *
+     * @param path the name of the API to compose the URL to call
+     * @return the URL of the API composed by the base Url and the path passed by parameter
+     */
     public static String composeUrl(String path) {
         return baseUrl + path;//String.format("/%s", "api") + String.format("/%s", VERSION)+String.format("/%s", path);
     }
 
+    /**
+     * The MD5 encoding algorithm
+     *
+     * @param md5 the string to encode
+     * @return the string encoded using the MD5 algorithm
+     */
     public static String MD5(String md5) {
 
         try {
