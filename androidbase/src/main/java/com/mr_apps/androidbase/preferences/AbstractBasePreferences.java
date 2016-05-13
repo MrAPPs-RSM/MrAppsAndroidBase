@@ -97,7 +97,7 @@ public abstract class AbstractBasePreferences {
      */
     public static void setPreferences(Context context, String namePreferences, String key, int value) {
         SharedPreferences.Editor editor = getEditor(context, namePreferences);
-        editor.putLong(key, value);
+        editor.putInt(key, value);
         editor.commit();
     }
 
