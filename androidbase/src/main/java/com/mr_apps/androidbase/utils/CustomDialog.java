@@ -244,13 +244,12 @@ public class CustomDialog {
 
                     if (value < lowerValue || value > upperValue) {
                         til_valore.setError(context.getString(R.string.Devi_inserire_un_valore_tra__d_e__d, (int) lowerValue, (int) upperValue));
-                        til_valore.setErrorEnabled(true);
                     } else {
-                        til_valore.setErrorEnabled(false);
+                        til_valore.setError(null);
                     }
 
                 } else {
-                    til_valore.setErrorEnabled(false);
+                    til_valore.setError(null);
                 }
 
             }
