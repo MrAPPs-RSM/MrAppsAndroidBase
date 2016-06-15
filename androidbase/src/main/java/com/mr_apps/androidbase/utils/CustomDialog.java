@@ -206,6 +206,23 @@ public class CustomDialog {
      * @param callback  the callback to determine the actions that should be done on "ok" tap
      */
     public static void showEditDialog(final Context context, String title, String hint, String message, int inputType, final String lower, final String upper, final EditTextDialogCallback callback) {
+        showEditDialog(context, title, hint, message, null, inputType, lower, upper, callback);
+    }
+
+    /**
+     * Shows a dialog with an edit text, with all the given parameters to configure it
+     *
+     * @param context   the context
+     * @param title     the title that should be displayed at the top of the dialog
+     * @param hint      the hint that should be displayed in the edit text. A null value removes the hint from the edit text
+     * @param message   the message of the dialog, placed above the edit text. A null value removes the message from the dialog
+     * @param precompiledText the text to set to the edit when created
+     * @param inputType the input type of the edit text
+     * @param lower     lower bound of the edit text, to show an error message if the value of the edit text is lower. A null value removes the controls
+     * @param upper     upper bound of the edit text, to show an error message if the value of the edit text is higher. A null value removes the controls
+     * @param callback  the callback to determine the actions that should be done on "ok" tap
+     */
+    public static void showEditDialog(final Context context, String title, String hint, String message, String precompiledText, int inputType, final String lower, final String upper, final EditTextDialogCallback callback) {
         View view = LayoutInflater.from(context).inflate(R.layout.custom_dialog, null);
 
         final TextView textView = (TextView) view.findViewById(R.id.message);
@@ -244,17 +261,19 @@ public class CustomDialog {
 
                     if (value < lowerValue || value > upperValue) {
                         til_valore.setError(context.getString(R.string.Devi_inserire_un_valore_tra__d_e__d, (int) lowerValue, (int) upperValue));
-                        til_valore.setErrorEnabled(true);
                     } else {
-                        til_valore.setErrorEnabled(false);
+                        til_valore.setError(null);
                     }
 
                 } else {
-                    til_valore.setErrorEnabled(false);
+                    til_valore.setError(null);
                 }
 
             }
         });
+
+        if(precompiledText!=null)
+            edit.setText(precompiledText);
 
         AlertDialog dialog = new AlertDialog.Builder(context)
                 .setTitle(title)

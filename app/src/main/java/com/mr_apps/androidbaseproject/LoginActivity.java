@@ -46,12 +46,12 @@ public class LoginActivity extends BaseLoginActivity {
 
     @Override
     protected void onLoginSuccess() {
-        CustomDialog.showOkDialog(this, "Bravo stronzo!", "Ti sei loggato!");
+        CustomDialog.showOkDialog(this, "Complimenti!", "Ti sei loggato!");
     }
 
     @Override
     protected void passwordForgotten() {
-        CustomDialog.showOkDialog(this, "Ti sei dimenticato la password?", "Allora sei proprio un coglione");
+        CustomDialog.showOkDialog(this, "Ti sei dimenticato la password?", "Problemi tuoi");
     }
 
     @Override
