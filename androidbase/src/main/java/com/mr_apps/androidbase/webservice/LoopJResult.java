@@ -16,4 +16,10 @@ public class LoopJResult {
         this.requestHandle=requestHandle;
     }
 
+    public void cancelRequest() {
+        if(client!=null && requestHandle!=null) {
+            client.cancelRequestsByTAG(requestHandle.getTag(), true);
+        }
+    }
+
 }
