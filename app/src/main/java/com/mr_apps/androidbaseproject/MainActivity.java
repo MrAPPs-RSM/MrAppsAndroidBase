@@ -71,6 +71,10 @@ public class MainActivity extends AbstractBaseActivity {
         manageCamera();
     }
 
+    public void network(View v) {
+        startActivity(new Intent(this, NetworkActivity.class));
+    }
+
     private void manageCamera() {
         if (!checkOrRequestPermission(Manifest.permission.CAMERA, R.string.Titolo_permesso_obbligatorio, R.string.Messaggio_permesso_camera))
             return;

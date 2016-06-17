@@ -1,0 +1,68 @@
+package com.mr_apps.androidbaseproject;
+
+import android.content.Context;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.mr_apps.androidbase.activity.AbstractBaseActivity;
+import com.mr_apps.androidbase.webservice.BaseLoopJSecurity;
+import com.mr_apps.androidbase.webservice.FutureLoopJCallback;
+
+/**
+ * Created by denis on 17/06/16.
+ */
+public class NetworkActivity extends AbstractBaseActivity {
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_network);
+        setBackButton();
+
+        final EditText baseurl=(EditText) findViewById(R.id.url);
+        final EditText path=(EditText) findViewById(R.id.path);
+        final TextView result=(TextView) findViewById(R.id.result);
+
+        Button send=(Button) findViewById(R.id.send);
+
+        send.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                BaseLoopJSecurity.setBaseUrl(baseurl.getText().toString());
+
+                BaseLoopJSecurity instance=BaseLoopJSecurity.getInstance(new BaseLoopJSecurity() {
+                    @Override
+                    public boolean handleErrorCode(Context context, JsonObject result) {
+                        return super.handleErrorCode(context, result);
+                    }
+                });
+
+                instance.baseOperationWithPath(NetworkActivity.this, path.getText().toString(), null, new FutureLoopJCallback<JsonElement>(){
+
+                    @Override
+                    public void onCompleted(JsonElement object) {
+
+                    }
+
+                    @Override
+                    public void onCompletedJsonObject(JsonObject object) {
+
+
+                        result.setText(object.toString());
+
+
+                    }
+                }, false, false);
+
+            }
+        });
+
+    }
+}
