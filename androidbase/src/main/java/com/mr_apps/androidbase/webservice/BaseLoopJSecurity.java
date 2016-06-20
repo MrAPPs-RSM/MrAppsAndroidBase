@@ -69,10 +69,18 @@ public abstract class BaseLoopJSecurity extends WebServiceUtils {
         return new TextHttpResponseHandler() {
 
             @Override
+            public void onStart() {
+                super.onStart();
+                Logger.d(TAG, "call to: "+url);
+                if(params!=null)
+                    Logger.d(TAG, "with params: "+params.toString());
+            }
+
+            @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
                 Logger.d(TAG, "url: " + url
                         + (headers != null ? "\nheaders: " + Arrays.toString(headers) : ""
-                        + ("responseString: " + responseString)));
+                        + ("\nresponseString: " + responseString)));
                 throwable.printStackTrace();
                 if(completeObject!=null)
                     completeObject.failed(new Exception());
@@ -94,7 +102,7 @@ public abstract class BaseLoopJSecurity extends WebServiceUtils {
 
                 Logger.d(TAG, "url: " + url
                         + (headers != null ? "\nheaders: " + Arrays.toString(headers) : ""
-                        + ("responseString: " + responseString)));
+                        + ("\nresponseString: " + responseString)));
 
                 Gson gson = new GsonBuilder().create();
 
@@ -215,15 +223,11 @@ public abstract class BaseLoopJSecurity extends WebServiceUtils {
         if (isSecurityEnabled) {
             Map<String, String> security = getSecurity(context);
 
-            Logger.d(TAG, "chiamata a " + url + "\ncon parametri aggiuntivi " + params + security.toString());
-
             asyncHttpClient.addHeader(WsseToken.HEADER_AUTHORIZATION, security.get(WsseToken.HEADER_AUTHORIZATION));
             asyncHttpClient.addHeader(WsseToken.HEADER_WSSE, security.get(WsseToken.HEADER_WSSE));
 
         } else {
             SecurityPreferences.setHeader(context, "");
-
-            Logger.d(TAG, "chiamata a " + url + "\ncon parametri aggiuntivi " + params);
 
         }
 
