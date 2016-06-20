@@ -9,6 +9,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.MySSLSocketFactory;
 import com.loopj.android.http.RequestHandle;
 import com.loopj.android.http.RequestParams;
 import com.loopj.android.http.ResponseHandlerInterface;
@@ -32,6 +33,12 @@ import cz.msebera.android.httpclient.concurrent.FutureCallback;
  * if you are not able to use ion (RECOMMENDED)
  */
 public abstract class BaseLoopJSecurity extends WebServiceUtils {
+
+    private static final AsyncHttpClient asyncHttpClient=new AsyncHttpClient();
+
+    public static void trustAllCertificates() {
+        asyncHttpClient.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
+    }
 
     public enum Method {
         GET,
@@ -179,8 +186,6 @@ public abstract class BaseLoopJSecurity extends WebServiceUtils {
     }
 
     public HttpResult baseOperationWithPath(final Context context, final String path, final RequestParams params, final FutureCallback<JsonObject> completeObject, final FutureCallback<JsonArray> completeArray, final boolean isSecurityEnabled, final boolean handleErrorCode, Method method) {
-
-        AsyncHttpClient asyncHttpClient = new AsyncHttpClient();
 
         asyncHttpClient.removeAllHeaders();
 
