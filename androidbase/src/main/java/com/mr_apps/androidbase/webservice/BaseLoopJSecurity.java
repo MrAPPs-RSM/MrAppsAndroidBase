@@ -67,6 +67,14 @@ public abstract class BaseLoopJSecurity extends WebServiceUtils {
             }
 
             @Override
+            public void onCancel() {
+                if(completeObject!=null)
+                    completeObject.cancelled();
+                if(completeArray!=null)
+                    completeArray.cancelled();
+            }
+
+            @Override
             public void onSuccess(int statusCode, Header[] headers, String responseString) {
 
                 Logger.d(TAG, "url: " + url
