@@ -12,7 +12,6 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.mr_apps.androidbase.activity.AbstractBaseActivity;
 import com.mr_apps.androidbase.webservice.BaseLoopJSecurity;
-import com.mr_apps.androidbase.webservice.FutureLoopJCallback;
 
 /**
  * Created by denis on 17/06/16.

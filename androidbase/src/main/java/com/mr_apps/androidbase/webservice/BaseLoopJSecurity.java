@@ -4,8 +4,10 @@ import android.content.Context;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonParseException;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.RequestHandle;
 import com.loopj.android.http.RequestParams;
@@ -15,6 +17,7 @@ import com.mr_apps.androidbase.preferences.SecurityPreferences;
 import com.mr_apps.androidbase.utils.Logger;
 import com.mr_apps.androidbase.utils.Utils;
 
+import java.nio.channels.NotYetConnectedException;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
@@ -22,14 +25,15 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import cz.msebera.android.httpclient.Header;
+import cz.msebera.android.httpclient.concurrent.FutureCallback;
 
 /**
  * Created by denis on 17/06/16.
  * if you are not able to use ion (RECOMMENDED)
  */
-public abstract class BaseLoopJSecurity extends WebServiceUtils{
+public abstract class BaseLoopJSecurity extends WebServiceUtils {
 
-    public enum Method{
+    public enum Method {
         GET,
         POST
     }
@@ -39,31 +43,37 @@ public abstract class BaseLoopJSecurity extends WebServiceUtils{
      * @param url
      * @param path
      * @param params
-     * @param complete
+     * @param completeObject
+     * @param completeArray
      * @param isSecurityEnabled
      * @param handleErrorCode
      * @return
      */
-    public ResponseHandlerInterface getResponseHandlerInterface(final Context context, final String url, final String path, final RequestParams params, final FutureLoopJCallback<JsonElement> complete, final boolean isSecurityEnabled, final boolean handleErrorCode, final Method method) {
+    public ResponseHandlerInterface getResponseHandlerInterface(final Context context, final String url, final String path, final RequestParams params, final FutureCallback<JsonObject> completeObject, final FutureCallback<JsonArray> completeArray, final boolean isSecurityEnabled, final boolean handleErrorCode, final Method method) {
 
         return new TextHttpResponseHandler() {
 
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-                Logger.d(TAG, "url: "+url
-                        +(headers!=null?"\nheaders: "+ Arrays.toString(headers):""
-                        +("responseString: "+responseString)));
+                Logger.d(TAG, "url: " + url
+                        + (headers != null ? "\nheaders: " + Arrays.toString(headers) : ""
+                        + ("responseString: " + responseString)));
                 throwable.printStackTrace();
+                if(completeObject!=null)
+                    completeObject.failed(new Exception());
+                if(completeArray!=null)
+                    completeArray.failed(new Exception());
+
             }
 
             @Override
             public void onSuccess(int statusCode, Header[] headers, String responseString) {
 
-                Logger.d(TAG, "url: "+url
-                        +(headers!=null?"\nheaders: "+ Arrays.toString(headers):""
-                        +("responseString: "+responseString)));
+                Logger.d(TAG, "url: " + url
+                        + (headers != null ? "\nheaders: " + Arrays.toString(headers) : ""
+                        + ("responseString: " + responseString)));
 
-                Gson gson=new GsonBuilder().create();
+                Gson gson = new GsonBuilder().create();
 
                 try {
 
@@ -71,30 +81,32 @@ public abstract class BaseLoopJSecurity extends WebServiceUtils{
 
                     if (el.isJsonObject()) {
 
-                        JsonObject obj=el.getAsJsonObject();
+                        JsonObject obj = el.getAsJsonObject();
 
                         if (!handleErrorCode) {
-                            complete.onCompletedJsonObject(obj);
+                            completeObject.completed(obj);
                             return;
                         }
 
                         if (handleErrorCode(context, obj)) {
                             updateSecurity(context);
-                            baseOperationWithPath(context, path, params, complete, isSecurityEnabled, true, method);
+                            baseOperationWithPath(context, path, params, completeObject, completeArray, isSecurityEnabled, true, method);
                         } else
-                            complete.onCompletedJsonObject(obj);
+                            completeObject.completed(obj);
 
                     } else if (el.isJsonArray()) {
-                        complete.onCompletedJsonArray(el.getAsJsonArray());
-                    } else if (el.isJsonPrimitive()) {
-                        complete.onCompletedJsonElement(el);
+
+                        JsonArray array = el.getAsJsonArray();
+
+                        completeArray.completed(array);
+
                     } else {
-                        complete.onCompleted(null);
+                        completeArray.failed(new JsonParseException("not a json object"));
                     }
 
                 } catch (Exception e) {
                     e.printStackTrace();
-                    complete.onCompleted(null);
+                    completeObject.failed(e);
                 }
 
 
@@ -150,20 +162,21 @@ public abstract class BaseLoopJSecurity extends WebServiceUtils{
      * @param handleErrorCode   parameter for the error's code management
      * @return the response of the web service
      */
-    public LoopJResult baseOperationWithPath(final Context context, final String path, final RequestParams params, final FutureLoopJCallback<JsonElement> complete, final boolean isSecurityEnabled, final boolean handleErrorCode) {
-
-        return baseOperationWithPath(context, path, params, complete, isSecurityEnabled, handleErrorCode, Method.POST);
-
+    public HttpResult baseOperationWithPath(final Context context, final String path, final RequestParams params, final FutureCallback<JsonObject> complete, final boolean isSecurityEnabled, final boolean handleErrorCode) {
+        return baseOperationWithPath(context, path, params, complete, null, isSecurityEnabled, handleErrorCode, Method.POST);
     }
 
-    public LoopJResult baseOperationWithPath(final Context context, final String path, final RequestParams params, final FutureLoopJCallback<JsonElement> complete, final boolean isSecurityEnabled, final boolean handleErrorCode, Method method) {
+    public HttpResult baseOperationWithPath(final Context context, final String path, final RequestParams params, final FutureCallback<JsonObject> completeObject, final FutureCallback<JsonArray> completeArray, final boolean isSecurityEnabled, final boolean handleErrorCode, Method method) {
 
-        AsyncHttpClient asyncHttpClient=new AsyncHttpClient();
+        AsyncHttpClient asyncHttpClient = new AsyncHttpClient();
 
         asyncHttpClient.removeAllHeaders();
 
         if (!Utils.isOnline(context)) {
-            complete.onCompleted(null);
+            if(completeObject!=null)
+                completeObject.failed(new NotYetConnectedException());
+            if(completeArray!=null)
+                completeArray.failed(new NotYetConnectedException());
 
             return null;
         }
@@ -189,13 +202,13 @@ public abstract class BaseLoopJSecurity extends WebServiceUtils{
 
         RequestHandle requestHandle;
 
-        if(method==Method.POST)
-            requestHandle=asyncHttpClient.post(context, url, params, getResponseHandlerInterface(context, url, path, params, complete, isSecurityEnabled, handleErrorCode, method)).setTag(path);
+        if (method == Method.POST)
+            requestHandle = asyncHttpClient.post(context, url, params, getResponseHandlerInterface(context, url, path, params, completeObject, completeArray, isSecurityEnabled, handleErrorCode, method)).setTag(path);
         else
-            requestHandle=asyncHttpClient.get(context, url, params, getResponseHandlerInterface(context, url, path, params, complete, isSecurityEnabled, handleErrorCode, method)).setTag(path);
+            requestHandle = asyncHttpClient.get(context, url, params, getResponseHandlerInterface(context, url, path, params, completeObject, completeArray, isSecurityEnabled, handleErrorCode, method)).setTag(path);
 
 
-        return new LoopJResult(asyncHttpClient, requestHandle);
+        return new HttpResult(asyncHttpClient, requestHandle);
 
     }
 
@@ -210,8 +223,8 @@ public abstract class BaseLoopJSecurity extends WebServiceUtils{
      * @param handleErrorCode   parameter for the error's code management
      * @return the response of the web service
      */
-    public LoopJResult baseOperationWithPathGet(final Context context, final String path, final RequestParams params, final FutureLoopJCallback<JsonElement> complete, final boolean isSecurityEnabled, final boolean handleErrorCode) {
-        return baseOperationWithPath(context, path, params, complete, isSecurityEnabled, handleErrorCode, Method.GET);
+    public HttpResult baseOperationWithPathGet(final Context context, final String path, final RequestParams params, final FutureCallback<JsonObject> complete, final boolean isSecurityEnabled, final boolean handleErrorCode) {
+        return baseOperationWithPath(context, path, params, complete, null, isSecurityEnabled, handleErrorCode, Method.GET);
     }
 
     /**

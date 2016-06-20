@@ -6,12 +6,12 @@ import com.loopj.android.http.RequestHandle;
 /**
  * Created by denis on 17/06/16.
  */
-public class LoopJResult {
+public class HttpResult {
 
     public AsyncHttpClient client;
     public RequestHandle requestHandle;
 
-    public LoopJResult(AsyncHttpClient client, RequestHandle requestHandle) {
+    public HttpResult(AsyncHttpClient client, RequestHandle requestHandle) {
         this.client=client;
         this.requestHandle=requestHandle;
     }
