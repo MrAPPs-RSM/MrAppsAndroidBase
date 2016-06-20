@@ -166,6 +166,10 @@ public abstract class BaseLoopJSecurity extends WebServiceUtils {
         return baseOperationWithPath(context, path, params, complete, null, isSecurityEnabled, handleErrorCode, Method.POST);
     }
 
+    public HttpResult baseOperationWithPath(final Context context, final String path, final RequestParams params, final FutureCallback<JsonObject> completeObject, final FutureCallback<JsonArray> completeArray, final boolean isSecurityEnabled, final boolean handleErrorCode) {
+        return baseOperationWithPath(context, path, params, completeObject, completeArray, isSecurityEnabled, handleErrorCode, Method.POST);
+    }
+
     public HttpResult baseOperationWithPath(final Context context, final String path, final RequestParams params, final FutureCallback<JsonObject> completeObject, final FutureCallback<JsonArray> completeArray, final boolean isSecurityEnabled, final boolean handleErrorCode, Method method) {
 
         AsyncHttpClient asyncHttpClient = new AsyncHttpClient();
@@ -225,6 +229,10 @@ public abstract class BaseLoopJSecurity extends WebServiceUtils {
      */
     public HttpResult baseOperationWithPathGet(final Context context, final String path, final RequestParams params, final FutureCallback<JsonObject> complete, final boolean isSecurityEnabled, final boolean handleErrorCode) {
         return baseOperationWithPath(context, path, params, complete, null, isSecurityEnabled, handleErrorCode, Method.GET);
+    }
+
+    public HttpResult baseOperationWithPathGet(final Context context, final String path, final RequestParams params, final FutureCallback<JsonObject> completeObject, final FutureCallback<JsonArray> completeArray, final boolean isSecurityEnabled, final boolean handleErrorCode) {
+        return baseOperationWithPath(context, path, params, completeObject, completeArray, isSecurityEnabled, handleErrorCode, Method.GET);
     }
 
     /**
