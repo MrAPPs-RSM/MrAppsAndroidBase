@@ -34,10 +34,18 @@ import cz.msebera.android.httpclient.concurrent.FutureCallback;
  */
 public abstract class BaseLoopJSecurity extends WebServiceUtils {
 
-    private static final AsyncHttpClient asyncHttpClient=new AsyncHttpClient();
+    private static AsyncHttpClient asyncHttpClient;
+
+    public static AsyncHttpClient getAsyncHttpClient() {
+
+        if(asyncHttpClient==null)
+            asyncHttpClient=new AsyncHttpClient();
+
+        return asyncHttpClient;
+    }
 
     public static void trustAllCertificates() {
-        asyncHttpClient.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
+        getAsyncHttpClient().setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
     }
 
     public enum Method {
@@ -186,6 +194,8 @@ public abstract class BaseLoopJSecurity extends WebServiceUtils {
     }
 
     public HttpResult baseOperationWithPath(final Context context, final String path, final RequestParams params, final FutureCallback<JsonObject> completeObject, final FutureCallback<JsonArray> completeArray, final boolean isSecurityEnabled, final boolean handleErrorCode, Method method) {
+
+        AsyncHttpClient asyncHttpClient=getAsyncHttpClient();
 
         asyncHttpClient.removeAllHeaders();
 
