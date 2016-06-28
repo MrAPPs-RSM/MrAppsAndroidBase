@@ -8,10 +8,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.mr_apps.androidbase.activity.AbstractBaseActivity;
 import com.mr_apps.androidbase.webservice.BaseLoopJSecurity;
+
+import cz.msebera.android.httpclient.concurrent.FutureCallback;
 
 /**
  * Created by denis on 17/06/16.
@@ -43,21 +44,23 @@ public class NetworkActivity extends AbstractBaseActivity {
                     }
                 });
 
-                instance.baseOperationWithPath(NetworkActivity.this, path.getText().toString(), null, new FutureLoopJCallback<JsonElement>(){
+                instance.baseOperationWithPath(NetworkActivity.this, path.getText().toString(), null, new FutureCallback<JsonObject>(){
 
                     @Override
-                    public void onCompleted(JsonElement object) {
-
-                    }
-
-                    @Override
-                    public void onCompletedJsonObject(JsonObject object) {
-
-
+                    public void completed(JsonObject object) {
                         result.setText(object.toString());
+                    }
 
+                    @Override
+                    public void failed(Exception ex) {
 
                     }
+
+                    @Override
+                    public void cancelled() {
+
+                    }
+
                 }, false, false);
 
             }

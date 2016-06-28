@@ -100,13 +100,18 @@ public abstract class BaseLoopJSecurity extends WebServiceUtils {
             @Override
             public void onSuccess(int statusCode, Header[] headers, String responseString) {
 
-                Logger.d(TAG, "url: " + url
-                        + (headers != null ? "\nheaders: " + Arrays.toString(headers) : ""
-                        + ("\nresponseString: " + responseString)));
+                if(responseString==null) {
+                    if(completeObject!=null)
+                        completeObject.failed(null);
+                    if(completeArray!=null)
+                        completeArray.failed(null);
+                }
 
                 Gson gson = new GsonBuilder().create();
 
                 try {
+
+                    Logger.d(TAG, "response: " + responseString);
 
                     JsonElement el = gson.fromJson(responseString, JsonElement.class);
 
