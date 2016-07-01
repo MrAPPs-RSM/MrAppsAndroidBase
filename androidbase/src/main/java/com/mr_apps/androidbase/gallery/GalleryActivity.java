@@ -8,8 +8,9 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
-import com.koushikdutta.async.future.FutureCallback;
-import com.koushikdutta.ion.Ion;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.target.SimpleTarget;
 import com.mr_apps.androidbase.R;
 import com.mr_apps.androidbase.activity.AbstractBaseActivity;
 import com.mr_apps.androidbase.share.GlobalShare;
@@ -88,12 +89,11 @@ public class GalleryActivity extends AbstractBaseActivity {
      * Opens the chooser dialog where the user can select the method he likes to share the image
      */
     private void shareImage() {
-        Ion.with(this).load(images.get(viewPager.getCurrentItem())).asBitmap().setCallback(new FutureCallback<Bitmap>() {
+
+        Glide.with(this).load(images.get(viewPager.getCurrentItem())).asBitmap().into(new SimpleTarget<Bitmap>() {
             @Override
-            public void onCompleted(Exception e, Bitmap result) {
-
-                GlobalShare.share(GalleryActivity.this, null, result);
-
+            public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
+                GlobalShare.share(GalleryActivity.this, null, resource);
             }
         });
     }

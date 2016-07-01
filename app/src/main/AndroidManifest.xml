@@ -4,6 +4,9 @@
 
     <uses-permission android:name="android.permission.CAMERA"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
     <application
         android:allowBackup="true"
@@ -37,9 +40,15 @@
             android:name=".RegistrazioneActivity"
             android:theme="@style/AppTheme.NoActionBar" />
 
+        <activity
+            android:name=".NetworkActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+
         <activity android:name=".TutorialActivity"
             android:launchMode="singleTop"
             android:theme="@style/TutorialTheme"/>
+
+
 
         <activity
             android:name="com.facebook.FacebookActivity"

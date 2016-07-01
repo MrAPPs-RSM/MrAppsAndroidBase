@@ -18,11 +18,13 @@ import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import com.koushikdutta.async.future.FutureCallback;
-import com.koushikdutta.ion.Ion;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.TextHttpResponseHandler;
 import com.mr_apps.androidbase.R;
 import com.mr_apps.androidbase.preferences.GlobalPreferences;
 import com.mr_apps.androidbase.utils.Logger;
@@ -30,6 +32,9 @@ import com.mr_apps.androidbase.utils.Logger;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+
+import cz.msebera.android.httpclient.Header;
+import cz.msebera.android.httpclient.concurrent.FutureCallback;
 
 
 /**
@@ -290,7 +295,7 @@ public abstract class LocationActivity extends PermissionManagerActivity impleme
 
         getStringFromLocation(latLng.latitude, latLng.longitude, new FutureCallback<List<Address>>() {
             @Override
-            public void onCompleted(Exception e, List<Address> listAddresses) {
+            public void completed(List<Address> listAddresses) {
 
 
                 if (null != listAddresses && listAddresses.size() > 0) {
@@ -298,6 +303,16 @@ public abstract class LocationActivity extends PermissionManagerActivity impleme
                     setTitle(location);
                     //getSupportActionBar().setTitle();
                 }
+
+            }
+
+            @Override
+            public void failed(Exception ex) {
+
+            }
+
+            @Override
+            public void cancelled() {
 
             }
         });
@@ -330,62 +345,77 @@ public abstract class LocationActivity extends PermissionManagerActivity impleme
      */
     public void getStringFromLocation(double lat, double lng, final FutureCallback<List<Address>> complete) {
 
-        Ion.with(this)
-                .load(String
-                        .format(Locale.ENGLISH, "http://maps.googleapis.com/maps/api/geocode/json?latlng=%1$f,%2$f&sensor=true&language="
-                                + Locale.getDefault().getCountry(), lat, lng))
-                .asJsonObject()
-                .setCallback(new FutureCallback<JsonObject>() {
-                    @Override
-                    public void onCompleted(Exception e, JsonObject result) {
+        AsyncHttpClient client = new AsyncHttpClient();
 
-                        if (result == null) {
-                            complete.onCompleted(e, null);
-                            return;
-                        }
+        client.get(this, String
+                .format(Locale.ENGLISH, "http://maps.googleapis.com/maps/api/geocode/json?latlng=%1$f,%2$f&sensor=true&language="
+                        + Locale.getDefault().getCountry(), lat, lng), new TextHttpResponseHandler() {
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
 
-                        ArrayList<Address> retList = new ArrayList<>();
+            }
 
-                        JsonArray results = result.getAsJsonArray("results");
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, String responseString) {
 
-                        if (results != null) {
-                            for (JsonElement el : results) {
-                                JsonObject object = el.getAsJsonObject();
+                Gson gson = new GsonBuilder().create();
 
-                                String indiStr = object.get("formatted_address").getAsString();
-                                Address addr = new Address(Locale.getDefault());
-                                addr.setAddressLine(0, indiStr);
+                if (responseString == null) {
+                    complete.failed(null);
+                    return;
+                }
 
-                                JsonArray addressComponents = object.getAsJsonArray("address_components");
+                JsonElement element = gson.fromJson(responseString, JsonElement.class);
 
-                                //civico
-                                if (addressComponents.size() > 0)
-                                    addr.setPremises(addressComponents.get(0).getAsJsonObject().get("long_name").getAsString());
+                if (!element.isJsonObject()) {
+                    complete.failed(null);
+                    return;
+                }
 
-                                //via
-                                if (addressComponents.size() > 1)
-                                    addr.setThoroughfare(addressComponents.get(1).getAsJsonObject().get("long_name").getAsString());
+                JsonObject result = element.getAsJsonObject();
 
-                                //zona
-                                if (addressComponents.size() > 2)
-                                    addr.setLocality(addressComponents.get(2).getAsJsonObject().get("long_name").getAsString());
+                ArrayList<Address> retList = new ArrayList<>();
 
-                                //citta
-                                if (addressComponents.size() > 3)
-                                    addr.setCountryName(addressComponents.get(3).getAsJsonObject().get("long_name").getAsString());
-                                //cap
-                                if (addressComponents.size() > 4)
-                                    addr.setPostalCode(addressComponents.get(4).getAsJsonObject().get("long_name").getAsString());
+                JsonArray results = result.getAsJsonArray("results");
 
-                                retList.add(addr);
+                if (results != null) {
+                    for (JsonElement el : results) {
+                        JsonObject object = el.getAsJsonObject();
 
-                            }
-                        }
+                        String indiStr = object.get("formatted_address").getAsString();
+                        Address addr = new Address(Locale.getDefault());
+                        addr.setAddressLine(0, indiStr);
 
-                        complete.onCompleted(e, retList);
+                        JsonArray addressComponents = object.getAsJsonArray("address_components");
+
+                        //civico
+                        if (addressComponents.size() > 0)
+                            addr.setPremises(addressComponents.get(0).getAsJsonObject().get("long_name").getAsString());
+
+                        //via
+                        if (addressComponents.size() > 1)
+                            addr.setThoroughfare(addressComponents.get(1).getAsJsonObject().get("long_name").getAsString());
+
+                        //zona
+                        if (addressComponents.size() > 2)
+                            addr.setLocality(addressComponents.get(2).getAsJsonObject().get("long_name").getAsString());
+
+                        //citta
+                        if (addressComponents.size() > 3)
+                            addr.setCountryName(addressComponents.get(3).getAsJsonObject().get("long_name").getAsString());
+                        //cap
+                        if (addressComponents.size() > 4)
+                            addr.setPostalCode(addressComponents.get(4).getAsJsonObject().get("long_name").getAsString());
+
+                        retList.add(addr);
 
                     }
-                });
+                }
+
+                complete.completed(retList);
+
+            }
+        });
     }
 
 }
