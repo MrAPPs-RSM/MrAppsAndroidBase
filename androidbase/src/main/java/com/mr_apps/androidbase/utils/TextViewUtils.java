@@ -129,6 +129,21 @@ public class TextViewUtils {
 
         String subStringed = fullString;
 
+        for (String piece : pieces) {
+            String[] split = fullString.split(piece);
+
+            if (split[0].equals(fullString)) {
+                list.add(fullString);
+
+                for(String string : pieces) {
+                    list.add(" ");
+                    list.add(string);
+                }
+
+                return list;
+            }
+        }
+
         for (String s : pieces) {
             String[] subSplitted = subStringed.split(s);
 
