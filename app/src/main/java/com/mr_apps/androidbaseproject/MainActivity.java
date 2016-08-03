@@ -6,15 +6,18 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.content.ContextCompat;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.mr_apps.androidbase.activity.AbstractBaseActivity;
 import com.mr_apps.androidbase.gallery.GalleryActivity;
 import com.mr_apps.androidbase.utils.BitmapUtils;
 import com.mr_apps.androidbase.utils.FileUtils;
+import com.mr_apps.androidbase.utils.TextViewUtils;
 
 import java.util.ArrayList;
 
@@ -28,19 +31,18 @@ public class MainActivity extends AbstractBaseActivity {
         setContentView(R.layout.activity_main);
         setToolbar();
 
-        preview=((ImageView) findViewById(R.id.image));
+        preview = ((ImageView) findViewById(R.id.image));
 
         preview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                if(preview.getDrawable()!=null)
-                {
-                    ArrayList<String> paths=new ArrayList<>();
+                if (preview.getDrawable() != null) {
+                    ArrayList<String> paths = new ArrayList<>();
 
                     paths.add(path);
 
-                    Intent intent=new Intent(MainActivity.this, GalleryActivity.class);
+                    Intent intent = new Intent(MainActivity.this, GalleryActivity.class);
                     intent.putStringArrayListExtra(GalleryActivity.Field_ImagesPath, paths);
                     startActivity(intent);
                 }
@@ -104,7 +106,7 @@ public class MainActivity extends AbstractBaseActivity {
     public void pickerResult(final String path, FileUtils.ElementType elementType, Bitmap bitmap) {
         super.pickerResult(path, elementType, bitmap);
 
-        this.path=path;
+        this.path = path;
 
         if (path == null || elementType == null)
             return;

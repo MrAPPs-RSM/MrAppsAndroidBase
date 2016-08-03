@@ -89,9 +89,8 @@ public class Utils {
      * @return the dp value in pixel
      */
     public static int dpToPx(float dp, Context context) {
-        DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
-        int px = Math.round(dp * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT));
-        return px;
+        DisplayMetrics metrics = context.getResources().getDisplayMetrics();
+        return (int) (dp * (metrics.densityDpi / DisplayMetrics.DENSITY_DEFAULT));
     }
 
     /**
@@ -159,9 +158,8 @@ public class Utils {
      * @return the dp value in pixel
      */
     public static int dpToPx(Context context, int dp) {
-        DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
-        int px = Math.round(dp * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT));
-        return px;
+        DisplayMetrics metrics = context.getResources().getDisplayMetrics();
+        return dp * (metrics.densityDpi / DisplayMetrics.DENSITY_DEFAULT);
     }
 
 }
