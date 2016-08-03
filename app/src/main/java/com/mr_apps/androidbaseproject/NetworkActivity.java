@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.google.gson.JsonObject;
+import com.loopj.android.http.RequestParams;
 import com.mr_apps.androidbase.activity.AbstractBaseActivity;
 import com.mr_apps.androidbase.webservice.BaseLoopJSecurity;
 
@@ -44,7 +45,7 @@ public class NetworkActivity extends AbstractBaseActivity {
                     }
                 });
 
-                instance.baseOperationWithPath(NetworkActivity.this, path.getText().toString(), null, new FutureCallback<JsonObject>(){
+                instance.baseOperationWithPath(NetworkActivity.this, path.getText().toString(), (RequestParams) null, new FutureCallback<JsonObject>(){
 
                     @Override
                     public void completed(JsonObject object) {
