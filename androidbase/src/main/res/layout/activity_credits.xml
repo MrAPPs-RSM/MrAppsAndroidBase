@@ -23,7 +23,7 @@
             app:collapsedTitleTextAppearance="@color/creditsColorControlNormal"
             app:contentScrim="?attr/colorPrimary"
             app:expandedTitleTextAppearance="@android:color/transparent"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -43,9 +43,7 @@
 
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_alignBottom="@+id/backdrop"
-                    android:layout_alignTop="@+id/backdrop"
+                    android:layout_height="@dimen/credits_gradient_height"
                     android:background="@drawable/toolbar_with_shadow"
                     android:fitsSystemWindows="true" />
 
@@ -54,7 +52,9 @@
                     android:layout_height="wrap_content"
                     android:layout_alignBottom="@+id/backdrop"
                     android:layout_centerHorizontal="true"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:background="@color/top_toolbar"
+                    android:id="@+id/container_header">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -63,10 +63,7 @@
                         android:layout_marginLeft="@dimen/activity_horizontal_margin"
                         android:layout_marginRight="@dimen/activity_horizontal_margin"
                         android:layout_marginStart="@dimen/activity_horizontal_margin"
-                        android:shadowColor="@android:color/black"
-                        android:shadowDx="1"
-                        android:shadowDy="1"
-                        android:shadowRadius="2"
+                        android:layout_marginTop="@dimen/activity_vertical_margin"
                         android:text="@string/app_name"
                         android:textAppearance="@style/TextAppearance.AppCompat.Title" />
 
@@ -78,11 +75,6 @@
                         android:layout_marginLeft="@dimen/activity_horizontal_margin"
                         android:layout_marginRight="@dimen/activity_horizontal_margin"
                         android:layout_marginStart="@dimen/activity_horizontal_margin"
-                        android:layout_marginTop="@dimen/default_small_margin_or_padding"
-                        android:shadowColor="@android:color/black"
-                        android:shadowDx="1"
-                        android:shadowDy="1"
-                        android:shadowRadius="2"
                         android:text="@string/developed_by"
                         android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
 
@@ -101,21 +93,11 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/toolbar_with_shadow"
-            android:fitsSystemWindows="true" />
-
         <android.support.v4.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:fillViewport="true">
+            android:fillViewport="true"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -310,6 +292,5 @@
 
         </android.support.v4.widget.NestedScrollView>
 
-    </RelativeLayout>
 
 </android.support.design.widget.CoordinatorLayout>
