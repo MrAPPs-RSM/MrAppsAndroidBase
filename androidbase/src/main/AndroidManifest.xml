@@ -16,6 +16,11 @@
             android:launchMode="singleTop"
             android:theme="@style/GalleryTheme" />
 
+        <activity android:name=".activity.CreditsActivity"
+            android:launchMode="singleTop"
+            android:theme="@style/CreditsTheme"
+            android:label="@string/Credits"/>
+
     </application>
 
 </manifest>
