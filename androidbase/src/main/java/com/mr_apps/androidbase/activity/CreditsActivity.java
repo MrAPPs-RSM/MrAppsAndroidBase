@@ -1,9 +1,11 @@
 package com.mr_apps.androidbase.activity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.view.View;
 
 import com.mr_apps.androidbase.R;
@@ -18,6 +20,9 @@ public class CreditsActivity extends AbstractBaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_credits);
         setBackButton();
+
+        ((CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar)).setExpandedTitleColor(Color.TRANSPARENT);
+
     }
 
     public void discover(View v) {

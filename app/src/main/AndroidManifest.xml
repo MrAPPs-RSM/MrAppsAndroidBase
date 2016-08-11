@@ -56,6 +56,10 @@
             android:label="@string/app_name"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
 
+        <activity android:name="com.mr_apps.androidbase.activity.CreditsActivity"
+            android:theme="@style/CreditsTheme"
+            android:label="@string/Credits"/>
+
     </application>
 
 </manifest>

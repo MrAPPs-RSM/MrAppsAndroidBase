@@ -6,18 +6,16 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
-import android.support.v4.content.ContextCompat;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.mr_apps.androidbase.activity.AbstractBaseActivity;
+import com.mr_apps.androidbase.activity.CreditsActivity;
 import com.mr_apps.androidbase.gallery.GalleryActivity;
 import com.mr_apps.androidbase.utils.BitmapUtils;
 import com.mr_apps.androidbase.utils.FileUtils;
-import com.mr_apps.androidbase.utils.TextViewUtils;
 
 import java.util.ArrayList;
 
@@ -58,6 +56,10 @@ public class MainActivity extends AbstractBaseActivity {
                         .setAction("Action", null).show();
             }
         });
+    }
+
+    public void credits(View v) {
+        startActivity(new Intent(this, CreditsActivity.class));
     }
 
     public void login(View v) {
