@@ -2,6 +2,9 @@
     <string name="app_name">AndroidBase</string>
     <string name="Devi_inserire_un_valore_tra__d_e__d" formatted="false">Devi inserire un valore tra %d e %d</string>
 
+    <!--animations-->
+    <string name="transition_gallery" translatable="false">gallery_image</string>
+
     <!--permessi-->
     <string name="Titolo_permesso_obbligatorio">Richiesta permesso</string>
 
@@ -23,7 +26,6 @@
     <string name="Avviso_gps">Il tuo GPS è disabilitato, vuoi attivarlo?</string>
     <string name="Si">Si</string>
     <string name="Annulla">Annulla</string>
-
 
     <string name="Scegli_immagine_da_galleria">Scegli immagine da galleria</string>
     <string name="Scatta_foto">Scatta foto</string>

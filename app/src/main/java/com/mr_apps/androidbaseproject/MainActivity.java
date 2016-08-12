@@ -6,6 +6,8 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -42,7 +44,8 @@ public class MainActivity extends AbstractBaseActivity {
 
                     Intent intent = new Intent(MainActivity.this, GalleryActivity.class);
                     intent.putStringArrayListExtra(GalleryActivity.Field_ImagesPath, paths);
-                    startActivity(intent);
+                    ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(MainActivity.this, v, getString(R.string.transition_gallery));
+                    ActivityCompat.startActivity(MainActivity.this, intent, optionsCompat.toBundle());
                 }
 
             }
