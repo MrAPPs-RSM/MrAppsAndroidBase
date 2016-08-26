@@ -2,14 +2,18 @@ package com.mr_apps.androidbase.gallery;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.bumptech.glide.DrawableTypeRequest;
 import com.bumptech.glide.Glide;
+import com.mr_apps.androidbase.R;
 
 import java.util.ArrayList;
 
@@ -89,7 +93,8 @@ public class ImageAdapter extends PagerAdapter {
                 intent.putExtra(GalleryActivity.Field_Position, position);
                 intent.putExtra(GalleryActivity.Field_CanShare, canShare);
 
-                context.startActivity(intent);
+                ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation((AppCompatActivity) context, v, context.getString(R.string.transition_gallery));
+                ActivityCompat.startActivity((AppCompatActivity) context, intent, optionsCompat.toBundle());
             }
         });
 

@@ -185,7 +185,7 @@
                         android:layout_height="wrap_content"
                         android:background="?attr/selectableItemBackground"
                         android:clickable="true"
-                        android:onClick="development"
+                        android:onClick="realization"
                         android:orientation="horizontal"
                         android:padding="@dimen/activity_margin">
 
@@ -214,7 +214,7 @@
                         android:layout_height="wrap_content"
                         android:background="?attr/selectableItemBackground"
                         android:clickable="true"
-                        android:onClick="development"
+                        android:onClick="design"
                         android:orientation="horizontal"
                         android:padding="@dimen/activity_margin">
 
@@ -243,7 +243,7 @@
                         android:layout_height="wrap_content"
                         android:background="?attr/selectableItemBackground"
                         android:clickable="true"
-                        android:onClick="development"
+                        android:onClick="apps"
                         android:orientation="horizontal"
                         android:padding="@dimen/activity_margin">
 
@@ -272,7 +272,7 @@
                         android:layout_height="wrap_content"
                         android:background="?attr/selectableItemBackground"
                         android:clickable="true"
-                        android:onClick="development"
+                        android:onClick="contacts"
                         android:orientation="horizontal"
                         android:padding="@dimen/activity_margin">
 
@@ -291,6 +291,35 @@
                             android:layout_marginStart="@dimen/activity_horizontal_margin"
                             android:gravity="center_vertical"
                             android:text="@string/contact_us"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                            android:textColor="@color/creditsItemsTextColor" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="?attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:onClick="requestQuote"
+                        android:orientation="horizontal"
+                        android:padding="@dimen/activity_margin">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:tint="?colorAccent"
+                            app:srcCompat="@drawable/ic_description_black_24dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                            android:layout_marginStart="@dimen/activity_horizontal_margin"
+                            android:gravity="center_vertical"
+                            android:text="@string/request_quote"
                             android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
                             android:textColor="@color/creditsItemsTextColor" />
 

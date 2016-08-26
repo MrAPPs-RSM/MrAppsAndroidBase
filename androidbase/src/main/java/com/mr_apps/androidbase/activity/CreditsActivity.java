@@ -26,27 +26,31 @@ public class CreditsActivity extends AbstractBaseActivity {
     }
 
     public void discover(View v) {
-        goTo("http://www.mr-apps.com");
+        goTo("http://www.mr-apps.com/it/sviluppo-app");
     }
 
     public void development(View v) {
-        goTo("http://www.mr-apps.com/servizi/sviluppo-app-san-marino");
+        goTo("http://www.mr-apps.com/it/servizi/realizzazione-app");
     }
 
     public void realization(View v) {
-        goTo("http://www.mr-apps.com/servizi/realizzazione-siti-web-san-marino");
+        goTo("http://www.mr-apps.com/it/servizi/realizzazione-siti-web");
     }
 
     public void design(View v) {
-        goTo("http://www.mr-apps.com/servizi/realizzazione-ecommerce-san-marino");
+        goTo("http://www.mr-apps.com/it/servizi/realizzazione-ecommerce");
     }
 
     public void apps(View v) {
-        goTo("http://www.mr-apps.com/portfolio");
+        goTo("http://www.mr-apps.com/it/portfolio/progetti");
     }
 
     public void contacts(View v) {
-        goTo("http://www.mr-apps.com/contact");
+        goTo("http://www.mr-apps.com/it/contatti");
+    }
+
+    public void requestQuote(View v) {
+        goTo("http://www.mr-apps.com/it/il-tuo-progetto");
     }
 
     private void goTo(String s) {
