@@ -83,4 +83,10 @@ public class WarningTextInputLayout extends TextInputLayout {
                 eye.clearColorFilter();
             }
     }
+
+    @Override
+    protected void onDetachedFromWindow() {
+        super.onDetachedFromWindow();
+        setErrorEnabled(false);
+    }
 }
