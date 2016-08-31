@@ -2,7 +2,6 @@ package com.mr_apps.androidbase.gallery;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.os.Build;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.View;
@@ -12,7 +11,6 @@ import android.widget.ImageView;
 import com.bumptech.glide.BitmapTypeRequest;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.BitmapImageViewTarget;
-import com.mr_apps.androidbase.R;
 import com.mr_apps.androidbase.utils.BitmapUtils;
 
 import java.util.List;
@@ -74,9 +72,6 @@ public class FullImageAdapter extends PagerAdapter{
 
         imageView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
         imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            imageView.setTransitionName(context.getString(R.string.transition_gallery));
-        }
 
         final PhotoViewAttacher mAttacher=new PhotoViewAttacher(imageView);
 

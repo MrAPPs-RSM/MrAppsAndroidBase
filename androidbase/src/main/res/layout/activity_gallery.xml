@@ -15,6 +15,7 @@
         android:id="@+id/toolbar"
         android:theme="@style/GalleryOverlay"
         android:layout_marginTop="@dimen/status_cheat"
+        android:transitionName="@string/transition_gallery"
         android:background="@android:color/transparent"/>
 
 </RelativeLayout>
