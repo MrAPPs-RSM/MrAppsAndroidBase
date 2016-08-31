@@ -85,8 +85,8 @@ public class WarningTextInputLayout extends TextInputLayout {
     }
 
     @Override
-    protected void onDetachedFromWindow() {
-        super.onDetachedFromWindow();
+    protected void onAttachedToWindow() {
+        super.onAttachedToWindow();
         setErrorEnabled(false);
     }
 }
