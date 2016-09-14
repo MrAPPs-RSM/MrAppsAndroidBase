@@ -1,9 +1,6 @@
 package com.mr_apps.androidbase.account;
 
 import android.content.Intent;
-import android.content.res.ColorStateList;
-import android.graphics.Color;
-import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
@@ -37,7 +34,6 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.mr_apps.androidbase.R;
 import com.mr_apps.androidbase.activity.AbstractBaseActivity;
-import com.mr_apps.androidbase.custom_views.PasswordView;
 import com.mr_apps.androidbase.custom_views.WarningTextInputLayout;
 import com.mr_apps.androidbase.utils.DrawableUtils;
 import com.mr_apps.androidbase.utils.Logger;
