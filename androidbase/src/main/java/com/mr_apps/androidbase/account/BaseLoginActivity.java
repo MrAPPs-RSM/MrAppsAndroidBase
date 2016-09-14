@@ -1,6 +1,9 @@
 package com.mr_apps.androidbase.account;
 
 import android.content.Intent;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
@@ -13,6 +16,7 @@ import android.support.v7.widget.AppCompatTextView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 
@@ -52,8 +56,7 @@ public abstract class BaseLoginActivity extends AbstractBaseActivity implements
 
     CallbackManager callbackManager;
 
-    TextInputEditText email;
-    PasswordView password;
+    TextInputEditText email, password;
     LoginButton loginButton;
     Button googleSignIn;
     AppCompatTextView forgetPwd, subscribe, login;
@@ -72,7 +75,7 @@ public abstract class BaseLoginActivity extends AbstractBaseActivity implements
         setupFbSignInButton();
 
         email = (TextInputEditText) findViewById(R.id.email);
-        password = (PasswordView) findViewById(R.id.password);
+        password = (TextInputEditText) findViewById(R.id.password);
         til_email = (WarningTextInputLayout) findViewById(R.id.til_email);
         til_password = (WarningTextInputLayout) findViewById(R.id.til_password);
 
@@ -125,21 +128,6 @@ public abstract class BaseLoginActivity extends AbstractBaseActivity implements
             }
         });
 
-        email.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                correctColor(true);
-            }
-        });
-
-        email.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (hasFocus)
-                    correctColor(true);
-            }
-        });
-
         password.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -154,21 +142,23 @@ public abstract class BaseLoginActivity extends AbstractBaseActivity implements
             @Override
             public void afterTextChanged(Editable s) {
                 til_password.setErrorEnabled(!passwordTilRule(s.toString()) && s.length() > 0);
-            }
-        });
-
-        password.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                correctColor(false);
-            }
-        });
-
-        password.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (hasFocus)
-                    correctColor(false);
+                if (til_password.isErrorEnabled()) {
+                    til_password.setPasswordVisibilityToggleTintList(new ColorStateList(new int[][]{
+                            new int[]{android.R.attr.state_enabled},
+                    },
+                            new int[]{
+                                    ContextCompat.getColor(BaseLoginActivity.this, R.color.errorRed),
+                            }
+                    ));
+                } else {
+                    til_password.setPasswordVisibilityToggleTintList(new ColorStateList(new int[][]{
+                            new int[]{android.R.attr.state_enabled},
+                    },
+                            new int[]{
+                                    Color.GRAY,
+                            }
+                    ));
+                }
             }
         });
 
@@ -395,5 +385,12 @@ public abstract class BaseLoginActivity extends AbstractBaseActivity implements
             // Signed out, show unauthenticated UI.
             onGoogleSignInCompleted(null);
         }
+    }
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        correctColor(true);
+        correctColor(false);
+        return super.dispatchTouchEvent(ev);
     }
 }
