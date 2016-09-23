@@ -13,6 +13,7 @@ import android.support.v7.widget.AppCompatTextView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 
@@ -33,7 +34,6 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.mr_apps.androidbase.R;
 import com.mr_apps.androidbase.activity.AbstractBaseActivity;
-import com.mr_apps.androidbase.custom_views.PasswordView;
 import com.mr_apps.androidbase.custom_views.WarningTextInputLayout;
 import com.mr_apps.androidbase.utils.DrawableUtils;
 import com.mr_apps.androidbase.utils.Logger;
@@ -52,8 +52,7 @@ public abstract class BaseLoginActivity extends AbstractBaseActivity implements
 
     CallbackManager callbackManager;
 
-    TextInputEditText email;
-    PasswordView password;
+    TextInputEditText email, password;
     LoginButton loginButton;
     Button googleSignIn;
     AppCompatTextView forgetPwd, subscribe, login;
@@ -72,7 +71,7 @@ public abstract class BaseLoginActivity extends AbstractBaseActivity implements
         setupFbSignInButton();
 
         email = (TextInputEditText) findViewById(R.id.email);
-        password = (PasswordView) findViewById(R.id.password);
+        password = (TextInputEditText) findViewById(R.id.password);
         til_email = (WarningTextInputLayout) findViewById(R.id.til_email);
         til_password = (WarningTextInputLayout) findViewById(R.id.til_password);
 
@@ -125,21 +124,6 @@ public abstract class BaseLoginActivity extends AbstractBaseActivity implements
             }
         });
 
-        email.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                correctColor(true);
-            }
-        });
-
-        email.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (hasFocus)
-                    correctColor(true);
-            }
-        });
-
         password.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -154,21 +138,7 @@ public abstract class BaseLoginActivity extends AbstractBaseActivity implements
             @Override
             public void afterTextChanged(Editable s) {
                 til_password.setErrorEnabled(!passwordTilRule(s.toString()) && s.length() > 0);
-            }
-        });
-
-        password.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                correctColor(false);
-            }
-        });
-
-        password.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (hasFocus)
-                    correctColor(false);
+                Utils.passwordToggleDrawableColor(BaseLoginActivity.this, til_password);
             }
         });
 
@@ -395,5 +365,12 @@ public abstract class BaseLoginActivity extends AbstractBaseActivity implements
             // Signed out, show unauthenticated UI.
             onGoogleSignInCompleted(null);
         }
+    }
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        correctColor(true);
+        correctColor(false);
+        return super.dispatchTouchEvent(ev);
     }
 }

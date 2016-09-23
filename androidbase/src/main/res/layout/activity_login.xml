@@ -52,13 +52,14 @@
             <com.mr_apps.androidbase.custom_views.WarningTextInputLayout
                 android:id="@+id/til_password"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                app:passwordToggleEnabled="true">
 
-                <com.mr_apps.androidbase.custom_views.PasswordView
+                <android.support.design.widget.TextInputEditText
                     android:id="@+id/password"
                     style="@style/EditTextStyle"
                     android:hint="@string/Password"
-                    app:useStrikeThrough="true" />
+                    android:inputType="textPassword" />
 
             </com.mr_apps.androidbase.custom_views.WarningTextInputLayout>
 
@@ -89,12 +90,12 @@
             <android.support.v7.widget.AppCompatTextView
                 android:id="@+id/iscriviti"
                 style="@style/LoginPrimaryTextStyle"
+                android:layout_marginBottom="@dimen/default_large_margin_or_padding"
                 android:background="?attr/selectableItemBackground"
+                android:paddingBottom="@dimen/default_small_margin_or_padding"
                 android:paddingLeft="@dimen/default_margin_or_padding"
                 android:paddingRight="@dimen/default_margin_or_padding"
                 android:paddingTop="@dimen/default_small_margin_or_padding"
-                android:paddingBottom="@dimen/default_small_margin_or_padding"
-                android:layout_marginBottom="@dimen/default_large_margin_or_padding"
                 android:text="@string/Iscriviti_ora"
                 android:textColor="@color/colorAccent" />
 
