@@ -18,6 +18,6 @@ and
 ``` gradle
 
 dependencies {
-  compile 'com.github.MrAPPs-RSM:MrAppsAndroidBase:1.0.37'
+  compile 'com.github.MrAPPs-RSM:MrAppsAndroidBase:1.0.38'
 }
 ```
