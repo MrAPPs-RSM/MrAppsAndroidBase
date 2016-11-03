@@ -1,5 +1,6 @@
 package com.mr_apps.androidbase.adapter;
 
+import android.os.Handler;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
@@ -55,7 +56,12 @@ public abstract class RecyclerViewFooterScrollView<T> extends RecyclerView.OnScr
 
             if (adapter.getItemCount() > 0 && !adapter.getItem(adapter.getItemCount() - 1).isFooter()) {
                 load();
-                adapter.addItem(new RecyclerItem<T>(false, null, true));
+                new Handler().post(new Runnable() {
+                    @Override
+                    public void run() {
+                        adapter.addItem(new RecyclerItem<T>(false, null, true));
+                    }
+                });
             }
 
             loading = true;

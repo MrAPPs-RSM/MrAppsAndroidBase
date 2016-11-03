@@ -29,6 +29,8 @@ public class ImageAdapter extends PagerAdapter {
     boolean canShare;
     private int placeholderResId = -1;
 
+    private boolean transition;
+
     /**
      * Constructor that takes the context, a list containing the images to show and a flag to set it the adapter can share images or not
      *
@@ -40,6 +42,13 @@ public class ImageAdapter extends PagerAdapter {
         this.context = context;
         this.imagesPath = images;
         this.canShare = canShare;
+    }
+
+    public ImageAdapter(Context context, ArrayList<String> images, boolean canShare, boolean transition) {
+        this.context = context;
+        this.imagesPath = images;
+        this.canShare = canShare;
+        this.transition = transition;
     }
 
     /**
@@ -56,6 +65,18 @@ public class ImageAdapter extends PagerAdapter {
         this.imagesPath = images;
         this.placeholderResId = placeholderResId;
         this.canShare = canShare;
+    }
+
+    public ImageAdapter(Context context, int placeholderResId, ArrayList<String> images, boolean canShare, boolean transition) {
+        this.context = context;
+        this.imagesPath = images;
+        this.placeholderResId = placeholderResId;
+        this.canShare = canShare;
+        this.transition = transition;
+    }
+
+    public void setTransition(boolean transition) {
+        this.transition = transition;
     }
 
     @Override
@@ -93,8 +114,12 @@ public class ImageAdapter extends PagerAdapter {
                 intent.putExtra(GalleryActivity.Field_Position, position);
                 intent.putExtra(GalleryActivity.Field_CanShare, canShare);
 
-                ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation((AppCompatActivity) context, v, context.getString(R.string.transition_gallery));
-                ActivityCompat.startActivity((AppCompatActivity) context, intent, optionsCompat.toBundle());
+                if (transition) {
+                    ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation((AppCompatActivity) context, v, context.getString(R.string.transition_gallery));
+                    ActivityCompat.startActivity(context, intent, optionsCompat.toBundle());
+                } else {
+                    context.startActivity(intent);
+                }
             }
         });
 
