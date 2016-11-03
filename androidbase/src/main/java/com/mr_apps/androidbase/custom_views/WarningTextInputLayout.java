@@ -39,7 +39,11 @@ public class WarningTextInputLayout extends TextInputLayout {
                 Drawable warning = Build.VERSION.SDK_INT >= 21 ? ContextCompat.getDrawable(getContext(), R.drawable.ic_warning_24dp) : VectorDrawableCompat.create(getContext().getResources(), R.drawable.ic_warning_24dp, null);
                 if (warning != null)
                     warning.setColorFilter(ContextCompat.getColor(getContext(), R.color.errorRed), PorterDuff.Mode.SRC_ATOP);
-                edit.setCompoundDrawablesWithIntrinsicBounds(null, null, warning, null);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1)
+                    edit.setCompoundDrawablesRelativeWithIntrinsicBounds(null, null, warning, null);
+                 else
+                    edit.setCompoundDrawablesWithIntrinsicBounds(null, null, warning, null);
+
             } else {
                 if (Build.VERSION.SDK_INT >= 21) {
                     edit.getBackground().clearColorFilter();
@@ -47,7 +51,10 @@ public class WarningTextInputLayout extends TextInputLayout {
                     edit.getBackground().setColorFilter(ContextCompat.getColor(getContext(), R.color.colorAccent), PorterDuff.Mode.SRC_ATOP);
                 }
                 setHintTextAppearance(R.style.HintStyle);
-                edit.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1)
+                    edit.setCompoundDrawablesRelativeWithIntrinsicBounds(null, null, null, null);
+                else
+                    edit.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null);
             }
             isErrorEnabled = enabled;
         }
