@@ -237,12 +237,12 @@ public class CustomDialog {
      * @param inputType       the input type of the edit text
      * @param lower           lower bound of the edit text, to show an error message if the value of the edit text is lower. A null value removes the controls
      * @param upper           upper bound of the edit text, to show an error message if the value of the edit text is higher. A null value removes the controls
-     * @param positiveResId   the resource id of the string to show on the "positive" button of the dialog. A null value sets the button text to "ok"
-     * @param negativeResId   the resource id of the string to show on the "negative" button of the dialog. A null value sets the button text to "cancel"
+     * @param positiveResId   the resource id of the string to show on the "positive" button of the dialog. A 0 value sets the button text to "ok"
+     * @param negativeResId   the resource id of the string to show on the "negative" button of the dialog. A 0 value sets the button text to "cancel"
      * @param callback        the callback to determine the actions that should be done on "ok" tap
      */
     public static void showEditDialog(final Context context, String title, String hint, String message, String precompiledText, int inputType, final String lower, final String upper, int positiveResId, int negativeResId, final EditTextDialogCallback callback) {
-        showEditDialog(context, title, hint, message, precompiledText, inputType, lower, upper, context.getString(positiveResId), context.getString(negativeResId), callback);
+        showEditDialog(context, title, hint, message, precompiledText, inputType, lower, upper, positiveResId == 0 ? null : context.getString(positiveResId), negativeResId == 0 ? null : context.getString(negativeResId), callback);
     }
 
     /**
