@@ -237,8 +237,8 @@ public class CustomDialog {
      * @param inputType       the input type of the edit text
      * @param lower           lower bound of the edit text, to show an error message if the value of the edit text is lower. A null value removes the controls
      * @param upper           upper bound of the edit text, to show an error message if the value of the edit text is higher. A null value removes the controls
-     * @param positiveResId   the resource id of the string to show on the "positive" button of the dialog
-     * @param negativeResId   the resource id of the string to show on the "negative" button of the dialog
+     * @param positiveResId   the resource id of the string to show on the "positive" button of the dialog. A null value sets the button text to "ok"
+     * @param negativeResId   the resource id of the string to show on the "negative" button of the dialog. A null value sets the button text to "cancel"
      * @param callback        the callback to determine the actions that should be done on "ok" tap
      */
     public static void showEditDialog(final Context context, String title, String hint, String message, String precompiledText, int inputType, final String lower, final String upper, int positiveResId, int negativeResId, final EditTextDialogCallback callback) {
@@ -256,8 +256,8 @@ public class CustomDialog {
      * @param inputType       the input type of the edit text
      * @param lower           lower bound of the edit text, to show an error message if the value of the edit text is lower. A null value removes the controls
      * @param upper           upper bound of the edit text, to show an error message if the value of the edit text is higher. A null value removes the controls
-     * @param positiveText    a text to show on the "positive" button of the dialog
-     * @param negativeText    a text to show on the "negative" button of the dialog
+     * @param positiveText    a text to show on the "positive" button of the dialog. A null value sets the button text to "ok"
+     * @param negativeText    a text to show on the "negative" button of the dialog. A null value sets the button text to "cancel"
      * @param callback        the callback to determine the actions that should be done on "ok" tap
      */
     public static void showEditDialog(final Context context, String title, String hint, String message, String precompiledText, int inputType, final String lower, final String upper, final String positiveText, final String negativeText, final EditTextDialogCallback callback) {
