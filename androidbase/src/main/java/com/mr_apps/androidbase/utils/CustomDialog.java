@@ -206,23 +206,61 @@ public class CustomDialog {
      * @param callback  the callback to determine the actions that should be done on "ok" tap
      */
     public static void showEditDialog(final Context context, String title, String hint, String message, int inputType, final String lower, final String upper, final EditTextDialogCallback callback) {
-        showEditDialog(context, title, hint, message, null, inputType, lower, upper, callback);
+        showEditDialog(context, title, hint, message, null, inputType, lower, upper, null, null, callback);
     }
 
     /**
      * Shows a dialog with an edit text, with all the given parameters to configure it
      *
-     * @param context   the context
-     * @param title     the title that should be displayed at the top of the dialog
-     * @param hint      the hint that should be displayed in the edit text. A null value removes the hint from the edit text
-     * @param message   the message of the dialog, placed above the edit text. A null value removes the message from the dialog
+     * @param context         the context
+     * @param title           the title that should be displayed at the top of the dialog
+     * @param hint            the hint that should be displayed in the edit text. A null value removes the hint from the edit text
+     * @param message         the message of the dialog, placed above the edit text. A null value removes the message from the dialog
      * @param precompiledText the text to set to the edit when created
-     * @param inputType the input type of the edit text
-     * @param lower     lower bound of the edit text, to show an error message if the value of the edit text is lower. A null value removes the controls
-     * @param upper     upper bound of the edit text, to show an error message if the value of the edit text is higher. A null value removes the controls
-     * @param callback  the callback to determine the actions that should be done on "ok" tap
+     * @param inputType       the input type of the edit text
+     * @param lower           lower bound of the edit text, to show an error message if the value of the edit text is lower. A null value removes the controls
+     * @param upper           upper bound of the edit text, to show an error message if the value of the edit text is higher. A null value removes the controls
+     * @param callback        the callback to determine the actions that should be done on "ok" tap
      */
     public static void showEditDialog(final Context context, String title, String hint, String message, String precompiledText, int inputType, final String lower, final String upper, final EditTextDialogCallback callback) {
+        showEditDialog(context, title, hint, message, precompiledText, inputType, lower, upper, null, null, callback);
+    }
+
+    /**
+     * Shows a dialog with an edit text, with all the given parameters to configure it
+     *
+     * @param context         the context
+     * @param title           the title that should be displayed at the top of the dialog
+     * @param hint            the hint that should be displayed in the edit text. A null value removes the hint from the edit text
+     * @param message         the message of the dialog, placed above the edit text. A null value removes the message from the dialog
+     * @param precompiledText the text to set to the edit when created
+     * @param inputType       the input type of the edit text
+     * @param lower           lower bound of the edit text, to show an error message if the value of the edit text is lower. A null value removes the controls
+     * @param upper           upper bound of the edit text, to show an error message if the value of the edit text is higher. A null value removes the controls
+     * @param positiveResId   the resource id of the string to show on the "positive" button of the dialog
+     * @param negativeResId   the resource id of the string to show on the "negative" button of the dialog
+     * @param callback        the callback to determine the actions that should be done on "ok" tap
+     */
+    public static void showEditDialog(final Context context, String title, String hint, String message, String precompiledText, int inputType, final String lower, final String upper, int positiveResId, int negativeResId, final EditTextDialogCallback callback) {
+        showEditDialog(context, title, hint, message, precompiledText, inputType, lower, upper, context.getString(positiveResId), context.getString(negativeResId), callback);
+    }
+
+    /**
+     * Shows a dialog with an edit text, with all the given parameters to configure it
+     *
+     * @param context         the context
+     * @param title           the title that should be displayed at the top of the dialog
+     * @param hint            the hint that should be displayed in the edit text. A null value removes the hint from the edit text
+     * @param message         the message of the dialog, placed above the edit text. A null value removes the message from the dialog
+     * @param precompiledText the text to set to the edit when created
+     * @param inputType       the input type of the edit text
+     * @param lower           lower bound of the edit text, to show an error message if the value of the edit text is lower. A null value removes the controls
+     * @param upper           upper bound of the edit text, to show an error message if the value of the edit text is higher. A null value removes the controls
+     * @param positiveText    a text to show on the "positive" button of the dialog
+     * @param negativeText    a text to show on the "negative" button of the dialog
+     * @param callback        the callback to determine the actions that should be done on "ok" tap
+     */
+    public static void showEditDialog(final Context context, String title, String hint, String message, String precompiledText, int inputType, final String lower, final String upper, final String positiveText, final String negativeText, final EditTextDialogCallback callback) {
         View view = LayoutInflater.from(context).inflate(R.layout.custom_dialog, null);
 
         final TextView textView = (TextView) view.findViewById(R.id.message);
@@ -272,19 +310,19 @@ public class CustomDialog {
             }
         });
 
-        if(precompiledText!=null)
+        if (precompiledText != null)
             edit.setText(precompiledText);
 
         AlertDialog dialog = new AlertDialog.Builder(context)
                 .setTitle(title)
                 .setView(view)
-                .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+                .setNegativeButton(negativeText == null ? context.getString(android.R.string.cancel) : negativeText, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
                     }
                 })
-                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                .setPositiveButton(positiveText == null ? context.getString(android.R.string.ok) : positiveText, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         callback.onPositive(edit);
