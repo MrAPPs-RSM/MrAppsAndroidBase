@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.mr_apps.androidbase.R;
@@ -413,6 +414,8 @@ public class CustomDialog {
 
         if (message != null)
             dialog.setMessage(message);
+        else
+            dialog.setContentView(new ProgressBar(context));
 
         return dialog;
 
