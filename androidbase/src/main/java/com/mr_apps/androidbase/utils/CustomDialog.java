@@ -140,23 +140,25 @@ public class CustomDialog {
     /**
      * Shows a dialog with two possible actions, "yes" or "no"
      *
-     * @param context  the context
-     * @param title    the title that should be displayed at the top of the dialog
-     * @param message  the message of the dialog
-     * @param callback the callback to determine the actions that should be done on "yes" tap (on "no" tap there's a simple dialog dismiss)
+     * @param context      the context
+     * @param title        the title that should be displayed at the top of the dialog
+     * @param message      the message of the dialog
+     * @param positiveText a text to show on the "positive" button of the dialog. A null value sets the button text to "ok"
+     * @param negativeText a text to show on the "negative" button of the dialog. A null value sets the button text to "cancel"
+     * @param callback     the callback to determine the actions that should be done on "yes" tap (on "no" tap there's a simple dialog dismiss)
      */
-    public static void showYesNoDialog(Context context, String title, String message, final StandardDialogCallback callback) {
+    public static void showYesNoDialog(Context context, String title, String message, String positiveText, String negativeText, final StandardDialogCallback callback) {
         new AlertDialog.Builder(context)
                 .setTitle(title)
                 .setMessage(message)
                 .setCancelable(false)
-                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                .setNegativeButton(negativeText == null ? context.getString(android.R.string.no) : negativeText, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
                     }
                 })
-                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                .setPositiveButton(positiveText == null ? context.getString(android.R.string.yes) : positiveText, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         callback.onPositive();
@@ -168,13 +170,54 @@ public class CustomDialog {
     /**
      * Shows a dialog with two possible actions, "yes" or "no"
      *
+     * @param context       the context
+     * @param title         the title that should be displayed at the top of the dialog
+     * @param message       the message of the dialog
+     * @param positiveResId the resource id of the string to show on the "positive" button of the dialog. A 0 value sets the button text to "ok"
+     * @param negativeResId the resource id of the string to show on the "negative" button of the dialog. A 0 value sets the button text to "cancel"
+     * @param callback      the callback to determine the actions that should be done on "yes" tap (on "no" tap there's a simple dialog dismiss)
+     */
+    public static void showYesNoDialog(Context context, String title, String message, int positiveResId, int negativeResId, final StandardDialogCallback callback) {
+        showYesNoDialog(context, title, message, positiveResId == 0 ? null : context.getString(positiveResId), negativeResId == 0 ? null : context.getString(negativeResId), callback);
+    }
+
+    /**
+     * Shows a dialog with two possible actions, "yes" or "no"
+     *
+     * @param context  the context
+     * @param title    the title that should be displayed at the top of the dialog
+     * @param message  the message of the dialog
+     * @param callback the callback to determine the actions that should be done on "yes" tap (on "no" tap there's a simple dialog dismiss)
+     */
+    public static void showYesNoDialog(Context context, String title, String message, final StandardDialogCallback callback) {
+        showYesNoDialog(context, title, message, null, null, callback);
+    }
+
+    /**
+     * Shows a dialog with two possible actions, "yes" or "no"
+     *
      * @param context      the context
      * @param titleResId   the string's resource id of the title that should be displayed at the top of the dialog
      * @param messageResId the string's resource id of the message of the dialog
      * @param callback     the callback to determine the actions that should be done on "yes" tap
      */
     public static void showYesNoDialog(Context context, int titleResId, int messageResId, final StandardDialogCallback callback) {
-        showYesNoDialog(context, titleResId == 0 ? null : context.getString(titleResId), titleResId == 0 ? null : context.getString(messageResId), callback);
+        showYesNoDialog(context, titleResId == 0 ? null : context.getString(titleResId), titleResId == 0 ? null : context.getString(messageResId), null, null, callback);
+    }
+
+    /**
+     * Shows a dialog with two possible actions, "yes" or "no"
+     *
+     * @param context       the context
+     * @param titleResId    the string's resource id of the title that should be displayed at the top of the dialog
+     * @param messageResId  the string's resource id of the message of the dialog
+     * @param positiveResId the resource id of the string to show on the "positive" button of the dialog. A 0 value sets the button text to "ok"
+     * @param negativeResId the resource id of the string to show on the "negative" button of the dialog. A 0 value sets the button text to "cancel"
+     * @param callback      the callback to determine the actions that should be done on "yes" tap
+     */
+    public static void showYesNoDialog(Context context, int titleResId, int messageResId, int positiveResId, int negativeResId, final StandardDialogCallback callback) {
+        showYesNoDialog(context, titleResId == 0 ? null : context.getString(titleResId), titleResId == 0 ? null : context.getString(messageResId),
+                positiveResId == 0 ? null : context.getString(positiveResId), negativeResId == 0 ? null : context.getString(negativeResId), callback);
     }
 
     /**
