@@ -34,7 +34,7 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.mr_apps.androidbase.R;
 import com.mr_apps.androidbase.activity.AbstractBaseActivity;
-import com.mr_apps.androidbase.custom_views.WarningTextInputLayout;
+import com.mr_apps.androidbasecore.custom_views.WarningTextInputLayout;
 import com.mr_apps.androidbaseutils.DrawableUtils;
 import com.mr_apps.androidbaseutils.Logger;
 import com.mr_apps.androidbaseutils.Utils;

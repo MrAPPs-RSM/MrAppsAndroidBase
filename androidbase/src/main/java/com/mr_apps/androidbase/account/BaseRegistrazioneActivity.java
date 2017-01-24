@@ -13,7 +13,7 @@ import android.widget.LinearLayout;
 
 import com.mr_apps.androidbase.R;
 import com.mr_apps.androidbase.activity.AbstractBaseActivity;
-import com.mr_apps.androidbase.custom_views.WarningTextInputLayout;
+import com.mr_apps.androidbasecore.custom_views.WarningTextInputLayout;
 import com.mr_apps.androidbaseutils.DrawableUtils;
 import com.mr_apps.androidbaseutils.TextViewUtils;
 
