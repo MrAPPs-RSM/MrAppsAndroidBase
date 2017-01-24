@@ -1,4 +1,4 @@
-package com.mr_apps.androidbaseutils;
+package com.mr_apps.androidbase.utils;
 
 import android.content.Context;
 import android.content.res.ColorStateList;
@@ -11,6 +11,7 @@ import android.text.TextUtils;
 import android.util.DisplayMetrics;
 
 import com.mr_apps.androidbasecore.custom_views.WarningTextInputLayout;
+import com.mr_apps.androidbaseutils.R;
 
 /**
  * Class that provides generic utils

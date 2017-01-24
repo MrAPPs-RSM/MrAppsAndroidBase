@@ -1,4 +1,4 @@
-package com.mr_apps.androidbaseutils;
+package com.mr_apps.androidbase.utils;
 
 import android.content.Context;
 import android.database.Cursor;

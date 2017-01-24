@@ -1,4 +1,4 @@
-package com.mr_apps.androidbaseutils;
+package com.mr_apps.androidbase.utils;
 
 import android.support.design.widget.AppBarLayout;
 
