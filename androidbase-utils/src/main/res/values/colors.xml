@@ -4,7 +4,7 @@
     <!-- Custom dialog colors -->
     <color name="titleDialogColor">#000000</color>
     <color name="editTextDialogColorNormal">#999999</color>
-    <color name="editTextDialogColorHighlight">#afafafa</color> <!--@color/colorAccent-->
+    <color name="editTextDialogColorHighlight">#ffffff</color> <!--@color/colorAccent-->
     <color name="editTextDialogTextColor">#000000</color>
 
 </resources>
