@@ -11,7 +11,7 @@ import android.view.View;
 import android.widget.RelativeLayout;
 
 import com.mr_apps.androidbase.R;
-import com.mr_apps.androidbase.utils.DrawableUtils;
+import com.mr_apps.androidbaseutils.utils.DrawableUtils;
 import com.viewpagerindicator.CirclePageIndicator;
 
 /**

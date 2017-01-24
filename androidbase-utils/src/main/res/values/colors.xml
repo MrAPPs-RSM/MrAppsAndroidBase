@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Custom dialog colors -->
+    <color name="titleDialogColor">#000000</color>
+    <color name="editTextDialogColorNormal">#999999</color>
+    <color name="editTextDialogColorHighlight">#afafafa</color> <!--@color/colorAccent-->
+    <color name="editTextDialogTextColor">#000000</color>
+
+</resources>

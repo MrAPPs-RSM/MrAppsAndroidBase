@@ -35,9 +35,9 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.mr_apps.androidbase.R;
 import com.mr_apps.androidbase.activity.AbstractBaseActivity;
 import com.mr_apps.androidbase.custom_views.WarningTextInputLayout;
-import com.mr_apps.androidbase.utils.DrawableUtils;
-import com.mr_apps.androidbase.utils.Logger;
-import com.mr_apps.androidbase.utils.Utils;
+import com.mr_apps.androidbaseutils.utils.DrawableUtils;
+import com.mr_apps.androidbaseutils.utils.Logger;
+import com.mr_apps.androidbaseutils.utils.Utils;
 
 import org.json.JSONObject;
 
@@ -137,8 +137,8 @@ public abstract class BaseLoginActivity extends AbstractBaseActivity implements
 
             @Override
             public void afterTextChanged(Editable s) {
-                til_password.setErrorEnabled(!passwordTilRule(s.toString()) && s.length() > 0);
-                Utils.passwordToggleDrawableColor(BaseLoginActivity.this, til_password);
+                til_password.setErrorEnabled(!passwordTilRule(s.toString()) && s.length() > 0); //TODO da reintegrare
+                //Utils.passwordToggleDrawableColor(BaseLoginActivity.this, til_password);
             }
         });
 

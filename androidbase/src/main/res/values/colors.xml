@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#ae3742</color>
+    <color name="colorPrimary">#ae3742</color> <!-- ELIMINARE I PRIMI 3 -->
     <color name="colorPrimaryDark">#912b35</color>
     <color name="colorAccent">#ae3742</color>
 
@@ -8,13 +8,6 @@
     <color name="errorRed">#D32F2F</color>
     <color name="googleSignIn">#DC4A39</color>
     <color name="googleSignIn_pressed">#C64233</color>
-
-
-    <!-- Custom dialog colors -->
-    <color name="editTextDialogColorNormal">#999999</color>
-    <color name="editTextDialogColorHighlight">@color/colorAccent</color>
-    <color name="editTextDialogTextColor">#000000</color>
-    <color name="titleDialogColor">#000000</color>
 
     <!-- Custom tutorial colors -->
     <color name="tutorial_title_color">@android:color/white</color>
