@@ -1,4 +1,4 @@
-package com.mr_apps.androidbaseutils.utils;
+package com.mr_apps.androidbase.utils;
 
 import android.content.Context;
 import android.content.res.ColorStateList;
@@ -10,7 +10,7 @@ import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
 
-//import com.mr_apps.androidbase.custom_views.WarningTextInputLayout;
+import com.mr_apps.androidbase.custom_views.WarningTextInputLayout;
 
 /**
  * Class that provides generic utils
@@ -167,7 +167,7 @@ public class Utils {
         return dp * (metrics.densityDpi / DisplayMetrics.DENSITY_DEFAULT);
     }
 
-    /*public static void passwordToggleDrawableColor(Context context, WarningTextInputLayout warningTextInputLayout) {
+    public static void passwordToggleDrawableColor(Context context, WarningTextInputLayout warningTextInputLayout) {
         if (warningTextInputLayout.isErrorEnabled()) {
             warningTextInputLayout.setPasswordVisibilityToggleTintList(new ColorStateList(new int[][]{
                     new int[]{android.R.attr.state_enabled},
@@ -185,5 +185,5 @@ public class Utils {
                     }
             ));
         }
-    }*/
+    }
 }

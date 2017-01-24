@@ -5,7 +5,8 @@
     android:orientation="vertical">
 
     <TextView
-        style="@style/TitleDialogStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:id="@+id/message" />
 
     <android.support.design.widget.TextInputLayout
@@ -15,7 +16,6 @@
         android:layout_margin="16dp"> <!-- @dimen/default_very_large_margin_or_padding -->
 
         <android.support.v7.widget.AppCompatEditText
-            style="@style/EditTextDialogStyle"
             android:id="@+id/edit_dialog"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
