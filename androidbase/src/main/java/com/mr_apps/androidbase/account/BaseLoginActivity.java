@@ -137,8 +137,8 @@ public abstract class BaseLoginActivity extends AbstractBaseActivity implements
 
             @Override
             public void afterTextChanged(Editable s) {
-                til_password.setErrorEnabled(!passwordTilRule(s.toString()) && s.length() > 0); //TODO da reintegrare
-                //Utils.passwordToggleDrawableColor(BaseLoginActivity.this, til_password);
+                til_password.setErrorEnabled(!passwordTilRule(s.toString()) && s.length() > 0);
+                Utils.passwordToggleDrawableColor(BaseLoginActivity.this, til_password);
             }
         });
 
