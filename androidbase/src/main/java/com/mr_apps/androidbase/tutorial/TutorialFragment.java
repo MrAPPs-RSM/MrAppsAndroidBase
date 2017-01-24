@@ -10,7 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.mr_apps.androidbase.R;
-import com.mr_apps.androidbaseutils.utils.Utils;
+import com.mr_apps.androidbaseutils.Utils;
 
 /**
  * CLass that manages a fragment of the tutorial

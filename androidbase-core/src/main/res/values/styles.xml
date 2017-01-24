@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="HintStyle" parent="TextAppearance.Design.Hint" />
+
+    <style name="HintErrorStyle" parent="HintStyle">
+        <item name="android:textColor">@color/errorRed</item>
+    </style>
+
+</resources>

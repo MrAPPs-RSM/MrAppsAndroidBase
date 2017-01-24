@@ -15,9 +15,9 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 
 import com.mr_apps.androidbase.R;
-import com.mr_apps.androidbaseutils.utils.BitmapUtils;
-import com.mr_apps.androidbaseutils.utils.FileUtils;
-import com.mr_apps.androidbaseutils.utils.FileUtils.ElementType;
+import com.mr_apps.androidbaseutils.BitmapUtils;
+import com.mr_apps.androidbaseutils.FileUtils;
+import com.mr_apps.androidbaseutils.FileUtils.ElementType;
 
 import java.io.File;
 import java.util.ArrayList;

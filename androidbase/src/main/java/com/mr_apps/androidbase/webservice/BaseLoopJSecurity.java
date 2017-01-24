@@ -15,8 +15,8 @@ import com.loopj.android.http.RequestParams;
 import com.loopj.android.http.ResponseHandlerInterface;
 import com.loopj.android.http.TextHttpResponseHandler;
 import com.mr_apps.androidbase.preferences.SecurityPreferences;
-import com.mr_apps.androidbaseutils.utils.Logger;
-import com.mr_apps.androidbaseutils.utils.Utils;
+import com.mr_apps.androidbaseutils.Logger;
+import com.mr_apps.androidbaseutils.Utils;
 
 import java.io.UnsupportedEncodingException;
 import java.nio.channels.NotYetConnectedException;
