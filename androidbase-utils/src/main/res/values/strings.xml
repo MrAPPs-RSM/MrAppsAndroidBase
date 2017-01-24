@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">AndroidBase Utils</string>
+
+    <string name="Devi_inserire_un_valore_tra__d_e__d" formatted="false">Devi inserire un valore tra %d e %d</string>
 </resources>

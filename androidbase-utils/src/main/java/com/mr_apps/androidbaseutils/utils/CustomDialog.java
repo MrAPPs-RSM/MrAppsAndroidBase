@@ -1,4 +1,4 @@
-package com.mr_apps.androidbase.utils;
+package com.mr_apps.androidbaseutils.utils;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -14,7 +14,7 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.mr_apps.androidbase.R;
+import com.mr_apps.androidbaseutils.R;
 
 
 /**

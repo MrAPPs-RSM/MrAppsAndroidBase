@@ -1,4 +1,4 @@
-package com.mr_apps.androidbase.utils;
+package com.mr_apps.androidbaseutils.utils;
 
 
 import android.app.Activity;

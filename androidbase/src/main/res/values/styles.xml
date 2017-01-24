@@ -93,30 +93,9 @@
         <item name="android:textColor">@color/errorRed</item>
     </style>
 
-    <style name="EdiTextDialogStyle" parent="Widget.AppCompat.EditText">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:inputType">textEmailAddress</item>
-        <item name="android:theme">@style/DialogColorControlTheme</item>
-        <item name="android:layout_marginBottom">@dimen/default_margin_or_padding</item>
-        <item name="android:singleLine">true</item>
-        <item name="android:textColor">@color/editTextDialogTextColor</item>
-    </style>
-
     <style name="DialogColorControlTheme">
         <item name="colorControlNormal">@color/editTextDialogColorNormal</item>
         <item name="colorAccent">@color/editTextDialogColorHighlight</item>
-    </style>
-
-    <style name="TitleDialogStyle" parent="android:TextAppearance">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:textSize">15sp</item>
-        <item name="android:gravity">center</item>
-        <item name="android:textColor">@color/titleDialogColor</item>
-        <item name="android:layout_marginRight">@dimen/default_very_large_margin_or_padding</item>
-        <item name="android:layout_marginLeft">@dimen/default_very_large_margin_or_padding</item>
-        <item name="android:layout_marginTop">@dimen/default_very_large_margin_or_padding</item>
     </style>
 
     <style name="SkipButton" parent="Widget.AppCompat.Button.Borderless">

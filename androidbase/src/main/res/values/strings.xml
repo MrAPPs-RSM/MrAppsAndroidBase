@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">AndroidBase</string>
-    <string name="Devi_inserire_un_valore_tra__d_e__d" formatted="false">Devi inserire un valore tra %d e %d</string>
 
     <!--animations-->
     <string name="transition_gallery" translatable="false">gallery_image</string>
