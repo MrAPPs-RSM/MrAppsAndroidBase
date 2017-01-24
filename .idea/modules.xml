@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/android-base-sdk.iml" filepath="$PROJECT_DIR$/android-base-sdk.iml" />
       <module fileurl="file://$PROJECT_DIR$/androidbase/androidbase.iml" filepath="$PROJECT_DIR$/androidbase/androidbase.iml" />
+      <module fileurl="file://$PROJECT_DIR$/androidbase-utils/androidbase-utils.iml" filepath="$PROJECT_DIR$/androidbase-utils/androidbase-utils.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
