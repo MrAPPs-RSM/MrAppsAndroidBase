@@ -16,8 +16,8 @@ import android.widget.ImageView;
 import com.mr_apps.androidbase.activity.AbstractBaseActivity;
 import com.mr_apps.androidbase.activity.CreditsActivity;
 import com.mr_apps.androidbase.gallery.GalleryActivity;
-import com.mr_apps.androidbaseutils.BitmapUtils;
-import com.mr_apps.androidbaseutils.FileUtils;
+import com.mr_apps.androidbase.utils.BitmapUtils;
+import com.mr_apps.androidbase.utils.FileUtils;
 
 import java.util.ArrayList;
 

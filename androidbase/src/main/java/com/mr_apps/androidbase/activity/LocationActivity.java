@@ -27,7 +27,7 @@ import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.TextHttpResponseHandler;
 import com.mr_apps.androidbase.R;
 import com.mr_apps.androidbase.preferences.GlobalPreferences;
-import com.mr_apps.androidbaseutils.Logger;
+import com.mr_apps.androidbase.utils.Logger;
 
 import java.util.ArrayList;
 import java.util.List;

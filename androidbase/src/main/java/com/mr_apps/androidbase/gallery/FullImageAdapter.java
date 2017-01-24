@@ -11,7 +11,7 @@ import android.widget.ImageView;
 import com.bumptech.glide.BitmapTypeRequest;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.BitmapImageViewTarget;
-import com.mr_apps.androidbaseutils.BitmapUtils;
+import com.mr_apps.androidbase.utils.BitmapUtils;
 
 import java.util.List;
 

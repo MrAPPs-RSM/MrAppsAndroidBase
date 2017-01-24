@@ -13,8 +13,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 
 import com.mr_apps.androidbase.R;
-import com.mr_apps.androidbaseutils.CustomDialog;
-import com.mr_apps.androidbaseutils.Utils;
+import com.mr_apps.androidbase.utils.CustomDialog;
+import com.mr_apps.androidbase.utils.Utils;
 
 /**
  * Class that manages a standard sign up element of the registration form

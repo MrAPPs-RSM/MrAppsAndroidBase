@@ -1,4 +1,4 @@
-package com.mr_apps.androidbasecore.custom_views;
+package com.mr_apps.androidbase.custom_views;
 
 import android.content.Context;
 import android.graphics.PorterDuff;
@@ -41,7 +41,7 @@ public class WarningTextInputLayout extends TextInputLayout {
                     warning.setColorFilter(ContextCompat.getColor(getContext(), R.color.errorRed), PorterDuff.Mode.SRC_ATOP);
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1)
                     edit.setCompoundDrawablesRelativeWithIntrinsicBounds(null, null, warning, null);
-                 else
+                else
                     edit.setCompoundDrawablesWithIntrinsicBounds(null, null, warning, null);
 
             } else {
