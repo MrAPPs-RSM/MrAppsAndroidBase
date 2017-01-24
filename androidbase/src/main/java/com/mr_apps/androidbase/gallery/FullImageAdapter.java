@@ -22,18 +22,18 @@ import uk.co.senab.photoview.PhotoViewAttacher;
  *
  * @author Denis Brandi
  */
-public class FullImageAdapter extends PagerAdapter{
+public class FullImageAdapter extends PagerAdapter {
 
     Context context;
     final List<String> imagesPath;
 
-    private int placeholderResId=-1;
+    private int placeholderResId = -1;
 
     /**
      * Constructor that takes the context and the list of images to show in the adapter
      *
      * @param context the context
-     * @param images the list of images to show
+     * @param images  the list of images to show
      */
     public FullImageAdapter(Context context, List<String> images) {
         this.context = context;
@@ -43,14 +43,14 @@ public class FullImageAdapter extends PagerAdapter{
     /**
      * Constructor that takes the context, the placeholder image to show when an image is not still loaded and the list of images to show in the adapter
      *
-     * @param context the context
+     * @param context          the context
      * @param placeholderResId the placeholder image to show until the real image is not loaded
-     * @param images the list of images to show
+     * @param images           the list of images to show
      */
     public FullImageAdapter(Context context, int placeholderResId, List<String> images) {
         this.context = context;
         this.imagesPath = images;
-        this.placeholderResId=placeholderResId;
+        this.placeholderResId = placeholderResId;
     }
 
     @Override
@@ -73,22 +73,22 @@ public class FullImageAdapter extends PagerAdapter{
         imageView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
         imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
 
-        final PhotoViewAttacher mAttacher=new PhotoViewAttacher(imageView);
+        final PhotoViewAttacher mAttacher = new PhotoViewAttacher(imageView);
 
         imageView.setImageResource(placeholderResId);
 
         mAttacher.update();
 
-        BitmapTypeRequest<String> request=Glide.with(context).load(imagesPath.get(position)).asBitmap();
+        BitmapTypeRequest<String> request = Glide.with(context).load(imagesPath.get(position)).asBitmap();
 
-        if(placeholderResId!=-1)
+        if (placeholderResId != -1)
             request.error(placeholderResId).placeholder(placeholderResId);
-        
+
 
         request.into(new BitmapImageViewTarget(imageView) {
             @Override
             protected void setResource(Bitmap resource) {
-                if(resource!=null) {
+                if (resource != null) {
                     imageView.setImageBitmap(BitmapUtils.scaleBitmap(resource));
                     mAttacher.update();
                 }
