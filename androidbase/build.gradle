@@ -60,6 +60,6 @@ dependencies {
     compile 'com.github.chrisbanes:PhotoView:1.2.6'
     compile 'com.facebook.android:facebook-android-sdk:4.10.0'
     compile 'com.viewpagerindicator:library:2.4.1'
-    compile 'com.github.MrAPPs-RSM.MrAppsAndroidBase:androidbase-core:1.0.57'
-    compile 'com.github.MrAPPs-RSM.MrAppsAndroidBase:androidbase-utils:1.0.57'
+    compile 'com.github.MrAPPs-RSM.MrAppsAndroidBase:androidbase-core:1.0.58'
+    compile 'com.github.MrAPPs-RSM.MrAppsAndroidBase:androidbase-utils:1.0.58'
 }

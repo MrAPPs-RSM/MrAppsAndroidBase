@@ -10,7 +10,7 @@ import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
 
-import com.mr_apps.androidbasecore.custom_views.WarningTextInputLayout;
+import com.mr_apps.androidbase.custom_views.WarningTextInputLayout;
 import com.mr_apps.androidbaseutils.R;
 
 /**
