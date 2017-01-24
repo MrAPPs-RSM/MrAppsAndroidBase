@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#ae3742</color> <!-- ELIMINARE I PRIMI 3 -->
-    <color name="colorPrimaryDark">#912b35</color>
-    <color name="colorAccent">#ae3742</color>
 
     <color name="lightGrey">#999999</color>
     <color name="errorRed">#D32F2F</color>

@@ -1,4 +1,4 @@
-package com.mr_apps.androidbaseutils.utils;
+package com.mr_apps.androidbaseutils;
 
 import android.content.Context;
 import android.graphics.Color;
