@@ -14,6 +14,7 @@ public class Logger {
 
     /**
      * Sets that every log created with this class has to be ignored
+     *
      * @param hideLog true if the log should be hidden, false otherwise
      */
     public static void setHideLog(boolean hideLog) {

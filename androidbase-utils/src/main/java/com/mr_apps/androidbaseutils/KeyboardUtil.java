@@ -16,6 +16,7 @@ public class KeyboardUtil {
 
     /**
      * Hides the Android keyboard
+     *
      * @param activity the current activity
      */
     public static void hideKeyboard(Activity activity) {
@@ -30,8 +31,9 @@ public class KeyboardUtil {
 
     /**
      * Hides the Android keyboard
+     *
      * @param activity the current activity
-     * @param view the view on which the keyboard is open
+     * @param view     the view on which the keyboard is open
      */
     public static void hideKeyboard(Activity activity, View view) {
         try {

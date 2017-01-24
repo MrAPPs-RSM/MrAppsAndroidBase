@@ -14,8 +14,6 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.mr_apps.androidbaseutils.R;
-
 
 /**
  * Class that contains a lot of useful methods to create standard dialogs

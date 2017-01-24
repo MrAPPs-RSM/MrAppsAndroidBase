@@ -135,7 +135,7 @@ public class TextViewUtils {
             if (split[0].equals(fullString)) {
                 list.add(fullString);
 
-                for(String string : pieces) {
+                for (String string : pieces) {
                     list.add(" ");
                     list.add(string);
                 }
