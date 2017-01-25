@@ -1,1 +1,1 @@
-include ':app', ':androidbase', ':androidbase-core', ':androidbase-account', ':androidbase-gallery', ':androidbase-share'
+include ':app', ':androidbase', ':androidbase-core', ':androidbase-account', ':androidbase-gallery', ':androidbase-share', ':androidbase-tutorial'

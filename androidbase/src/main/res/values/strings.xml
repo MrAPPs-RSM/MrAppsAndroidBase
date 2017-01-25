@@ -26,12 +26,12 @@
     <string name="Password_dimenticata">Hai dimenticato la password?</string>
     <string name="Nessun_account">Non hai un account?</string>
     <string name="Iscriviti_ora">Iscriviti ora</string>
-    <string name="Login">Login</string>
+    <string name="Login">Login</string> <!-- ELIMINARE -->
     <string name="Signin">Signin</string>
     <string name="Entra">Entra</string>
     <string name="Controllare_dati_inseriti">Controllare i dati inseriti</string>
     <string name="Placeholder">Prova</string>
-    <string name="skip_login">Vai alla login</string>
+    <string name="skip_login">Vai alla login</string> <!-- ELIMINARE -->
     <string name="discover_mrapps">Scopri Mr. APPs</string>
     <string name="app_development">Sviluppo App</string>
     <string name="websites_realization">Realizzazione Siti Web</string>

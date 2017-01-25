@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/background"
+    android:paddingTop="@dimen/status_cheat"
+    android:background="@color/tutorial_background_color">
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/tutorial_pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/layout_skip"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/default_extra_large_margin_or_padding"
+        android:id="@+id/layout_skip"
+        android:orientation="vertical">
+
+        <com.viewpagerindicator.CirclePageIndicator
+            android:id="@+id/indicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/default_very_large_margin_or_padding"
+            android:layout_gravity="center_horizontal"
+            android:padding="@dimen/default_margin_or_padding"/>
+
+        <android.support.v7.widget.AppCompatButton
+            style="@style/SkipButton"
+            android:id="@+id/skip"
+            android:text="@string/skip_login"
+            android:layout_margin="@dimen/default_very_large_margin_or_padding" />
+
+        <android.support.v7.widget.AppCompatButton
+            style="@style/WhiteLoginButton"
+            android:layout_width="wrap_content"
+            android:id="@+id/login"
+            android:text="@string/Login"
+            android:theme="@style/WhiteLoginButton"
+            android:layout_margin="@dimen/default_very_large_margin_or_padding" />
+
+    </LinearLayout>
+
+
+</RelativeLayout>

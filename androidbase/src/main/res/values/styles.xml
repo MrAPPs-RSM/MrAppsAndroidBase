@@ -10,7 +10,7 @@
         <item name="colorControlNormal">@color/creditsColorControlNormal</item>
     </style>
 
-    <style name="SkipButton" parent="Widget.AppCompat.Button.Borderless">
+    <style name="SkipButton" parent="Widget.AppCompat.Button.Borderless"> <!-- ELIMINARE -->
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:alpha">0.5</item>
@@ -27,7 +27,7 @@
         <item name="colorButtonNormal">@android:color/white</item>
     </style>
 
-    <style name="WhiteLoginButton" parent="Widget.AppCompat.Button.Borderless">
+    <style name="WhiteLoginButton" parent="Widget.AppCompat.Button.Borderless"> <!-- ELIMINARE -->
         <item name="android:layout_width">wrap_content</item>
         <item name="android:minWidth">@dimen/min_button_width</item>
         <item name="android:layout_height">wrap_content</item>
@@ -38,7 +38,7 @@
         <item name="android:textColor">@color/tutorial_background_color</item>
     </style>
 
-    <style name="TutorialTitle" parent="android:TextAppearance">
+    <style name="TutorialTitle" parent="android:TextAppearance"> <!-- ELIMINARE -->
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textColor">@android:color/white</item>
@@ -47,7 +47,7 @@
         <item name="android:layout_gravity">center_horizontal</item>
     </style>
 
-    <style name="TutorialSubTitle" parent="TutorialTitle">
+    <style name="TutorialSubTitle" parent="TutorialTitle"> <!-- ELIMINARE -->
         <item name="android:textSize">14sp</item>
     </style>
 

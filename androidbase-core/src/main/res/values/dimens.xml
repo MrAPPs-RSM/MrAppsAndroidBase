@@ -7,4 +7,6 @@
     <dimen name="default_extra_large_margin_or_padding">32dp</dimen>
     <dimen name="default_small_margin_or_padding">4dp</dimen>
 
+    <dimen name="status_cheat">0dp</dimen>
+
 </resources>
