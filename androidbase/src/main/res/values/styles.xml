@@ -10,15 +10,6 @@
         <item name="colorControlNormal">@color/creditsColorControlNormal</item>
     </style>
 
-    <style name="GalleryTheme" parent="Theme.AppCompat.NoActionBar">
-        <item name="android:windowBackground">@android:color/black</item>
-        <item name="colorAccent">@android:color/white</item>
-    </style>
-
-    <style name="GalleryOverlay" parent="ThemeOverlay.AppCompat.ActionBar">
-        <item name="colorAccent">@android:color/white</item>
-    </style>
-
     <style name="SkipButton" parent="Widget.AppCompat.Button.Borderless">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
