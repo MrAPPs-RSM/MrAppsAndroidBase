@@ -7,13 +7,10 @@
     <!--permessi-->
     <string name="Titolo_permesso_obbligatorio">Richiesta permesso</string>
 
-    <string name="Messaggio_permesso_storage">È necessario consentire il permesso per la gestione dei file nella SD.\n Vuoi impostarlo adesso?</string>
-    <string name="Messaggio_permesso_posizione">È necessario consentire il permesso per accedere alla tua posizione.\n Vuoi impostarlo adesso?</string>
     <string name="Messaggio_permesso_camera">È necessario consentire il permesso per accedere alla fotocamera.\n Vuoi impostarlo adesso?</string>
 
     <string name="La_mia_posizione">La mia posizione</string>
     <string name="Credenziali_non_corrette">Credenziali non corrette</string>
-    <string name="Campi_obbligatori_non_inseriti">Campi obbligatori non inseriti</string> <!-- ELIMINARE -->
     <string name="Email_conferma">Ti è stata inviata una email di conferma per completare la registrazione.</string>
     <string name="Devi_selezionare_una_lingua">Devi selezionare una lingua</string>
 
@@ -22,23 +19,8 @@
     <string name="Scegli_lingua">Scegli lingua</string>
     <string name="Traduzione">Traduzione</string>
     <string name="Scansiona_il_QR_CODE">Scansiona il QR CODE del ristorante per visualizzarlo</string>
-    <string name="Avviso_gps">Il tuo GPS è disabilitato, vuoi attivarlo?</string> <!-- ELIMINARE -->
-    <string name="Si">Si</string> <!-- ELIMINARE -->
-    <string name="Annulla">Annulla</string> <!-- ELIMINARE -->
 
-    <string name="Scegli_immagine_da_galleria">Scegli immagine da galleria</string>
-    <string name="Scatta_foto">Scatta foto</string>
-    <string name="Scegli_audio_da_galleria">Scegli audio da galleria</string>
-    <string name="Registra_audio">Registra audio</string>
-    <string name="Scegli_video_da_galleria">Scegli video da galleria</string>
-    <string name="Gira_video">Gira video</string>
     <string name="Condividi">Condividi</string>
-    <string name="termini_condizioni">Iscrivendoti al servizio accetti Termini e condizioni e informativa sulla Privacy Policy</string> <!-- ELIMINARE -->
-    <string name="termini_condizioni_1">Iscrivendoti al servizio accetti</string> <!-- ELIMINARE -->
-    <string name="termini_condizioni_2">Termini e condizioni</string> <!-- ELIMINARE -->
-    <string name="termini_condizioni_3">e informativa sulla</string> <!-- ELIMINARE -->
-    <string name="termini_condizioni_4">Privacy Policy</string> <!-- ELIMINARE -->
-    <string name="Iscriviti">Iscriviti</string> <!-- ELIMINARE -->
 
     <string name="Esegui_il_login">Esegui il login</string>
     <string name="oppure">oppure</string>
