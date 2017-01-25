@@ -3,6 +3,4 @@
 
     <dimen name="min_button_width">160dp</dimen>
 
-    <dimen name="status_cheat">0dp</dimen>
-
 </resources>
