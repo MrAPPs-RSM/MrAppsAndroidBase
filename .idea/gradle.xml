@@ -11,6 +11,8 @@
             <option value="$PROJECT_DIR$/androidbase" />
             <option value="$PROJECT_DIR$/androidbase-account" />
             <option value="$PROJECT_DIR$/androidbase-core" />
+            <option value="$PROJECT_DIR$/androidbase-gallery" />
+            <option value="$PROJECT_DIR$/androidbase-share" />
             <option value="$PROJECT_DIR$/app" />
           </set>
         </option>

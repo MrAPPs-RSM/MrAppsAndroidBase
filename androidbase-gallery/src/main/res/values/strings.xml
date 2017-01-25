@@ -1,0 +1,10 @@
+<resources>
+
+    <string name="app_name">AndroidBase Gallery</string>
+
+    <!--animations-->
+    <string name="transition_gallery" translatable="false">gallery_image</string>
+
+    <string name="Condividi">Condividi</string>
+
+</resources>
