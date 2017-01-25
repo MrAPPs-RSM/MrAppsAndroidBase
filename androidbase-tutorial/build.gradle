@@ -27,6 +27,6 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     compile 'com.viewpagerindicator:library:2.4.1'
-    compile 'com.github.MrAPPs-RSM.MrAppsAndroidBase:androidbase-core:1.0.70'
+    compile 'com.github.MrAPPs-RSM.MrAppsAndroidBase:androidbase-core:1.0.71'
     testCompile 'junit:junit:4.12'
 }

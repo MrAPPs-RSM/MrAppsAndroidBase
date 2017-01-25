@@ -1,13 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!-- Custom tutorial colors -->
-    <color name="tutorial_title_color">@android:color/white</color>
-    <color name="tutorial_subtitle_color">@android:color/white</color>
-    <color name="tutorial_background_color">#3e79c9</color>
-    <color name="tutorial_button_color">#ffffff</color>
-    <color name="tutorial_button_textcolor">#3e79c9</color>
-
     <!-- CreditsActivity -->
     <color name="creditsItemsTextColor">@android:color/black</color>
     <color name="creditsBackground">#f5f5f5</color>
