@@ -13,7 +13,7 @@ import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.mr_apps.androidbasegallery.R;
 import com.mr_apps.androidbase.activity.AbstractBaseActivity;
-//import com.mr_apps.androidbase.share.GlobalShare;
+import com.mr_apps.androidbase.share.GlobalShare;
 
 import java.util.ArrayList;
 
@@ -93,7 +93,7 @@ public class GalleryActivity extends AbstractBaseActivity {
         Glide.with(this).load(images.get(viewPager.getCurrentItem())).asBitmap().into(new SimpleTarget<Bitmap>() {
             @Override
             public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
-                //GlobalShare.share(GalleryActivity.this, null, resource);
+                GlobalShare.share(GalleryActivity.this, null, resource);
             }
         });
     }
