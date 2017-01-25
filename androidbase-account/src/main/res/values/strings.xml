@@ -1,3 +1,24 @@
 <resources>
     <string name="app_name">AndroidBase Account</string>
+
+    <!-- BaseRegistrazioneActivity -->
+    <string name="Iscriviti">Iscriviti</string>
+    <string name="Campi_obbligatori_non_inseriti">Campi obbligatori non inseriti</string>
+    <string name="termini_condizioni">Iscrivendoti al servizio accetti Termini e condizioni e informativa sulla Privacy Policy</string>
+    <string name="termini_condizioni_1">Iscrivendoti al servizio accetti</string>
+    <string name="termini_condizioni_2">Termini e condizioni</string>
+    <string name="termini_condizioni_3">e informativa sulla</string>
+    <string name="termini_condizioni_4">Privacy Policy</string>
+
+    <!-- BaseLoginActivity -->
+    <string name="Esegui_il_login">Esegui il login</string>
+    <string name="oppure">oppure</string>
+    <string name="Email">Email</string>
+    <string name="Password">Password</string>
+    <string name="Password_dimenticata">Hai dimenticato la password?</string>
+    <string name="Nessun_account">Non hai un account?</string>
+    <string name="Iscriviti_ora">Iscriviti ora</string>
+    <string name="Entra">Entra</string>
+    <string name="Controllare_dati_inseriti">Controllare i dati inseriti</string>
+
 </resources>

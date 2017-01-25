@@ -3,4 +3,8 @@
 
     <color name="lightGrey">#999999</color>
 
+    <!-- Google SignIn Button -->
+    <color name="googleSignIn">#DC4A39</color>
+    <color name="googleSignIn_pressed">#C64233</color>
+
 </resources>
