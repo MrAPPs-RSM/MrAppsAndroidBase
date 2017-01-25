@@ -30,7 +30,7 @@
         <item name="android:padding">@dimen/default_large_margin_or_padding</item>
     </style>
 
-    <style name="LoginPrimaryTextStyle" parent="android:TextAppearance">
+    <style name="LoginPrimaryTextStyle" parent="android:TextAppearance"> <!-- ELIMINARE -->
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textStyle">bold</item>
@@ -41,7 +41,7 @@
         <item name="android:layout_marginBottom">@dimen/default_very_large_margin_or_padding</item>
     </style>
 
-    <style name="LoginSecondaryTextStyle" parent="LoginPrimaryTextStyle">
+    <style name="LoginSecondaryTextStyle" parent="LoginPrimaryTextStyle"> <!-- ELIMINARE -->
         <item name="android:textStyle">normal</item>
         <item name="android:textColor">@color/lightGrey</item>
         <item name="android:layout_marginTop">@dimen/default_very_large_margin_or_padding</item>
@@ -58,7 +58,7 @@
         <item name="android:textStyle">normal</item>
     </style>
 
-    <style name="EditTextStyle" parent="Widget.AppCompat.EditText">
+    <style name="EditTextStyle" parent="Widget.AppCompat.EditText"> <!-- ELIMINARE -->
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:inputType">textEmailAddress</item>
@@ -67,11 +67,11 @@
         <item name="android:singleLine">true</item>
     </style>
 
-    <style name="ColorControlTheme">
+    <style name="ColorControlTheme"> <!-- ELIMINARE -->
         <item name="colorControlNormal">@color/lightGrey</item>
     </style>
 
-    <style name="SwitchStyle" parent="Widget.AppCompat.CompoundButton.Switch">
+    <style name="SwitchStyle" parent="Widget.AppCompat.CompoundButton.Switch"> <!-- ELIMINARE -->
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:paddingTop">@dimen/default_very_large_margin_or_padding</item>

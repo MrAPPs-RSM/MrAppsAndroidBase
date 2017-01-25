@@ -27,10 +27,8 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     compile 'com.android.support:appcompat-v7:25.1.0'
-    compile 'com.android.support:design:25.1.0'
-    compile 'com.google.android.gms:play-services-location:10.0.1'
-    compile 'com.google.android.gms:play-services-maps:10.0.1'
-    compile 'com.google.code.gson:gson:2.7'
-    compile 'com.loopj.android:android-async-http:1.4.9'
+    compile 'com.facebook.android:facebook-android-sdk:4.18.0'
+    compile 'com.github.MrAPPs-RSM.MrAppsAndroidBase:androidbase-core:1.0.59'
+    compile 'com.github.MrAPPs-RSM.MrAppsAndroidBase:androidbase-utils:1.0.59'
     testCompile 'junit:junit:4.12'
 }

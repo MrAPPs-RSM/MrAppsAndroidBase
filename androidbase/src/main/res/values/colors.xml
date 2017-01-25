@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <color name="lightGrey">#999999</color>
+    <color name="lightGrey">#999999</color> <!-- ELIMINARE -->
     <color name="googleSignIn">#DC4A39</color>
     <color name="googleSignIn_pressed">#C64233</color>
 

@@ -22,9 +22,9 @@
     <string name="Scegli_lingua">Scegli lingua</string>
     <string name="Traduzione">Traduzione</string>
     <string name="Scansiona_il_QR_CODE">Scansiona il QR CODE del ristorante per visualizzarlo</string>
-    <string name="Avviso_gps">Il tuo GPS è disabilitato, vuoi attivarlo?</string>
-    <string name="Si">Si</string>
-    <string name="Annulla">Annulla</string>
+    <string name="Avviso_gps">Il tuo GPS è disabilitato, vuoi attivarlo?</string> <!-- ELIMINARE -->
+    <string name="Si">Si</string> <!-- ELIMINARE -->
+    <string name="Annulla">Annulla</string> <!-- ELIMINARE -->
 
     <string name="Scegli_immagine_da_galleria">Scegli immagine da galleria</string>
     <string name="Scatta_foto">Scatta foto</string>

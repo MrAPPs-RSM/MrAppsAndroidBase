@@ -9,8 +9,8 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/androidbase" />
+            <option value="$PROJECT_DIR$/androidbase-account" />
             <option value="$PROJECT_DIR$/androidbase-core" />
-            <option value="$PROJECT_DIR$/androidbase-utils" />
             <option value="$PROJECT_DIR$/app" />
           </set>
         </option>

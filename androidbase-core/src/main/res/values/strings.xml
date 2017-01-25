@@ -1,3 +1,20 @@
 <resources>
     <string name="app_name">AndroidBase Core</string>
+
+    <string name="Devi_inserire_un_valore_tra__d_e__d" formatted="false">Devi inserire un valore tra %d e %d</string>
+
+    <string name="Avviso_gps">Il tuo GPS è disabilitato, vuoi attivarlo?</string>
+    <string name="Si">Si</string>
+    <string name="Annulla">Annulla</string>
+
+    <string name="Titolo_permesso_obbligatorio">Richiesta permesso</string>
+    <string name="Messaggio_permesso_posizione">È necessario consentire il permesso per accedere alla tua posizione.\n Vuoi impostarlo adesso?</string>
+    <string name="Messaggio_permesso_storage">È necessario consentire il permesso per la gestione dei file nella SD.\n Vuoi impostarlo adesso?</string>
+
+    <string name="Scegli_immagine_da_galleria">Scegli immagine da galleria</string>
+    <string name="Scatta_foto">Scatta foto</string>
+    <string name="Scegli_audio_da_galleria">Scegli audio da galleria</string>
+    <string name="Registra_audio">Registra audio</string>
+    <string name="Scegli_video_da_galleria">Scegli video da galleria</string>
+    <string name="Gira_video">Gira video</string>
 </resources>
