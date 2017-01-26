@@ -10,6 +10,7 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/androidbase" />
             <option value="$PROJECT_DIR$/androidbase-account" />
+            <option value="$PROJECT_DIR$/androidbase-adapter" />
             <option value="$PROJECT_DIR$/androidbase-core" />
             <option value="$PROJECT_DIR$/androidbase-gallery" />
             <option value="$PROJECT_DIR$/androidbase-share" />

@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/android-base-sdk.iml" filepath="$PROJECT_DIR$/android-base-sdk.iml" />
       <module fileurl="file://$PROJECT_DIR$/androidbase/androidbase.iml" filepath="$PROJECT_DIR$/androidbase/androidbase.iml" />
       <module fileurl="file://$PROJECT_DIR$/androidbase-account/androidbase-account.iml" filepath="$PROJECT_DIR$/androidbase-account/androidbase-account.iml" />
+      <module fileurl="file://$PROJECT_DIR$/androidbase-adapter/androidbase-adapter.iml" filepath="$PROJECT_DIR$/androidbase-adapter/androidbase-adapter.iml" />
       <module fileurl="file://$PROJECT_DIR$/androidbase-core/androidbase-core.iml" filepath="$PROJECT_DIR$/androidbase-core/androidbase-core.iml" />
       <module fileurl="file://$PROJECT_DIR$/androidbase-gallery/androidbase-gallery.iml" filepath="$PROJECT_DIR$/androidbase-gallery/androidbase-gallery.iml" />
       <module fileurl="file://$PROJECT_DIR$/androidbase-share/androidbase-share.iml" filepath="$PROJECT_DIR$/androidbase-share/androidbase-share.iml" />
