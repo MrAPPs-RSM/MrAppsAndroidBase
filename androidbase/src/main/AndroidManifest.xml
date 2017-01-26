@@ -1,21 +1,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.mr_apps.androidbase">
 
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-
     <application
         android:allowBackup="true"
         android:label="@string/app_name"
-        android:supportsRtl="true">
-
-        <activity android:name=".activity.CreditsActivity"
-            android:launchMode="singleTop"
-            android:theme="@style/CreditsTheme"
-            android:label="@string/Credits"/>
-
-    </application>
+        android:supportsRtl="true" />
 
 </manifest>
