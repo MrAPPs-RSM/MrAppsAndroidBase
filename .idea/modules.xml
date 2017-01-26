@@ -9,6 +9,7 @@
       <module fileurl="file://$PROJECT_DIR$/androidbase-gallery/androidbase-gallery.iml" filepath="$PROJECT_DIR$/androidbase-gallery/androidbase-gallery.iml" />
       <module fileurl="file://$PROJECT_DIR$/androidbase-share/androidbase-share.iml" filepath="$PROJECT_DIR$/androidbase-share/androidbase-share.iml" />
       <module fileurl="file://$PROJECT_DIR$/androidbase-tutorial/androidbase-tutorial.iml" filepath="$PROJECT_DIR$/androidbase-tutorial/androidbase-tutorial.iml" />
+      <module fileurl="file://$PROJECT_DIR$/androidbase-webservice/androidbase-webservice.iml" filepath="$PROJECT_DIR$/androidbase-webservice/androidbase-webservice.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

@@ -9,14 +9,14 @@ import android.content.Context;
  */
 public class GlobalPreferences extends AbstractBasePreferences {
 
-    public static final String namePreferences = "GlobalPreferences";
-    public static final String latitude = "latitude";
-    public static final String longitude = "longitude";
-    public static final String altitude = "altitude";
-    public static final String id = "id";
-    public static final String username = "username";
-    public static final String password = "password";
-    public static final String hashedPassword = "hashedPassword";
+    private static final String namePreferences = "GlobalPreferences";
+    private static final String latitude = "latitude";
+    private static final String longitude = "longitude";
+    private static final String altitude = "altitude";
+    private static final String id = "id";
+    private static final String username = "username";
+    private static final String password = "password";
+    private static final String hashedPassword = "hashedPassword";
 
     /**
      * Sets the value for the id key
