@@ -7,6 +7,8 @@
     <string name="Si">Si</string>
     <string name="Annulla">Annulla</string>
 
+    <string name="Placeholder">Prova</string>
+
     <string name="Titolo_permesso_obbligatorio">Richiesta permesso</string>
     <string name="Messaggio_permesso_posizione">È necessario consentire il permesso per accedere alla tua posizione.\n Vuoi impostarlo adesso?</string>
     <string name="Messaggio_permesso_storage">È necessario consentire il permesso per la gestione dei file nella SD.\n Vuoi impostarlo adesso?</string>

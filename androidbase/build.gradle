@@ -49,11 +49,11 @@ artifacts {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
-    compile 'com.github.MrAPPs-RSM.MrAppsAndroidBase:androidbase-core:1.1beta'
-    compile 'com.github.MrAPPs-RSM.MrAppsAndroidBase:androidbase-account:1.1beta'
-    compile 'com.github.MrAPPs-RSM.MrAppsAndroidBase:androidbase-gallery:1.1beta'
-    compile 'com.github.MrAPPs-RSM.MrAppsAndroidBase:androidbase-share:1.1beta'
-    compile 'com.github.MrAPPs-RSM.MrAppsAndroidBase:androidbase-tutorial:1.1beta'
-    compile 'com.github.MrAPPs-RSM.MrAppsAndroidBase:androidbase-webservice:1.1beta'
-    compile 'com.github.MrAPPs-RSM.MrAppsAndroidBase:androidbase-adapter:1.1beta'
+    compile 'com.github.MrAPPs-RSM.MrAppsAndroidBase:androidbase-core:1.1'
+    compile 'com.github.MrAPPs-RSM.MrAppsAndroidBase:androidbase-account:1.1'
+    compile 'com.github.MrAPPs-RSM.MrAppsAndroidBase:androidbase-gallery:1.1'
+    compile 'com.github.MrAPPs-RSM.MrAppsAndroidBase:androidbase-share:1.1'
+    compile 'com.github.MrAPPs-RSM.MrAppsAndroidBase:androidbase-tutorial:1.1'
+    compile 'com.github.MrAPPs-RSM.MrAppsAndroidBase:androidbase-webservice:1.1'
+    compile 'com.github.MrAPPs-RSM.MrAppsAndroidBase:androidbase-adapter:1.1'
 }

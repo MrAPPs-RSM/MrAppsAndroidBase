@@ -15,6 +15,8 @@
 
     <dimen name="status_cheat">0dp</dimen>
 
+    <dimen name="corner_radius">2.5dp</dimen>
+
     <!-- Height status bar + toolbar -->
     <dimen name="status_toolbar_height">56dp</dimen>
 
