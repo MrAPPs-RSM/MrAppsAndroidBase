@@ -33,4 +33,13 @@
         <item name="colorAccent">@color/editTextDialogColorHighlight</item>
     </style>
 
+    <style name="CreditsTheme" parent="Theme.AppCompat.Light">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="colorControlNormal">@color/creditsColorControlNormal</item>
+    </style>
+
 </resources>

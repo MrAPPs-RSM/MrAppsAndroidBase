@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Height status bar + toolbar -->
+    <dimen name="status_toolbar_height">88dp</dimen>
+
+    <!-- CreditsActivity -->
+    <dimen name="credits_gradient_height">264dp</dimen>
+
+</resources>

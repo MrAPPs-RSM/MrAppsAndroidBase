@@ -13,4 +13,10 @@
     <color name="editTextDialogColorHighlight">@color/colorAccent</color>
     <color name="editTextDialogTextColor">#000000</color>
 
+    <!-- CreditsActivity -->
+    <color name="creditsItemsTextColor">@android:color/black</color>
+    <color name="creditsBackground">#f5f5f5</color>
+    <color name="creditsColorControlNormal">@android:color/white</color>
+    <color name="top_toolbar">#66000000</color>
+
 </resources>

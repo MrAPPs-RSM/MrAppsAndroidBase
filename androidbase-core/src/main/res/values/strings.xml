@@ -17,4 +17,16 @@
     <string name="Registra_audio">Registra audio</string>
     <string name="Scegli_video_da_galleria">Scegli video da galleria</string>
     <string name="Gira_video">Gira video</string>
+
+    <!-- CreditsActivity -->
+    <string name="Credits">Credits</string>
+    <string name="developed_by">è un\'applicazione realizzata da Mr. APPs</string>
+    <string name="discover_mrapps">Scopri Mr. APPs</string>
+    <string name="app_development">Sviluppo App</string>
+    <string name="websites_realization">Realizzazione Siti Web</string>
+    <string name="ecommerce_design">Progettazione E-Commerce</string>
+    <string name="our_apps">Le nostre App</string>
+    <string name="contact_us">Contattaci ora</string>
+    <string name="request_quote">Richiedi un preventivo</string>
+
 </resources>
