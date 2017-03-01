@@ -123,7 +123,7 @@ public class TextViewUtils {
      * @param pieces     the pieces in which the full string has to be splitted
      * @return an arrayList containing the parts of the splitted string
      */
-    private static ArrayList<String> splitStringByPieces(String fullString, String[] pieces) {
+    public static ArrayList<String> splitStringByPieces(String fullString, String[] pieces) {
 
         ArrayList<String> list = new ArrayList<>();
 

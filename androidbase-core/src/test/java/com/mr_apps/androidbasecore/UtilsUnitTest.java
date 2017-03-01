@@ -1,5 +1,8 @@
 package com.mr_apps.androidbasecore;
 
+import android.text.TextUtils;
+
+import com.mr_apps.androidbase.utils.TextViewUtils;
 import com.mr_apps.androidbase.utils.Utils;
 
 import org.junit.Test;
