@@ -37,6 +37,7 @@ import java.util.ArrayList;
  */
 public abstract class PickerActivity extends LocationActivity {
 
+    private static final int COMPRESSION_QUALITY = 80;
     private static final int COMPRESSION_WIDTH = 1280;
     private static final int COMPRESSION_HEIGHT = 1280;
 
@@ -60,7 +61,9 @@ public abstract class PickerActivity extends LocationActivity {
     private static final int actionPickAudio = 5000;
     private static final int actionRecordAudio = 6000;
 
-    private int qualityImage = 80;
+    private int qualityImage = COMPRESSION_QUALITY;
+    private int imageWidth = COMPRESSION_WIDTH;
+    private int imageHeight = COMPRESSION_HEIGHT;
 
     /**
      * Sets the quality of the image taken or chosen from gallery
@@ -69,6 +72,24 @@ public abstract class PickerActivity extends LocationActivity {
      */
     public void setQualityImage(int qualityImage) {
         this.qualityImage = qualityImage;
+    }
+
+    /**
+     * Sets the width of the image taken or chosen from gallery
+     *
+     * @param imageWidth the width of the image
+     */
+    public void setImageWidth(int imageWidth) {
+        this.imageWidth = imageWidth;
+    }
+
+    /**
+     * Sets the height of the image taken or chosen from gallery
+     *
+     * @param imageHeight the height of the image
+     */
+    public void setImageHeight(int imageHeight) {
+        this.imageHeight = imageHeight;
     }
 
     private boolean saveInInternalStorage = false;
@@ -444,7 +465,7 @@ public abstract class PickerActivity extends LocationActivity {
 
         try {
 
-            Bitmap resizedBitmap = BitmapUtils.scaleBitmap(bitmap, COMPRESSION_WIDTH, COMPRESSION_HEIGHT);
+            Bitmap resizedBitmap = BitmapUtils.scaleBitmap(bitmap, imageWidth, imageHeight);
 
             OutputStream os = new BufferedOutputStream(new FileOutputStream(file));
             resizedBitmap.compress(Bitmap.CompressFormat.JPEG, qualityImage, os);
@@ -517,7 +538,7 @@ public abstract class PickerActivity extends LocationActivity {
             ExifInterface exif = new ExifInterface(tempUri.getPath());
             int orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_UNDEFINED);
 
-            Bitmap resizedBitmap = BitmapUtils.scaleBitmap(bitmap, COMPRESSION_WIDTH, COMPRESSION_HEIGHT);
+            Bitmap resizedBitmap = BitmapUtils.scaleBitmap(bitmap, imageWidth, imageHeight);
 
             Bitmap bitmap1 = BitmapUtils.rotateBitmap(resizedBitmap, orientation);
 
