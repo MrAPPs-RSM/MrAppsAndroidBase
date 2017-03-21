@@ -12,6 +12,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
+import android.support.v4.content.FileProvider;
 import android.support.v7.app.AlertDialog;
 
 import com.mr_apps.androidbase.utils.BitmapUtils;
@@ -19,7 +20,12 @@ import com.mr_apps.androidbase.utils.FileUtils;
 import com.mr_apps.androidbase.utils.FileUtils.ElementType;
 import com.mr_apps.androidbasecore.R;
 
+import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.ArrayList;
 
 /**
@@ -30,6 +36,9 @@ import java.util.ArrayList;
  * @author Mattia Ruggiero
  */
 public abstract class PickerActivity extends LocationActivity {
+
+    private static final int COMPRESSION_WIDTH = 1280;
+    private static final int COMPRESSION_HEIGHT = 1280;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -205,10 +214,19 @@ public abstract class PickerActivity extends LocationActivity {
      * Opens the camera activity where the user can take a photo to return to this activity
      */
     public void takePhoto() {
-        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         File file = FileUtils.newFileToUpload(PickerActivity.this, getFolder(), ElementType.img, saveInInternalStorage);
         imageUri = Uri.fromFile(file);
-        intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+
+        Uri uri;
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            uri = FileProvider.getUriForFile(this, getApplicationContext().getPackageName() + ".provider", file);
+        } else {
+            uri = Uri.fromFile(file);
+        }
+
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
         startActivityForResult(intent, actionTakeImage);
     }
 
@@ -236,9 +254,18 @@ public abstract class PickerActivity extends LocationActivity {
      * Opens the camera activity where the user can record a video to return to this activity
      */
     public void recordVideo() {
-        Intent intent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
         File file = FileUtils.newFileToUpload(PickerActivity.this, getFolder(), ElementType.vid, false);
         videoUri = Uri.fromFile(file);
+        Intent intent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
+
+        Uri uri;
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            uri = FileProvider.getUriForFile(this, getApplicationContext().getPackageName() + ".provider", file);
+        } else {
+            uri = Uri.fromFile(file);
+        }
+
         intent.putExtra(MediaStore.EXTRA_OUTPUT, videoUri);
         intent.putExtra(MediaStore.EXTRA_DURATION_LIMIT, getDurationVideo());
         startActivityForResult(intent, actionRecordVideo);
@@ -271,7 +298,8 @@ public abstract class PickerActivity extends LocationActivity {
         Intent intent = new Intent(MediaStore.Audio.Media.RECORD_SOUND_ACTION);
         File file = FileUtils.newFileToUpload(PickerActivity.this, getFolder(), ElementType.audio, false);
         audioUri = Uri.fromFile(file);
-        intent.putExtra(MediaStore.EXTRA_OUTPUT, audioUri);
+        Uri intentUri = FileProvider.getUriForFile(this, getApplicationContext().getPackageName() + ".provider", file);
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, intentUri);
         intent.putExtra(MediaStore.EXTRA_DURATION_LIMIT, getDurationAudio());
         startActivityForResult(intent, actionRecordAudio);
     }
@@ -353,12 +381,10 @@ public abstract class PickerActivity extends LocationActivity {
 
                     FileUtils.MediaSelected mediaSelected = FileUtils.getPath(this, uri);
                     path = mediaSelected.path;
-                    type = ElementType.img;
 
                     Bitmap bitmap = BitmapFactory.decodeFile(path);
 
-                    pickerResult(path, type, bitmap);
-
+                    onImageSelected(bitmap);
 
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -411,6 +437,25 @@ public abstract class PickerActivity extends LocationActivity {
                 break;
 
         }
+    }
+
+    private void onImageSelected(Bitmap bitmap) {
+        File file = FileUtils.newFileToUpload(PickerActivity.this, getFolder(), ElementType.img, saveInInternalStorage);
+
+        try {
+
+            Bitmap resizedBitmap = BitmapUtils.scaleBitmap(bitmap, COMPRESSION_WIDTH, COMPRESSION_HEIGHT);
+
+            OutputStream os = new BufferedOutputStream(new FileOutputStream(file));
+            resizedBitmap.compress(Bitmap.CompressFormat.JPEG, qualityImage, os);
+            os.close();
+
+            pickerResult(file.getPath(), ElementType.img, resizedBitmap);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
     /**
@@ -472,17 +517,20 @@ public abstract class PickerActivity extends LocationActivity {
             ExifInterface exif = new ExifInterface(tempUri.getPath());
             int orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_UNDEFINED);
 
-            Bitmap resizedBitmap = BitmapUtils.scaleBitmap(bitmap);
+            Bitmap resizedBitmap = BitmapUtils.scaleBitmap(bitmap, COMPRESSION_WIDTH, COMPRESSION_HEIGHT);
 
             Bitmap bitmap1 = BitmapUtils.rotateBitmap(resizedBitmap, orientation);
 
             if (bitmap1 != null)
                 bitmap = bitmap1;
 
-            String path = FileUtils.getRealPath(this, tempUri);
-            ElementType type = ElementType.img;
+            File file = FileUtils.newFileToUpload(PickerActivity.this, getFolder(), ElementType.img, saveInInternalStorage);
 
-            pickerResult(path, type, bitmap);
+            OutputStream os = new BufferedOutputStream(new FileOutputStream(file));
+            bitmap.compress(Bitmap.CompressFormat.JPEG, qualityImage, os);
+            os.close();
+
+            pickerResult(file.getPath(), ElementType.img, bitmap);
 
         } catch (Exception e) {
             e.printStackTrace();

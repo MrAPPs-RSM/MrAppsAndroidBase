@@ -9,7 +9,7 @@ import android.content.Context;
  */
 public class GlobalPreferences extends AbstractBasePreferences {
 
-    private static final String namePreferences = "GlobalPreferences";
+    protected static final String namePreferences = "GlobalPreferences";
     private static final String latitude = "latitude";
     private static final String longitude = "longitude";
     private static final String altitude = "altitude";
