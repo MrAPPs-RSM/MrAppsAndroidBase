@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         minSdkVersion 15
-        targetSdkVersion 24
+        targetSdkVersion 25
         versionCode 1
         versionName "1.0"
         vectorDrawables.useSupportLibrary = true
@@ -48,11 +48,11 @@ artifacts {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
-    compile 'com.github.MrAPPs-RSM.MrAppsAndroidBase:androidbase-core:1.1.3beta2'
-    compile 'com.github.MrAPPs-RSM.MrAppsAndroidBase:androidbase-account:1.1.3beta2'
-    compile 'com.github.MrAPPs-RSM.MrAppsAndroidBase:androidbase-gallery:1.1.3beta2'
-    compile 'com.github.MrAPPs-RSM.MrAppsAndroidBase:androidbase-share:1.1.3beta2'
-    compile 'com.github.MrAPPs-RSM.MrAppsAndroidBase:androidbase-tutorial:1.1.3beta2'
-    compile 'com.github.MrAPPs-RSM.MrAppsAndroidBase:androidbase-webservice:1.1.3beta2'
-    compile 'com.github.MrAPPs-RSM.MrAppsAndroidBase:androidbase-adapter:1.1.3beta2'
+    compile 'com.github.MrAPPs-RSM.MrAppsAndroidBase:androidbase-core:1.1.3'
+    compile 'com.github.MrAPPs-RSM.MrAppsAndroidBase:androidbase-account:1.1.3'
+    compile 'com.github.MrAPPs-RSM.MrAppsAndroidBase:androidbase-gallery:1.1.3'
+    compile 'com.github.MrAPPs-RSM.MrAppsAndroidBase:androidbase-share:1.1.3'
+    compile 'com.github.MrAPPs-RSM.MrAppsAndroidBase:androidbase-tutorial:1.1.3'
+    compile 'com.github.MrAPPs-RSM.MrAppsAndroidBase:androidbase-webservice:1.1.3'
+    compile 'com.github.MrAPPs-RSM.MrAppsAndroidBase:androidbase-adapter:1.1.3'
 }
