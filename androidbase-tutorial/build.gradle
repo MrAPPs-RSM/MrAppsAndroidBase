@@ -29,7 +29,6 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.viewpagerindicator:library:2.4.1'
     compile project(':androidbase-core')
     testCompile 'junit:junit:4.12'
 }

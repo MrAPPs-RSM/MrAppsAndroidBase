@@ -10,9 +10,8 @@ import android.support.v7.widget.AppCompatButton;
 import android.view.View;
 import android.widget.RelativeLayout;
 
-import com.mr_apps.androidbasetutorial.R;
 import com.mr_apps.androidbase.utils.DrawableUtils;
-import com.viewpagerindicator.CirclePageIndicator;
+import com.mr_apps.androidbasetutorial.R;
 
 /**
  * Base abstract activity that should be extended to create a tutorial for an application
@@ -22,38 +21,38 @@ import com.viewpagerindicator.CirclePageIndicator;
 public abstract class BaseTutorialActivity extends AppCompatActivity {
 
     ViewPager pagerTutorial;
-    CirclePageIndicator pageIndicator;
+    //CirclePageIndicator pageIndicator;
 
-    public static final String Field_SkipLogin="Field_SkipLogin";
+    public static final String Field_SkipLogin = "Field_SkipLogin";
 
     AppCompatButton login, skip;
 
-    ItemTutorial [] tutorials;
+    ItemTutorial[] tutorials;
 
-    boolean skipLogin=true;
+    boolean skipLogin = true;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tutorial);
 
-        RelativeLayout background=(RelativeLayout) findViewById(R.id.background);
+        RelativeLayout background = (RelativeLayout) findViewById(R.id.background);
 
-        pagerTutorial= (ViewPager) findViewById(R.id.tutorial_pager);
-        pageIndicator= (CirclePageIndicator) findViewById(R.id.indicator);
+        pagerTutorial = (ViewPager) findViewById(R.id.tutorial_pager);
+        //pageIndicator= (CirclePageIndicator) findViewById(R.id.indicator);
 
-        pageIndicator.setRadius(getResources().getDimension(R.dimen.default_small_margin_or_padding));
+        //pageIndicator.setRadius(getResources().getDimension(R.dimen.default_small_margin_or_padding));
 
-        tutorials= getTutorials();
+        tutorials = getTutorials();
 
-        TutorialAdapter adapter=new TutorialAdapter(getSupportFragmentManager(), this, tutorials);
+        TutorialAdapter adapter = new TutorialAdapter(getSupportFragmentManager(), this, tutorials);
 
         pagerTutorial.setAdapter(adapter);
 
-        pageIndicator.setViewPager(pagerTutorial);
+        //pageIndicator.setViewPager(pagerTutorial);
 
-        login= (AppCompatButton) findViewById(R.id.login);
-        skip= (AppCompatButton) findViewById(R.id.skip);
+        login = (AppCompatButton) findViewById(R.id.login);
+        skip = (AppCompatButton) findViewById(R.id.skip);
 
         Drawable d = DrawableUtils.getVectorDrawable(this, R.drawable.ic_chevron_right_white_18dp);
 
@@ -68,7 +67,7 @@ public abstract class BaseTutorialActivity extends AppCompatActivity {
             @Override
             public void onPageSelected(int position) {
 
-               showHideButtons(position);
+                showHideButtons(position);
 
             }
 
@@ -78,7 +77,7 @@ public abstract class BaseTutorialActivity extends AppCompatActivity {
             }
         });
 
-        skipLogin=getIntent().getBooleanExtra(Field_SkipLogin, true);
+        skipLogin = getIntent().getBooleanExtra(Field_SkipLogin, true);
 
         showHideButtons(0);
 
@@ -98,7 +97,7 @@ public abstract class BaseTutorialActivity extends AppCompatActivity {
             }
         });
 
-        styleViews(background, pagerTutorial, pageIndicator, skip, login);
+        styleViews(background, pagerTutorial, /*pageIndicator,*/ skip, login);
 
     }
 
@@ -106,12 +105,11 @@ public abstract class BaseTutorialActivity extends AppCompatActivity {
      * Abstract method that should be override by the subclasses to style all the views of the tutorial
      *
      * @param background the layout of the background
-     * @param pager the view pager
-     * @param indicator the view pager indicator
-     * @param skip the button "skip" to skip the turorial
-     * @param login the "login" button to show at the end of the tutorial
+     * @param pager      the view pager
+     * @param skip       the button "skip" to skip the turorial
+     * @param login      the "login" button to show at the end of the tutorial
      */
-    public abstract void styleViews(RelativeLayout background, ViewPager pager, CirclePageIndicator indicator, AppCompatButton skip, AppCompatButton login);
+    public abstract void styleViews(RelativeLayout background, ViewPager pager, /*CirclePageIndicator indicator,*/ AppCompatButton skip, AppCompatButton login);
 
     /**
      * Abstract method that should be override by the subclasses to manage the actions to do on "login" button tapped
@@ -123,7 +121,7 @@ public abstract class BaseTutorialActivity extends AppCompatActivity {
      *
      * @return an array containing all the items of the tutorial
      */
-    public abstract ItemTutorial [] getTutorials();
+    public abstract ItemTutorial[] getTutorials();
 
     /**
      * Shows or hides the buttons base on the given position
@@ -131,7 +129,7 @@ public abstract class BaseTutorialActivity extends AppCompatActivity {
      * @param position the position of the current "slide" of the tutorial
      */
     private void showHideButtons(int position) {
-        if(position==tutorials.length-1) {
+        if (position == tutorials.length - 1) {
             login.setVisibility(View.VISIBLE);
             skip.setVisibility(View.GONE);
         } else {
@@ -139,7 +137,7 @@ public abstract class BaseTutorialActivity extends AppCompatActivity {
             skip.setVisibility(View.VISIBLE);
         }
 
-        if(!skipLogin)
+        if (!skipLogin)
             skip.setVisibility(View.GONE);
     }
 
