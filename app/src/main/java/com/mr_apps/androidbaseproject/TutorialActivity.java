@@ -8,6 +8,8 @@ import android.widget.RelativeLayout;
 import com.mr_apps.androidbase.tutorial.BaseTutorialActivity;
 import com.mr_apps.androidbase.tutorial.ItemTutorial;
 
+import me.relex.circleindicator.CircleIndicator;
+
 /**
  * Created by denis on 20/04/16.
  */
@@ -15,7 +17,7 @@ public class TutorialActivity extends BaseTutorialActivity {
 
 
     @Override
-    public void styleViews(RelativeLayout background, ViewPager pager, /*CirclePageIndicator indicator,*/ AppCompatButton skip, AppCompatButton login) {
+    public void styleViews(RelativeLayout background, ViewPager pager, CircleIndicator indicator, AppCompatButton skip, AppCompatButton login) {
 
     }
 

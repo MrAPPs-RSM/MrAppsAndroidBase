@@ -29,6 +29,7 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
+    compile 'me.relex:circleindicator:1.2.2@aar'
     compile project(':androidbase-core')
     testCompile 'junit:junit:4.12'
 }

@@ -13,6 +13,8 @@ import android.widget.RelativeLayout;
 import com.mr_apps.androidbase.utils.DrawableUtils;
 import com.mr_apps.androidbasetutorial.R;
 
+import me.relex.circleindicator.CircleIndicator;
+
 /**
  * Base abstract activity that should be extended to create a tutorial for an application
  *
@@ -21,7 +23,7 @@ import com.mr_apps.androidbasetutorial.R;
 public abstract class BaseTutorialActivity extends AppCompatActivity {
 
     ViewPager pagerTutorial;
-    //CirclePageIndicator pageIndicator;
+    CircleIndicator pageIndicator;
 
     public static final String Field_SkipLogin = "Field_SkipLogin";
 
@@ -36,12 +38,10 @@ public abstract class BaseTutorialActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tutorial);
 
-        RelativeLayout background = (RelativeLayout) findViewById(R.id.background);
+        RelativeLayout background = findViewById(R.id.background);
 
-        pagerTutorial = (ViewPager) findViewById(R.id.tutorial_pager);
-        //pageIndicator= (CirclePageIndicator) findViewById(R.id.indicator);
-
-        //pageIndicator.setRadius(getResources().getDimension(R.dimen.default_small_margin_or_padding));
+        pagerTutorial = findViewById(R.id.tutorial_pager);
+        pageIndicator = findViewById(R.id.indicator);
 
         tutorials = getTutorials();
 
@@ -49,10 +49,10 @@ public abstract class BaseTutorialActivity extends AppCompatActivity {
 
         pagerTutorial.setAdapter(adapter);
 
-        //pageIndicator.setViewPager(pagerTutorial);
+        pageIndicator.setViewPager(pagerTutorial);
 
-        login = (AppCompatButton) findViewById(R.id.login);
-        skip = (AppCompatButton) findViewById(R.id.skip);
+        login = findViewById(R.id.login);
+        skip = findViewById(R.id.skip);
 
         Drawable d = DrawableUtils.getVectorDrawable(this, R.drawable.ic_chevron_right_white_18dp);
 
@@ -97,7 +97,7 @@ public abstract class BaseTutorialActivity extends AppCompatActivity {
             }
         });
 
-        styleViews(background, pagerTutorial, /*pageIndicator,*/ skip, login);
+        styleViews(background, pagerTutorial, pageIndicator, skip, login);
 
     }
 
@@ -106,10 +106,11 @@ public abstract class BaseTutorialActivity extends AppCompatActivity {
      *
      * @param background the layout of the background
      * @param pager      the view pager
+     * @param indicator  the view pager indicator
      * @param skip       the button "skip" to skip the turorial
      * @param login      the "login" button to show at the end of the tutorial
      */
-    public abstract void styleViews(RelativeLayout background, ViewPager pager, /*CirclePageIndicator indicator,*/ AppCompatButton skip, AppCompatButton login);
+    public abstract void styleViews(RelativeLayout background, ViewPager pager, CircleIndicator indicator, AppCompatButton skip, AppCompatButton login);
 
     /**
      * Abstract method that should be override by the subclasses to manage the actions to do on "login" button tapped
