@@ -2,6 +2,16 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/MrAppsAndroidBase.iml" filepath="$PROJECT_DIR$/MrAppsAndroidBase.iml" group="MrAppsAndroidBase" />
+      <module fileurl="file://$PROJECT_DIR$/androidbase/MrAppsAndroidBase-androidbase.iml" filepath="$PROJECT_DIR$/androidbase/MrAppsAndroidBase-androidbase.iml" group="MrAppsAndroidBase/androidbase" />
+      <module fileurl="file://$PROJECT_DIR$/androidbase-account/MrAppsAndroidBase-androidbase-account.iml" filepath="$PROJECT_DIR$/androidbase-account/MrAppsAndroidBase-androidbase-account.iml" group="MrAppsAndroidBase/androidbase-account" />
+      <module fileurl="file://$PROJECT_DIR$/androidbase-adapter/MrAppsAndroidBase-androidbase-adapter.iml" filepath="$PROJECT_DIR$/androidbase-adapter/MrAppsAndroidBase-androidbase-adapter.iml" group="MrAppsAndroidBase/androidbase-adapter" />
+      <module fileurl="file://$PROJECT_DIR$/androidbase-core/MrAppsAndroidBase-androidbase-core.iml" filepath="$PROJECT_DIR$/androidbase-core/MrAppsAndroidBase-androidbase-core.iml" group="MrAppsAndroidBase/androidbase-core" />
+      <module fileurl="file://$PROJECT_DIR$/androidbase-gallery/MrAppsAndroidBase-androidbase-gallery.iml" filepath="$PROJECT_DIR$/androidbase-gallery/MrAppsAndroidBase-androidbase-gallery.iml" group="MrAppsAndroidBase/androidbase-gallery" />
+      <module fileurl="file://$PROJECT_DIR$/androidbase-share/MrAppsAndroidBase-androidbase-share.iml" filepath="$PROJECT_DIR$/androidbase-share/MrAppsAndroidBase-androidbase-share.iml" group="MrAppsAndroidBase/androidbase-share" />
+      <module fileurl="file://$PROJECT_DIR$/androidbase-tutorial/MrAppsAndroidBase-androidbase-tutorial.iml" filepath="$PROJECT_DIR$/androidbase-tutorial/MrAppsAndroidBase-androidbase-tutorial.iml" group="MrAppsAndroidBase/androidbase-tutorial" />
+      <module fileurl="file://$PROJECT_DIR$/androidbase-webservice/MrAppsAndroidBase-androidbase-webservice.iml" filepath="$PROJECT_DIR$/androidbase-webservice/MrAppsAndroidBase-androidbase-webservice.iml" group="MrAppsAndroidBase/androidbase-webservice" />
+      <module fileurl="file://$PROJECT_DIR$/app/MrAppsAndroidBase-app.iml" filepath="$PROJECT_DIR$/app/MrAppsAndroidBase-app.iml" group="MrAppsAndroidBase/app" />
       <module fileurl="file://$PROJECT_DIR$/android-base-sdk.iml" filepath="$PROJECT_DIR$/android-base-sdk.iml" />
       <module fileurl="file://$PROJECT_DIR$/androidbase/androidbase.iml" filepath="$PROJECT_DIR$/androidbase/androidbase.iml" />
       <module fileurl="file://$PROJECT_DIR$/androidbase-account/androidbase-account.iml" filepath="$PROJECT_DIR$/androidbase-account/androidbase-account.iml" />
