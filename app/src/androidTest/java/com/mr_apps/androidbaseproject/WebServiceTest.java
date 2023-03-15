@@ -1,7 +1,7 @@
 package com.mr_apps.androidbaseproject;
 
 import android.content.Context;
-import android.support.test.runner.AndroidJUnit4;
+import androidx.test.ext.junit.runners.AndroidJUnit4;
 import android.test.ActivityInstrumentationTestCase2;
 
 import com.google.gson.JsonObject;

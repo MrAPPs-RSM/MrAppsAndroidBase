@@ -30,7 +30,7 @@
                 android:layout_marginRight="@dimen/default_very_large_margin_or_padding"
                 android:orientation="vertical">
 
-                <android.support.v7.widget.AppCompatTextView
+                <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/termini_condizioni"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -38,7 +38,7 @@
                     android:gravity="center"
                     android:textColor="@color/lightGrey" />
 
-                <android.support.v7.widget.AppCompatTextView
+                <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/signup"
                     style="@style/LoginButtonStyle"
                     android:layout_marginBottom="@dimen/default_very_large_margin_or_padding"

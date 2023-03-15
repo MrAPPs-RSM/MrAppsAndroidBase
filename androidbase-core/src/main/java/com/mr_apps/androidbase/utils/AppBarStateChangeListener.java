@@ -1,6 +1,6 @@
 package com.mr_apps.androidbase.utils;
 
-import android.support.design.widget.AppBarLayout;
+import com.google.android.material.appbar.AppBarLayout;
 
 /**
  * Class that represents a listener that fires the "onStateChanged" every time the App Bar changes its state.

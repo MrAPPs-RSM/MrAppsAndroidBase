@@ -18,11 +18,11 @@
         android:layout_marginBottom="@dimen/default_very_large_margin_or_padding"
         android:orientation="vertical">
 
-        <android.support.v7.widget.AppCompatTextView
+        <androidx.appcompat.widget.AppCompatTextView
             style="@style/TutorialTitle"
             android:id="@+id/title"/>
 
-        <android.support.v7.widget.AppCompatTextView
+        <androidx.appcompat.widget.AppCompatTextView
             style="@style/TutorialSubTitle"
             android:id="@+id/subtitle"/>
 

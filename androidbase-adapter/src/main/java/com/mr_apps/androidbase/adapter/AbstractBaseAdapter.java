@@ -1,7 +1,7 @@
 package com.mr_apps.androidbase.adapter;
 
 import android.content.Context;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.mr_apps.androidbase.activity.AbstractBaseActivity;
 import com.mr_apps.androidbase.fragments.BaseFragment;
@@ -40,7 +40,7 @@ public abstract class AbstractBaseAdapter<T> extends RecyclerView.Adapter<Recycl
      */
     public AbstractBaseAdapter(BaseFragment fragment) {
         this.fragment = fragment;
-        this.context = fragment.getActivity();
+        this.context = fragment.getContext();
     }
 
     /**

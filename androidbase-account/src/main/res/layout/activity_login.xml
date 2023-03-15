@@ -19,7 +19,7 @@
             android:gravity="center_horizontal"
             android:orientation="vertical">
 
-            <android.support.v7.widget.AppCompatTextView
+            <androidx.appcompat.widget.AppCompatTextView
                 style="@style/LoginPrimaryTextStyle"
                 android:layout_marginTop="@dimen/default_very_large_margin_or_padding"
                 android:text="@string/Esegui_il_login" />
@@ -32,7 +32,7 @@
                 android:id="@+id/sign_in_button"
                 style="@style/GoogleSignInButton" />
 
-            <android.support.v7.widget.AppCompatTextView
+            <androidx.appcompat.widget.AppCompatTextView
                 style="@style/LoginSecondaryTextStyle"
                 android:layout_marginBottom="@dimen/default_margin_or_padding"
                 android:text="@string/oppure" />
@@ -63,12 +63,12 @@
 
             </com.mr_apps.androidbase.custom_views.WarningTextInputLayout>
 
-            <android.support.v7.widget.AppCompatTextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/login"
                 style="@style/LoginButtonStyle"
                 android:text="@string/Entra" />
 
-            <android.support.v7.widget.AppCompatTextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/forget_pwd"
                 style="@style/LoginSecondaryTextStyle"
                 android:layout_marginBottom="0dp"
@@ -81,13 +81,13 @@
                 android:text="@string/Password_dimenticata"
                 android:textSize="13sp" />
 
-            <android.support.v7.widget.AppCompatTextView
+            <androidx.appcompat.widget.AppCompatTextView
                 style="@style/LoginSecondaryTextStyle"
                 android:layout_marginBottom="0dp"
                 android:text="@string/Nessun_account"
                 android:textColor="@android:color/black" />
 
-            <android.support.v7.widget.AppCompatTextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/iscriviti"
                 style="@style/LoginPrimaryTextStyle"
                 android:layout_marginBottom="@dimen/default_large_margin_or_padding"

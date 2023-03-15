@@ -1,8 +1,8 @@
 package com.mr_apps.androidbase.adapter;
 
 import android.os.Handler;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * Class that manage a scroll listener for the recycler view when the last element is a footer (should be a progress) that has to be managed while scrolling

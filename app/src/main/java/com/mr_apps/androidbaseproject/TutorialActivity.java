@@ -1,8 +1,8 @@
 package com.mr_apps.androidbaseproject;
 
 import android.content.Intent;
-import android.support.v4.view.ViewPager;
-import android.support.v7.widget.AppCompatButton;
+import androidx.viewpager.widget.ViewPager;
+import androidx.appcompat.widget.AppCompatButton;
 import android.widget.RelativeLayout;
 
 import com.mr_apps.androidbase.tutorial.BaseTutorialActivity;

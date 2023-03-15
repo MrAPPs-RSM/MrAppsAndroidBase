@@ -2,26 +2,43 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/MrAppsAndroidBase.iml" filepath="$PROJECT_DIR$/MrAppsAndroidBase.iml" group="MrAppsAndroidBase" />
-      <module fileurl="file://$PROJECT_DIR$/androidbase/MrAppsAndroidBase-androidbase.iml" filepath="$PROJECT_DIR$/androidbase/MrAppsAndroidBase-androidbase.iml" group="MrAppsAndroidBase/androidbase" />
-      <module fileurl="file://$PROJECT_DIR$/androidbase-account/MrAppsAndroidBase-androidbase-account.iml" filepath="$PROJECT_DIR$/androidbase-account/MrAppsAndroidBase-androidbase-account.iml" group="MrAppsAndroidBase/androidbase-account" />
-      <module fileurl="file://$PROJECT_DIR$/androidbase-adapter/MrAppsAndroidBase-androidbase-adapter.iml" filepath="$PROJECT_DIR$/androidbase-adapter/MrAppsAndroidBase-androidbase-adapter.iml" group="MrAppsAndroidBase/androidbase-adapter" />
-      <module fileurl="file://$PROJECT_DIR$/androidbase-core/MrAppsAndroidBase-androidbase-core.iml" filepath="$PROJECT_DIR$/androidbase-core/MrAppsAndroidBase-androidbase-core.iml" group="MrAppsAndroidBase/androidbase-core" />
-      <module fileurl="file://$PROJECT_DIR$/androidbase-gallery/MrAppsAndroidBase-androidbase-gallery.iml" filepath="$PROJECT_DIR$/androidbase-gallery/MrAppsAndroidBase-androidbase-gallery.iml" group="MrAppsAndroidBase/androidbase-gallery" />
-      <module fileurl="file://$PROJECT_DIR$/androidbase-share/MrAppsAndroidBase-androidbase-share.iml" filepath="$PROJECT_DIR$/androidbase-share/MrAppsAndroidBase-androidbase-share.iml" group="MrAppsAndroidBase/androidbase-share" />
-      <module fileurl="file://$PROJECT_DIR$/androidbase-tutorial/MrAppsAndroidBase-androidbase-tutorial.iml" filepath="$PROJECT_DIR$/androidbase-tutorial/MrAppsAndroidBase-androidbase-tutorial.iml" group="MrAppsAndroidBase/androidbase-tutorial" />
-      <module fileurl="file://$PROJECT_DIR$/androidbase-webservice/MrAppsAndroidBase-androidbase-webservice.iml" filepath="$PROJECT_DIR$/androidbase-webservice/MrAppsAndroidBase-androidbase-webservice.iml" group="MrAppsAndroidBase/androidbase-webservice" />
-      <module fileurl="file://$PROJECT_DIR$/app/MrAppsAndroidBase-app.iml" filepath="$PROJECT_DIR$/app/MrAppsAndroidBase-app.iml" group="MrAppsAndroidBase/app" />
-      <module fileurl="file://$PROJECT_DIR$/android-base-sdk.iml" filepath="$PROJECT_DIR$/android-base-sdk.iml" />
-      <module fileurl="file://$PROJECT_DIR$/androidbase/androidbase.iml" filepath="$PROJECT_DIR$/androidbase/androidbase.iml" />
-      <module fileurl="file://$PROJECT_DIR$/androidbase-account/androidbase-account.iml" filepath="$PROJECT_DIR$/androidbase-account/androidbase-account.iml" />
-      <module fileurl="file://$PROJECT_DIR$/androidbase-adapter/androidbase-adapter.iml" filepath="$PROJECT_DIR$/androidbase-adapter/androidbase-adapter.iml" />
-      <module fileurl="file://$PROJECT_DIR$/androidbase-core/androidbase-core.iml" filepath="$PROJECT_DIR$/androidbase-core/androidbase-core.iml" />
-      <module fileurl="file://$PROJECT_DIR$/androidbase-gallery/androidbase-gallery.iml" filepath="$PROJECT_DIR$/androidbase-gallery/androidbase-gallery.iml" />
-      <module fileurl="file://$PROJECT_DIR$/androidbase-share/androidbase-share.iml" filepath="$PROJECT_DIR$/androidbase-share/androidbase-share.iml" />
-      <module fileurl="file://$PROJECT_DIR$/androidbase-tutorial/androidbase-tutorial.iml" filepath="$PROJECT_DIR$/androidbase-tutorial/androidbase-tutorial.iml" />
-      <module fileurl="file://$PROJECT_DIR$/androidbase-webservice/androidbase-webservice.iml" filepath="$PROJECT_DIR$/androidbase-webservice/androidbase-webservice.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/MrAppsAndroidBase.iml" filepath="$PROJECT_DIR$/.idea/modules/MrAppsAndroidBase.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/androidbase/MrAppsAndroidBase.androidbase.iml" filepath="$PROJECT_DIR$/.idea/modules/androidbase/MrAppsAndroidBase.androidbase.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/androidbase-account/MrAppsAndroidBase.androidbase-account.iml" filepath="$PROJECT_DIR$/.idea/modules/androidbase-account/MrAppsAndroidBase.androidbase-account.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/androidbase-account/MrAppsAndroidBase.androidbase-account.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/androidbase-account/MrAppsAndroidBase.androidbase-account.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/androidbase-account/MrAppsAndroidBase.androidbase-account.main.iml" filepath="$PROJECT_DIR$/.idea/modules/androidbase-account/MrAppsAndroidBase.androidbase-account.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/androidbase-account/MrAppsAndroidBase.androidbase-account.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/androidbase-account/MrAppsAndroidBase.androidbase-account.unitTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/androidbase-adapter/MrAppsAndroidBase.androidbase-adapter.iml" filepath="$PROJECT_DIR$/.idea/modules/androidbase-adapter/MrAppsAndroidBase.androidbase-adapter.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/androidbase-adapter/MrAppsAndroidBase.androidbase-adapter.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/androidbase-adapter/MrAppsAndroidBase.androidbase-adapter.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/androidbase-adapter/MrAppsAndroidBase.androidbase-adapter.main.iml" filepath="$PROJECT_DIR$/.idea/modules/androidbase-adapter/MrAppsAndroidBase.androidbase-adapter.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/androidbase-adapter/MrAppsAndroidBase.androidbase-adapter.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/androidbase-adapter/MrAppsAndroidBase.androidbase-adapter.unitTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/androidbase-core/MrAppsAndroidBase.androidbase-core.iml" filepath="$PROJECT_DIR$/.idea/modules/androidbase-core/MrAppsAndroidBase.androidbase-core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/androidbase-core/MrAppsAndroidBase.androidbase-core.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/androidbase-core/MrAppsAndroidBase.androidbase-core.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/androidbase-core/MrAppsAndroidBase.androidbase-core.main.iml" filepath="$PROJECT_DIR$/.idea/modules/androidbase-core/MrAppsAndroidBase.androidbase-core.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/androidbase-core/MrAppsAndroidBase.androidbase-core.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/androidbase-core/MrAppsAndroidBase.androidbase-core.unitTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/androidbase-gallery/MrAppsAndroidBase.androidbase-gallery.iml" filepath="$PROJECT_DIR$/.idea/modules/androidbase-gallery/MrAppsAndroidBase.androidbase-gallery.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/androidbase-gallery/MrAppsAndroidBase.androidbase-gallery.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/androidbase-gallery/MrAppsAndroidBase.androidbase-gallery.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/androidbase-gallery/MrAppsAndroidBase.androidbase-gallery.main.iml" filepath="$PROJECT_DIR$/.idea/modules/androidbase-gallery/MrAppsAndroidBase.androidbase-gallery.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/androidbase-gallery/MrAppsAndroidBase.androidbase-gallery.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/androidbase-gallery/MrAppsAndroidBase.androidbase-gallery.unitTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/androidbase-share/MrAppsAndroidBase.androidbase-share.iml" filepath="$PROJECT_DIR$/.idea/modules/androidbase-share/MrAppsAndroidBase.androidbase-share.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/androidbase-share/MrAppsAndroidBase.androidbase-share.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/androidbase-share/MrAppsAndroidBase.androidbase-share.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/androidbase-share/MrAppsAndroidBase.androidbase-share.main.iml" filepath="$PROJECT_DIR$/.idea/modules/androidbase-share/MrAppsAndroidBase.androidbase-share.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/androidbase-share/MrAppsAndroidBase.androidbase-share.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/androidbase-share/MrAppsAndroidBase.androidbase-share.unitTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/androidbase-tutorial/MrAppsAndroidBase.androidbase-tutorial.iml" filepath="$PROJECT_DIR$/.idea/modules/androidbase-tutorial/MrAppsAndroidBase.androidbase-tutorial.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/androidbase-tutorial/MrAppsAndroidBase.androidbase-tutorial.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/androidbase-tutorial/MrAppsAndroidBase.androidbase-tutorial.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/androidbase-tutorial/MrAppsAndroidBase.androidbase-tutorial.main.iml" filepath="$PROJECT_DIR$/.idea/modules/androidbase-tutorial/MrAppsAndroidBase.androidbase-tutorial.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/androidbase-tutorial/MrAppsAndroidBase.androidbase-tutorial.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/androidbase-tutorial/MrAppsAndroidBase.androidbase-tutorial.unitTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/androidbase-webservice/MrAppsAndroidBase.androidbase-webservice.iml" filepath="$PROJECT_DIR$/.idea/modules/androidbase-webservice/MrAppsAndroidBase.androidbase-webservice.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/androidbase-webservice/MrAppsAndroidBase.androidbase-webservice.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/androidbase-webservice/MrAppsAndroidBase.androidbase-webservice.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/androidbase-webservice/MrAppsAndroidBase.androidbase-webservice.main.iml" filepath="$PROJECT_DIR$/.idea/modules/androidbase-webservice/MrAppsAndroidBase.androidbase-webservice.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/androidbase-webservice/MrAppsAndroidBase.androidbase-webservice.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/androidbase-webservice/MrAppsAndroidBase.androidbase-webservice.unitTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/androidbase/MrAppsAndroidBase.androidbase.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/androidbase/MrAppsAndroidBase.androidbase.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/androidbase/MrAppsAndroidBase.androidbase.main.iml" filepath="$PROJECT_DIR$/.idea/modules/androidbase/MrAppsAndroidBase.androidbase.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/androidbase/MrAppsAndroidBase.androidbase.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/androidbase/MrAppsAndroidBase.androidbase.unitTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/MrAppsAndroidBase.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/MrAppsAndroidBase.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/MrAppsAndroidBase.app.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/MrAppsAndroidBase.app.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/MrAppsAndroidBase.app.main.iml" filepath="$PROJECT_DIR$/.idea/modules/app/MrAppsAndroidBase.app.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/MrAppsAndroidBase.app.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/MrAppsAndroidBase.app.unitTest.iml" />
     </modules>
   </component>
 </project>

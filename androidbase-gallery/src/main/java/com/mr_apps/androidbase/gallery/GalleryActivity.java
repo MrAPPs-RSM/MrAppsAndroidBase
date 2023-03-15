@@ -3,17 +3,18 @@ package com.mr_apps.androidbase.gallery;
 import android.Manifest;
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.support.v4.view.ViewPager;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import androidx.viewpager.widget.ViewPager;
+
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
-import com.mr_apps.androidbasegallery.R;
 import com.mr_apps.androidbase.activity.AbstractBaseActivity;
 import com.mr_apps.androidbase.share.GlobalShare;
+import com.mr_apps.androidbasegallery.R;
 
 import java.util.ArrayList;
 
