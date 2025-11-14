@@ -6,5 +6,7 @@
     <string name="transition_gallery" translatable="false">gallery_image</string>
 
     <string name="Condividi">Condividi</string>
+    <string name="Titolo_permesso_obbligatorio">Permesso storage</string>
+    <string name="Messaggio_permesso_storage">Richiesto permesso storage</string>
 
 </resources>

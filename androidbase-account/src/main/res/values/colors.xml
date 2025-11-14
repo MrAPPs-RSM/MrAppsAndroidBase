@@ -6,5 +6,6 @@
     <!-- Google SignIn Button -->
     <color name="googleSignIn">#DC4A39</color>
     <color name="googleSignIn_pressed">#C64233</color>
+    <color name="colorAccent">#FF4081</color>
 
 </resources>

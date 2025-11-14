@@ -2,4 +2,7 @@
     <string name="app_name">AndroidBaseProject</string>
     <string name="action_settings">Settings</string>
     <string name="facebook_app_id">347384952122201</string>
+    <string name="transition_gallery">transition</string>
+    <string name="Titolo_permesso_obbligatorio">Permesso camera</string>
+    <string name="Messaggio_permesso_camera">Richiesto permesso camera</string>
 </resources>
