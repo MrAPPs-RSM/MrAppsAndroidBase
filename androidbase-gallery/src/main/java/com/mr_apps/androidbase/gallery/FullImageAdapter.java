@@ -2,20 +2,20 @@ package com.mr_apps.androidbase.gallery;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import androidx.viewpager.widget.PagerAdapter;
-import androidx.viewpager.widget.ViewPager;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import androidx.viewpager.widget.PagerAdapter;
+import androidx.viewpager.widget.ViewPager;
+
 import com.bumptech.glide.BitmapTypeRequest;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.BitmapImageViewTarget;
+import com.github.chrisbanes.photoview.PhotoViewAttacher;
 import com.mr_apps.androidbase.utils.BitmapUtils;
 
 import java.util.List;
-
-import uk.co.senab.photoview.PhotoViewAttacher;
 
 /**
  * Class that manages an adapter to see an image full screen

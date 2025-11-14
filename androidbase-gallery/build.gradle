@@ -29,7 +29,7 @@ dependencies {
     androidTestImplementation('androidx.test.espresso:espresso-core:3.1.0', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    implementation 'com.github.chrisbanes:PhotoView:2.3.0'
+    implementation 'com.github.chrisbanes:PhotoView:2.0.0'
     implementation 'com.github.bumptech.glide:glide:3.8.0'
     implementation project(':androidbase-core')
     implementation project(':androidbase-share')
