@@ -1,4 +1,8 @@
 apply plugin: 'com.android.library'
+apply plugin: 'maven-publish'
+
+group = project.findProperty("group") ?: "com.github.MrAPPs-RSM"
+version = project.findProperty("version") ?: "LOCAL"
 
 android {
     namespace "com.mr_apps.androidbase"
@@ -22,32 +26,6 @@ android {
     flavorDimensions "default"
 }
 
-//repositories {
-//    jcenter()
-//}
-//
-//task sourcesJar(type: Jar) {
-//    from android.sourceSets.main.java.srcDirs
-//    classifier = 'sources'
-//}
-//
-//task javadoc(type: Javadoc) {
-//    source = android.sourceSets.main.java.srcDirs
-//    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
-//    destinationDir = file("../javadoc/")
-//    failOnError false
-//}
-//
-//task javadocJar(type: Jar, dependsOn: javadoc) {
-//    classifier = 'javadoc'
-//    from javadoc.destinationDir
-//}
-//
-//artifacts {
-//    archives javadocJar
-//    archives sourcesJar
-//}
-
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     testImplementation 'junit:junit:4.13.2'
@@ -59,3 +37,17 @@ dependencies {
     api project(':androidbase-webservice')
     api project(':androidbase-adapter')
 }
+
+afterEvaluate {
+    publishing {
+        publications {
+            release(MavenPublication) {
+                from components.release
+                groupId = project.group
+                artifactId = "MrAppsAndroidBase"
+                version = project.version
+            }
+        }
+    }
+}
+
