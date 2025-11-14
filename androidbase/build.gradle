@@ -24,11 +24,18 @@ android {
     }
 
     flavorDimensions "default"
+
+    publishing {
+        singleVariant("release") {
+            withSourcesJar()
+        }
+    }
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     testImplementation 'junit:junit:4.13.2'
+
     api project(':androidbase-core')
     api project(':androidbase-account')
     api project(':androidbase-gallery')
@@ -42,12 +49,12 @@ afterEvaluate {
     publishing {
         publications {
             release(MavenPublication) {
-                from components.release
                 groupId = project.group
                 artifactId = "MrAppsAndroidBase"
                 version = project.version
+
+                from components.release
             }
         }
     }
 }
-
