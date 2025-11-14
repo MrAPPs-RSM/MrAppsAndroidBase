@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/MrAppsAndroidBase.iml" filepath="$PROJECT_DIR$/.idea/modules/MrAppsAndroidBase.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/androidbase/MrAppsAndroidBase.androidbase.iml" filepath="$PROJECT_DIR$/.idea/modules/androidbase/MrAppsAndroidBase.androidbase.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/androidbase-account/MrAppsAndroidBase.androidbase-account.iml" filepath="$PROJECT_DIR$/.idea/modules/androidbase-account/MrAppsAndroidBase.androidbase-account.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/androidbase-account/MrAppsAndroidBase.androidbase-account.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/androidbase-account/MrAppsAndroidBase.androidbase-account.androidTest.iml" />
