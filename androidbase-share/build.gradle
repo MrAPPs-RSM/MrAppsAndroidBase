@@ -1,4 +1,8 @@
 apply plugin: 'com.android.library'
+apply plugin: 'maven-publish'
+
+group = project.findProperty("group") ?: "com.github.MrAPPs-RSM"
+version = project.findProperty("version") ?: "LOCAL"
 
 android {
     namespace "com.mr_apps.androidbaseshare"
@@ -22,6 +26,12 @@ android {
     }
 
     flavorDimensions "default"
+
+    publishing {
+        singleVariant("release") {
+            withSourcesJar()
+        }
+    }
 }
 
 dependencies {
@@ -30,4 +40,20 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     testImplementation 'junit:junit:4.12'
+}
+
+afterEvaluate {
+    publishing {
+        publications {
+            release(MavenPublication) {
+                from components.release
+
+                groupId = "${project.group}.MrAppsAndroidBase"
+
+                artifactId = "androidbase-share"
+
+                version = project.version
+            }
+        }
+    }
 }

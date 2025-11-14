@@ -1,4 +1,8 @@
 apply plugin: 'com.android.library'
+apply plugin: 'maven-publish'
+
+group = project.findProperty("group") ?: "com.github.MrAPPs-RSM"
+version = project.findProperty("version") ?: "LOCAL"
 
 android {
     namespace "com.mr_apps.androidbasegallery"
@@ -22,6 +26,12 @@ android {
     }
 
     flavorDimensions "default"
+
+    publishing {
+        singleVariant("release") {
+            withSourcesJar()
+        }
+    }
 }
 
 dependencies {
@@ -34,4 +44,20 @@ dependencies {
     implementation project(':androidbase-core')
     implementation project(':androidbase-share')
     testImplementation 'junit:junit:4.13.2'
+}
+
+afterEvaluate {
+    publishing {
+        publications {
+            release(MavenPublication) {
+                from components.release
+
+                groupId = "${project.group}.MrAppsAndroidBase"
+
+                artifactId = "androidbase-gallery"
+
+                version = project.version
+            }
+        }
+    }
 }

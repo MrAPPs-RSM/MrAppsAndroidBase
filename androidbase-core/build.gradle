@@ -1,4 +1,8 @@
 apply plugin: 'com.android.library'
+apply plugin: 'maven-publish'
+
+group = project.findProperty("group") ?: "com.github.MrAPPs-RSM"
+version = project.findProperty("version") ?: "LOCAL"
 
 android {
     namespace "com.mr_apps.androidbasecore"
@@ -23,6 +27,12 @@ android {
     }
 
     flavorDimensions "default"
+
+    publishing {
+        singleVariant("release") {
+            withSourcesJar()
+        }
+    }
 }
 
 dependencies {
@@ -37,5 +47,21 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0', {
         exclude group: 'com.android.support', module: 'support-annotations'
+    }
+}
+
+afterEvaluate {
+    publishing {
+        publications {
+            release(MavenPublication) {
+                from components.release
+
+                groupId = "${project.group}.MrAppsAndroidBase"
+
+                artifactId = "androidbase-core"
+
+                version = project.version
+            }
+        }
     }
 }
